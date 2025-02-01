@@ -1,0 +1,83 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 16,
+          "end": 20
+        },
+        "value": "user"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 21,
+          "end": 24
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 25,
+            "end": 44
+          },
+          "value": "echo $user | base64"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 45,
+          "end": 48
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 49,
+            "end": 65
+          },
+          "value": "touch /tmp/hello"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 18,
+          "end": 23
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 24,
+          "end": 74
+        },
+        "value": "maintainer Erik \\\\Hollensbe <erik@hollensbe.org>\\\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 76,
+          "end": 79
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 80,
+            "end": 127
+          },
+          "value": "apt-get \\update && \\\n  apt-get \\\"install znc -y"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 128,
+          "end": 131
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 132,
+              "end": 140
+            },
+            "value": "\\conf\\\\\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 141,
+          "end": 146
+        },
+        "value": "/.znc"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 148,
+          "end": 151
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 152,
+            "end": 169
+          },
+          "value": "foo \\\n\nbar \\\n\nbaz"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 171,
+          "end": 174
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 175,
+            "end": 210
+          },
+          "value": [
+            {
+              "span": {
+                "start": 178,
+                "end": 195
+              },
+              "value": "/usr\\\"/bin/znc"
+            },
+            {
+              "span": {
+                "start": 199,
+                "end": 201
+              },
+              "value": "-f"
+            },
+            {
+              "span": {
+                "start": 205,
+                "end": 207
+              },
+              "value": "-r"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

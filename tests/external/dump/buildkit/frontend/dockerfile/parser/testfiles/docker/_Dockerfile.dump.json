@@ -1,0 +1,473 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 588,
+          "end": 592
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 593,
+          "end": 605
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 606,
+          "end": 611
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 612,
+          "end": 667
+        },
+        "value": "maintainer\tTianon Gravi <admwiggin@gmail.com> (@tianon)"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 693,
+          "end": 696
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 697,
+            "end": 1054
+          },
+          "value": "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -yq \\\n\tapt-utils \\\n\taufs-tools \\\n\tautomake \\\n\tbtrfs-tools \\\n\tbuild-essential \\\n\tcurl \\\n\tdpkg-sig \\\n\tgit \\\n\tiptables \\\n\tlibapparmor-dev \\\n\tlibcap-dev \\\n\tmercurial \\\n\tpandoc \\\n\tparallel \\\n\treprepro \\\n\truby1.9.1 \\\n\truby1.9.1-dev \\\n\ts3cmd=1.1.0* \\\n\t--no-install-recommends"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1099,
+          "end": 1102
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1103,
+            "end": 1235
+          },
+          "value": "git clone --no-checkout https://git.fedorahosted.org/git/lvm2.git /usr/local/lvm2 && cd /usr/local/lvm2 && git checkout -q v2_02_103"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1536,
+          "end": 1539
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1540,
+            "end": 1646
+          },
+          "value": "cd /usr/local/lvm2 && ./configure --enable-static_link && make device-mapper && make install_device-mapper"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1723,
+          "end": 1726
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1727,
+            "end": 1802
+          },
+          "value": "curl -sSL https://golang.org/dl/go1.3.src.tar.gz | tar -v -C /usr/local -xz"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1803,
+          "end": 1806
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1807,
+          "end": 1835
+        },
+        "value": "PATH\t/usr/local/go/bin:$PATH"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1836,
+          "end": 1839
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1840,
+          "end": 1890
+        },
+        "value": "GOPATH\t/go:/go/src/github.com/docker/docker/vendor"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1891,
+          "end": 1894
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1895,
+            "end": 1946
+          },
+          "value": "cd /usr/local/go/src && ./make.bash --no-clean 2>&1"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1983,
+          "end": 1986
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1987,
+          "end": 2099
+        },
+        "value": "DOCKER_CROSSPLATFORMS\t\tlinux/386 linux/arm \tdarwin/amd64 darwin/386 \tfreebsd/amd64 freebsd/386 freebsd/arm"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 2157,
+          "end": 2160
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2161,
+          "end": 2168
+        },
+        "value": "GOARM\t5"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2169,
+          "end": 2172
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2173,
+            "end": 2327
+          },
+          "value": "cd /usr/local/go/src && bash -xc 'for platform in $DOCKER_CROSSPLATFORMS; do GOOS=${platform%/*} GOARCH=${platform##*/} ./make.bash --no-clean 2>&1; done'"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2390,
+          "end": 2393
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2394,
+            "end": 2429
+          },
+          "value": "go get golang.org/x/tools/cmd/cover"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2489,
+          "end": 2492
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2493,
+            "end": 2542
+          },
+          "value": "gem install --no-rdoc --no-ri fpm --version 1.0.2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2620,
+          "end": 2623
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2624,
+            "end": 2717
+          },
+          "value": "git clone -b buildroot-2014.02 https://github.com/jpetazzo/docker-busybox.git /docker-busybox"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2740,
+          "end": 2743
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2744,
+            "end": 2834
+          },
+          "value": "/bin/echo -e '[default]\\naccess_key=$AWS_ACCESS_KEY\\nsecret_key=$AWS_SECRET_KEY' > /.s3cfg"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2911,
+          "end": 2914
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2915,
+            "end": 2972
+          },
+          "value": "git config --global user.email 'docker-dummy@example.com'"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 3036,
+          "end": 3039
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 3040,
+            "end": 3058
+          },
+          "value": "groupadd -r docker"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 3059,
+          "end": 3062
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 3063,
+            "end": 3114
+          },
+          "value": "useradd --create-home --gid docker unprivilegeduser"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 3116,
+          "end": 3122
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 3123,
+              "end": 3138
+            },
+            "value": "/var/lib/docker"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 3139,
+          "end": 3146
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3147,
+          "end": 3179
+        },
+        "value": "/go/src/github.com/docker/docker"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 3180,
+          "end": 3183
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3184,
+          "end": 3217
+        },
+        "value": "DOCKER_BUILDTAGS\tapparmor selinux"
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 3299,
+          "end": 3309
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 3310,
+            "end": 3323
+          },
+          "value": [
+            {
+              "span": {
+                "start": 3312,
+                "end": 3321
+              },
+              "value": "hack/dind"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3348,
+          "end": 3352
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3353,
+              "end": 3354
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3355,
+          "end": 3387
+        },
+        "value": "/go/src/github.com/docker/docker"
+      }
+    }
+  ]
+}

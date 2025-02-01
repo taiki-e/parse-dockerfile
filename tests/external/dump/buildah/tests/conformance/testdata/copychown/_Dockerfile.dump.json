@@ -1,0 +1,470 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 28
+        },
+        "value": "quay.io/libpod/centos:7"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 29,
+          "end": 33
+        }
+      },
+      "options": [
+        {
+          "flag_start": 34,
+          "name": {
+            "span": {
+              "start": 36,
+              "end": 41
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 42,
+              "end": 45
+            },
+            "value": "1:2"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 49,
+              "end": 55
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 56,
+          "end": 74
+        },
+        "value": "/usr/bin/script.12"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 75,
+          "end": 79
+        }
+      },
+      "options": [
+        {
+          "flag_start": 80,
+          "name": {
+            "span": {
+              "start": 82,
+              "end": 87
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 88,
+              "end": 93
+            },
+            "value": "1:adm"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 95,
+              "end": 101
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 102,
+          "end": 123
+        },
+        "value": "/usr/bin/script.1-adm"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 124,
+          "end": 128
+        }
+      },
+      "options": [
+        {
+          "flag_start": 129,
+          "name": {
+            "span": {
+              "start": 131,
+              "end": 136
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 137,
+              "end": 138
+            },
+            "value": "1"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 144,
+              "end": 150
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 151,
+          "end": 168
+        },
+        "value": "/usr/bin/script.1"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 169,
+          "end": 173
+        }
+      },
+      "options": [
+        {
+          "flag_start": 174,
+          "name": {
+            "span": {
+              "start": 176,
+              "end": 181
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 182,
+              "end": 188
+            },
+            "value": "lp:adm"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 189,
+              "end": 195
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 196,
+          "end": 218
+        },
+        "value": "/usr/bin/script.lp-adm"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 219,
+          "end": 223
+        }
+      },
+      "options": [
+        {
+          "flag_start": 224,
+          "name": {
+            "span": {
+              "start": 226,
+              "end": 231
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 232,
+              "end": 238
+            },
+            "value": "2:mail"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 239,
+              "end": 245
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 246,
+          "end": 268
+        },
+        "value": "/usr/bin/script.2-mail"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 269,
+          "end": 273
+        }
+      },
+      "options": [
+        {
+          "flag_start": 274,
+          "name": {
+            "span": {
+              "start": 276,
+              "end": 281
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 282,
+              "end": 283
+            },
+            "value": "2"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 289,
+              "end": 295
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 296,
+          "end": 313
+        },
+        "value": "/usr/bin/script.2"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 314,
+          "end": 318
+        }
+      },
+      "options": [
+        {
+          "flag_start": 319,
+          "name": {
+            "span": {
+              "start": 321,
+              "end": 326
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 327,
+              "end": 330
+            },
+            "value": "bin"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 334,
+              "end": 340
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 341,
+          "end": 360
+        },
+        "value": "/usr/bin/script.bin"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 361,
+          "end": 365
+        }
+      },
+      "options": [
+        {
+          "flag_start": 366,
+          "name": {
+            "span": {
+              "start": 368,
+              "end": 373
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 374,
+              "end": 376
+            },
+            "value": "lp"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 381,
+              "end": 387
+            },
+            "value": "script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 388,
+          "end": 406
+        },
+        "value": "/usr/bin/script.lp"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 407,
+          "end": 411
+        }
+      },
+      "options": [
+        {
+          "flag_start": 412,
+          "name": {
+            "span": {
+              "start": 414,
+              "end": 419
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 420,
+              "end": 421
+            },
+            "value": "3"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 427,
+              "end": 433
+            },
+            "value": "script"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 434,
+              "end": 441
+            },
+            "value": "script2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 442,
+          "end": 457
+        },
+        "value": "/usr/local/bin/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 458,
+          "end": 461
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 462,
+            "end": 484
+          },
+          "value": "ls -al /usr/bin/script"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

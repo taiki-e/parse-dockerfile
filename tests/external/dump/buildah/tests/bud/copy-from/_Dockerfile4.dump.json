@@ -1,0 +1,139 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 30
+        },
+        "value": "docker.io/library/busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 31,
+            "end": 33
+          }
+        },
+        {
+          "span": {
+            "start": 34,
+            "end": 38
+          },
+          "value": "test"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 39,
+          "end": 42
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 43,
+            "end": 56
+          },
+          "value": "rm -f /bin/nl"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 57,
+          "end": 61
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 62,
+          "end": 86
+        },
+        "value": "docker.io/library/alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 87,
+            "end": 89
+          }
+        },
+        {
+          "span": {
+            "start": 90,
+            "end": 95
+          },
+          "value": "final"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 96,
+          "end": 100
+        }
+      },
+      "options": [
+        {
+          "flag_start": 101,
+          "name": {
+            "span": {
+              "start": 103,
+              "end": 107
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 108,
+              "end": 133
+            },
+            "value": "docker.io/library/busybox"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 134,
+              "end": 141
+            },
+            "value": "/bin/nl"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 142,
+          "end": 148
+        },
+        "value": "/test/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 49,
+          "end": 53
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 54,
+          "end": 65
+        },
+        "value": "hello-world"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 67,
+          "end": 70
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 71,
+          "end": 77
+        },
+        "value": "A path"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 78,
+          "end": 81
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 82,
+          "end": 97
+        },
+        "value": "B another\\\\path"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 98,
+          "end": 101
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 102,
+          "end": 164
+        },
+        "value": "C trailing\\\\backslash\\ENV D This should not be appended to C"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 165,
+          "end": 168
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 169,
+          "end": 185
+        },
+        "value": "E helloworld"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 186,
+          "end": 189
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 190,
+          "end": 207
+        },
+        "value": "F hello world"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 208,
+          "end": 211
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 212,
+          "end": 229
+        },
+        "value": "G hello world"
+      }
+    }
+  ]
+}

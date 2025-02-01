@@ -1,0 +1,199 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 20
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "MAINTAINER",
+      "maintainer": {
+        "span": {
+          "start": 21,
+          "end": 31
+        }
+      },
+      "name": {
+        "span": {
+          "start": 32,
+          "end": 46
+        },
+        "value": "root@localhost"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 48,
+          "end": 52
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 53,
+          "end": 60
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "MAINTAINER",
+      "maintainer": {
+        "span": {
+          "start": 61,
+          "end": 71
+        }
+      },
+      "name": {
+        "span": {
+          "start": 72,
+          "end": 86
+        },
+        "value": "root@localhost"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 87,
+          "end": 91
+        }
+      },
+      "options": [
+        {
+          "flag_start": 92,
+          "name": {
+            "span": {
+              "start": 94,
+              "end": 98
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 99,
+              "end": 104
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 105,
+              "end": 106
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 107,
+          "end": 108
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "MAINTAINER",
+      "maintainer": {
+        "span": {
+          "start": 109,
+          "end": 119
+        }
+      },
+      "name": {
+        "span": {
+          "start": 120,
+          "end": 134
+        },
+        "value": "root@localhost"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 135,
+          "end": 139
+        }
+      },
+      "options": [
+        {
+          "flag_start": 140,
+          "name": {
+            "span": {
+              "start": 142,
+              "end": 146
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 147,
+              "end": 152
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 153,
+              "end": 154
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 155,
+          "end": 156
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 25
+        },
+        "value": "mirror.gcr.io/alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 27,
+          "end": 31
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 32,
+              "end": 34
+            },
+            "value": "./"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 35,
+          "end": 37
+        },
+        "value": "./"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 38,
+          "end": 42
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 43,
+              "end": 49
+            },
+            "value": "subdir"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 50,
+          "end": 52
+        },
+        "value": "./"
+      }
+    }
+  ]
+}

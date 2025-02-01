@@ -1,0 +1,131 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 18,
+              "end": 19
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 20,
+          "end": 28
+        },
+        "value": "/upload/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 29,
+          "end": 33
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 34,
+              "end": 37
+            },
+            "value": "src"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 38,
+          "end": 51
+        },
+        "value": "/upload/src2/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 52,
+          "end": 56
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 57,
+              "end": 66
+            },
+            "value": "test1.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 67,
+          "end": 84
+        },
+        "value": "/upload/test1.txt"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 85,
+          "end": 88
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 89,
+            "end": 164
+          },
+          "value": "echo \"CUT HERE\"; /bin/find /upload | LANG=en_US.UTF-8 sort; echo \"CUT HERE\""
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

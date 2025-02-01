@@ -1,0 +1,119 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 45
+          },
+          "value": "adduser -D http -h /home/http"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 46,
+          "end": 50
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 51,
+          "end": 55
+        },
+        "value": "http"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 56,
+          "end": 63
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 64,
+          "end": 81
+        },
+        "value": "/home/http/public"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 82,
+          "end": 85
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 86,
+            "end": 109
+          },
+          "value": "stat -c '%u:%g %n' $PWD"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 110,
+          "end": 113
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 114,
+            "end": 126
+          },
+          "value": "touch foobar"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

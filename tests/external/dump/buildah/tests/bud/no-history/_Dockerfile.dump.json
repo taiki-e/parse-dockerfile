@@ -1,0 +1,185 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 221,
+          "end": 225
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 226,
+          "end": 261
+        },
+        "value": "fakeregistry.podman.invalid/notreal"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 262,
+            "end": 264
+          }
+        },
+        {
+          "span": {
+            "start": 265,
+            "end": 276
+          },
+          "value": "first-stage"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 277,
+          "end": 281
+        }
+      },
+      "options": [
+        {
+          "flag_start": 282,
+          "name": {
+            "span": {
+              "start": 284,
+              "end": 288
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 289,
+              "end": 296
+            },
+            "value": "busybox"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 297,
+              "end": 298
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 299,
+          "end": 300
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 301,
+          "end": 304
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 305,
+            "end": 322
+          },
+          "value": "date > /date1.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 323,
+          "end": 326
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 327,
+            "end": 348
+          },
+          "value": "sleep 1 > /sleep1.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 350,
+          "end": 354
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 355,
+          "end": 366
+        },
+        "value": "first-stage"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 367,
+          "end": 370
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 371,
+            "end": 388
+          },
+          "value": "date > /date2.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 389,
+          "end": 392
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 393,
+            "end": 414
+          },
+          "value": "sleep 1 > /sleep2.txt"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

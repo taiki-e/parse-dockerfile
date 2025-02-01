@@ -1,0 +1,853 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 20
+        },
+        "value": "cpuguy83/ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 21,
+          "end": 24
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 25,
+          "end": 48
+        },
+        "value": "NAGIOS_HOME /opt/nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 49,
+          "end": 52
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 53,
+          "end": 71
+        },
+        "value": "NAGIOS_USER nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 72,
+          "end": 75
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 76,
+          "end": 95
+        },
+        "value": "NAGIOS_GROUP nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 96,
+          "end": 99
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 100,
+          "end": 121
+        },
+        "value": "NAGIOS_CMDUSER nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 122,
+          "end": 125
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 126,
+          "end": 148
+        },
+        "value": "NAGIOS_CMDGROUP nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 149,
+          "end": 152
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 153,
+          "end": 181
+        },
+        "value": "NAGIOSADMIN_USER nagiosadmin"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 182,
+          "end": 185
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 186,
+          "end": 209
+        },
+        "value": "NAGIOSADMIN_PASS nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 210,
+          "end": 213
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 214,
+          "end": 236
+        },
+        "value": "APACHE_RUN_USER nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 237,
+          "end": 240
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 241,
+          "end": 264
+        },
+        "value": "APACHE_RUN_GROUP nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 265,
+          "end": 268
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 269,
+          "end": 288
+        },
+        "value": "NAGIOS_TIMEZONE UTC"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 290,
+          "end": 293
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 294,
+            "end": 356
+          },
+          "value": "sed -i 's/universe/universe multiverse/' /etc/apt/sources.list"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 357,
+          "end": 360
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 361,
+            "end": 553
+          },
+          "value": "apt-get update && apt-get --no-install-recommends install -y iputils-ping netcat build-essential snmp snmpd snmp-mibs-downloader php5-cli apache2 libapache2-mod-php5 runit bc postfix bsd-mailx"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 554,
+          "end": 557
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 558,
+            "end": 705
+          },
+          "value": "( egrep -i  \"^${NAGIOS_GROUP}\" /etc/group || groupadd $NAGIOS_GROUP ) && ( egrep -i \"^${NAGIOS_CMDGROUP}\" /etc/group || groupadd $NAGIOS_CMDGROUP )"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 706,
+          "end": 709
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 710,
+            "end": 899
+          },
+          "value": "( id -u $NAGIOS_USER || useradd --system $NAGIOS_USER -g $NAGIOS_GROUP -d $NAGIOS_HOME ) && ( id -u $NAGIOS_CMDUSER || useradd --system -d $NAGIOS_HOME -g $NAGIOS_CMDGROUP $NAGIOS_CMDUSER )"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 901,
+          "end": 904
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 905,
+              "end": 1110
+            },
+            "value": "http://downloads.sourceforge.net/project/nagios/nagios-3.x/nagios-3.5.1/nagios-3.5.1.tar.gz?r=http%3A%2F%2Fwww.nagios.org%2Fdownload%2Fcore%2Fthanks%2F%3Ft%3D1398863696&ts=1398863718&use_mirror=superb-dca3"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1111,
+          "end": 1129
+        },
+        "value": "/tmp/nagios.tar.gz"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1130,
+          "end": 1133
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1134,
+            "end": 1569
+          },
+          "value": "cd /tmp && tar -zxvf nagios.tar.gz && cd nagios  && ./configure --prefix=${NAGIOS_HOME} --exec-prefix=${NAGIOS_HOME} --enable-event-broker --with-nagios-command-user=${NAGIOS_CMDUSER} --with-command-group=${NAGIOS_CMDGROUP} --with-nagios-user=${NAGIOS_USER} --with-nagios-group=${NAGIOS_GROUP} && make all && make install && make install-config && make install-commandmode && cp sample-config/httpd.conf /etc/apache2/conf.d/nagios.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 1570,
+          "end": 1573
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1574,
+              "end": 1638
+            },
+            "value": "http://www.nagios-plugins.org/download/nagios-plugins-1.5.tar.gz"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1639,
+          "end": 1644
+        },
+        "value": "/tmp/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1645,
+          "end": 1648
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1649,
+            "end": 1783
+          },
+          "value": "cd /tmp && tar -zxvf nagios-plugins-1.5.tar.gz && cd nagios-plugins-1.5 && ./configure --prefix=${NAGIOS_HOME} && make && make install"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1785,
+          "end": 1788
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1789,
+            "end": 1841
+          },
+          "value": "sed -i.bak 's/.*\\=www\\-data//g' /etc/apache2/envvars"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1842,
+          "end": 1845
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1846,
+            "end": 1980
+          },
+          "value": "export DOC_ROOT=\"DocumentRoot $(echo $NAGIOS_HOME/share)\"; sed -i \"s,DocumentRoot.*,$DOC_ROOT,\" /etc/apache2/sites-enabled/000-default"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1982,
+          "end": 1985
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1986,
+            "end": 2142
+          },
+          "value": "ln -s ${NAGIOS_HOME}/bin/nagios /usr/local/bin/nagios && mkdir -p /usr/share/snmp/mibs && chmod 0755 /usr/share/snmp/mibs && touch /usr/share/snmp/mibs/.foo"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2144,
+          "end": 2147
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2148,
+            "end": 2295
+          },
+          "value": "echo \"use_timezone=$NAGIOS_TIMEZONE\" >> ${NAGIOS_HOME}/etc/nagios.cfg && echo \"SetEnv TZ \\\"${NAGIOS_TIMEZONE}\\\"\" >> /etc/apache2/conf.d/nagios.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2297,
+          "end": 2300
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2301,
+            "end": 2432
+          },
+          "value": "mkdir -p ${NAGIOS_HOME}/etc/conf.d && mkdir -p ${NAGIOS_HOME}/etc/monitor && ln -s /usr/share/snmp/mibs ${NAGIOS_HOME}/libexec/mibs"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2433,
+          "end": 2436
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2437,
+            "end": 2510
+          },
+          "value": "echo \"cfg_dir=${NAGIOS_HOME}/etc/conf.d\" >> ${NAGIOS_HOME}/etc/nagios.cfg"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2511,
+          "end": 2514
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2515,
+            "end": 2589
+          },
+          "value": "echo \"cfg_dir=${NAGIOS_HOME}/etc/monitor\" >> ${NAGIOS_HOME}/etc/nagios.cfg"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2590,
+          "end": 2593
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2594,
+            "end": 2649
+          },
+          "value": "download-mibs && echo \"mibs +ALL\" > /etc/snmp/snmp.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2651,
+          "end": 2654
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2655,
+            "end": 2797
+          },
+          "value": "sed -i 's,/bin/mail,/usr/bin/mail,' /opt/nagios/etc/objects/commands.cfg && \\\n  sed -i 's,/usr/usr,/usr,' /opt/nagios/etc/objects/commands.cfg"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2798,
+          "end": 2801
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2802,
+            "end": 2842
+          },
+          "value": "cp /etc/services /var/spool/postfix/etc/"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2844,
+          "end": 2847
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2848,
+            "end": 2952
+          },
+          "value": "mkdir -p /etc/sv/nagios && mkdir -p /etc/sv/apache && rm -rf /etc/sv/getty-5 && mkdir -p /etc/sv/postfix"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2953,
+          "end": 2956
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2957,
+              "end": 2968
+            },
+            "value": "nagios.init"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2969,
+          "end": 2987
+        },
+        "value": "/etc/sv/nagios/run"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2988,
+          "end": 2991
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2992,
+              "end": 3003
+            },
+            "value": "apache.init"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3004,
+          "end": 3022
+        },
+        "value": "/etc/sv/apache/run"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 3023,
+          "end": 3026
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3027,
+              "end": 3039
+            },
+            "value": "postfix.init"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3040,
+          "end": 3059
+        },
+        "value": "/etc/sv/postfix/run"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 3060,
+          "end": 3063
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3064,
+              "end": 3076
+            },
+            "value": "postfix.stop"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3077,
+          "end": 3099
+        },
+        "value": "/etc/sv/postfix/finish"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 3101,
+          "end": 3104
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3105,
+              "end": 3113
+            },
+            "value": "start.sh"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3114,
+          "end": 3141
+        },
+        "value": "/usr/local/bin/start_nagios"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 3143,
+          "end": 3146
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3147,
+          "end": 3171
+        },
+        "value": "APACHE_LOCK_DIR /var/run"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 3172,
+          "end": 3175
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3176,
+          "end": 3207
+        },
+        "value": "APACHE_LOG_DIR /var/log/apache2"
+      }
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 3209,
+          "end": 3215
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 3216,
+            "end": 3218
+          },
+          "value": "80"
+        }
+      ]
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 3220,
+          "end": 3226
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 3227,
+            "end": 3332
+          },
+          "value": [
+            {
+              "span": {
+                "start": 3229,
+                "end": 3244
+              },
+              "value": "/opt/nagios/var"
+            },
+            {
+              "span": {
+                "start": 3248,
+                "end": 3263
+              },
+              "value": "/opt/nagios/etc"
+            },
+            {
+              "span": {
+                "start": 3267,
+                "end": 3286
+              },
+              "value": "/opt/nagios/libexec"
+            },
+            {
+              "span": {
+                "start": 3290,
+                "end": 3306
+              },
+              "value": "/var/log/apache2"
+            },
+            {
+              "span": {
+                "start": 3310,
+                "end": 3330
+              },
+              "value": "/usr/share/snmp/mibs"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 3334,
+          "end": 3337
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 3338,
+            "end": 3369
+          },
+          "value": [
+            {
+              "span": {
+                "start": 3340,
+                "end": 3367
+              },
+              "value": "/usr/local/bin/start_nagios"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

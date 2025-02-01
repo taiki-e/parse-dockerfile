@@ -1,0 +1,343 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 5,
+          "end": 9
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 10,
+          "end": 20
+        },
+        "value": "ubuntu"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 21,
+            "end": 27
+          }
+        },
+        {
+          "span": {
+            "start": 28,
+            "end": 35
+          },
+          "value": "ss"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 37,
+          "end": 49
+        }
+      },
+      "options": [
+        {
+          "flag_start": 52,
+          "name": {
+            "span": {
+              "start": 54,
+              "end": 71
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 72,
+              "end": 90
+            },
+            "value": "arm64"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 91,
+          "end": 97
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 98,
+          "end": 104
+        }
+      },
+      "options": [
+        {
+          "flag_start": 105,
+          "name": {
+            "span": {
+              "start": 107,
+              "end": 111
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 112,
+              "end": 113
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 114,
+              "end": 120
+            },
+            "value": "[[].]a"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 121,
+          "end": 125
+        },
+        "value": "dest"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 127,
+          "end": 130
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 131,
+            "end": 157
+          },
+          "value": "a \\\n#\n   \\\n \\\n #\n    b \\\nc"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 158,
+          "end": 165
+        }
+      },
+      "instruction": {
+        "kind": "RUN",
+        "run": {
+          "span": {
+            "start": 194,
+            "end": 197
+          }
+        },
+        "options": [],
+        "arguments": {
+          "shell": {
+            "span": {
+              "start": 198,
+              "end": 199
+            },
+            "value": "v"
+          }
+        },
+        "here_docs": []
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 200,
+          "end": 203
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 204,
+            "end": 238
+          },
+          "value": [
+            {
+              "span": {
+                "start": 206,
+                "end": 225
+              },
+              "value": "executable"
+            },
+            {
+              "span": {
+                "start": 231,
+                "end": 236
+              },
+              "value": "param"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 239,
+          "end": 245
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 246,
+            "end": 254
+          },
+          "value": "80/tcp"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 255,
+          "end": 262
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 263,
+          "end": 284
+        },
+        "value": "/the/workdir/path"
+      }
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 285,
+          "end": 289
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 290,
+          "end": 298
+        },
+        "value": "daemon"
+      }
+    },
+    {
+      "kind": "STOPSIGNAL",
+      "stopsignal": {
+        "span": {
+          "start": 299,
+          "end": 309
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 310,
+          "end": 318
+        },
+        "value": "SIGINT"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 319,
+          "end": 325
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 326,
+            "end": 328
+          },
+          "value": []
+        }
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 329,
+          "end": 332
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 332,
+            "end": 332
+          },
+          "value": ""
+        }
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 333,
+          "end": 340
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 341,
+          "end": 345
+        },
+        "value": "${A}"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 346,
+          "end": 349
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 349,
+            "end": 349
+          },
+          "value": ""
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

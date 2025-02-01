@@ -1,0 +1,775 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 27,
+          "end": 30
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 31,
+          "end": 41
+        },
+        "value": "argA=argvA"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 42,
+          "end": 45
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 46,
+          "end": 57
+        },
+        "value": "varA=valueA"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 126,
+          "end": 129
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 135,
+            "end": 135
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 136,
+            "end": 256
+          },
+          "expand": true,
+          "value": "varB=valueB\ntouch /run-argA=$argA.unquoted1.txt\ntouch /run-varA=$varA.unquoted1.txt\ntouch /run-varB=$varB.unquoted1.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 328,
+          "end": 331
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 337,
+            "end": 337
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 338,
+            "end": 464
+          },
+          "expand": true,
+          "value": "varB=valueB\ntouch /run-argA=\"$argA\".unquoted2.txt\ntouch /run-varA=\"$varA\".unquoted2.txt\ntouch /run-varB=\"$varB\".unquoted2.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 562,
+          "end": 565
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 571,
+            "end": 571
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 572,
+            "end": 711
+          },
+          "expand": true,
+          "value": "varA=valueA2\nvarB=valueB\ntouch /run-argA=\"$argA\".unquoted3.txt\ntouch /run-varA=\"$varA\".unquoted3.txt\ntouch /run-varB=\"$varB\".unquoted3.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 820,
+          "end": 823
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 829,
+            "end": 829
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 830,
+            "end": 981
+          },
+          "expand": true,
+          "value": "argA=argvA2\nvarA=valueA2\nvarB=valueB\ntouch /run-argA=\"$argA\".unquoted4.txt\ntouch /run-varA=\"$varA\".unquoted4.txt\ntouch /run-varB=\"$varB\".unquoted4.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1053,
+          "end": 1056
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1064,
+            "end": 1064
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1065,
+            "end": 1179
+          },
+          "expand": false,
+          "value": "varB=valueB\ntouch /run-argA=$argA.quoted1.txt\ntouch /run-varA=$varA.quoted1.txt\ntouch /run-varB=$varB.quoted1.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1251,
+          "end": 1254
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1262,
+            "end": 1262
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1263,
+            "end": 1383
+          },
+          "expand": false,
+          "value": "varB=valueB\ntouch /run-argA=\"$argA\".quoted2.txt\ntouch /run-varA=\"$varA\".quoted2.txt\ntouch /run-varB=\"$varB\".quoted2.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1481,
+          "end": 1484
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1492,
+            "end": 1492
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1493,
+            "end": 1626
+          },
+          "expand": false,
+          "value": "varA=valueA2\nvarB=valueB\ntouch /run-argA=\"$argA\".quoted3.txt\ntouch /run-varA=\"$varA\".quoted3.txt\ntouch /run-varB=\"$varB\".quoted3.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1735,
+          "end": 1738
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1746,
+            "end": 1746
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1747,
+            "end": 1892
+          },
+          "expand": false,
+          "value": "argA=argvA2\nvarA=valueA2\nvarB=valueB\ntouch /run-argA=\"$argA\".quoted4.txt\ntouch /run-varA=\"$varA\".quoted4.txt\ntouch /run-varB=\"$varB\".quoted4.txt\n"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1964,
+          "end": 1968
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 1995,
+              "end": 2061
+            },
+            "expand": true,
+            "value": "varB=valueB\ntouch /argA=$argA\ntouch /varA=$varA\ntouch /varB=$varB\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1975,
+          "end": 1994
+        },
+        "value": "/copy-unquoted1.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2133,
+          "end": 2137
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 2164,
+              "end": 2215
+            },
+            "expand": true,
+            "value": "varB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2144,
+          "end": 2163
+        },
+        "value": "/copy-unquoted2.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2313,
+          "end": 2317
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 2344,
+              "end": 2408
+            },
+            "expand": true,
+            "value": "varA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2324,
+          "end": 2343
+        },
+        "value": "/copy-unquoted3.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2517,
+          "end": 2521
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 2548,
+              "end": 2624
+            },
+            "expand": true,
+            "value": "argA=argvA2\nvarA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2528,
+          "end": 2547
+        },
+        "value": "/copy-unquoted4.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2696,
+          "end": 2700
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 2727,
+              "end": 2772
+            },
+            "expand": false,
+            "value": "varB=valueB\nargA=$argA\nvarA=$varA\nvarB=$varB\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2709,
+          "end": 2726
+        },
+        "value": "/copy-quoted1.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2844,
+          "end": 2848
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 2875,
+              "end": 2926
+            },
+            "expand": false,
+            "value": "varB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2857,
+          "end": 2874
+        },
+        "value": "/copy-quoted2.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3024,
+          "end": 3028
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 3055,
+              "end": 3119
+            },
+            "expand": false,
+            "value": "varA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3037,
+          "end": 3054
+        },
+        "value": "/copy-quoted3.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3228,
+          "end": 3232
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 3259,
+              "end": 3335
+            },
+            "expand": false,
+            "value": "argA=argvA2\nvarA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3241,
+          "end": 3258
+        },
+        "value": "/copy-quoted4.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 3407,
+          "end": 3410
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 3436,
+              "end": 3502
+            },
+            "expand": true,
+            "value": "varB=valueB\ntouch /argA=$argA\ntouch /varA=$varA\ntouch /varB=$varB\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3417,
+          "end": 3435
+        },
+        "value": "/add-unquoted1.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 3574,
+          "end": 3577
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 3603,
+              "end": 3654
+            },
+            "expand": true,
+            "value": "varB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3584,
+          "end": 3602
+        },
+        "value": "/add-unquoted2.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 3752,
+          "end": 3755
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 3781,
+              "end": 3845
+            },
+            "expand": true,
+            "value": "varA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3762,
+          "end": 3780
+        },
+        "value": "/add-unquoted3.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 3954,
+          "end": 3957
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 3983,
+              "end": 4059
+            },
+            "expand": true,
+            "value": "argA=argvA2\nvarA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3964,
+          "end": 3982
+        },
+        "value": "/add-unquoted4.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 4131,
+          "end": 4134
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 4160,
+              "end": 4205
+            },
+            "expand": false,
+            "value": "varB=valueB\nargA=$argA\nvarA=$varA\nvarB=$varB\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 4143,
+          "end": 4159
+        },
+        "value": "/add-quoted1.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 4277,
+          "end": 4280
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 4306,
+              "end": 4357
+            },
+            "expand": false,
+            "value": "varB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 4289,
+          "end": 4305
+        },
+        "value": "/add-quoted2.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 4455,
+          "end": 4458
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 4484,
+              "end": 4548
+            },
+            "expand": false,
+            "value": "varA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 4467,
+          "end": 4483
+        },
+        "value": "/add-quoted3.txt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 4657,
+          "end": 4660
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 4686,
+              "end": 4762
+            },
+            "expand": false,
+            "value": "argA=argvA2\nvarA=valueA2\nvarB=valueB\nargA=\"$argA\"\nvarA=\"$varA\"\nvarB=\"$varB\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 4669,
+          "end": 4685
+        },
+        "value": "/add-quoted4.txt"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 4767,
+          "end": 4770
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 4771,
+            "end": 4798
+          },
+          "value": "touch -r /etc/passwd /*.txt"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 90,
+          "end": 93
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 94,
+            "end": 115
+          },
+          "value": "cat        /dev/stdin"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 149,
+          "end": 152
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 153,
+            "end": 175
+          },
+          "value": "echo foo > /dev/stdout"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 209,
+          "end": 212
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 213,
+            "end": 235
+          },
+          "value": "echo foo > /dev/stderr"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

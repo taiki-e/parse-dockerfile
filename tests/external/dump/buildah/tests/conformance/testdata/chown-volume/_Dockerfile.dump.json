@@ -1,0 +1,179 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 27,
+            "end": 29
+          }
+        },
+        {
+          "span": {
+            "start": 30,
+            "end": 35
+          },
+          "value": "first"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 36,
+          "end": 39
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 40,
+            "end": 72
+          },
+          "value": "mkdir /volumea /volumeb /volumec"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 248,
+          "end": 251
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 252,
+            "end": 295
+          },
+          "value": "touch -r /bin/ls /volumea /volumeb /volumec"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 296,
+          "end": 302
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 303,
+              "end": 311
+            },
+            "value": "/volumea"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 312,
+          "end": 318
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 319,
+              "end": 327
+            },
+            "value": "/volumeb"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 328,
+          "end": 334
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 335,
+              "end": 343
+            },
+            "value": "/volumec"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 345,
+          "end": 349
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 350,
+          "end": 355
+        },
+        "value": "first"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 356,
+          "end": 359
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 360,
+            "end": 402
+          },
+          "value": "chown 1000:1000 /volumea /volumeb /volumec"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 10
+        },
+        "value": "\\"
+      }
+    },
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 14,
+          "end": 18
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 19,
+          "end": 41
+        },
+        "value": "brimstone/ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 99,
+          "end": 102
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 103,
+          "end": 115
+        },
+        "value": "GOPATH /go"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 178,
+          "end": 181
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 182,
+            "end": 698
+          },
+          "value": "apt-get update \\\n\t&& dpkg -l | awk '/^ii/ {print $2}' > /tmp/dpkg.clean \\\n\n\n    && apt-get --no-install-recommends install -y git golang ca-certificates \\\n    && apt-get clean \\\n    && rm -rf /var/lib/apt/lists \\\n\n\t&& go get -v github.com/brimstone/consuldock \\\n    && mv $GOPATH/bin/consuldock /usr/local/bin/consuldock \\\n\n\t&& dpkg -l | awk '/^ii/ {print $2}' > /tmp/dpkg.dirty \\\n\t&& apt-get remove --purge -y $(diff /tmp/dpkg.clean /tmp/dpkg.dirty | awk '/^>/ {print $2}') \\\n\t&& rm /tmp/dpkg.* \\\n\t&& rm -rf $GOPATH"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

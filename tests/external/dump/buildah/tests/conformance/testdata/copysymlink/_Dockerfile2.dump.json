@@ -1,0 +1,179 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 28
+        },
+        "value": "quay.io/libpod/centos:7"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 29,
+          "end": 33
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 34,
+              "end": 45
+            },
+            "value": "file.tar.gz"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 46,
+          "end": 47
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 48,
+          "end": 51
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 52,
+            "end": 86
+          },
+          "value": "ln -s file.tar.gz file-link.tar.gz"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 87,
+          "end": 90
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 91,
+            "end": 114
+          },
+          "value": "ls -l /file-link.tar.gz"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 115,
+          "end": 119
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 120,
+          "end": 143
+        },
+        "value": "quay.io/libpod/centos:7"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 144,
+          "end": 148
+        }
+      },
+      "options": [
+        {
+          "flag_start": 149,
+          "name": {
+            "span": {
+              "start": 151,
+              "end": 155
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 156,
+              "end": 157
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 158,
+              "end": 175
+            },
+            "value": "/file-link.tar.gz"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 176,
+          "end": 177
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 178,
+          "end": 181
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 182,
+            "end": 205
+          },
+          "value": "ls -l /file-link.tar.gz"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

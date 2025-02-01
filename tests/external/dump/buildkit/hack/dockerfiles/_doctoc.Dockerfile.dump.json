@@ -1,0 +1,375 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 42
+        },
+        "value": "docker/dockerfile-upstream:master"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 44,
+          "end": 47
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 48,
+          "end": 63
+        },
+        "value": "NODE_VERSION=19"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 65,
+          "end": 69
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 70,
+          "end": 97
+        },
+        "value": "node:${NODE_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 98,
+            "end": 100
+          }
+        },
+        {
+          "span": {
+            "start": 101,
+            "end": 105
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 106,
+          "end": 109
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 110,
+            "end": 132
+          },
+          "value": "apk add --no-cache git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 133,
+          "end": 140
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 141,
+          "end": 145
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 147,
+          "end": 151
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 152,
+          "end": 156
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 157,
+            "end": 159
+          }
+        },
+        {
+          "span": {
+            "start": 160,
+            "end": 166
+          },
+          "value": "doctoc"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 167,
+          "end": 170
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 171,
+            "end": 192
+          },
+          "value": "npm install -g doctoc"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 193,
+          "end": 196
+        }
+      },
+      "options": [
+        {
+          "flag_start": 197,
+          "name": {
+            "span": {
+              "start": 199,
+              "end": 204
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 205,
+              "end": 251
+            },
+            "value": "type=bind,source=README.md,target=README.md,rw"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 257,
+            "end": 257
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 258,
+            "end": 320
+          },
+          "expand": true,
+          "value": "  set -e\n  doctoc README.md\n  mkdir /out\n  cp README.md /out/\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 325,
+          "end": 329
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 330,
+          "end": 337
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 338,
+            "end": 340
+          }
+        },
+        {
+          "span": {
+            "start": 341,
+            "end": 347
+          },
+          "value": "update"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 348,
+          "end": 352
+        }
+      },
+      "options": [
+        {
+          "flag_start": 353,
+          "name": {
+            "span": {
+              "start": 355,
+              "end": 359
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 360,
+              "end": 366
+            },
+            "value": "doctoc"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 367,
+              "end": 371
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 372,
+          "end": 373
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 375,
+          "end": 379
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 380,
+          "end": 384
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 385,
+            "end": 387
+          }
+        },
+        {
+          "span": {
+            "start": 388,
+            "end": 400
+          },
+          "value": "validate-toc"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 401,
+          "end": 404
+        }
+      },
+      "options": [
+        {
+          "flag_start": 405,
+          "name": {
+            "span": {
+              "start": 407,
+              "end": 412
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 413,
+              "end": 434
+            },
+            "value": "type=bind,target=.,rw"
+          }
+        },
+        {
+          "flag_start": 441,
+          "name": {
+            "span": {
+              "start": 443,
+              "end": 448
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 449,
+              "end": 511
+            },
+            "value": "type=bind,from=doctoc,source=/out/README.md,target=./README.md"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 517,
+            "end": 517
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 518,
+            "end": 721
+          },
+          "expand": true,
+          "value": "  set -e\n  diff=$(git status --porcelain -- 'README.md')\n  if [ -n \"$diff\" ]; then\n    echo >&2 'ERROR: The result of \"doctoc\" differs. Please update with \"make doctoc\"'\n    echo \"$diff\"\n    exit 1\n  fi\n"
+        }
+      ]
+    }
+  ]
+}

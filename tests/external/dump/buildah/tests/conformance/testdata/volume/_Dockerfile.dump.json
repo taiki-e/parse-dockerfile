@@ -1,0 +1,151 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 28,
+          "end": 31
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 32,
+              "end": 36
+            },
+            "value": "file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 37,
+          "end": 46
+        },
+        "value": "/var/www/"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 47,
+          "end": 53
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 54,
+              "end": 62
+            },
+            "value": "/var/www"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 63,
+          "end": 66
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 67,
+              "end": 71
+            },
+            "value": "file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 72,
+          "end": 77
+        },
+        "value": "/var/"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 78,
+          "end": 84
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 85,
+              "end": 89
+            },
+            "value": "/var"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 90,
+          "end": 93
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 94,
+              "end": 99
+            },
+            "value": "file2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 100,
+          "end": 105
+        },
+        "value": "/var/"
+      }
+    }
+  ]
+}

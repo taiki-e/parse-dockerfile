@@ -1,0 +1,222 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 23,
+          "end": 27
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 28,
+              "end": 33
+            },
+            "value": "hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 34,
+          "end": 35
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 37,
+          "end": 41
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 42,
+          "end": 48
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 49,
+            "end": 51
+          }
+        },
+        {
+          "span": {
+            "start": 52,
+            "end": 60
+          },
+          "value": "builder2"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 61,
+          "end": 65
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 66,
+              "end": 72
+            },
+            "value": "hello2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 73,
+          "end": 74
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 76,
+          "end": 80
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 81,
+          "end": 87
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 88,
+          "end": 91
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 92,
+            "end": 103
+          },
+          "value": "mkdir /test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 139,
+          "end": 142
+        }
+      },
+      "options": [
+        {
+          "flag_start": 143,
+          "name": {
+            "span": {
+              "start": 145,
+              "end": 150
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 151,
+              "end": 187
+            },
+            "value": "type=cache,from=builder,target=/test"
+          }
+        },
+        {
+          "flag_start": 188,
+          "name": {
+            "span": {
+              "start": 190,
+              "end": 195
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 196,
+              "end": 234
+            },
+            "value": "type=cache,from=builder2,target=/test2"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 235,
+            "end": 271
+          },
+          "value": "cat /test2/hello2 && cat /test/hello"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 131,
+          "end": 134
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 135,
+          "end": 144
+        },
+        "value": "SAFEIMAGE"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 198,
+          "end": 202
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 203,
+          "end": 227
+        },
+        "value": "docker.io/library/alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 228,
+          "end": 232
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 233,
+              "end": 250
+            },
+            "value": "Dockerfile.no-run"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 251,
+          "end": 257
+        },
+        "value": "/root/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 259,
+          "end": 263
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 264,
+          "end": 274
+        },
+        "value": "$SAFEIMAGE"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 275,
+          "end": 279
+        }
+      },
+      "options": [
+        {
+          "flag_start": 280,
+          "name": {
+            "span": {
+              "start": 282,
+              "end": 286
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 287,
+              "end": 288
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 289,
+              "end": 312
+            },
+            "value": "/root/Dockerfile.no-run"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 313,
+          "end": 319
+        },
+        "value": "/root/"
+      }
+    }
+  ]
+}

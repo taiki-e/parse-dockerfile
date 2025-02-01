@@ -1,0 +1,136 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 18,
+              "end": 26
+            },
+            "value": "testfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 27,
+          "end": 38
+        },
+        "value": "renamedfile"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 39,
+          "end": 43
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 44,
+          "end": 51
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 52,
+          "end": 56
+        }
+      },
+      "options": [
+        {
+          "flag_start": 57,
+          "name": {
+            "span": {
+              "start": 59,
+              "end": 64
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 65,
+              "end": 68
+            },
+            "value": "2:2"
+          }
+        },
+        {
+          "flag_start": 69,
+          "name": {
+            "span": {
+              "start": 71,
+              "end": 75
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 76,
+              "end": 77
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 78,
+              "end": 89
+            },
+            "value": "renamedfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 90,
+          "end": 91
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 30
+        },
+        "value": "docker/dockerfile:1.4"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 31,
+          "end": 35
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 36,
+          "end": 57
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 58,
+          "end": 61
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 62,
+          "end": 65
+        },
+        "value": "a=b"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 66,
+          "end": 69
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 70,
+          "end": 73
+        },
+        "value": "c=d"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 74,
+          "end": 77
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 78,
+            "end": 92
+          },
+          "value": "echo E=$E G=$G"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 93,
+          "end": 96
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 97,
+          "end": 104
+        },
+        "value": "E=E G=G"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 105,
+          "end": 108
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 109,
+            "end": 123
+          },
+          "value": "echo E=$E G=$G"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

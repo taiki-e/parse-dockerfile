@@ -1,0 +1,697 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 51
+        },
+        "value": "GO_VERSION=1.23.5"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 52,
+          "end": 55
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 56,
+          "end": 85
+        },
+        "value": "BASE_DEBIAN_DISTRO=\"bookworm\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 86,
+          "end": 89
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 90,
+          "end": 111
+        },
+        "value": "PROTOC_VERSION=3.11.4"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 178,
+          "end": 182
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 183,
+          "end": 225
+        },
+        "value": "golang:${GO_VERSION}-${BASE_DEBIAN_DISTRO}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 226,
+            "end": 228
+          }
+        },
+        {
+          "span": {
+            "start": 229,
+            "end": 233
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 234,
+          "end": 237
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 238,
+            "end": 308
+          },
+          "value": "apt-get update && apt-get --no-install-recommends install -y git unzip"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 309,
+          "end": 312
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 313,
+          "end": 327
+        },
+        "value": "PROTOC_VERSION"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 328,
+          "end": 331
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 332,
+          "end": 340
+        },
+        "value": "TARGETOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 341,
+          "end": 344
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 345,
+          "end": 355
+        },
+        "value": "TARGETARCH"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 356,
+          "end": 359
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 360,
+          "end": 377
+        },
+        "value": "GOTOOLCHAIN=local"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 378,
+          "end": 381
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 387,
+            "end": 387
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 388,
+            "end": 681
+          },
+          "expand": true,
+          "value": "  set -e\n  arch=$(echo $TARGETARCH | sed -e s/amd64/x86_64/ -e s/arm64/aarch_64/)\n  wget -q https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-${TARGETOS}-${arch}.zip\n  unzip protoc-${PROTOC_VERSION}-${TARGETOS}-${arch}.zip -d /usr/local\n"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 685,
+          "end": 692
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 693,
+          "end": 725
+        },
+        "value": "/go/src/github.com/docker/docker"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 727,
+          "end": 731
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 732,
+          "end": 736
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 737,
+            "end": 739
+          }
+        },
+        {
+          "span": {
+            "start": 740,
+            "end": 743
+          },
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 744,
+          "end": 751
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 752,
+          "end": 756
+        },
+        "value": "/out"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 757,
+          "end": 761
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 762,
+              "end": 763
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 764,
+          "end": 765
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 766,
+          "end": 769
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 775,
+            "end": 775
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 776,
+            "end": 925
+          },
+          "expand": true,
+          "value": "  set -ex\n  git config --global user.email \"moby@example.com\"\n  git config --global user.name \"moby\"\n  git init .\n  git add .\n  git commit -m 'init'\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 930,
+          "end": 934
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 935,
+          "end": 939
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 940,
+            "end": 942
+          }
+        },
+        {
+          "span": {
+            "start": 943,
+            "end": 948
+          },
+          "value": "tools"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 949,
+          "end": 952
+        }
+      },
+      "options": [
+        {
+          "flag_start": 953,
+          "name": {
+            "span": {
+              "start": 955,
+              "end": 960
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 961,
+              "end": 993
+            },
+            "value": "from=src,source=/out,target=.,rw"
+          }
+        },
+        {
+          "flag_start": 1000,
+          "name": {
+            "span": {
+              "start": 1002,
+              "end": 1007
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1008,
+              "end": 1047
+            },
+            "value": "type=cache,target=/root/.cache/go-build"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1053,
+            "end": 1053
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1054,
+            "end": 1467
+          },
+          "expand": true,
+          "value": "  set -ex\n  ./hack/with-go-mod.sh go install -v -mod=vendor -modfile=vendor.mod \\\n    github.com/gogo/protobuf/protoc-gen-gogo \\\n    github.com/gogo/protobuf/protoc-gen-gogofaster \\\n    github.com/gogo/protobuf/protoc-gen-gogoslick \\\n    github.com/golang/protobuf/protoc-gen-go\n  ./hack/with-go-mod.sh go build -v -mod=vendor -modfile=vendor.mod \\\n    -o /usr/bin/pluginrpc-gen \\\n    ./pkg/plugins/pluginrpc-gen\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1472,
+          "end": 1476
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1477,
+          "end": 1482
+        },
+        "value": "tools"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1483,
+            "end": 1485
+          }
+        },
+        {
+          "span": {
+            "start": 1486,
+            "end": 1495
+          },
+          "value": "generated"
+        }
+      ]
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1496,
+          "end": 1499
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1500,
+          "end": 1515
+        },
+        "value": "GO111MODULE=off"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1516,
+          "end": 1519
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1520,
+          "name": {
+            "span": {
+              "start": 1522,
+              "end": 1527
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1528,
+              "end": 1560
+            },
+            "value": "from=src,source=/out,target=.,rw"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1566,
+            "end": 1566
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1567,
+            "end": 1746
+          },
+          "expand": true,
+          "value": "  set -ex\n  go generate -v ./...\n  mkdir /out\n  git ls-files -m --others -- ':!vendor' 'profiles/seccomp/default.json' '**/*.pb.go' | tar -cf - --files-from - | tar -C /out -xf -\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1751,
+          "end": 1755
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1756,
+          "end": 1763
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1764,
+            "end": 1766
+          }
+        },
+        {
+          "span": {
+            "start": 1767,
+            "end": 1773
+          },
+          "value": "update"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1774,
+          "end": 1778
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1779,
+          "name": {
+            "span": {
+              "start": 1781,
+              "end": 1785
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1786,
+              "end": 1795
+            },
+            "value": "generated"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1796,
+              "end": 1800
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1801,
+          "end": 1802
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1804,
+          "end": 1808
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1809,
+          "end": 1813
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1814,
+            "end": 1816
+          }
+        },
+        {
+          "span": {
+            "start": 1817,
+            "end": 1825
+          },
+          "value": "validate"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1826,
+          "end": 1829
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1830,
+          "name": {
+            "span": {
+              "start": 1832,
+              "end": 1837
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1838,
+              "end": 1870
+            },
+            "value": "from=src,source=/out,target=.,rw"
+          }
+        },
+        {
+          "flag_start": 1877,
+          "name": {
+            "span": {
+              "start": 1879,
+              "end": 1884
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1885,
+              "end": 1945
+            },
+            "value": "type=bind,from=generated,source=/out,target=/generated-files"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1951,
+            "end": 1951
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1952,
+            "end": 2305
+          },
+          "expand": true,
+          "value": "  set -e\n  git add -A\n  if [ \"$(ls -A /generated-files)\" ]; then\n    cp -rf /generated-files/* .\n  fi\n  diff=$(git status --porcelain -- ':!vendor' 'profiles/seccomp/default.json' '**/*.pb.go')\n  if [ -n \"$diff\" ]; then\n    echo >&2 'ERROR: The result of \"go generate\" differs. Please update with \"make generate-files\"'\n    echo \"$diff\"\n    exit 1\n  fi\n"
+        }
+      ]
+    }
+  ]
+}

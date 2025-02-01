@@ -1,0 +1,9 @@
+[submodule "tests/external/buildah"]
+	path = tests/external/buildah
+	url = https://github.com/containers/buildah.git
+[submodule "tests/external/buildkit"]
+	path = tests/external/buildkit
+	url = https://github.com/moby/buildkit.git
+[submodule "tests/external/moby"]
+	path = tests/external/moby
+	url = https://github.com/moby/moby.git

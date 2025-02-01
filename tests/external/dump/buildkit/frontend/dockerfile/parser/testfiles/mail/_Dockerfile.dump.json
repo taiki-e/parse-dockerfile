@@ -1,0 +1,341 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 19,
+          "end": 22
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 23,
+            "end": 120
+          },
+          "value": "apt-get update -qy && apt-get install mutt offlineimap vim-nox abook elinks curl tmux cron zsh -y"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 121,
+          "end": 124
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 125,
+              "end": 132
+            },
+            "value": ".muttrc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 133,
+          "end": 134
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 135,
+          "end": 138
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 139,
+              "end": 153
+            },
+            "value": ".offlineimaprc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 154,
+          "end": 155
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 156,
+          "end": 159
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 160,
+              "end": 170
+            },
+            "value": ".tmux.conf"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 171,
+          "end": 172
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 173,
+          "end": 176
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 177,
+              "end": 181
+            },
+            "value": "mutt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 182,
+          "end": 188
+        },
+        "value": "/.mutt"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 189,
+          "end": 192
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 193,
+              "end": 196
+            },
+            "value": "vim"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 197,
+          "end": 202
+        },
+        "value": "/.vim"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 203,
+          "end": 206
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 207,
+              "end": 212
+            },
+            "value": "vimrc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 213,
+          "end": 220
+        },
+        "value": "/.vimrc"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 221,
+          "end": 224
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 225,
+              "end": 232
+            },
+            "value": "crontab"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 233,
+          "end": 245
+        },
+        "value": "/etc/crontab"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 246,
+          "end": 249
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 250,
+            "end": 272
+          },
+          "value": "chmod 644 /etc/crontab"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 273,
+          "end": 276
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 277,
+            "end": 288
+          },
+          "value": "mkdir /Mail"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 289,
+          "end": 292
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 293,
+            "end": 312
+          },
+          "value": "mkdir /.offlineimap"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 313,
+          "end": 316
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 317,
+            "end": 361
+          },
+          "value": "echo \"export TERM=screen-256color\" >/.zshenv"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 363,
+          "end": 366
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 367,
+            "end": 387
+          },
+          "value": "setsid cron; tmux -2"
+        }
+      }
+    }
+  ]
+}

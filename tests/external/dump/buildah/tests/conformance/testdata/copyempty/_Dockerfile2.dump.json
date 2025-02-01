@@ -1,0 +1,73 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 28
+        },
+        "value": "quay.io/libpod/centos:7"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 29,
+          "end": 33
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 34,
+              "end": 41
+            },
+            "value": "script1"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 42,
+              "end": 44
+            },
+            "value": "\"\""
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 45,
+              "end": 52
+            },
+            "value": "script2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 53,
+          "end": 68
+        },
+        "value": "/usr/local/tmp/"
+      }
+    }
+  ]
+}

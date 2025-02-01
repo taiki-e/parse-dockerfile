@@ -1,0 +1,102 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 27
+          },
+          "value": "mkdir /test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 158,
+          "end": 161
+        }
+      },
+      "options": [
+        {
+          "flag_start": 162,
+          "name": {
+            "span": {
+              "start": 164,
+              "end": 169
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 170,
+              "end": 201
+            },
+            "value": "type=cache,target=/test/cache,z"
+          }
+        },
+        {
+          "flag_start": 208,
+          "name": {
+            "span": {
+              "start": 210,
+              "end": 215
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 216,
+              "end": 259
+            },
+            "value": "source=input_file,target=/test/input_file,z"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 266,
+            "end": 286
+          },
+          "value": "cat /test/input_file"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

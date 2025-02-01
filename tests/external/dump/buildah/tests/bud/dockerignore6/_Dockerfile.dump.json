@@ -1,0 +1,83 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 18,
+              "end": 20
+            },
+            "value": "./"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 21,
+          "end": 23
+        },
+        "value": "./"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 24,
+          "end": 28
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 29,
+              "end": 35
+            },
+            "value": "subdir"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 36,
+          "end": 38
+        },
+        "value": "./"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "MAINTAINER",
+      "maintainer": {
+        "span": {
+          "start": 12,
+          "end": 22
+        }
+      },
+      "name": {
+        "span": {
+          "start": 23,
+          "end": 29
+        },
+        "value": "kilroy"
+      }
+    }
+  ]
+}

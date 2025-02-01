@@ -1,0 +1,303 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 46
+          },
+          "value": "mkdir -p /vol/subvol/subsubvol"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 47,
+          "end": 50
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 51,
+            "end": 120
+          },
+          "value": "dd if=/dev/zero bs=512 count=1 of=/vol/subvol/subsubvol/subsubvolfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 121,
+          "end": 127
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 128,
+              "end": 139
+            },
+            "value": "/vol/subvol"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 266,
+          "end": 269
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 270,
+            "end": 326
+          },
+          "value": "dd if=/dev/zero bs=512 count=1 of=/vol/subvol/subvolfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 432,
+          "end": 435
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 436,
+            "end": 482
+          },
+          "value": "dd if=/dev/zero bs=512 count=1 of=/vol/volfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 589,
+          "end": 595
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 596,
+              "end": 600
+            },
+            "value": "/vol"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 633,
+          "end": 639
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 640,
+              "end": 651
+            },
+            "value": "/vol/subvol"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 738,
+          "end": 741
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 742,
+            "end": 795
+          },
+          "value": "dd if=/dev/zero bs=512 count=1 of=/vol/anothervolfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 875,
+          "end": 878
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 879,
+              "end": 889
+            },
+            "value": "Dockerfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 890,
+          "end": 905
+        },
+        "value": "/vol/Dockerfile"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 906,
+          "end": 909
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 910,
+            "end": 930
+          },
+          "value": "stat /vol/Dockerfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 931,
+          "end": 934
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 935,
+              "end": 945
+            },
+            "value": "Dockerfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 946,
+          "end": 962
+        },
+        "value": "/vol/Dockerfile2"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 963,
+          "end": 966
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 967,
+            "end": 988
+          },
+          "value": "stat /vol/Dockerfile2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1147,
+          "end": 1150
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1151,
+            "end": 1207
+          },
+          "value": "dd if=/dev/zero bs=512 count=1 of=/vol/subvol/subvolfile"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

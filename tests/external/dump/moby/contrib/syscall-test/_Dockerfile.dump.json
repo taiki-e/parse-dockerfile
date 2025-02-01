@@ -1,0 +1,131 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 25
+        },
+        "value": "debian:bookworm-slim"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 26,
+          "end": 29
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 30,
+            "end": 104
+          },
+          "value": "apt-get update && apt-get install -y gcc libc6-dev --no-install-recommends"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 106,
+          "end": 110
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 111,
+              "end": 112
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 113,
+          "end": 122
+        },
+        "value": "/usr/src/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 124,
+          "end": 131
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 132,
+          "end": 141
+        },
+        "value": "/usr/src/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 143,
+          "end": 146
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 147,
+            "end": 542
+          },
+          "value": "gcc -g -Wall -static userns.c -o /usr/bin/userns-test \\\n\t&& gcc -g -Wall -static ns.c -o /usr/bin/ns-test \\\n\t&& gcc -g -Wall -static acct.c -o /usr/bin/acct-test \\\n\t&& gcc -g -Wall -static setuid.c -o /usr/bin/setuid-test \\\n\t&& gcc -g -Wall -static setgid.c -o /usr/bin/setgid-test \\\n\t&& gcc -g -Wall -static socket.c -o /usr/bin/socket-test \\\n\t&& gcc -g -Wall -static raw.c -o /usr/bin/raw-test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 544,
+          "end": 547
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 548,
+            "end": 642
+          },
+          "value": "[ \"$(uname -m)\" = \"x86_64\" ] && gcc -s -m32 -nostdlib exit32.s -o /usr/bin/exit32-test || true"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

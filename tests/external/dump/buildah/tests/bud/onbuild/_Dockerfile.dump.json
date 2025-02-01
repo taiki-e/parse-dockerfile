@@ -1,0 +1,85 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 13,
+          "end": 20
+        }
+      },
+      "instruction": {
+        "kind": "RUN",
+        "run": {
+          "span": {
+            "start": 21,
+            "end": 24
+          }
+        },
+        "options": [],
+        "arguments": {
+          "shell": {
+            "span": {
+              "start": 25,
+              "end": 40
+            },
+            "value": "touch /onbuild1"
+          }
+        },
+        "here_docs": []
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 41,
+          "end": 48
+        }
+      },
+      "instruction": {
+        "kind": "RUN",
+        "run": {
+          "span": {
+            "start": 49,
+            "end": 52
+          }
+        },
+        "options": [],
+        "arguments": {
+          "shell": {
+            "span": {
+              "start": 53,
+              "end": 68
+            },
+            "value": "touch /onbuild2"
+          }
+        },
+        "here_docs": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,795 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 1,
+      "value": {
+        "span": {
+          "start": 8,
+          "end": 29
+        },
+        "value": "docker/dockerfile:1.8"
+      }
+    },
+    "escape": null,
+    "check": {
+      "start": 31,
+      "value": {
+        "span": {
+          "start": 37,
+          "end": 47
+        },
+        "value": "error=true"
+      }
+    }
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 49,
+          "end": 52
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 53,
+          "end": 68
+        },
+        "value": "GO_VERSION=1.22"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 69,
+          "end": 72
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 73,
+          "end": 89
+        },
+        "value": "XX_VERSION=1.4.0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 91,
+          "end": 94
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 95,
+          "end": 121
+        },
+        "value": "COVER_FILENAME=\"cover.out\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 122,
+          "end": 125
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 126,
+          "end": 152
+        },
+        "value": "BENCH_FILENAME=\"bench.txt\""
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 154,
+          "end": 158
+        }
+      },
+      "options": [
+        {
+          "flag_start": 159,
+          "name": {
+            "span": {
+              "start": 161,
+              "end": 169
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 170,
+              "end": 186
+            },
+            "value": "${BUILDPLATFORM}"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 187,
+          "end": 214
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 215,
+            "end": 217
+          }
+        },
+        {
+          "span": {
+            "start": 218,
+            "end": 220
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 222,
+          "end": 226
+        }
+      },
+      "options": [
+        {
+          "flag_start": 227,
+          "name": {
+            "span": {
+              "start": 229,
+              "end": 237
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 238,
+              "end": 254
+            },
+            "value": "${BUILDPLATFORM}"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 255,
+          "end": 282
+        },
+        "value": "golang:${GO_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 283,
+            "end": 285
+          }
+        },
+        {
+          "span": {
+            "start": 286,
+            "end": 292
+          },
+          "value": "golang"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 293,
+          "end": 297
+        }
+      },
+      "options": [
+        {
+          "flag_start": 298,
+          "name": {
+            "span": {
+              "start": 300,
+              "end": 304
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 305,
+          "name": {
+            "span": {
+              "start": 307,
+              "end": 311
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 312,
+              "end": 314
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 315,
+              "end": 316
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 317,
+          "end": 318
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 319,
+          "end": 326
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 327,
+          "end": 331
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 332,
+          "end": 335
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 336,
+          "end": 350
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 352,
+          "end": 356
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 357,
+          "end": 363
+        },
+        "value": "golang"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 364,
+            "end": 366
+          }
+        },
+        {
+          "span": {
+            "start": 367,
+            "end": 372
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 373,
+          "end": 376
+        }
+      },
+      "options": [
+        {
+          "flag_start": 377,
+          "name": {
+            "span": {
+              "start": 379,
+              "end": 384
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 385,
+              "end": 415
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 422,
+          "name": {
+            "span": {
+              "start": 424,
+              "end": 429
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 430,
+              "end": 439
+            },
+            "value": "type=bind"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 440,
+            "end": 453
+          },
+          "value": "xx-go build ."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 455,
+          "end": 459
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 460,
+          "end": 466
+        },
+        "value": "golang"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 467,
+            "end": 469
+          }
+        },
+        {
+          "span": {
+            "start": 470,
+            "end": 478
+          },
+          "value": "runbench"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 479,
+          "end": 482
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 483,
+          "end": 497
+        },
+        "value": "BENCH_FILENAME"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 498,
+          "end": 501
+        }
+      },
+      "options": [
+        {
+          "flag_start": 502,
+          "name": {
+            "span": {
+              "start": 504,
+              "end": 509
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 510,
+              "end": 540
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 547,
+          "name": {
+            "span": {
+              "start": 549,
+              "end": 554
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 555,
+              "end": 564
+            },
+            "value": "type=bind"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 571,
+            "end": 634
+          },
+          "value": "xx-go test -v --run skip --bench . | tee /tmp/${BENCH_FILENAME}"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 636,
+          "end": 640
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 641,
+          "end": 648
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 649,
+            "end": 651
+          }
+        },
+        {
+          "span": {
+            "start": 652,
+            "end": 657
+          },
+          "value": "bench"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 658,
+          "end": 661
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 662,
+          "end": 676
+        },
+        "value": "BENCH_FILENAME"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 677,
+          "end": 681
+        }
+      },
+      "options": [
+        {
+          "flag_start": 682,
+          "name": {
+            "span": {
+              "start": 684,
+              "end": 688
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 689,
+              "end": 697
+            },
+            "value": "runbench"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 698,
+              "end": 720
+            },
+            "value": "/tmp/${BENCH_FILENAME}"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 721,
+          "end": 722
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 724,
+          "end": 728
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 729,
+          "end": 735
+        },
+        "value": "golang"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 736,
+            "end": 738
+          }
+        },
+        {
+          "span": {
+            "start": 739,
+            "end": 746
+          },
+          "value": "runtest"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 747,
+          "end": 750
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 751,
+          "end": 765
+        },
+        "value": "TESTFLAGS=\"-v\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 766,
+          "end": 769
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 770,
+          "end": 784
+        },
+        "value": "COVER_FILENAME"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 785,
+          "end": 788
+        }
+      },
+      "options": [
+        {
+          "flag_start": 789,
+          "name": {
+            "span": {
+              "start": 791,
+              "end": 796
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 797,
+              "end": 827
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 834,
+          "name": {
+            "span": {
+              "start": 836,
+              "end": 841
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 842,
+              "end": 851
+            },
+            "value": "type=bind"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 858,
+            "end": 918
+          },
+          "value": "xx-go test -coverprofile=/tmp/${COVER_FILENAME} $TESTFLAGS ."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 920,
+          "end": 924
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 925,
+          "end": 932
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 933,
+            "end": 935
+          }
+        },
+        {
+          "span": {
+            "start": 936,
+            "end": 940
+          },
+          "value": "test"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 941,
+          "end": 944
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 945,
+          "end": 959
+        },
+        "value": "COVER_FILENAME"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 960,
+          "end": 964
+        }
+      },
+      "options": [
+        {
+          "flag_start": 965,
+          "name": {
+            "span": {
+              "start": 967,
+              "end": 971
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 972,
+              "end": 979
+            },
+            "value": "runtest"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 980,
+              "end": 1002
+            },
+            "value": "/tmp/${COVER_FILENAME}"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1003,
+          "end": 1004
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1006,
+          "end": 1010
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1011,
+          "end": 1016
+        },
+        "value": "build"
+      },
+      "as_": null
+    }
+  ]
+}

@@ -1,0 +1,7152 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 42
+        },
+        "value": "docker/dockerfile-upstream:master"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 44,
+          "end": 47
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 48,
+          "end": 67
+        },
+        "value": "RUNC_VERSION=v1.2.4"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 68,
+          "end": 71
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 72,
+          "end": 97
+        },
+        "value": "CONTAINERD_VERSION=v2.0.2"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 185,
+          "end": 188
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 189,
+          "end": 222
+        },
+        "value": "CONTAINERD_ALT_VERSION_17=v1.7.25"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 223,
+          "end": 226
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 227,
+          "end": 260
+        },
+        "value": "CONTAINERD_ALT_VERSION_16=v1.6.36"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 261,
+          "end": 264
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 265,
+          "end": 288
+        },
+        "value": "REGISTRY_VERSION=v2.8.3"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 289,
+          "end": 292
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 293,
+          "end": 319
+        },
+        "value": "ROOTLESSKIT_VERSION=v2.3.2"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 320,
+          "end": 323
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 324,
+          "end": 342
+        },
+        "value": "CNI_VERSION=v1.5.1"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 343,
+          "end": 346
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 347,
+          "end": 381
+        },
+        "value": "STARGZ_SNAPSHOTTER_VERSION=v0.15.1"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 382,
+          "end": 385
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 386,
+          "end": 408
+        },
+        "value": "NERDCTL_VERSION=v1.6.2"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 409,
+          "end": 412
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 413,
+          "end": 435
+        },
+        "value": "DNSNAME_VERSION=v1.3.1"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 436,
+          "end": 439
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 440,
+          "end": 460
+        },
+        "value": "NYDUS_VERSION=v2.2.4"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 461,
+          "end": 464
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 465,
+          "end": 507
+        },
+        "value": "MINIO_VERSION=RELEASE.2022-05-03T20-36-08Z"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 508,
+          "end": 511
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 512,
+          "end": 557
+        },
+        "value": "MINIO_MC_VERSION=RELEASE.2022-05-04T06-07-55Z"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 558,
+          "end": 561
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 562,
+          "end": 584
+        },
+        "value": "AZURITE_VERSION=3.18.0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 585,
+          "end": 588
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 589,
+          "end": 613
+        },
+        "value": "GOTESTSUM_VERSION=v1.9.0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 614,
+          "end": 617
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 618,
+          "end": 639
+        },
+        "value": "DELVE_VERSION=v1.23.1"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 641,
+          "end": 644
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 645,
+          "end": 660
+        },
+        "value": "GO_VERSION=1.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 661,
+          "end": 664
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 665,
+          "end": 684
+        },
+        "value": "ALPINE_VERSION=3.21"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 685,
+          "end": 688
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 689,
+          "end": 705
+        },
+        "value": "XX_VERSION=1.6.1"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 706,
+          "end": 709
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 710,
+          "end": 724
+        },
+        "value": "BUILDKIT_DEBUG"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 759,
+          "end": 763
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 764,
+          "end": 792
+        },
+        "value": "minio/minio:${MINIO_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 793,
+            "end": 795
+          }
+        },
+        {
+          "span": {
+            "start": 796,
+            "end": 801
+          },
+          "value": "minio"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 802,
+          "end": 806
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 807,
+          "end": 835
+        },
+        "value": "minio/mc:${MINIO_MC_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 836,
+            "end": 838
+          }
+        },
+        {
+          "span": {
+            "start": 839,
+            "end": 847
+          },
+          "value": "minio-mc"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 888,
+          "end": 892
+        }
+      },
+      "options": [
+        {
+          "flag_start": 893,
+          "name": {
+            "span": {
+              "start": 895,
+              "end": 903
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 904,
+              "end": 918
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 919,
+          "end": 946
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 947,
+            "end": 949
+          }
+        },
+        {
+          "span": {
+            "start": 950,
+            "end": 952
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 992,
+          "end": 996
+        }
+      },
+      "options": [
+        {
+          "flag_start": 997,
+          "name": {
+            "span": {
+              "start": 999,
+              "end": 1007
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 1008,
+              "end": 1022
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 1023,
+          "end": 1067
+        },
+        "value": "golang:${GO_VERSION}-alpine${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1068,
+            "end": 1070
+          }
+        },
+        {
+          "span": {
+            "start": 1071,
+            "end": 1079
+          },
+          "value": "golatest"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1131,
+          "end": 1135
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1136,
+          "end": 1144
+        },
+        "value": "golatest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1145,
+            "end": 1147
+          }
+        },
+        {
+          "span": {
+            "start": 1148,
+            "end": 1160
+          },
+          "value": "gobuild-base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1161,
+          "end": 1164
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1165,
+            "end": 1231
+          },
+          "value": "apk add --no-cache file bash clang lld musl-dev pkgconfig git make"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1232,
+          "end": 1236
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1237,
+          "name": {
+            "span": {
+              "start": 1239,
+              "end": 1243
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 1244,
+          "name": {
+            "span": {
+              "start": 1246,
+              "end": 1250
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1251,
+              "end": 1253
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1254,
+              "end": 1255
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1256,
+          "end": 1257
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1285,
+          "end": 1289
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1290,
+          "end": 1302
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1303,
+            "end": 1305
+          }
+        },
+        {
+          "span": {
+            "start": 1306,
+            "end": 1310
+          },
+          "value": "runc"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1311,
+          "end": 1318
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1319,
+          "end": 1361
+        },
+        "value": "$GOPATH/src/github.com/opencontainers/runc"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1362,
+          "end": 1365
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1366,
+          "end": 1378
+        },
+        "value": "RUNC_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 1379,
+          "end": 1382
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1383,
+          "name": {
+            "span": {
+              "start": 1385,
+              "end": 1397
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 1398,
+              "end": 1402
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1403,
+              "end": 1461
+            },
+            "value": "\"https://github.com/opencontainers/runc.git#$RUNC_VERSION\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1462,
+          "end": 1463
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1464,
+          "end": 1467
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1468,
+          "end": 1482
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1588,
+          "end": 1591
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1592,
+            "end": 1753
+          },
+          "value": "set -e; xx-apk add musl-dev gcc libseccomp-dev libseccomp-static; \\\n  [ \"$(xx-info arch)\" != \"ppc64le\" ] || XX_CC_PREFER_LINKER=ld xx-clang --setup-target-triple"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1754,
+          "end": 1757
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1758,
+          "name": {
+            "span": {
+              "start": 1760,
+              "end": 1765
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1766,
+              "end": 1796
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1802,
+            "end": 1802
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1803,
+            "end": 2065
+          },
+          "expand": true,
+          "value": "  set -ex\n  CGO_ENABLED=1 xx-go build -mod=vendor -ldflags '-extldflags -static' -tags 'apparmor seccomp netgo cgo static_build osusergo' -o /usr/bin/runc ./\n  xx-verify --static /usr/bin/runc\n  if [ \"$(xx-info os)\" = \"linux\" ]; then /usr/bin/runc --version; fi\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2070,
+          "end": 2074
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2075,
+          "end": 2087
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2088,
+            "end": 2090
+          }
+        },
+        {
+          "span": {
+            "start": 2091,
+            "end": 2104
+          },
+          "value": "buildkit-base"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 2105,
+          "end": 2112
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2113,
+          "end": 2117
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 2118,
+          "end": 2121
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2122,
+          "end": 2141
+        },
+        "value": "GOFLAGS=-mod=vendor"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2202,
+          "end": 2206
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2207,
+          "end": 2220
+        },
+        "value": "buildkit-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2221,
+            "end": 2223
+          }
+        },
+        {
+          "span": {
+            "start": 2224,
+            "end": 2240
+          },
+          "value": "buildkit-version"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2288,
+          "end": 2291
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2292,
+          "name": {
+            "span": {
+              "start": 2294,
+              "end": 2299
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 2300,
+              "end": 2308
+            },
+            "value": "target=."
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2316,
+            "end": 2316
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2317,
+            "end": 2900
+          },
+          "expand": false,
+          "value": "  git rev-parse HEAD 2>/dev/null || {\n    echo >&2 \"Failed to get git revision, make sure --build-arg BUILDKIT_CONTEXT_KEEP_GIT_DIR=1 is set when building from Git directly\"\n    exit 1\n  }\n  set -ex\n  export PKG=github.com/moby/buildkit VERSION=$(git describe --match 'v[0-9]*' --dirty='.m' --always --tags) REVISION=$(git rev-parse HEAD)$(if ! git diff --no-ext-diff --quiet --exit-code; then echo .m; fi);\n  echo \"-X ${PKG}/version.Version=${VERSION} -X ${PKG}/version.Revision=${REVISION} -X ${PKG}/version.Package=${PKG}\" > /tmp/.ldflags;\n  echo -n \"${VERSION}\" > /tmp/.version;\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2939,
+          "end": 2943
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2944,
+          "end": 2957
+        },
+        "value": "buildkit-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2958,
+            "end": 2960
+          }
+        },
+        {
+          "span": {
+            "start": 2961,
+            "end": 2969
+          },
+          "value": "buildctl"
+        }
+      ]
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 2970,
+          "end": 2973
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2974,
+          "end": 2987
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 2988,
+          "end": 2991
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2992,
+          "end": 3006
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3007,
+          "end": 3010
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3011,
+          "end": 3023
+        },
+        "value": "GOBUILDFLAGS"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 3024,
+          "end": 3027
+        }
+      },
+      "options": [
+        {
+          "flag_start": 3028,
+          "name": {
+            "span": {
+              "start": 3030,
+              "end": 3035
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3036,
+              "end": 3044
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 3045,
+          "name": {
+            "span": {
+              "start": 3047,
+              "end": 3052
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3053,
+              "end": 3083
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 3088,
+          "name": {
+            "span": {
+              "start": 3090,
+              "end": 3095
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3096,
+              "end": 3125
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        },
+        {
+          "flag_start": 3130,
+          "name": {
+            "span": {
+              "start": 3132,
+              "end": 3137
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3138,
+              "end": 3201
+            },
+            "value": "source=/tmp/.ldflags,target=/tmp/.ldflags,from=buildkit-version"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 3207,
+            "end": 3207
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 3208,
+            "end": 3428
+          },
+          "expand": true,
+          "value": "  set -ex\n  xx-go build ${GOBUILDFLAGS} -ldflags \"$(cat /tmp/.ldflags)\" -o /usr/bin/buildctl ./cmd/buildctl\n  xx-verify --static /usr/bin/buildctl\n  if [ \"$(xx-info os)\" = \"linux\" ]; then /usr/bin/buildctl --version; fi\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 3466,
+          "end": 3470
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 3471,
+          "end": 3484
+        },
+        "value": "buildkit-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 3485,
+            "end": 3487
+          }
+        },
+        {
+          "span": {
+            "start": 3488,
+            "end": 3497
+          },
+          "value": "buildkitd"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3572,
+          "end": 3575
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3576,
+          "end": 3590
+        },
+        "value": "BUILDKITD_TAGS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3591,
+          "end": 3594
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3595,
+          "end": 3609
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3610,
+          "end": 3613
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3614,
+          "end": 3626
+        },
+        "value": "GOBUILDFLAGS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3627,
+          "end": 3630
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3631,
+          "end": 3653
+        },
+        "value": "VERIFYFLAGS=\"--static\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3654,
+          "end": 3657
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3658,
+          "end": 3671
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3672,
+          "end": 3675
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3676,
+          "end": 3690
+        },
+        "value": "BUILDKIT_DEBUG"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 3691,
+          "end": 3694
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 3695,
+          "end": 3735
+        },
+        "value": "GOGCFLAGS=${BUILDKIT_DEBUG:+\"all=-N -l\"}"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 3736,
+          "end": 3739
+        }
+      },
+      "options": [
+        {
+          "flag_start": 3740,
+          "name": {
+            "span": {
+              "start": 3742,
+              "end": 3747
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3748,
+              "end": 3756
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 3757,
+          "name": {
+            "span": {
+              "start": 3759,
+              "end": 3764
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3765,
+              "end": 3795
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 3800,
+          "name": {
+            "span": {
+              "start": 3802,
+              "end": 3807
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3808,
+              "end": 3837
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        },
+        {
+          "flag_start": 3842,
+          "name": {
+            "span": {
+              "start": 3844,
+              "end": 3849
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 3850,
+              "end": 3913
+            },
+            "value": "source=/tmp/.ldflags,target=/tmp/.ldflags,from=buildkit-version"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 3919,
+            "end": 3919
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 3920,
+            "end": 4980
+          },
+          "expand": true,
+          "value": "  set -ex\n  xx-go build ${GOBUILDFLAGS} -gcflags=\"${GOGCFLAGS}\" -ldflags \"$(cat /tmp/.ldflags) -extldflags '-static'\" -tags \"osusergo netgo static_build seccomp ${BUILDKITD_TAGS}\" -o /usr/bin/buildkitd ./cmd/buildkitd\n  xx-verify ${VERIFYFLAGS} /usr/bin/buildkitd\n\n  # buildkitd --version can be flaky when running through emulation related to\n  # https://github.com/moby/buildkit/pull/4491. Retry a few times as a workaround.\n  set +ex\n  if [ \"$(xx-info os)\" = \"linux\" ]; then\n    max_retries=5\n    for attempt in $(seq \"$max_retries\"); do\n      timeout 3 /usr/bin/buildkitd --version\n      exitcode=$?\n      if ! xx-info is-cross; then\n        exit $exitcode\n      elif [ $exitcode -eq 0 ]; then\n        break\n      elif [ $exitcode -eq 124 ] || [ $exitcode -eq 143 ]; then\n        echo \"WARN: buildkitd --version timed out ($attempt/$max_retries)\"\n        if [ \"$attempt\" -eq \"$max_retries\" ]; then\n          exit $exitcode\n        fi\n      else\n        echo \"ERROR: buildkitd --version failed with exit code $exitcode\"\n      fi\n      sleep 1\n    done\n  fi\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 5033,
+          "end": 5037
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5038,
+          "end": 5050
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 5051,
+            "end": 5053
+          }
+        },
+        {
+          "span": {
+            "start": 5054,
+            "end": 5061
+          },
+          "value": "dnsname"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 5062,
+          "end": 5069
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5070,
+          "end": 5107
+        },
+        "value": "/go/src/github.com/containers/dnsname"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 5108,
+          "end": 5111
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5112,
+          "end": 5127
+        },
+        "value": "DNSNAME_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 5128,
+          "end": 5131
+        }
+      },
+      "options": [
+        {
+          "flag_start": 5132,
+          "name": {
+            "span": {
+              "start": 5134,
+              "end": 5146
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 5147,
+              "end": 5151
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 5152,
+              "end": 5212
+            },
+            "value": "\"https://github.com/containers/dnsname.git#$DNSNAME_VERSION\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 5213,
+          "end": 5214
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 5215,
+          "end": 5218
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5219,
+          "end": 5233
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 5234,
+          "end": 5237
+        }
+      },
+      "options": [
+        {
+          "flag_start": 5238,
+          "name": {
+            "span": {
+              "start": 5240,
+              "end": 5245
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 5246,
+              "end": 5276
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 5283,
+            "end": 5396
+          },
+          "value": "CGO_ENABLED=0 xx-go build -o /usr/bin/dnsname ./plugins/meta/dnsname && \\\n    xx-verify --static /usr/bin/dnsname"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 5398,
+          "end": 5402
+        }
+      },
+      "options": [
+        {
+          "flag_start": 5403,
+          "name": {
+            "span": {
+              "start": 5405,
+              "end": 5413
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 5414,
+              "end": 5428
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 5429,
+          "end": 5453
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 5454,
+            "end": 5456
+          }
+        },
+        {
+          "span": {
+            "start": 5457,
+            "end": 5468
+          },
+          "value": "cni-plugins"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 5469,
+          "end": 5472
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 5473,
+            "end": 5496
+          },
+          "value": "apk add --no-cache curl"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 5497,
+          "end": 5501
+        }
+      },
+      "options": [
+        {
+          "flag_start": 5502,
+          "name": {
+            "span": {
+              "start": 5504,
+              "end": 5508
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 5509,
+              "end": 5511
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 5512,
+              "end": 5513
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 5514,
+          "end": 5515
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 5516,
+          "end": 5519
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5520,
+          "end": 5531
+        },
+        "value": "CNI_VERSION"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 5532,
+          "end": 5535
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5536,
+          "end": 5544
+        },
+        "value": "TARGETOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 5545,
+          "end": 5548
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5549,
+          "end": 5559
+        },
+        "value": "TARGETARCH"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 5560,
+          "end": 5563
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5564,
+          "end": 5578
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 5579,
+          "end": 5586
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 5587,
+          "end": 5599
+        },
+        "value": "/opt/cni/bin"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 5600,
+          "end": 5603
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 5604,
+            "end": 5759
+          },
+          "value": "curl -Ls https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-${TARGETOS}-${TARGETARCH}-${CNI_VERSION}.tgz | tar xzv"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 5760,
+          "end": 5763
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 5764,
+            "end": 5809
+          },
+          "value": "xx-verify --static bridge loopback host-local"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 5810,
+          "end": 5814
+        }
+      },
+      "options": [
+        {
+          "flag_start": 5815,
+          "name": {
+            "span": {
+              "start": 5817,
+              "end": 5821
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 5822,
+          "name": {
+            "span": {
+              "start": 5824,
+              "end": 5828
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 5829,
+              "end": 5836
+            },
+            "value": "dnsname"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 5837,
+              "end": 5853
+            },
+            "value": "/usr/bin/dnsname"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 5854,
+          "end": 5867
+        },
+        "value": "/opt/cni/bin/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 5869,
+          "end": 5873
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5874,
+          "end": 5881
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 5882,
+            "end": 5884
+          }
+        },
+        {
+          "span": {
+            "start": 5885,
+            "end": 5903
+          },
+          "value": "cni-plugins-export"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 5904,
+          "end": 5908
+        }
+      },
+      "options": [
+        {
+          "flag_start": 5909,
+          "name": {
+            "span": {
+              "start": 5911,
+              "end": 5915
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 5916,
+          "name": {
+            "span": {
+              "start": 5918,
+              "end": 5922
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 5923,
+              "end": 5934
+            },
+            "value": "cni-plugins"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 5935,
+              "end": 5954
+            },
+            "value": "/opt/cni/bin/bridge"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 5955,
+          "end": 5975
+        },
+        "value": "/buildkit-cni-bridge"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 5976,
+          "end": 5980
+        }
+      },
+      "options": [
+        {
+          "flag_start": 5981,
+          "name": {
+            "span": {
+              "start": 5983,
+              "end": 5987
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 5988,
+          "name": {
+            "span": {
+              "start": 5990,
+              "end": 5994
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 5995,
+              "end": 6006
+            },
+            "value": "cni-plugins"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6007,
+              "end": 6028
+            },
+            "value": "/opt/cni/bin/loopback"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6029,
+          "end": 6051
+        },
+        "value": "/buildkit-cni-loopback"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6052,
+          "end": 6056
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6057,
+          "name": {
+            "span": {
+              "start": 6059,
+              "end": 6063
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6064,
+          "name": {
+            "span": {
+              "start": 6066,
+              "end": 6070
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6071,
+              "end": 6082
+            },
+            "value": "cni-plugins"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6083,
+              "end": 6106
+            },
+            "value": "/opt/cni/bin/host-local"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6107,
+          "end": 6131
+        },
+        "value": "/buildkit-cni-host-local"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6132,
+          "end": 6136
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6137,
+          "name": {
+            "span": {
+              "start": 6139,
+              "end": 6143
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6144,
+          "name": {
+            "span": {
+              "start": 6146,
+              "end": 6150
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6151,
+              "end": 6162
+            },
+            "value": "cni-plugins"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6163,
+              "end": 6184
+            },
+            "value": "/opt/cni/bin/firewall"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6185,
+          "end": 6207
+        },
+        "value": "/buildkit-cni-firewall"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 6209,
+          "end": 6213
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 6214,
+          "end": 6221
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 6222,
+            "end": 6224
+          }
+        },
+        {
+          "span": {
+            "start": 6225,
+            "end": 6252
+          },
+          "value": "cni-plugins-export-squashed"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6253,
+          "end": 6257
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6258,
+          "name": {
+            "span": {
+              "start": 6260,
+              "end": 6264
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6265,
+              "end": 6283
+            },
+            "value": "cni-plugins-export"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6284,
+              "end": 6285
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6286,
+          "end": 6287
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 6289,
+          "end": 6293
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 6294,
+          "end": 6301
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 6302,
+            "end": 6304
+          }
+        },
+        {
+          "span": {
+            "start": 6305,
+            "end": 6319
+          },
+          "value": "binaries-linux"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6320,
+          "end": 6324
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6325,
+          "name": {
+            "span": {
+              "start": 6327,
+              "end": 6331
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6332,
+          "name": {
+            "span": {
+              "start": 6334,
+              "end": 6338
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6339,
+              "end": 6343
+            },
+            "value": "runc"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6344,
+              "end": 6357
+            },
+            "value": "/usr/bin/runc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6358,
+          "end": 6372
+        },
+        "value": "/buildkit-runc"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6457,
+          "end": 6461
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6462,
+          "name": {
+            "span": {
+              "start": 6464,
+              "end": 6468
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6469,
+          "name": {
+            "span": {
+              "start": 6471,
+              "end": 6475
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6476,
+              "end": 6584
+            },
+            "value": "tonistiigi/binfmt:buildkit-v7.1.0-30@sha256:45dd57b4ba2f24e2354f71f1e4e51f073cb7a28fd848ce6f5f2a7701142a6bf0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6585,
+              "end": 6586
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6587,
+          "end": 6588
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6589,
+          "end": 6593
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6594,
+          "name": {
+            "span": {
+              "start": 6596,
+              "end": 6600
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6601,
+          "name": {
+            "span": {
+              "start": 6603,
+              "end": 6607
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6608,
+              "end": 6635
+            },
+            "value": "cni-plugins-export-squashed"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6636,
+              "end": 6637
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6638,
+          "end": 6639
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6640,
+          "end": 6644
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6645,
+          "name": {
+            "span": {
+              "start": 6647,
+              "end": 6651
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6652,
+          "name": {
+            "span": {
+              "start": 6654,
+              "end": 6658
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6659,
+              "end": 6667
+            },
+            "value": "buildctl"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6668,
+              "end": 6685
+            },
+            "value": "/usr/bin/buildctl"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6686,
+          "end": 6687
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6688,
+          "end": 6692
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6693,
+          "name": {
+            "span": {
+              "start": 6695,
+              "end": 6699
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6700,
+          "name": {
+            "span": {
+              "start": 6702,
+              "end": 6706
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6707,
+              "end": 6716
+            },
+            "value": "buildkitd"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6717,
+              "end": 6735
+            },
+            "value": "/usr/bin/buildkitd"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6736,
+          "end": 6737
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 6739,
+          "end": 6743
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 6744,
+          "end": 6751
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 6752,
+            "end": 6754
+          }
+        },
+        {
+          "span": {
+            "start": 6755,
+            "end": 6770
+          },
+          "value": "binaries-darwin"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6771,
+          "end": 6775
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6776,
+          "name": {
+            "span": {
+              "start": 6778,
+              "end": 6782
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6783,
+          "name": {
+            "span": {
+              "start": 6785,
+              "end": 6789
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6790,
+              "end": 6798
+            },
+            "value": "buildctl"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6799,
+              "end": 6816
+            },
+            "value": "/usr/bin/buildctl"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6817,
+          "end": 6818
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 6820,
+          "end": 6824
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 6825,
+          "end": 6832
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 6833,
+            "end": 6835
+          }
+        },
+        {
+          "span": {
+            "start": 6836,
+            "end": 6852
+          },
+          "value": "binaries-windows"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6853,
+          "end": 6857
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6858,
+          "name": {
+            "span": {
+              "start": 6860,
+              "end": 6864
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6865,
+          "name": {
+            "span": {
+              "start": 6867,
+              "end": 6871
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6872,
+              "end": 6880
+            },
+            "value": "buildctl"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6881,
+              "end": 6898
+            },
+            "value": "/usr/bin/buildctl"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6899,
+          "end": 6912
+        },
+        "value": "/buildctl.exe"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 6913,
+          "end": 6917
+        }
+      },
+      "options": [
+        {
+          "flag_start": 6918,
+          "name": {
+            "span": {
+              "start": 6920,
+              "end": 6924
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 6925,
+          "name": {
+            "span": {
+              "start": 6927,
+              "end": 6931
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 6932,
+              "end": 6941
+            },
+            "value": "buildkitd"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 6942,
+              "end": 6960
+            },
+            "value": "/usr/bin/buildkitd"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 6961,
+          "end": 6975
+        },
+        "value": "/buildkitd.exe"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 6977,
+          "end": 6981
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 6982,
+          "end": 6989
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 6990,
+            "end": 6992
+          }
+        },
+        {
+          "span": {
+            "start": 6993,
+            "end": 7009
+          },
+          "value": "binaries-freebsd"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 7010,
+          "end": 7014
+        }
+      },
+      "options": [
+        {
+          "flag_start": 7015,
+          "name": {
+            "span": {
+              "start": 7017,
+              "end": 7021
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 7022,
+          "name": {
+            "span": {
+              "start": 7024,
+              "end": 7028
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 7029,
+              "end": 7038
+            },
+            "value": "buildkitd"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 7039,
+              "end": 7057
+            },
+            "value": "/usr/bin/buildkitd"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 7058,
+          "end": 7059
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 7060,
+          "end": 7064
+        }
+      },
+      "options": [
+        {
+          "flag_start": 7065,
+          "name": {
+            "span": {
+              "start": 7067,
+              "end": 7071
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 7072,
+          "name": {
+            "span": {
+              "start": 7074,
+              "end": 7078
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 7079,
+              "end": 7087
+            },
+            "value": "buildctl"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 7088,
+              "end": 7105
+            },
+            "value": "/usr/bin/buildctl"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 7106,
+          "end": 7107
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 7109,
+          "end": 7113
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 7114,
+          "end": 7132
+        },
+        "value": "binaries-$TARGETOS"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 7133,
+            "end": 7135
+          }
+        },
+        {
+          "span": {
+            "start": 7136,
+            "end": 7144
+          },
+          "value": "binaries"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 7209,
+          "end": 7212
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 7213,
+          "end": 7242
+        },
+        "value": "BUILDKIT_SBOM_SCAN_STAGE=true"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 7244,
+          "end": 7248
+        }
+      },
+      "options": [
+        {
+          "flag_start": 7249,
+          "name": {
+            "span": {
+              "start": 7251,
+              "end": 7259
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 7260,
+              "end": 7274
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 7275,
+          "end": 7299
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 7300,
+            "end": 7302
+          }
+        },
+        {
+          "span": {
+            "start": 7303,
+            "end": 7311
+          },
+          "value": "releaser"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 7312,
+          "end": 7315
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 7316,
+            "end": 7343
+          },
+          "value": "apk add --no-cache tar gzip"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 7344,
+          "end": 7351
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 7352,
+          "end": 7357
+        },
+        "value": "/work"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 7358,
+          "end": 7361
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 7362,
+          "end": 7376
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 7377,
+          "end": 7380
+        }
+      },
+      "options": [
+        {
+          "flag_start": 7381,
+          "name": {
+            "span": {
+              "start": 7383,
+              "end": 7388
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 7389,
+              "end": 7402
+            },
+            "value": "from=binaries"
+          }
+        },
+        {
+          "flag_start": 7407,
+          "name": {
+            "span": {
+              "start": 7409,
+              "end": 7414
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 7415,
+              "end": 7478
+            },
+            "value": "source=/tmp/.version,target=/tmp/.version,from=buildkit-version"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 7483,
+            "end": 7659
+          },
+          "value": "mkdir -p /out && tar czvf \"/out/buildkit-$(cat /tmp/.version).$(echo $TARGETPLATFORM | sed 's/\\//-/g').tar.gz\" --mtime='2015-10-21 00:00Z' --sort=name --transform 's/^./bin/' ."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 7661,
+          "end": 7665
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 7666,
+          "end": 7673
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 7674,
+            "end": 7676
+          }
+        },
+        {
+          "span": {
+            "start": 7677,
+            "end": 7684
+          },
+          "value": "release"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 7685,
+          "end": 7689
+        }
+      },
+      "options": [
+        {
+          "flag_start": 7690,
+          "name": {
+            "span": {
+              "start": 7692,
+              "end": 7696
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 7697,
+          "name": {
+            "span": {
+              "start": 7699,
+              "end": 7703
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 7704,
+              "end": 7712
+            },
+            "value": "releaser"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 7713,
+              "end": 7718
+            },
+            "value": "/out/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 7719,
+          "end": 7720
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 7722,
+          "end": 7726
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 7727,
+          "end": 7751
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 7752,
+            "end": 7754
+          }
+        },
+        {
+          "span": {
+            "start": 7755,
+            "end": 7770
+          },
+          "value": "buildkit-export"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 7771,
+          "end": 7774
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 7775,
+            "end": 7883
+          },
+          "value": "apk add --no-cache fuse3 git openssh pigz xz iptables ip6tables \\\n  && ln -s fusermount3 /usr/bin/fusermount"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 7884,
+          "end": 7888
+        }
+      },
+      "options": [
+        {
+          "flag_start": 7889,
+          "name": {
+            "span": {
+              "start": 7891,
+              "end": 7895
+            },
+            "value": "link"
+          },
+          "value": null
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 7896,
+              "end": 7947
+            },
+            "value": "examples/buildctl-daemonless/buildctl-daemonless.sh"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 7948,
+          "end": 7957
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 7958,
+          "end": 7964
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 7965,
+              "end": 7982
+            },
+            "value": "/var/lib/buildkit"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 7984,
+          "end": 7988
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 7989,
+          "end": 8001
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 8002,
+            "end": 8004
+          }
+        },
+        {
+          "span": {
+            "start": 8005,
+            "end": 8021
+          },
+          "value": "containerd-build"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 8022,
+          "end": 8029
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 8030,
+          "end": 8070
+        },
+        "value": "/go/src/github.com/containerd/containerd"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 8071,
+          "end": 8074
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 8075,
+          "end": 8089
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 8090,
+          "end": 8093
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 8094,
+          "end": 8169
+        },
+        "value": "CGO_ENABLED=1 CGO_LDFLAGS=\"-fuse-ld=lld\" BUILDTAGS=no_btrfs GO111MODULE=off"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 8170,
+          "end": 8173
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 8174,
+            "end": 8213
+          },
+          "value": "xx-apk add musl-dev gcc && xx-go --wrap"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 8214,
+          "end": 8218
+        }
+      },
+      "options": [
+        {
+          "flag_start": 8219,
+          "name": {
+            "span": {
+              "start": 8221,
+              "end": 8226
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 8227,
+              "end": 8230
+            },
+            "value": "755"
+          }
+        }
+      ],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 8248,
+              "end": 8732
+            },
+            "expand": true,
+            "value": "#!/bin/sh\nset -ex\nmkdir /out\nif [ \"$(xx-info os)\" = \"linux\" ]; then\n  make bin/containerd\n  make bin/containerd-shim-runc-v2\n  mv bin/containerd bin/containerd-shim* /out\nelse\n  CGO_ENABLED=0 make STATIC=1 binaries\n  if [ \"$(xx-info os)\" = \"windows\" ]; then\n    mv bin/containerd.exe /out\n  else\n    mv bin/containerd /out\n  fi\n  # No shim binary is built for FreeBSD, since containerd v2.0.\n  if ls bin/containerd-shim* >/dev/null 2>&1; then\n    mv bin/containerd-shim* /out\n  fi\nfi\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 8238,
+          "end": 8247
+        },
+        "value": "/build.sh"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 8737,
+          "end": 8741
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 8742,
+          "end": 8758
+        },
+        "value": "containerd-build"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 8759,
+            "end": 8761
+          }
+        },
+        {
+          "span": {
+            "start": 8762,
+            "end": 8772
+          },
+          "value": "containerd"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 8773,
+          "end": 8780
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 8781,
+          "end": 8821
+        },
+        "value": "/go/src/github.com/containerd/containerd"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 8822,
+          "end": 8825
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 8826,
+          "end": 8844
+        },
+        "value": "CONTAINERD_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 8845,
+          "end": 8848
+        }
+      },
+      "options": [
+        {
+          "flag_start": 8849,
+          "name": {
+            "span": {
+              "start": 8851,
+              "end": 8863
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 8864,
+              "end": 8868
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 8869,
+              "end": 8935
+            },
+            "value": "\"https://github.com/containerd/containerd.git#$CONTAINERD_VERSION\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 8936,
+          "end": 8937
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 8938,
+          "end": 8941
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 8942,
+            "end": 8951
+          },
+          "value": "/build.sh"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 9018,
+          "end": 9022
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 9023,
+          "end": 9039
+        },
+        "value": "containerd-build"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 9040,
+            "end": 9042
+          }
+        },
+        {
+          "span": {
+            "start": 9043,
+            "end": 9060
+          },
+          "value": "containerd-alt-17"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 9061,
+          "end": 9068
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 9069,
+          "end": 9109
+        },
+        "value": "/go/src/github.com/containerd/containerd"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 9110,
+          "end": 9113
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 9114,
+          "end": 9139
+        },
+        "value": "CONTAINERD_ALT_VERSION_17"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 9140,
+          "end": 9143
+        }
+      },
+      "options": [
+        {
+          "flag_start": 9144,
+          "name": {
+            "span": {
+              "start": 9146,
+              "end": 9158
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 9159,
+              "end": 9163
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 9164,
+              "end": 9237
+            },
+            "value": "\"https://github.com/containerd/containerd.git#$CONTAINERD_ALT_VERSION_17\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 9238,
+          "end": 9239
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 9240,
+          "end": 9243
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 9244,
+            "end": 9253
+          },
+          "value": "/build.sh"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 9320,
+          "end": 9324
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 9325,
+          "end": 9341
+        },
+        "value": "containerd-build"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 9342,
+            "end": 9344
+          }
+        },
+        {
+          "span": {
+            "start": 9345,
+            "end": 9362
+          },
+          "value": "containerd-alt-16"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 9363,
+          "end": 9370
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 9371,
+          "end": 9411
+        },
+        "value": "/go/src/github.com/containerd/containerd"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 9412,
+          "end": 9415
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 9416,
+          "end": 9441
+        },
+        "value": "CONTAINERD_ALT_VERSION_16"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 9442,
+          "end": 9445
+        }
+      },
+      "options": [
+        {
+          "flag_start": 9446,
+          "name": {
+            "span": {
+              "start": 9448,
+              "end": 9460
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 9461,
+              "end": 9465
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 9466,
+              "end": 9539
+            },
+            "value": "\"https://github.com/containerd/containerd.git#$CONTAINERD_ALT_VERSION_16\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 9540,
+          "end": 9541
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 9542,
+          "end": 9545
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 9546,
+            "end": 9555
+          },
+          "value": "/build.sh"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 9557,
+          "end": 9561
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 9562,
+          "end": 9574
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 9575,
+            "end": 9577
+          }
+        },
+        {
+          "span": {
+            "start": 9578,
+            "end": 9586
+          },
+          "value": "registry"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 9587,
+          "end": 9594
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 9595,
+          "end": 9633
+        },
+        "value": "/go/src/github.com/docker/distribution"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 9634,
+          "end": 9637
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 9638,
+          "end": 9654
+        },
+        "value": "REGISTRY_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 9655,
+          "end": 9658
+        }
+      },
+      "options": [
+        {
+          "flag_start": 9659,
+          "name": {
+            "span": {
+              "start": 9661,
+              "end": 9673
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 9674,
+              "end": 9678
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 9679,
+              "end": 9747
+            },
+            "value": "\"https://github.com/distribution/distribution.git#$REGISTRY_VERSION\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 9748,
+          "end": 9749
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 9750,
+          "end": 9753
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 9754,
+          "end": 9768
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 9769,
+          "end": 9772
+        }
+      },
+      "options": [
+        {
+          "flag_start": 9773,
+          "name": {
+            "span": {
+              "start": 9775,
+              "end": 9780
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 9781,
+              "end": 9811
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 9817,
+            "end": 9817
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 9818,
+            "end": 10090
+          },
+          "expand": true,
+          "value": "  set -ex\n  mkdir /out\n  export GOPATH=\"$(pwd)/Godeps/_workspace:$GOPATH\"\n  GO111MODULE=off CGO_ENABLED=0 xx-go build -o /out/registry ./cmd/registry\n  xx-verify --static /out/registry\n  if [ \"$(xx-info os)\" = \"windows\" ]; then\n    mv /out/registry /out/registry.exe\n  fi\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 10095,
+          "end": 10099
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 10100,
+          "end": 10112
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 10113,
+            "end": 10115
+          }
+        },
+        {
+          "span": {
+            "start": 10116,
+            "end": 10127
+          },
+          "value": "rootlesskit"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 10128,
+          "end": 10135
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10136,
+          "end": 10186
+        },
+        "value": "/go/src/github.com/rootless-containers/rootlesskit"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 10187,
+          "end": 10190
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10191,
+          "end": 10210
+        },
+        "value": "ROOTLESSKIT_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 10211,
+          "end": 10214
+        }
+      },
+      "options": [
+        {
+          "flag_start": 10215,
+          "name": {
+            "span": {
+              "start": 10217,
+              "end": 10229
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 10230,
+              "end": 10234
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 10235,
+              "end": 10312
+            },
+            "value": "\"https://github.com/rootless-containers/rootlesskit.git#$ROOTLESSKIT_VERSION\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 10313,
+          "end": 10314
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 10315,
+          "end": 10318
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10319,
+          "end": 10333
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 10334,
+          "end": 10337
+        }
+      },
+      "options": [
+        {
+          "flag_start": 10339,
+          "name": {
+            "span": {
+              "start": 10341,
+              "end": 10346
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 10347,
+              "end": 10377
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 10382,
+            "end": 10480
+          },
+          "value": "CGO_ENABLED=0 xx-go build -o /rootlesskit ./cmd/rootlesskit && \\\n  xx-verify --static /rootlesskit"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 10482,
+          "end": 10486
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 10487,
+          "end": 10499
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 10500,
+            "end": 10502
+          }
+        },
+        {
+          "span": {
+            "start": 10503,
+            "end": 10521
+          },
+          "value": "stargz-snapshotter"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 10522,
+          "end": 10529
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10530,
+          "end": 10578
+        },
+        "value": "/go/src/github.com/containerd/stargz-snapshotter"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 10579,
+          "end": 10582
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10583,
+          "end": 10609
+        },
+        "value": "STARGZ_SNAPSHOTTER_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 10610,
+          "end": 10613
+        }
+      },
+      "options": [
+        {
+          "flag_start": 10614,
+          "name": {
+            "span": {
+              "start": 10616,
+              "end": 10628
+            },
+            "value": "keep-git-dir"
+          },
+          "value": {
+            "span": {
+              "start": 10629,
+              "end": 10633
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 10634,
+              "end": 10716
+            },
+            "value": "\"https://github.com/containerd/stargz-snapshotter.git#$STARGZ_SNAPSHOTTER_VERSION\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 10717,
+          "end": 10718
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 10719,
+          "end": 10722
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10723,
+          "end": 10737
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 10738,
+          "end": 10741
+        }
+      },
+      "options": [
+        {
+          "flag_start": 10742,
+          "name": {
+            "span": {
+              "start": 10744,
+              "end": 10749
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 10750,
+              "end": 10780
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 10785,
+            "end": 10946
+          },
+          "value": "xx-go --wrap && \\\n  mkdir /out && CGO_ENABLED=0 PREFIX=/out/ make && \\\n  xx-verify --static /out/containerd-stargz-grpc && \\\n  xx-verify --static /out/ctr-remote"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 10948,
+          "end": 10952
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 10953,
+          "end": 10965
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 10966,
+            "end": 10968
+          }
+        },
+        {
+          "span": {
+            "start": 10969,
+            "end": 10974
+          },
+          "value": "nydus"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 10975,
+          "end": 10978
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10979,
+          "end": 10992
+        },
+        "value": "NYDUS_VERSION"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 10993,
+          "end": 10996
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 10997,
+          "end": 11005
+        },
+        "value": "TARGETOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 11006,
+          "end": 11009
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 11010,
+          "end": 11020
+        },
+        "value": "TARGETARCH"
+      }
+    },
+    {
+      "kind": "SHELL",
+      "shell": {
+        "span": {
+          "start": 11021,
+          "end": 11026
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 11029,
+            "end": 11038
+          },
+          "value": "/bin/bash"
+        },
+        {
+          "span": {
+            "start": 11042,
+            "end": 11044
+          },
+          "value": "-c"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 11047,
+          "end": 11050
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 11051,
+            "end": 11188
+          },
+          "value": "wget https://github.com/dragonflyoss/image-service/releases/download/$NYDUS_VERSION/nydus-static-$NYDUS_VERSION-$TARGETOS-$TARGETARCH.tgz"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 11189,
+          "end": 11192
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 11193,
+            "end": 11293
+          },
+          "value": "mkdir -p /out/nydus-static && tar xzvf nydus-static-$NYDUS_VERSION-$TARGETOS-$TARGETARCH.tgz -C /out"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 11295,
+          "end": 11299
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 11300,
+          "end": 11312
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 11313,
+            "end": 11315
+          }
+        },
+        {
+          "span": {
+            "start": 11316,
+            "end": 11325
+          },
+          "value": "gotestsum"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 11326,
+          "end": 11329
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 11330,
+          "end": 11347
+        },
+        "value": "GOTESTSUM_VERSION"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 11348,
+          "end": 11351
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 11352,
+          "end": 11366
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 11367,
+          "end": 11370
+        }
+      },
+      "options": [
+        {
+          "flag_start": 11371,
+          "name": {
+            "span": {
+              "start": 11373,
+              "end": 11378
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 11379,
+              "end": 11409
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 11415,
+            "end": 11415
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 11416,
+            "end": 11756
+          },
+          "expand": true,
+          "value": "  set -ex\n  xx-go install \"gotest.tools/gotestsum@${GOTESTSUM_VERSION}\"\n  xx-go install \"github.com/wadey/gocovmerge@latest\"\n  mkdir /out\n  if ! xx-info is-cross; then\n    /go/bin/gotestsum --version\n    mv /go/bin/gotestsum /out\n    mv /go/bin/gocovmerge /out\n  else\n    mv /go/bin/*/gotestsum* /out\n    mv /go/bin/*/gocovmerge* /out\n  fi\n"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 11760,
+          "end": 11764
+        }
+      },
+      "options": [
+        {
+          "flag_start": 11765,
+          "name": {
+            "span": {
+              "start": 11767,
+              "end": 11772
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 11773,
+              "end": 11776
+            },
+            "value": "755"
+          }
+        }
+      ],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 11808,
+              "end": 12381
+            },
+            "expand": false,
+            "value": "#!/bin/sh\nset -x\nif [ -z \"$GO_TEST_COVERPROFILE\" ]; then\n  exec gotestsum \"$@\"\nfi\ncoverdir=\"$(dirname \"$GO_TEST_COVERPROFILE\")\"\nmkdir -p \"$coverdir/helpers\"\ngotestsum \"$@\" \"-coverprofile=$GO_TEST_COVERPROFILE\"\necode=$?\ngo tool covdata textfmt -i=$coverdir/helpers -o=$coverdir/helpers-report.txt\ngocovmerge \"$coverdir/helpers-report.txt\" \"$GO_TEST_COVERPROFILE\" > \"$coverdir/merged-report.txt\"\nmv \"$coverdir/merged-report.txt\" \"$GO_TEST_COVERPROFILE\"\nrm \"$coverdir/helpers-report.txt\"\nfor f in \"$coverdir/helpers\"/*; do\n  rm \"$f\"\ndone\nrmdir \"$coverdir/helpers\"\nexit $ecode\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 11785,
+          "end": 11807
+        },
+        "value": "/out/gotestsumandcover"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 12430,
+          "end": 12434
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 12435,
+          "end": 12447
+        },
+        "value": "gobuild-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12448,
+            "end": 12450
+          }
+        },
+        {
+          "span": {
+            "start": 12451,
+            "end": 12454
+          },
+          "value": "dlv"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 12455,
+          "end": 12458
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 12459,
+          "end": 12472
+        },
+        "value": "DELVE_VERSION"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 12473,
+          "end": 12476
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 12477,
+          "end": 12491
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12492,
+          "end": 12495
+        }
+      },
+      "options": [
+        {
+          "flag_start": 12496,
+          "name": {
+            "span": {
+              "start": 12498,
+              "end": 12503
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 12504,
+              "end": 12536
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 12540,
+          "name": {
+            "span": {
+              "start": 12542,
+              "end": 12547
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 12548,
+              "end": 12577
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 12583,
+            "end": 12583
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 12584,
+            "end": 12983
+          },
+          "expand": true,
+          "value": "  set -ex\n  mkdir /out\n  if [ \"$(xx-info os)\" = \"freebsd\" ]; then\n    echo \"WARN: dlv requires cgo enabled on FreeBSD, skipping: https://github.com/moby/buildkit/pull/5497#issuecomment-2462031339\"\n    exit 0\n  fi\n  xx-go install \"github.com/go-delve/delve/cmd/dlv@${DELVE_VERSION}\"\n  if ! xx-info is-cross; then\n    /go/bin/dlv version\n    mv /go/bin/dlv /out\n  else\n    mv /go/bin/*/dlv* /out\n  fi\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 12988,
+          "end": 12992
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 12993,
+          "end": 13008
+        },
+        "value": "buildkit-export"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13009,
+            "end": 13011
+          }
+        },
+        {
+          "span": {
+            "start": 13012,
+            "end": 13026
+          },
+          "value": "buildkit-linux"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13027,
+          "end": 13031
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13032,
+          "name": {
+            "span": {
+              "start": 13034,
+              "end": 13038
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13039,
+          "name": {
+            "span": {
+              "start": 13041,
+              "end": 13045
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 13046,
+              "end": 13054
+            },
+            "value": "binaries"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 13055,
+              "end": 13056
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13057,
+          "end": 13066
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 13067,
+          "end": 13070
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 13071,
+          "end": 13101
+        },
+        "value": "BUILDKIT_SETUP_CGROUPV2_ROOT=1"
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 13102,
+          "end": 13112
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 13113,
+            "end": 13126
+          },
+          "value": [
+            {
+              "span": {
+                "start": 13115,
+                "end": 13124
+              },
+              "value": "buildkitd"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 13128,
+          "end": 13132
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 13133,
+          "end": 13147
+        },
+        "value": "buildkit-linux"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13148,
+            "end": 13150
+          }
+        },
+        {
+          "span": {
+            "start": 13151,
+            "end": 13171
+          },
+          "value": "buildkit-linux-debug"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13172,
+          "end": 13176
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13177,
+          "name": {
+            "span": {
+              "start": 13179,
+              "end": 13183
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13184,
+          "name": {
+            "span": {
+              "start": 13186,
+              "end": 13190
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 13191,
+              "end": 13194
+            },
+            "value": "dlv"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 13195,
+              "end": 13207
+            },
+            "value": "/usr/bin/dlv"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13208,
+          "end": 13220
+        },
+        "value": "/usr/bin/dlv"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13221,
+          "end": 13225
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13226,
+          "name": {
+            "span": {
+              "start": 13228,
+              "end": 13232
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13233,
+          "name": {
+            "span": {
+              "start": 13235,
+              "end": 13240
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 13241,
+              "end": 13244
+            },
+            "value": "755"
+          }
+        }
+      ],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 13273,
+              "end": 13451
+            },
+            "expand": true,
+            "value": "#!/bin/sh\nexec dlv exec /usr/bin/buildkitd \\\\\n  --api-version=2 \\\\\n  -l 0.0.0.0:\\${DELVE_PORT:-5000} \\\\\n  --headless=true \\\\\n  --accept-multiclient \\\\\n  --continue \\\\\n  -- \"\\$@\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13251,
+          "end": 13272
+        },
+        "value": "/docker-entrypoint.sh"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 13455,
+          "end": 13458
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 13459,
+          "end": 13474
+        },
+        "value": "DELVE_PORT=5000"
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 13475,
+          "end": 13485
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 13486,
+            "end": 13511
+          },
+          "value": [
+            {
+              "span": {
+                "start": 13488,
+                "end": 13509
+              },
+              "value": "/docker-entrypoint.sh"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 13513,
+          "end": 13517
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 13518,
+          "end": 13526
+        },
+        "value": "binaries"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13527,
+            "end": 13529
+          }
+        },
+        {
+          "span": {
+            "start": 13530,
+            "end": 13545
+          },
+          "value": "buildkit-darwin"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 13547,
+          "end": 13551
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 13552,
+          "end": 13560
+        },
+        "value": "binaries"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13561,
+            "end": 13563
+          }
+        },
+        {
+          "span": {
+            "start": 13564,
+            "end": 13580
+          },
+          "value": "buildkit-freebsd"
+        }
+      ]
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 13581,
+          "end": 13591
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 13592,
+            "end": 13606
+          },
+          "value": [
+            {
+              "span": {
+                "start": 13594,
+                "end": 13604
+              },
+              "value": "/buildkitd"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 13608,
+          "end": 13612
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 13613,
+          "end": 13621
+        },
+        "value": "binaries"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13622,
+            "end": 13624
+          }
+        },
+        {
+          "span": {
+            "start": 13625,
+            "end": 13641
+          },
+          "value": "buildkit-windows"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 13643,
+          "end": 13647
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 13648,
+          "end": 13655
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13656,
+            "end": 13658
+          }
+        },
+        {
+          "span": {
+            "start": 13659,
+            "end": 13676
+          },
+          "value": "binaries-for-test"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13677,
+          "end": 13681
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13682,
+          "name": {
+            "span": {
+              "start": 13684,
+              "end": 13688
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13689,
+          "name": {
+            "span": {
+              "start": 13691,
+              "end": 13695
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 13696,
+              "end": 13705
+            },
+            "value": "gotestsum"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 13706,
+              "end": 13710
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13711,
+          "end": 13712
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13713,
+          "end": 13717
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13718,
+          "name": {
+            "span": {
+              "start": 13720,
+              "end": 13724
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13725,
+          "name": {
+            "span": {
+              "start": 13727,
+              "end": 13731
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 13732,
+              "end": 13735
+            },
+            "value": "dlv"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 13736,
+              "end": 13740
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13741,
+          "end": 13742
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13743,
+          "end": 13747
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13748,
+          "name": {
+            "span": {
+              "start": 13750,
+              "end": 13754
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13755,
+          "name": {
+            "span": {
+              "start": 13757,
+              "end": 13761
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 13762,
+              "end": 13770
+            },
+            "value": "registry"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 13771,
+              "end": 13775
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13776,
+          "end": 13777
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13778,
+          "end": 13782
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13783,
+          "name": {
+            "span": {
+              "start": 13785,
+              "end": 13789
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13790,
+          "name": {
+            "span": {
+              "start": 13792,
+              "end": 13796
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 13797,
+              "end": 13807
+            },
+            "value": "containerd"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 13808,
+              "end": 13812
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13813,
+          "end": 13814
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13815,
+          "end": 13819
+        }
+      },
+      "options": [
+        {
+          "flag_start": 13820,
+          "name": {
+            "span": {
+              "start": 13822,
+              "end": 13826
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 13827,
+          "name": {
+            "span": {
+              "start": 13829,
+              "end": 13833
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 13834,
+              "end": 13842
+            },
+            "value": "binaries"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 13843,
+              "end": 13844
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 13845,
+          "end": 13846
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 13848,
+          "end": 13852
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 13853,
+          "end": 13866
+        },
+        "value": "buildkit-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13867,
+            "end": 13869
+          }
+        },
+        {
+          "span": {
+            "start": 13870,
+            "end": 13892
+          },
+          "value": "integration-tests-base"
+        }
+      ]
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 13893,
+          "end": 13896
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 13897,
+          "end": 13945
+        },
+        "value": "BUILDKIT_INTEGRATION_ROOTLESS_IDPAIR=\"1000:1000\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 13946,
+          "end": 13949
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 13950,
+            "end": 14411
+          },
+          "value": "apk add --no-cache shadow shadow-uidmap sudo vim iptables ip6tables dnsmasq fuse curl git-daemon openssh-client slirp4netns iproute2 \\\n  && useradd --create-home --home-dir /home/user --uid 1000 -s /bin/sh user \\\n  && echo \"XDG_RUNTIME_DIR=/run/user/1000; export XDG_RUNTIME_DIR\" >> /home/user/.profile \\\n  && mkdir -m 0700 -p /run/user/1000 \\\n  && chown -R user /run/user/1000 /home/user \\\n  && ln -s /sbin/iptables-legacy /usr/bin/iptables \\\n  && xx-go --wrap"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 14412,
+          "end": 14415
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 14416,
+          "end": 14431
+        },
+        "value": "NERDCTL_VERSION"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 14432,
+          "end": 14435
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 14436,
+            "end": 14637
+          },
+          "value": "curl -Ls https://raw.githubusercontent.com/containerd/nerdctl/$NERDCTL_VERSION/extras/rootless/containerd-rootless.sh > /usr/bin/containerd-rootless.sh \\\n  && chmod 0755 /usr/bin/containerd-rootless.sh"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 14638,
+          "end": 14641
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 14642,
+          "end": 14657
+        },
+        "value": "AZURITE_VERSION"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 14658,
+          "end": 14661
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 14662,
+            "end": 14740
+          },
+          "value": "apk add --no-cache nodejs npm \\\n  && npm install -g azurite@${AZURITE_VERSION}"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 14876,
+          "end": 14879
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 14880,
+            "end": 15014
+          },
+          "value": "curl -Ls https://raw.githubusercontent.com/moby/moby/v25.0.1/hack/dind > /docker-entrypoint.sh \\\n  && chmod 0755 /docker-entrypoint.sh"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 15015,
+          "end": 15025
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 15026,
+            "end": 15051
+          },
+          "value": [
+            {
+              "span": {
+                "start": 15028,
+                "end": 15049
+              },
+              "value": "/docker-entrypoint.sh"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 15129,
+          "end": 15132
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 15133,
+          "end": 15256
+        },
+        "value": "BUILDKIT_INTEGRATION_CONTAINERD_EXTRA=\"containerd-1.7=/opt/containerd-alt-17/bin,containerd-1.6=/opt/containerd-alt-16/bin\""
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 15257,
+          "end": 15260
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 15261,
+          "end": 15300
+        },
+        "value": "BUILDKIT_INTEGRATION_SNAPSHOTTER=stargz"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 15301,
+          "end": 15304
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 15305,
+          "end": 15335
+        },
+        "value": "BUILDKIT_SETUP_CGROUPV2_ROOT=1"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 15336,
+          "end": 15339
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 15340,
+          "end": 15353
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 15354,
+          "end": 15357
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 15358,
+          "end": 15391
+        },
+        "value": "GOTESTSUM_FORMAT=standard-verbose"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15392,
+          "end": 15396
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15397,
+          "name": {
+            "span": {
+              "start": 15399,
+              "end": 15403
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15404,
+          "name": {
+            "span": {
+              "start": 15406,
+              "end": 15410
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15411,
+              "end": 15420
+            },
+            "value": "gotestsum"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15421,
+              "end": 15425
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15426,
+          "end": 15435
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15436,
+          "end": 15440
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15441,
+          "name": {
+            "span": {
+              "start": 15443,
+              "end": 15447
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15448,
+          "name": {
+            "span": {
+              "start": 15450,
+              "end": 15454
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15455,
+              "end": 15460
+            },
+            "value": "minio"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15461,
+              "end": 15475
+            },
+            "value": "/opt/bin/minio"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15476,
+          "end": 15485
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15486,
+          "end": 15490
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15491,
+          "name": {
+            "span": {
+              "start": 15493,
+              "end": 15497
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15498,
+          "name": {
+            "span": {
+              "start": 15500,
+              "end": 15504
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15505,
+              "end": 15513
+            },
+            "value": "minio-mc"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15514,
+              "end": 15525
+            },
+            "value": "/usr/bin/mc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15526,
+          "end": 15535
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15536,
+          "end": 15540
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15541,
+          "name": {
+            "span": {
+              "start": 15543,
+              "end": 15547
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15548,
+          "name": {
+            "span": {
+              "start": 15550,
+              "end": 15554
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15555,
+              "end": 15560
+            },
+            "value": "nydus"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15561,
+              "end": 15580
+            },
+            "value": "/out/nydus-static/*"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15581,
+          "end": 15590
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15591,
+          "end": 15595
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15596,
+          "name": {
+            "span": {
+              "start": 15598,
+              "end": 15602
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15603,
+          "name": {
+            "span": {
+              "start": 15605,
+              "end": 15609
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15610,
+              "end": 15628
+            },
+            "value": "stargz-snapshotter"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15629,
+              "end": 15635
+            },
+            "value": "/out/*"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15636,
+          "end": 15645
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15646,
+          "end": 15650
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15651,
+          "name": {
+            "span": {
+              "start": 15653,
+              "end": 15657
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15658,
+          "name": {
+            "span": {
+              "start": 15660,
+              "end": 15664
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15665,
+              "end": 15676
+            },
+            "value": "rootlesskit"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15677,
+              "end": 15689
+            },
+            "value": "/rootlesskit"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15690,
+          "end": 15699
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15700,
+          "end": 15704
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15705,
+          "name": {
+            "span": {
+              "start": 15707,
+              "end": 15711
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15712,
+          "name": {
+            "span": {
+              "start": 15714,
+              "end": 15718
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15719,
+              "end": 15736
+            },
+            "value": "containerd-alt-17"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15737,
+              "end": 15753
+            },
+            "value": "/out/containerd*"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15754,
+          "end": 15781
+        },
+        "value": "/opt/containerd-alt-17/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15782,
+          "end": 15786
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15787,
+          "name": {
+            "span": {
+              "start": 15789,
+              "end": 15793
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15794,
+          "name": {
+            "span": {
+              "start": 15796,
+              "end": 15800
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15801,
+              "end": 15818
+            },
+            "value": "containerd-alt-16"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15819,
+              "end": 15835
+            },
+            "value": "/out/containerd*"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15836,
+          "end": 15863
+        },
+        "value": "/opt/containerd-alt-16/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15864,
+          "end": 15868
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15869,
+          "name": {
+            "span": {
+              "start": 15871,
+              "end": 15875
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15876,
+          "name": {
+            "span": {
+              "start": 15878,
+              "end": 15882
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15883,
+              "end": 15891
+            },
+            "value": "registry"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15892,
+              "end": 15896
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15897,
+          "end": 15906
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15907,
+          "end": 15911
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15912,
+          "name": {
+            "span": {
+              "start": 15914,
+              "end": 15918
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15919,
+          "name": {
+            "span": {
+              "start": 15921,
+              "end": 15925
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15926,
+              "end": 15930
+            },
+            "value": "runc"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15931,
+              "end": 15944
+            },
+            "value": "/usr/bin/runc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 15945,
+          "end": 15954
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 15955,
+          "end": 15959
+        }
+      },
+      "options": [
+        {
+          "flag_start": 15960,
+          "name": {
+            "span": {
+              "start": 15962,
+              "end": 15966
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 15967,
+          "name": {
+            "span": {
+              "start": 15969,
+              "end": 15973
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 15974,
+              "end": 15984
+            },
+            "value": "containerd"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 15985,
+              "end": 16001
+            },
+            "value": "/out/containerd*"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 16002,
+          "end": 16011
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 16012,
+          "end": 16016
+        }
+      },
+      "options": [
+        {
+          "flag_start": 16017,
+          "name": {
+            "span": {
+              "start": 16019,
+              "end": 16023
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 16024,
+          "name": {
+            "span": {
+              "start": 16026,
+              "end": 16030
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 16031,
+              "end": 16042
+            },
+            "value": "cni-plugins"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 16043,
+              "end": 16062
+            },
+            "value": "/opt/cni/bin/bridge"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 16063,
+              "end": 16086
+            },
+            "value": "/opt/cni/bin/host-local"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 16087,
+              "end": 16108
+            },
+            "value": "/opt/cni/bin/loopback"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 16109,
+              "end": 16130
+            },
+            "value": "/opt/cni/bin/firewall"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 16131,
+              "end": 16151
+            },
+            "value": "/opt/cni/bin/dnsname"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 16152,
+          "end": 16165
+        },
+        "value": "/opt/cni/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 16166,
+          "end": 16170
+        }
+      },
+      "options": [
+        {
+          "flag_start": 16171,
+          "name": {
+            "span": {
+              "start": 16173,
+              "end": 16177
+            },
+            "value": "link"
+          },
+          "value": null
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 16178,
+              "end": 16200
+            },
+            "value": "hack/fixtures/cni.json"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 16201,
+          "end": 16223
+        },
+        "value": "/etc/buildkit/cni.json"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 16224,
+          "end": 16228
+        }
+      },
+      "options": [
+        {
+          "flag_start": 16229,
+          "name": {
+            "span": {
+              "start": 16231,
+              "end": 16235
+            },
+            "value": "link"
+          },
+          "value": null
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 16236,
+              "end": 16266
+            },
+            "value": "hack/fixtures/dns-cni.conflist"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 16267,
+          "end": 16297
+        },
+        "value": "/etc/buildkit/dns-cni.conflist"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 16298,
+          "end": 16302
+        }
+      },
+      "options": [
+        {
+          "flag_start": 16303,
+          "name": {
+            "span": {
+              "start": 16305,
+              "end": 16309
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 16310,
+          "name": {
+            "span": {
+              "start": 16312,
+              "end": 16316
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 16317,
+              "end": 16325
+            },
+            "value": "binaries"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 16326,
+              "end": 16327
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 16328,
+          "end": 16337
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 16408,
+          "end": 16412
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 16413,
+          "end": 16435
+        },
+        "value": "integration-tests-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 16436,
+            "end": 16438
+          }
+        },
+        {
+          "span": {
+            "start": 16439,
+            "end": 16456
+          },
+          "value": "integration-tests"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 16457,
+          "end": 16461
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 16462,
+              "end": 16463
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 16464,
+          "end": 16465
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 16466,
+          "end": 16469
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 16470,
+          "end": 16568
+        },
+        "value": "BUILDKIT_RUN_NETWORK_INTEGRATION_TESTS=1 BUILDKIT_CNI_INIT_LOCK_PATH=/run/buildkit_cni_bridge.lock"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 16570,
+          "end": 16574
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 16575,
+          "end": 16592
+        },
+        "value": "integration-tests"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 16593,
+            "end": 16595
+          }
+        },
+        {
+          "span": {
+            "start": 16596,
+            "end": 16603
+          },
+          "value": "dev-env"
+        }
+      ]
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 16604,
+          "end": 16610
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 16611,
+              "end": 16628
+            },
+            "value": "/var/lib/buildkit"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 16686,
+          "end": 16690
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 16691,
+          "end": 16715
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 16716,
+            "end": 16718
+          }
+        },
+        {
+          "span": {
+            "start": 16719,
+            "end": 16727
+          },
+          "value": "rootless"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 16728,
+          "end": 16731
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16732,
+            "end": 16805
+          },
+          "value": "apk add --no-cache fuse3 fuse-overlayfs git openssh pigz shadow-uidmap xz"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 16806,
+          "end": 16809
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16810,
+            "end": 17032
+          },
+          "value": "adduser -D -u 1000 user \\\n  && mkdir -p /run/user/1000 /home/user/.local/tmp /home/user/.local/share/buildkit \\\n  && chown -R user /run/user/1000 /home/user \\\n  && echo user:100000:65536 | tee /etc/subuid | tee /etc/subgid"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 17033,
+          "end": 17037
+        }
+      },
+      "options": [
+        {
+          "flag_start": 17038,
+          "name": {
+            "span": {
+              "start": 17040,
+              "end": 17044
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 17045,
+          "name": {
+            "span": {
+              "start": 17047,
+              "end": 17051
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 17052,
+              "end": 17063
+            },
+            "value": "rootlesskit"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 17064,
+              "end": 17076
+            },
+            "value": "/rootlesskit"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 17077,
+          "end": 17086
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 17087,
+          "end": 17091
+        }
+      },
+      "options": [
+        {
+          "flag_start": 17092,
+          "name": {
+            "span": {
+              "start": 17094,
+              "end": 17098
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 17099,
+          "name": {
+            "span": {
+              "start": 17101,
+              "end": 17105
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 17106,
+              "end": 17114
+            },
+            "value": "binaries"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 17115,
+              "end": 17116
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 17117,
+          "end": 17126
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 17127,
+          "end": 17131
+        }
+      },
+      "options": [
+        {
+          "flag_start": 17132,
+          "name": {
+            "span": {
+              "start": 17134,
+              "end": 17138
+            },
+            "value": "link"
+          },
+          "value": null
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 17139,
+              "end": 17190
+            },
+            "value": "examples/buildctl-daemonless/buildctl-daemonless.sh"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 17191,
+          "end": 17200
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 17255,
+          "end": 17259
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17260,
+          "end": 17269
+        },
+        "value": "1000:1000"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 17270,
+          "end": 17273
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17274,
+          "end": 17289
+        },
+        "value": "HOME=/home/user"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 17290,
+          "end": 17293
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17294,
+          "end": 17303
+        },
+        "value": "USER=user"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 17304,
+          "end": 17307
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17308,
+          "end": 17338
+        },
+        "value": "XDG_RUNTIME_DIR=/run/user/1000"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 17339,
+          "end": 17342
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17343,
+          "end": 17371
+        },
+        "value": "TMPDIR=/home/user/.local/tmp"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 17372,
+          "end": 17375
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17376,
+          "end": 17435
+        },
+        "value": "BUILDKIT_HOST=unix:///run/user/1000/buildkit/buildkitd.sock"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 17436,
+          "end": 17442
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 17443,
+              "end": 17475
+            },
+            "value": "/home/user/.local/share/buildkit"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 17476,
+          "end": 17486
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 17487,
+            "end": 17515
+          },
+          "value": [
+            {
+              "span": {
+                "start": 17489,
+                "end": 17500
+              },
+              "value": "rootlesskit"
+            },
+            {
+              "span": {
+                "start": 17504,
+                "end": 17513
+              },
+              "value": "buildkitd"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 17564,
+          "end": 17568
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 17569,
+          "end": 17612
+        },
+        "value": "buildkit-$TARGETOS${BUILDKIT_DEBUG:+-debug}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 17613,
+            "end": 17615
+          }
+        },
+        {
+          "span": {
+            "start": 17616,
+            "end": 17624
+          },
+          "value": "buildkit"
+        }
+      ]
+    }
+  ]
+}

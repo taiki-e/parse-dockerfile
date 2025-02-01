@@ -1,0 +1,437 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:12.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 19,
+          "end": 25
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 26,
+            "end": 31
+          },
+          "value": "27015"
+        }
+      ]
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 32,
+          "end": 38
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 39,
+            "end": 44
+          },
+          "value": "27005"
+        }
+      ]
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 45,
+          "end": 51
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 52,
+            "end": 57
+          },
+          "value": "26901"
+        }
+      ]
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 58,
+          "end": 64
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 65,
+            "end": 70
+          },
+          "value": "27020"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 72,
+          "end": 75
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 76,
+            "end": 138
+          },
+          "value": "apt-get update && apt-get install libc6-dev-i386 curl unzip -y"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 139,
+          "end": 142
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 143,
+            "end": 158
+          },
+          "value": "mkdir -p /steam"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 159,
+          "end": 162
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 163,
+            "end": 246
+          },
+          "value": "curl http://media.steampowered.com/client/steamcmd_linux.tar.gz | tar vxz -C /steam"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 247,
+          "end": 250
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 251,
+              "end": 259
+            },
+            "value": "./script"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 260,
+          "end": 273
+        },
+        "value": "/steam/script"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 274,
+          "end": 277
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 278,
+            "end": 321
+          },
+          "value": "/steam/steamcmd.sh +runscript /steam/script"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 322,
+          "end": 325
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 326,
+            "end": 433
+          },
+          "value": "curl http://mirror.pointysoftware.net/alliedmodders/mmsource-1.10.0-linux.tar.gz | tar vxz -C /steam/tf2/tf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 434,
+          "end": 437
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 438,
+            "end": 545
+          },
+          "value": "curl http://mirror.pointysoftware.net/alliedmodders/sourcemod-1.5.3-linux.tar.gz | tar vxz -C /steam/tf2/tf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 546,
+          "end": 549
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 550,
+              "end": 562
+            },
+            "value": "./server.cfg"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 563,
+          "end": 591
+        },
+        "value": "/steam/tf2/tf/cfg/server.cfg"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 592,
+          "end": 595
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 596,
+              "end": 611
+            },
+            "value": "./ctf_2fort.cfg"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 612,
+          "end": 643
+        },
+        "value": "/steam/tf2/tf/cfg/ctf_2fort.cfg"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 644,
+          "end": 647
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 648,
+              "end": 663
+            },
+            "value": "./sourcemod.cfg"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 664,
+          "end": 705
+        },
+        "value": "/steam/tf2/tf/cfg/sourcemod/sourcemod.cfg"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 706,
+          "end": 709
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 710,
+            "end": 754
+          },
+          "value": "rm -r /steam/tf2/tf/addons/sourcemod/configs"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 755,
+          "end": 758
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 759,
+              "end": 768
+            },
+            "value": "./configs"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 769,
+          "end": 807
+        },
+        "value": "/steam/tf2/tf/addons/sourcemod/configs"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 808,
+          "end": 811
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 812,
+            "end": 867
+          },
+          "value": "mkdir -p /steam/tf2/tf/addons/sourcemod/translations/en"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 868,
+          "end": 871
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 872,
+            "end": 971
+          },
+          "value": "cp /steam/tf2/tf/addons/sourcemod/translations/*.txt /steam/tf2/tf/addons/sourcemod/translations/en"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 973,
+          "end": 976
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 977,
+            "end": 1146
+          },
+          "value": "cd /steam/tf2 && ./srcds_run -port 27015 +ip 0.0.0.0 +map ctf_2fort -autoupdate -steam_dir /steam -steamcmd_script /steam/script +tf_bot_quota 12 +tf_bot_quota_mode fill"
+        }
+      }
+    }
+  ]
+}

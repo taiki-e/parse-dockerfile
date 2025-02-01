@@ -1,0 +1,171 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 20
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 21,
+          "end": 24
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 25,
+            "end": 60
+          },
+          "value": "touch cache-invalidating-difference"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 62,
+          "end": 66
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 67,
+          "end": 74
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 75,
+          "end": 79
+        }
+      },
+      "options": [
+        {
+          "flag_start": 80,
+          "name": {
+            "span": {
+              "start": 82,
+              "end": 86
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 87,
+              "end": 92
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 93,
+              "end": 94
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 95,
+          "end": 96
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 97,
+          "end": 101
+        }
+      },
+      "options": [
+        {
+          "flag_start": 102,
+          "name": {
+            "span": {
+              "start": 104,
+              "end": 108
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 109,
+              "end": 114
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 115,
+              "end": 116
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 117,
+          "end": 118
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

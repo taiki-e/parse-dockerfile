@@ -1,0 +1,251 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 374,
+          "end": 377
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 378,
+          "end": 395
+        },
+        "value": "GO_VERSION=1.23.5"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 397,
+          "end": 400
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 401,
+          "end": 430
+        },
+        "value": "BASE_DEBIAN_DISTRO=\"bookworm\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 431,
+          "end": 434
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 435,
+          "end": 492
+        },
+        "value": "GOLANG_IMAGE=\"golang:${GO_VERSION}-${BASE_DEBIAN_DISTRO}\""
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 494,
+          "end": 498
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 499,
+          "end": 514
+        },
+        "value": "${GOLANG_IMAGE}"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 515,
+          "end": 518
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 519,
+          "end": 534
+        },
+        "value": "GO111MODULE=off"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 535,
+          "end": 538
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 539,
+          "end": 556
+        },
+        "value": "GOTOOLCHAIN=local"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 761,
+          "end": 764
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 765,
+            "end": 1052
+          },
+          "value": "apt-get update && apt-get install -y --no-install-recommends \\\n\t\tbuild-essential \\\n\t\tcurl \\\n\t\tcmake \\\n\t\tgit \\\n\t\tlibseccomp-dev \\\n\t\tca-certificates \\\n\t\te2fsprogs \\\n\t\tiptables \\\n\t\tpkg-config \\\n\t\tpigz \\\n\t\tprocps \\\n\t\txfsprogs \\\n\t\txz-utils \\\n\t\t\\\n\t\tvim-common \\\n\t&& rm -rf /var/lib/apt/lists/*"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1175,
+          "end": 1179
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1180,
+              "end": 1203
+            },
+            "value": "hack/dockerfile/install"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1204,
+          "end": 1227
+        },
+        "value": "hack/dockerfile/install"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1228,
+          "end": 1231
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1232,
+            "end": 1332
+          },
+          "value": "for i in runc containerd tini proxy dockercli; \\\n\t\tdo hack/dockerfile/install/install.sh $i; \\\n\tdone"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1333,
+          "end": 1336
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1337,
+          "end": 1362
+        },
+        "value": "PATH=/usr/local/cli:$PATH"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1364,
+          "end": 1367
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1368,
+          "end": 1381
+        },
+        "value": "AUTO_GOPATH 1"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1382,
+          "end": 1389
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1390,
+          "end": 1405
+        },
+        "value": "/usr/src/docker"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1406,
+          "end": 1410
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1411,
+              "end": 1412
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1413,
+          "end": 1428
+        },
+        "value": "/usr/src/docker"
+      }
+    }
+  ]
+}

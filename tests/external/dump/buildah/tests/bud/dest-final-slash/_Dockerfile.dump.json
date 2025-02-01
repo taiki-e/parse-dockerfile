@@ -1,0 +1,171 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13,
+            "end": 15
+          }
+        },
+        {
+          "span": {
+            "start": 16,
+            "end": 20
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 21,
+          "end": 25
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 26,
+          "end": 33
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 34,
+          "end": 38
+        }
+      },
+      "options": [
+        {
+          "flag_start": 39,
+          "name": {
+            "span": {
+              "start": 41,
+              "end": 45
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 46,
+              "end": 50
+            },
+            "value": "base"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 51,
+              "end": 58
+            },
+            "value": "/bin/ls"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 59,
+          "end": 65
+        },
+        "value": "/test/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 66,
+          "end": 70
+        }
+      },
+      "options": [
+        {
+          "flag_start": 71,
+          "name": {
+            "span": {
+              "start": 73,
+              "end": 77
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 78,
+              "end": 82
+            },
+            "value": "base"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 83,
+              "end": 90
+            },
+            "value": "/bin/sh"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 91,
+          "end": 96
+        },
+        "value": "/bin/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 97,
+          "end": 100
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 101,
+            "end": 122
+          },
+          "value": "/test/ls -lR /test/ls"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

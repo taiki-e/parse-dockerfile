@@ -1,0 +1,227 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13,
+            "end": 15
+          }
+        },
+        {
+          "span": {
+            "start": 16,
+            "end": 20
+          },
+          "value": "test"
+        }
+      ]
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 21,
+          "end": 25
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 26,
+          "end": 30
+        },
+        "value": "1001"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 31,
+          "end": 35
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 36,
+          "end": 43
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 44,
+            "end": 46
+          }
+        },
+        {
+          "span": {
+            "start": 47,
+            "end": 52
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 53,
+          "end": 57
+        }
+      },
+      "options": [
+        {
+          "flag_start": 58,
+          "name": {
+            "span": {
+              "start": 60,
+              "end": 64
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 65,
+              "end": 69
+            },
+            "value": "test"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 70,
+              "end": 78
+            },
+            "value": "/bin/cut"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 79,
+          "end": 85
+        },
+        "value": "/test/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 86,
+          "end": 90
+        }
+      },
+      "options": [
+        {
+          "flag_start": 91,
+          "name": {
+            "span": {
+              "start": 93,
+              "end": 97
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 98,
+              "end": 103
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 104,
+              "end": 111
+            },
+            "value": "/bin/cp"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 112,
+          "end": 118
+        },
+        "value": "/test/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 119,
+          "end": 123
+        }
+      },
+      "options": [
+        {
+          "flag_start": 124,
+          "name": {
+            "span": {
+              "start": 126,
+              "end": 130
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 131,
+              "end": 138
+            },
+            "value": "busybox"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 139,
+              "end": 149
+            },
+            "value": "/bin/paste"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 150,
+          "end": 156
+        },
+        "value": "/test/"
+      }
+    }
+  ]
+}

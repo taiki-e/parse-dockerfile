@@ -1,0 +1,59 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 16,
+          "end": 26
+        },
+        "value": "TARGETARCH"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 27,
+          "end": 30
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 31,
+          "end": 39
+        },
+        "value": "TARGETOS"
+      }
+    }
+  ]
+}

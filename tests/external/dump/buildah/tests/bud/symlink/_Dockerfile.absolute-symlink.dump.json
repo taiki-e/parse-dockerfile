@@ -1,0 +1,151 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "ubuntu"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 94
+          },
+          "value": "echo \"symlink-test\" > /bin/myexe.1 && ln -s /bin/myexe.1 /bin/myexe"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 96,
+          "end": 100
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 101,
+          "end": 107
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 108,
+          "end": 112
+        }
+      },
+      "options": [
+        {
+          "flag_start": 113,
+          "name": {
+            "span": {
+              "start": 115,
+              "end": 119
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 120,
+              "end": 127
+            },
+            "value": "builder"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 128,
+              "end": 138
+            },
+            "value": "/bin/myexe"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 139,
+          "end": 144
+        },
+        "value": "/bin/"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 145,
+          "end": 151
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 152,
+            "end": 162
+          },
+          "value": [
+            {
+              "span": {
+                "start": 155,
+                "end": 159
+              },
+              "value": "/bin"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

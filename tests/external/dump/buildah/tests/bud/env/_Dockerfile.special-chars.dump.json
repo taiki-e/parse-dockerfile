@@ -1,0 +1,43 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 21
+        },
+        "value": "docker.io/ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 22,
+          "end": 25
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 26,
+          "end": 45
+        },
+        "value": "LIB=\"$(PREFIX)/lib\""
+      }
+    }
+  ]
+}

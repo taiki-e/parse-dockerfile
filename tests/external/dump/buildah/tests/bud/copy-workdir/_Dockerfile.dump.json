@@ -1,0 +1,99 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 13,
+          "end": 20
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 21,
+          "end": 28
+        },
+        "value": "/subdir"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 29,
+          "end": 33
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 34,
+              "end": 43
+            },
+            "value": "file1.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 44,
+          "end": 45
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 46,
+          "end": 50
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 51,
+              "end": 60
+            },
+            "value": "file2.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 61,
+          "end": 68
+        },
+        "value": "/subdir"
+      }
+    }
+  ]
+}

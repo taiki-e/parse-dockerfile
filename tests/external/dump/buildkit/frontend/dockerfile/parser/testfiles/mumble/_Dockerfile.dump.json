@@ -1,0 +1,93 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 19,
+          "end": 22
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 23,
+            "end": 85
+          },
+          "value": "apt-get update && apt-get install libcap2-bin mumble-server -y"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 87,
+          "end": 90
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 91,
+              "end": 110
+            },
+            "value": "./mumble-server.ini"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 111,
+          "end": 133
+        },
+        "value": "/etc/mumble-server.ini"
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 135,
+          "end": 138
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 139,
+            "end": 156
+          },
+          "value": "/usr/sbin/murmurd"
+        }
+      }
+    }
+  ]
+}

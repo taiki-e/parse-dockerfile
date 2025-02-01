@@ -1,0 +1,99 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13,
+            "end": 15
+          }
+        },
+        {
+          "span": {
+            "start": 16,
+            "end": 21
+          },
+          "value": "basis"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 22,
+          "end": 25
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 26,
+            "end": 47
+          },
+          "value": "echo hello > /newfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 48,
+          "end": 52
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 53,
+          "end": 58
+        },
+        "value": "basis"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 59,
+          "end": 62
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 63,
+            "end": 79
+          },
+          "value": "test -s /newfile"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

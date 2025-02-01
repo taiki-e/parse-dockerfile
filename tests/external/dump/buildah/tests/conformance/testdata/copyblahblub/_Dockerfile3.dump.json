@@ -1,0 +1,199 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 27,
+          "end": 31
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 32,
+              "end": 51
+            },
+            "value": "/firstdir/seconddir"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 52,
+          "end": 56
+        },
+        "value": "/var"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 57,
+          "end": 60
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 61,
+            "end": 72
+          },
+          "value": "ls -la /var"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 73,
+          "end": 76
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 77,
+            "end": 94
+          },
+          "value": "ls -la /var/dir-a"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 95,
+          "end": 99
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 100,
+          "end": 121
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 122,
+          "end": 126
+        }
+      },
+      "options": [
+        {
+          "flag_start": 127,
+          "name": {
+            "span": {
+              "start": 129,
+              "end": 133
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 134,
+              "end": 135
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 136,
+              "end": 146
+            },
+            "value": "/var/dir-a"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 147,
+          "end": 151
+        },
+        "value": "/var"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 152,
+          "end": 155
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 156,
+            "end": 167
+          },
+          "value": "ls -la /var"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 168,
+          "end": 171
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 172,
+            "end": 190
+          },
+          "value": "ls -la /var/file-a"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

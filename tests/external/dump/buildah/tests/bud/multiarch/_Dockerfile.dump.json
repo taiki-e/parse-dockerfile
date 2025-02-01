@@ -1,0 +1,211 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 19
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 20,
+          "end": 23
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 24,
+            "end": 56
+          },
+          "value": "cp /etc/apk/arch /root/arch-base"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 58,
+          "end": 62
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 63,
+          "end": 69
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 152,
+          "end": 156
+        }
+      },
+      "options": [
+        {
+          "flag_start": 157,
+          "name": {
+            "span": {
+              "start": 159,
+              "end": 163
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 164,
+              "end": 168
+            },
+            "value": "base"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 169,
+              "end": 184
+            },
+            "value": "/root/arch-base"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 185,
+          "end": 191
+        },
+        "value": "/root/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 274,
+          "end": 278
+        }
+      },
+      "options": [
+        {
+          "flag_start": 279,
+          "name": {
+            "span": {
+              "start": 281,
+              "end": 285
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 286,
+              "end": 292
+            },
+            "value": "alpine"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 293,
+              "end": 306
+            },
+            "value": "/etc/apk/arch"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 307,
+          "end": 313
+        },
+        "value": "/root/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 314,
+          "end": 317
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 318,
+            "end": 346
+          },
+          "value": "cmp /etc/apk/arch /root/arch"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 347,
+          "end": 350
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 351,
+            "end": 384
+          },
+          "value": "cmp /etc/apk/arch /root/arch-base"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

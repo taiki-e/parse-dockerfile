@@ -1,0 +1,275 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 27,
+          "end": 30
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 31,
+              "end": 87
+            },
+            "value": "https://github.com/openshift/origin/raw/master/README.md"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 88,
+          "end": 97
+        },
+        "value": "README.md"
+      }
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 98,
+          "end": 102
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 103,
+          "end": 107
+        },
+        "value": "1001"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 108,
+          "end": 111
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 112,
+              "end": 166
+            },
+            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 167,
+          "end": 168
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 169,
+          "end": 172
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 173,
+              "end": 227
+            },
+            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 228,
+          "end": 229
+        },
+        "value": "A"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 230,
+          "end": 233
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 234,
+              "end": 288
+            },
+            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 289,
+          "end": 292
+        },
+        "value": "./a"
+      }
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 293,
+          "end": 297
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 298,
+          "end": 302
+        },
+        "value": "root"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 303,
+          "end": 306
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 307,
+            "end": 316
+          },
+          "value": "mkdir ./b"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 317,
+          "end": 320
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 321,
+              "end": 375
+            },
+            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 376,
+          "end": 381
+        },
+        "value": "./b/a"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 382,
+          "end": 385
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 386,
+              "end": 440
+            },
+            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 441,
+          "end": 446
+        },
+        "value": "./b/."
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 447,
+          "end": 450
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 451,
+              "end": 515
+            },
+            "value": "https://github.com/openshift/ruby-hello-world/archive/master.zip"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 516,
+          "end": 521
+        },
+        "value": "/tmp/"
+      }
+    }
+  ]
+}

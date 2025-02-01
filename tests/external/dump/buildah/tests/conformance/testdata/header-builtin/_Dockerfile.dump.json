@@ -1,0 +1,301 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 55,
+          "end": 59
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 60,
+          "end": 126
+        },
+        "value": "registry.fedoraproject.org/fedora-minimal:41${TARGETARCH:+-x86_64}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 127,
+            "end": 129
+          }
+        },
+        {
+          "span": {
+            "start": 130,
+            "end": 135
+          },
+          "value": "amd64"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 192,
+          "end": 196
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 197,
+          "end": 264
+        },
+        "value": "registry.fedoraproject.org/fedora-minimal:41${TARGETARCH:+-aarch64}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 265,
+            "end": 267
+          }
+        },
+        {
+          "span": {
+            "start": 268,
+            "end": 273
+          },
+          "value": "arm64"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 318,
+          "end": 322
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 323,
+          "end": 364
+        },
+        "value": "registry.fedoraproject.org/fedora-minimal"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 365,
+            "end": 367
+          }
+        },
+        {
+          "span": {
+            "start": 368,
+            "end": 374
+          },
+          "value": "native"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 375,
+          "end": 379
+        }
+      },
+      "options": [
+        {
+          "flag_start": 380,
+          "name": {
+            "span": {
+              "start": 382,
+              "end": 386
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 387,
+              "end": 392
+            },
+            "value": "amd64"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 393,
+              "end": 409
+            },
+            "value": "/lib64/libc.so.6"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 410,
+          "end": 421
+        },
+        "value": "/libc-amd64"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 422,
+          "end": 426
+        }
+      },
+      "options": [
+        {
+          "flag_start": 427,
+          "name": {
+            "span": {
+              "start": 429,
+              "end": 433
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 434,
+              "end": 439
+            },
+            "value": "arm64"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 440,
+              "end": 456
+            },
+            "value": "/lib64/libc.so.6"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 457,
+          "end": 468
+        },
+        "value": "/libc-arm64"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 469,
+          "end": 472
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 473,
+            "end": 522
+          },
+          "value": "microdnf -y install file && microdnf -y clean all"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 523,
+          "end": 526
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 527,
+            "end": 592
+          },
+          "value": "file /libc-* | tee /libc-types.txt && touch -d @0 /libc-types.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 675,
+          "end": 679
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 680,
+          "end": 721
+        },
+        "value": "registry.fedoraproject.org/fedora-minimal"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 722,
+          "end": 726
+        }
+      },
+      "options": [
+        {
+          "flag_start": 727,
+          "name": {
+            "span": {
+              "start": 729,
+              "end": 733
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 734,
+              "end": 740
+            },
+            "value": "native"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 741,
+              "end": 756
+            },
+            "value": "/libc-types.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 757,
+          "end": 758
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 12,
+          "end": 16
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17,
+          "end": 26
+        },
+        "value": "1000:1000"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 27,
+          "end": 30
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 31,
+            "end": 50
+          },
+          "value": "cat /proc/$$/status"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

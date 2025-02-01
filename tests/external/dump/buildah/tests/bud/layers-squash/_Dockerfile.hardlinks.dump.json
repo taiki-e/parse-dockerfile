@@ -1,0 +1,75 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 18,
+              "end": 26
+            },
+            "value": "artifact"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 27,
+          "end": 43
+        },
+        "value": "/subdir/artifact"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 44,
+          "end": 47
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 48,
+            "end": 96
+          },
+          "value": "ln -f /subdir/artifact /subdir/artifact-hardlink"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

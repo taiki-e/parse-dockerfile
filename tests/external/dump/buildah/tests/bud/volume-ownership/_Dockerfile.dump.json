@@ -1,0 +1,127 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 60
+          },
+          "value": "adduser -D -H testuser && addgroup testgroup"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 61,
+          "end": 64
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 65,
+            "end": 85
+          },
+          "value": "mkdir -p /vol/subvol"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 86,
+          "end": 89
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 90,
+            "end": 126
+          },
+          "value": "chown testuser:testgroup /vol/subvol"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 127,
+          "end": 133
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 134,
+              "end": 145
+            },
+            "value": "/vol/subvol"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 383,
+          "end": 386
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 387,
+            "end": 398
+          },
+          "value": "touch /test"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

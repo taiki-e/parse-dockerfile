@@ -1,0 +1,65 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [
+        {
+          "flag_start": 16,
+          "name": {
+            "span": {
+              "start": 18,
+              "end": 25
+            },
+            "value": "network"
+          },
+          "value": {
+            "span": {
+              "start": 26,
+              "end": 30
+            },
+            "value": "fake"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 31,
+            "end": 46
+          },
+          "value": "wget google.com"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

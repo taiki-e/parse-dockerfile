@@ -1,0 +1,159 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 39
+          },
+          "value": "mkdir subdir"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 40,
+          "end": 44
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 45,
+              "end": 50
+            },
+            "value": "hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 51,
+          "end": 60
+        },
+        "value": "./subdir/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 62,
+          "end": 66
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 67,
+          "end": 73
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 74,
+            "end": 76
+          }
+        },
+        {
+          "span": {
+            "start": 77,
+            "end": 83
+          },
+          "value": "second"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 84,
+          "end": 87
+        }
+      },
+      "options": [
+        {
+          "flag_start": 88,
+          "name": {
+            "span": {
+              "start": 90,
+              "end": 95
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 96,
+              "end": 146
+            },
+            "value": "type=bind,source=/subdir,from=builder,target=/test"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 147,
+            "end": 162
+          },
+          "value": "cat /test/hello"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

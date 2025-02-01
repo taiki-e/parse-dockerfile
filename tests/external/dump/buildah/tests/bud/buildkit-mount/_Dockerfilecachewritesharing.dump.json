@@ -1,0 +1,123 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 27
+          },
+          "value": "mkdir /test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 84,
+          "end": 87
+        }
+      },
+      "options": [
+        {
+          "flag_start": 88,
+          "name": {
+            "span": {
+              "start": 90,
+              "end": 95
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 96,
+              "end": 136
+            },
+            "value": "target=/test,type=cache,sharing=locked,z"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 137,
+            "end": 180
+          },
+          "value": "echo hello > /test/world && cat /test/world"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 232,
+          "end": 235
+        }
+      },
+      "options": [
+        {
+          "flag_start": 236,
+          "name": {
+            "span": {
+              "start": 238,
+              "end": 243
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 244,
+              "end": 284
+            },
+            "value": "target=/test,sharing=locked,type=cache,z"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 285,
+            "end": 328
+          },
+          "value": "echo world > /test/world && cat /test/world"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

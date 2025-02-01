@@ -1,0 +1,73 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [
+        {
+          "flag_start": 18,
+          "name": {
+            "span": {
+              "start": 20,
+              "end": 24
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 25,
+              "end": 31
+            },
+            "value": "alpine"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 32,
+              "end": 50
+            },
+            "value": "/we/never/get/here"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 51,
+          "end": 67
+        },
+        "value": "/nor/here/either"
+      }
+    }
+  ]
+}

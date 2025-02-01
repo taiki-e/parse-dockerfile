@@ -1,0 +1,71 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 12,
+          "end": 16
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17,
+          "end": 21
+        },
+        "value": "root"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 22,
+          "end": 26
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 27,
+              "end": 35
+            },
+            "value": "artifact"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 36,
+          "end": 45
+        },
+        "value": "/artifact"
+      }
+    }
+  ]
+}

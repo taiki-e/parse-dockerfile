@@ -1,0 +1,115 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 13,
+          "end": 16
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 17,
+            "end": 31
+          },
+          "value": "mkdir /symlink"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 32,
+          "end": 35
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 36,
+            "end": 74
+          },
+          "value": "ln -s /symlink /src && rm -rf /symlink"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 75,
+          "end": 79
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 80,
+              "end": 90
+            },
+            "value": "Dockerfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 91,
+          "end": 96
+        },
+        "value": "/src/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 97,
+          "end": 100
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 101,
+            "end": 128
+          },
+          "value": "test -s /symlink/Dockerfile"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

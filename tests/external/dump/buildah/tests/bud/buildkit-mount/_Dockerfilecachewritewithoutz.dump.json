@@ -1,0 +1,85 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 28
+          },
+          "value": "mkdir /test2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 29,
+          "end": 32
+        }
+      },
+      "options": [
+        {
+          "flag_start": 33,
+          "name": {
+            "span": {
+              "start": 35,
+              "end": 40
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 41,
+              "end": 65
+            },
+            "value": "type=cache,target=/test2"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 66,
+            "end": 91
+          },
+          "value": "echo hello > /test2/world"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

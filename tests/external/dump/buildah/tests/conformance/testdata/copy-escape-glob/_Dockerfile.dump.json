@@ -1,0 +1,183 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 13,
+          "end": 20
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 21,
+          "end": 25
+        },
+        "value": "/app"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 262,
+          "end": 266
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 267,
+              "end": 289
+            },
+            "value": "./app/[[]xyz]/file.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 290,
+          "end": 295
+        },
+        "value": "/app/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 296,
+          "end": 300
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 301,
+              "end": 331
+            },
+            "value": "./app/[[]xyz]/[[]abc]/file.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 332,
+          "end": 338
+        },
+        "value": "/app2/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 339,
+          "end": 343
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 344,
+              "end": 351
+            },
+            "value": "./app/*"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 352,
+          "end": 358
+        },
+        "value": "/app3/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 394,
+          "end": 398
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 399,
+              "end": 419
+            },
+            "value": "./app/n\\?pe/file.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 420,
+          "end": 434
+        },
+        "value": "/app4/file.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 470,
+          "end": 474
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 475,
+              "end": 496
+            },
+            "value": "./app/st\\*uv/file.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 497,
+          "end": 511
+        },
+        "value": "/app5/file.txt"
+      }
+    }
+  ]
+}

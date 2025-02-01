@@ -1,0 +1,157 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 12
+        },
+        "value": "my_env=a"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 14,
+          "end": 18
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 19,
+          "end": 25
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 26,
+            "end": 28
+          }
+        },
+        {
+          "span": {
+            "start": 29,
+            "end": 36
+          },
+          "value": "stage_a"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 37,
+          "end": 40
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 41,
+            "end": 50
+          },
+          "value": "/bin/true"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 52,
+          "end": 56
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 57,
+          "end": 63
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 64,
+          "end": 67
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 68,
+          "end": 74
+        },
+        "value": "my_env"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 75,
+          "end": 79
+        }
+      },
+      "options": [
+        {
+          "flag_start": 80,
+          "name": {
+            "span": {
+              "start": 82,
+              "end": 86
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 87,
+              "end": 102
+            },
+            "value": "stage_${my_env}"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 103,
+              "end": 112
+            },
+            "value": "/bin/true"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 113,
+          "end": 127
+        },
+        "value": "/bin/true_copy"
+      }
+    }
+  ]
+}

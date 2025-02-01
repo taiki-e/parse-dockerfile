@@ -1,0 +1,342 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 30,
+          "end": 34
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 35,
+          "end": 46
+        },
+        "value": "alpine:edge"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 47,
+            "end": 49
+          }
+        },
+        {
+          "span": {
+            "start": 50,
+            "end": 53
+          },
+          "value": "gen"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 54,
+          "end": 57
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 58,
+            "end": 149
+          },
+          "value": "echo \"@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing\" >> /etc/apk/repositories"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 150,
+          "end": 153
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 154,
+            "end": 212
+          },
+          "value": "apk --update --no-cache add mkcert@testing ca-certificates"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 213,
+          "end": 220
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 221,
+          "end": 227
+        },
+        "value": "/certs"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 228,
+          "end": 231
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 232,
+            "end": 254
+          },
+          "value": "mkdir -p daemon client"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 255,
+          "end": 258
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 259,
+          "end": 272
+        },
+        "value": "SAN=localhost"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 273,
+          "end": 276
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 277,
+          "end": 294
+        },
+        "value": "SAN_CLIENT=client"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 295,
+          "end": 298
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 299,
+            "end": 327
+          },
+          "value": "echo $SAN | tr \" \" \"\\n\" >SAN"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 328,
+          "end": 331
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 332,
+            "end": 409
+          },
+          "value": "CAROOT=$(pwd) mkcert -cert-file daemon/cert.pem -key-file daemon/key.pem $SAN"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 410,
+          "end": 413
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 414,
+            "end": 506
+          },
+          "value": "CAROOT=$(pwd) mkcert -client -cert-file client/cert.pem -key-file client/key.pem $SAN_CLIENT"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 507,
+          "end": 510
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 511,
+            "end": 541
+          },
+          "value": "cp -f rootCA.pem daemon/ca.pem"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 542,
+          "end": 545
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 546,
+            "end": 576
+          },
+          "value": "cp -f rootCA.pem client/ca.pem"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 577,
+          "end": 580
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 581,
+            "end": 612
+          },
+          "value": "rm -f rootCA.pem rootCA-key.pem"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 614,
+          "end": 618
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 619,
+          "end": 626
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 627,
+          "end": 631
+        }
+      },
+      "options": [
+        {
+          "flag_start": 632,
+          "name": {
+            "span": {
+              "start": 634,
+              "end": 638
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 639,
+              "end": 642
+            },
+            "value": "gen"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 643,
+              "end": 649
+            },
+            "value": "/certs"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 650,
+          "end": 651
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

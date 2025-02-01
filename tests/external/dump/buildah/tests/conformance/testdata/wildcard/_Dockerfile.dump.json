@@ -1,0 +1,80 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 27,
+          "end": 30
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 31,
+          "end": 39
+        },
+        "value": "DIR=/usr"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 40,
+          "end": 43
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 44,
+              "end": 52
+            },
+            "value": "dir2/*.b"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 53,
+              "end": 61
+            },
+            "value": "dir2/*.c"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 62,
+          "end": 72
+        },
+        "value": "$DIR/test/"
+      }
+    }
+  ]
+}

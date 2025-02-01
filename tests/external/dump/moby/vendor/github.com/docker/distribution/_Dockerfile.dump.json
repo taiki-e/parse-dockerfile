@@ -1,0 +1,1074 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 51
+        },
+        "value": "GO_VERSION=1.20.8"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 52,
+          "end": 55
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 56,
+          "end": 75
+        },
+        "value": "ALPINE_VERSION=3.18"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 76,
+          "end": 79
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 80,
+          "end": 96
+        },
+        "value": "XX_VERSION=1.2.1"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 98,
+          "end": 102
+        }
+      },
+      "options": [
+        {
+          "flag_start": 103,
+          "name": {
+            "span": {
+              "start": 105,
+              "end": 113
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 114,
+              "end": 128
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 129,
+          "end": 156
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 157,
+            "end": 159
+          }
+        },
+        {
+          "span": {
+            "start": 160,
+            "end": 162
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 163,
+          "end": 167
+        }
+      },
+      "options": [
+        {
+          "flag_start": 168,
+          "name": {
+            "span": {
+              "start": 170,
+              "end": 178
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 179,
+              "end": 193
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 194,
+          "end": 238
+        },
+        "value": "golang:${GO_VERSION}-alpine${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 239,
+            "end": 241
+          }
+        },
+        {
+          "span": {
+            "start": 242,
+            "end": 246
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 247,
+          "end": 251
+        }
+      },
+      "options": [
+        {
+          "flag_start": 252,
+          "name": {
+            "span": {
+              "start": 254,
+              "end": 258
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 259,
+              "end": 261
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 262,
+              "end": 263
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 264,
+          "end": 265
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 266,
+          "end": 269
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 270,
+            "end": 312
+          },
+          "value": "apk add --no-cache bash coreutils file git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 313,
+          "end": 316
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 317,
+          "end": 333
+        },
+        "value": "GO111MODULE=auto"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 334,
+          "end": 337
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 338,
+          "end": 351
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 352,
+          "end": 359
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 360,
+          "end": 398
+        },
+        "value": "/go/src/github.com/docker/distribution"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 400,
+          "end": 404
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 405,
+          "end": 409
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 410,
+            "end": 412
+          }
+        },
+        {
+          "span": {
+            "start": 413,
+            "end": 420
+          },
+          "value": "version"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 421,
+          "end": 424
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 425,
+          "end": 461
+        },
+        "value": "PKG=\"github.com/docker/distribution\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 462,
+          "end": 465
+        }
+      },
+      "options": [
+        {
+          "flag_start": 466,
+          "name": {
+            "span": {
+              "start": 468,
+              "end": 473
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 474,
+              "end": 482
+            },
+            "value": "target=."
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 487,
+            "end": 846
+          },
+          "value": "VERSION=$(git describe --match 'v[0-9]*' --dirty='.m' --always --tags) REVISION=$(git rev-parse HEAD)$(if ! git diff --no-ext-diff --quiet --exit-code; then echo .m; fi); \\\n  echo \"-X ${PKG}/version.Version=${VERSION#v} -X ${PKG}/version.Revision=${REVISION} -X ${PKG}/version.Package=${PKG}\" | tee /tmp/.ldflags; \\\n  echo -n \"${VERSION}\" | tee /tmp/.version;"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 848,
+          "end": 852
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 853,
+          "end": 857
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 858,
+            "end": 860
+          }
+        },
+        {
+          "span": {
+            "start": 861,
+            "end": 866
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 867,
+          "end": 870
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 871,
+          "end": 885
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 886,
+          "end": 889
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 890,
+          "end": 905
+        },
+        "value": "LDFLAGS=\"-s -w\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 906,
+          "end": 909
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 910,
+          "end": 945
+        },
+        "value": "BUILDTAGS=\"include_oss,include_gcs\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 946,
+          "end": 949
+        }
+      },
+      "options": [
+        {
+          "flag_start": 950,
+          "name": {
+            "span": {
+              "start": 952,
+              "end": 957
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 958,
+              "end": 1016
+            },
+            "value": "type=bind,target=/go/src/github.com/docker/distribution,rw"
+          }
+        },
+        {
+          "flag_start": 1023,
+          "name": {
+            "span": {
+              "start": 1025,
+              "end": 1030
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1031,
+              "end": 1070
+            },
+            "value": "type=cache,target=/root/.cache/go-build"
+          }
+        },
+        {
+          "flag_start": 1077,
+          "name": {
+            "span": {
+              "start": 1079,
+              "end": 1084
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1085,
+              "end": 1114
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        },
+        {
+          "flag_start": 1121,
+          "name": {
+            "span": {
+              "start": 1123,
+              "end": 1128
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1129,
+              "end": 1193
+            },
+            "value": "type=bind,source=/tmp/.ldflags,target=/tmp/.ldflags,from=version"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1202,
+            "end": 1380
+          },
+          "value": "set -x ; xx-go build -tags \"${BUILDTAGS}\" -trimpath -ldflags \"$(cat /tmp/.ldflags) ${LDFLAGS}\" -o /usr/bin/registry ./cmd/registry \\\n      && xx-verify --static /usr/bin/registry"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1382,
+          "end": 1386
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1387,
+          "end": 1394
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1395,
+            "end": 1397
+          }
+        },
+        {
+          "span": {
+            "start": 1398,
+            "end": 1404
+          },
+          "value": "binary"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1405,
+          "end": 1409
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1410,
+          "name": {
+            "span": {
+              "start": 1412,
+              "end": 1416
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1417,
+              "end": 1422
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1423,
+              "end": 1440
+            },
+            "value": "/usr/bin/registry"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1441,
+          "end": 1442
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1444,
+          "end": 1448
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1449,
+          "end": 1453
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1454,
+            "end": 1456
+          }
+        },
+        {
+          "span": {
+            "start": 1457,
+            "end": 1465
+          },
+          "value": "releaser"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1466,
+          "end": 1469
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1470,
+          "end": 1478
+        },
+        "value": "TARGETOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1479,
+          "end": 1482
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1483,
+          "end": 1493
+        },
+        "value": "TARGETARCH"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1494,
+          "end": 1497
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1498,
+          "end": 1511
+        },
+        "value": "TARGETVARIANT"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1512,
+          "end": 1519
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1520,
+          "end": 1525
+        },
+        "value": "/work"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1526,
+          "end": 1529
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1530,
+          "name": {
+            "span": {
+              "start": 1532,
+              "end": 1537
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1538,
+              "end": 1563
+            },
+            "value": "from=binary,target=/build"
+          }
+        },
+        {
+          "flag_start": 1570,
+          "name": {
+            "span": {
+              "start": 1572,
+              "end": 1577
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1578,
+              "end": 1599
+            },
+            "value": "type=bind,target=/src"
+          }
+        },
+        {
+          "flag_start": 1606,
+          "name": {
+            "span": {
+              "start": 1608,
+              "end": 1613
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1614,
+              "end": 1678
+            },
+            "value": "type=bind,source=/tmp/.version,target=/tmp/.version,from=version"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1687,
+            "end": 2111
+          },
+          "value": "VERSION=$(cat /tmp/.version) \\\n      && mkdir -p /out \\\n      && cp /build/registry /src/README.md /src/LICENSE . \\\n      && tar -czvf \"/out/registry_${VERSION#v}_${TARGETOS}_${TARGETARCH}${TARGETVARIANT}.tar.gz\" * \\\n      && sha256sum -z \"/out/registry_${VERSION#v}_${TARGETOS}_${TARGETARCH}${TARGETVARIANT}.tar.gz\" | awk '{ print $1 }' > \"/out/registry_${VERSION#v}_${TARGETOS}_${TARGETARCH}${TARGETVARIANT}.tar.gz.sha256\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2113,
+          "end": 2117
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2118,
+          "end": 2125
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2126,
+            "end": 2128
+          }
+        },
+        {
+          "span": {
+            "start": 2129,
+            "end": 2137
+          },
+          "value": "artifact"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2138,
+          "end": 2142
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2143,
+          "name": {
+            "span": {
+              "start": 2145,
+              "end": 2149
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2150,
+              "end": 2158
+            },
+            "value": "releaser"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2159,
+              "end": 2163
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2164,
+          "end": 2165
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2167,
+          "end": 2171
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2172,
+          "end": 2196
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2197,
+          "end": 2200
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2201,
+            "end": 2235
+          },
+          "value": "apk add --no-cache ca-certificates"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2236,
+          "end": 2240
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2241,
+              "end": 2268
+            },
+            "value": "cmd/registry/config-dev.yml"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2269,
+          "end": 2300
+        },
+        "value": "/etc/docker/registry/config.yml"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2301,
+          "end": 2305
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2306,
+          "name": {
+            "span": {
+              "start": 2308,
+              "end": 2312
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2313,
+              "end": 2319
+            },
+            "value": "binary"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2320,
+              "end": 2329
+            },
+            "value": "/registry"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2330,
+          "end": 2343
+        },
+        "value": "/bin/registry"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 2344,
+          "end": 2350
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 2351,
+            "end": 2372
+          },
+          "value": [
+            {
+              "span": {
+                "start": 2353,
+                "end": 2370
+              },
+              "value": "/var/lib/registry"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 2373,
+          "end": 2379
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 2380,
+            "end": 2384
+          },
+          "value": "5000"
+        }
+      ]
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 2385,
+          "end": 2395
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 2396,
+            "end": 2408
+          },
+          "value": [
+            {
+              "span": {
+                "start": 2398,
+                "end": 2406
+              },
+              "value": "registry"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 2409,
+          "end": 2412
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 2413,
+            "end": 2457
+          },
+          "value": [
+            {
+              "span": {
+                "start": 2415,
+                "end": 2420
+              },
+              "value": "serve"
+            },
+            {
+              "span": {
+                "start": 2424,
+                "end": 2455
+              },
+              "value": "/etc/docker/registry/config.yml"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

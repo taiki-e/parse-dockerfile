@@ -1,0 +1,205 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "MAINTAINER",
+      "maintainer": {
+        "span": {
+          "start": 13,
+          "end": 23
+        }
+      },
+      "name": {
+        "span": {
+          "start": 24,
+          "end": 47
+        },
+        "value": "jdoe <jdoe@example.com>"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 48,
+          "end": 51
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 52,
+          "end": 70
+        },
+        "value": "container=\"docker\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 72,
+          "end": 75
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 76,
+            "end": 115
+          },
+          "value": "echo this-should-be-cached-but-it-s-not"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 117,
+          "end": 120
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 121,
+          "end": 129
+        },
+        "value": "USERNAME"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 130,
+          "end": 133
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 134,
+          "end": 137
+        },
+        "value": "UID"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 138,
+          "end": 141
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 142,
+          "end": 146
+        },
+        "value": "CODE"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 147,
+          "end": 150
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 151,
+          "end": 157
+        },
+        "value": "PGDATA"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 158,
+          "end": 161
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 162,
+          "end": 172
+        },
+        "value": "PORT=55555"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 174,
+          "end": 177
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 178,
+            "end": 225
+          },
+          "value": "echo this-should-not-be-cached-when-args-change"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 227,
+          "end": 230
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 231,
+            "end": 249
+          },
+          "value": [
+            {
+              "span": {
+                "start": 233,
+                "end": 247
+              },
+              "value": "/container-run"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

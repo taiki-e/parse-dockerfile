@@ -1,0 +1,151 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 20
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 22,
+          "end": 26
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 27,
+          "end": 34
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 35,
+          "end": 39
+        }
+      },
+      "options": [
+        {
+          "flag_start": 40,
+          "name": {
+            "span": {
+              "start": 42,
+              "end": 46
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 47,
+              "end": 52
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 53,
+              "end": 54
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 55,
+          "end": 56
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 57,
+          "end": 61
+        }
+      },
+      "options": [
+        {
+          "flag_start": 62,
+          "name": {
+            "span": {
+              "start": 64,
+              "end": 68
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 69,
+              "end": 74
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 75,
+              "end": 76
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 77,
+          "end": 78
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 94,
+          "end": 97
+        }
+      },
+      "options": [
+        {
+          "flag_start": 98,
+          "name": {
+            "span": {
+              "start": 100,
+              "end": 105
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 106,
+              "end": 144
+            },
+            "value": "type=tmpfs,target=/var/tmpfs-not-empty"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 145,
+            "end": 177
+          },
+          "value": "touch /var/tmpfs-not-empty/hello"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

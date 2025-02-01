@@ -1,0 +1,123 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 30
+        },
+        "value": "docker.io/library/busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 31,
+            "end": 33
+          }
+        },
+        {
+          "span": {
+            "start": 34,
+            "end": 39
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 40,
+          "end": 43
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 44,
+            "end": 60
+          },
+          "value": "rm -f /bin/paste"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 61,
+          "end": 65
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 66,
+          "end": 70
+        },
+        "value": "1001"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 71,
+          "end": 75
+        }
+      },
+      "options": [
+        {
+          "flag_start": 76,
+          "name": {
+            "span": {
+              "start": 78,
+              "end": 82
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 83,
+              "end": 108
+            },
+            "value": "docker.io/library/busybox"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 109,
+              "end": 119
+            },
+            "value": "/bin/paste"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 120,
+          "end": 126
+        },
+        "value": "/test/"
+      }
+    }
+  ]
+}

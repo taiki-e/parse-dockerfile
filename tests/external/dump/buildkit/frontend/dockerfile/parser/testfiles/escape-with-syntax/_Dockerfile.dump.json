@@ -1,0 +1,45 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 11,
+          "end": 28
+        },
+        "value": "docker/dockerfile"
+      }
+    },
+    "escape": {
+      "start": 31,
+      "value": {
+        "span": {
+          "start": 40,
+          "end": 41
+        },
+        "value": "`"
+      }
+    },
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 43,
+          "end": 47
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 54,
+          "end": 59
+        },
+        "value": "image"
+      },
+      "as_": null
+    }
+  ]
+}

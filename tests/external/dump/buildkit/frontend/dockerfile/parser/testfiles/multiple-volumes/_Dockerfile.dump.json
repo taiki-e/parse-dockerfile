@@ -1,0 +1,75 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 8
+        },
+        "value": "foo"
+      },
+      "as_": null
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 10,
+          "end": 16
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 17,
+              "end": 32
+            },
+            "value": "/opt/nagios/var"
+          },
+          {
+            "span": {
+              "start": 33,
+              "end": 48
+            },
+            "value": "/opt/nagios/etc"
+          },
+          {
+            "span": {
+              "start": 49,
+              "end": 68
+            },
+            "value": "/opt/nagios/libexec"
+          },
+          {
+            "span": {
+              "start": 69,
+              "end": 85
+            },
+            "value": "/var/log/apache2"
+          },
+          {
+            "span": {
+              "start": 86,
+              "end": 106
+            },
+            "value": "/usr/share/snmp/mibs"
+          }
+        ]
+      }
+    }
+  ]
+}

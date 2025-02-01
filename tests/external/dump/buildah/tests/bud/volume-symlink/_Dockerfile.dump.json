@@ -1,0 +1,73 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 57,
+          "end": 60
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 61,
+            "end": 164
+          },
+          "value": "mkdir -p /home/app/myvolume \\\n&& touch /home/app/myvolume/foo.txt \\\n&& ln -s /home/app/myvolume /config"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 165,
+          "end": 171
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 172,
+            "end": 183
+          },
+          "value": [
+            {
+              "span": {
+                "start": 174,
+                "end": 181
+              },
+              "value": "/config"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

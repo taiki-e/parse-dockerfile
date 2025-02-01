@@ -1,0 +1,904 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 7
+        },
+        "value": "a=b"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 9,
+          "end": 13
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 14,
+          "end": 20
+        },
+        "value": "ubuntu"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 21,
+            "end": 23
+          }
+        },
+        {
+          "span": {
+            "start": 24,
+            "end": 25
+          },
+          "value": "f"
+        }
+      ]
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 26,
+          "end": 29
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 30,
+              "end": 31
+            },
+            "value": "s"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 32,
+          "end": 33
+        },
+        "value": "d"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 34,
+          "end": 37
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 38,
+          "end": 39
+        },
+        "value": "a"
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 40,
+          "end": 43
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 44,
+            "end": 58
+          },
+          "value": [
+            {
+              "span": {
+                "start": 46,
+                "end": 56
+              },
+              "value": "executable"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 59,
+          "end": 63
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 64,
+              "end": 65
+            },
+            "value": "s"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 66,
+          "end": 67
+        },
+        "value": "d"
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 68,
+          "end": 78
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 79,
+            "end": 93
+          },
+          "value": [
+            {
+              "span": {
+                "start": 81,
+                "end": 91
+              },
+              "value": "executable"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 94,
+          "end": 97
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 98,
+          "end": 101
+        },
+        "value": "k=v"
+      }
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 102,
+          "end": 108
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 109,
+            "end": 111
+          },
+          "value": "80"
+        }
+      ]
+    },
+    {
+      "kind": "HEALTHCHECK",
+      "healthcheck": {
+        "span": {
+          "start": 112,
+          "end": 123
+        }
+      },
+      "options": [
+        {
+          "flag_start": 124,
+          "name": {
+            "span": {
+              "start": 126,
+              "end": 134
+            },
+            "value": "interval"
+          },
+          "value": {
+            "span": {
+              "start": 135,
+              "end": 138
+            },
+            "value": "30s"
+          }
+        },
+        {
+          "flag_start": 139,
+          "name": {
+            "span": {
+              "start": 141,
+              "end": 148
+            },
+            "value": "timeout"
+          },
+          "value": {
+            "span": {
+              "start": 149,
+              "end": 152
+            },
+            "value": "30s"
+          }
+        },
+        {
+          "flag_start": 153,
+          "name": {
+            "span": {
+              "start": 155,
+              "end": 167
+            },
+            "value": "start-period"
+          },
+          "value": {
+            "span": {
+              "start": 168,
+              "end": 170
+            },
+            "value": "5s"
+          }
+        },
+        {
+          "flag_start": 171,
+          "name": {
+            "span": {
+              "start": 173,
+              "end": 180
+            },
+            "value": "retries"
+          },
+          "value": {
+            "span": {
+              "start": 181,
+              "end": 182
+            },
+            "value": "3"
+          }
+        }
+      ],
+      "arguments": {
+        "kind": "CMD",
+        "cmd": {
+          "span": {
+            "start": 183,
+            "end": 186
+          }
+        },
+        "arguments": {
+          "exec": {
+            "span": {
+              "start": 187,
+              "end": 201
+            },
+            "value": [
+              {
+                "span": {
+                  "start": 189,
+                  "end": 199
+                },
+                "value": "executable"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 202,
+          "end": 207
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 208,
+          "end": 213
+        },
+        "value": "k=\"v\""
+      }
+    },
+    {
+      "kind": "MAINTAINER",
+      "maintainer": {
+        "span": {
+          "start": 214,
+          "end": 224
+        }
+      },
+      "name": {
+        "span": {
+          "start": 225,
+          "end": 229
+        },
+        "value": "name"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 230,
+          "end": 233
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 234,
+            "end": 235
+          },
+          "value": "a"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "SHELL",
+      "shell": {
+        "span": {
+          "start": 236,
+          "end": 241
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 244,
+            "end": 254
+          },
+          "value": "executable"
+        }
+      ]
+    },
+    {
+      "kind": "STOPSIGNAL",
+      "stopsignal": {
+        "span": {
+          "start": 257,
+          "end": 267
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 268,
+          "end": 274
+        },
+        "value": "SIGINT"
+      }
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 275,
+          "end": 279
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 280,
+          "end": 281
+        },
+        "value": "u"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 282,
+          "end": 288
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 289,
+            "end": 297
+          },
+          "value": [
+            {
+              "span": {
+                "start": 291,
+                "end": 295
+              },
+              "value": "/dir"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 298,
+          "end": 305
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 306,
+          "end": 310
+        },
+        "value": "/dir"
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 312,
+          "end": 319
+        }
+      },
+      "instruction": {
+        "kind": "ADD",
+        "add": {
+          "span": {
+            "start": 320,
+            "end": 323
+          }
+        },
+        "options": [],
+        "src": [
+          {
+            "path": {
+              "span": {
+                "start": 324,
+                "end": 325
+              },
+              "value": "s"
+            }
+          }
+        ],
+        "dest": {
+          "span": {
+            "start": 326,
+            "end": 327
+          },
+          "value": "d"
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 328,
+          "end": 335
+        }
+      },
+      "instruction": {
+        "kind": "ARG",
+        "arg": {
+          "span": {
+            "start": 336,
+            "end": 339
+          }
+        },
+        "arguments": {
+          "span": {
+            "start": 340,
+            "end": 341
+          },
+          "value": "a"
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 342,
+          "end": 349
+        }
+      },
+      "instruction": {
+        "kind": "CMD",
+        "cmd": {
+          "span": {
+            "start": 350,
+            "end": 353
+          }
+        },
+        "arguments": {
+          "exec": {
+            "span": {
+              "start": 354,
+              "end": 368
+            },
+            "value": [
+              {
+                "span": {
+                  "start": 356,
+                  "end": 366
+                },
+                "value": "executable"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 369,
+          "end": 376
+        }
+      },
+      "instruction": {
+        "kind": "COPY",
+        "copy": {
+          "span": {
+            "start": 377,
+            "end": 381
+          }
+        },
+        "options": [],
+        "src": [
+          {
+            "path": {
+              "span": {
+                "start": 382,
+                "end": 383
+              },
+              "value": "s"
+            }
+          }
+        ],
+        "dest": {
+          "span": {
+            "start": 384,
+            "end": 385
+          },
+          "value": "d"
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 386,
+          "end": 393
+        }
+      },
+      "instruction": {
+        "kind": "ENTRYPOINT",
+        "entrypoint": {
+          "span": {
+            "start": 394,
+            "end": 404
+          }
+        },
+        "arguments": {
+          "exec": {
+            "span": {
+              "start": 405,
+              "end": 419
+            },
+            "value": [
+              {
+                "span": {
+                  "start": 407,
+                  "end": 417
+                },
+                "value": "executable"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 420,
+          "end": 427
+        }
+      },
+      "instruction": {
+        "kind": "ENV",
+        "env": {
+          "span": {
+            "start": 428,
+            "end": 431
+          }
+        },
+        "arguments": {
+          "span": {
+            "start": 432,
+            "end": 435
+          },
+          "value": "k=v"
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 436,
+          "end": 443
+        }
+      },
+      "instruction": {
+        "kind": "EXPOSE",
+        "expose": {
+          "span": {
+            "start": 444,
+            "end": 450
+          }
+        },
+        "arguments": [
+          {
+            "span": {
+              "start": 451,
+              "end": 453
+            },
+            "value": "80"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 454,
+          "end": 461
+        }
+      },
+      "instruction": {
+        "kind": "HEALTHCHECK",
+        "healthcheck": {
+          "span": {
+            "start": 462,
+            "end": 473
+          }
+        },
+        "options": [],
+        "arguments": {
+          "kind": "NONE",
+          "none": {
+            "span": {
+              "start": 474,
+              "end": 478
+            }
+          }
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 479,
+          "end": 486
+        }
+      },
+      "instruction": {
+        "kind": "LABEL",
+        "label": {
+          "span": {
+            "start": 487,
+            "end": 492
+          }
+        },
+        "arguments": {
+          "span": {
+            "start": 493,
+            "end": 498
+          },
+          "value": "k=\"v\""
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 499,
+          "end": 506
+        }
+      },
+      "instruction": {
+        "kind": "RUN",
+        "run": {
+          "span": {
+            "start": 507,
+            "end": 510
+          }
+        },
+        "options": [],
+        "arguments": {
+          "shell": {
+            "span": {
+              "start": 511,
+              "end": 512
+            },
+            "value": "a"
+          }
+        },
+        "here_docs": []
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 513,
+          "end": 520
+        }
+      },
+      "instruction": {
+        "kind": "SHELL",
+        "shell": {
+          "span": {
+            "start": 521,
+            "end": 526
+          }
+        },
+        "arguments": [
+          {
+            "span": {
+              "start": 529,
+              "end": 539
+            },
+            "value": "executable"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 542,
+          "end": 549
+        }
+      },
+      "instruction": {
+        "kind": "STOPSIGNAL",
+        "stopsignal": {
+          "span": {
+            "start": 550,
+            "end": 560
+          }
+        },
+        "arguments": {
+          "span": {
+            "start": 561,
+            "end": 567
+          },
+          "value": "SIGINT"
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 568,
+          "end": 575
+        }
+      },
+      "instruction": {
+        "kind": "USER",
+        "user": {
+          "span": {
+            "start": 576,
+            "end": 580
+          }
+        },
+        "arguments": {
+          "span": {
+            "start": 581,
+            "end": 582
+          },
+          "value": "u"
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 583,
+          "end": 590
+        }
+      },
+      "instruction": {
+        "kind": "VOLUME",
+        "volume": {
+          "span": {
+            "start": 591,
+            "end": 597
+          }
+        },
+        "arguments": {
+          "json": {
+            "span": {
+              "start": 598,
+              "end": 606
+            },
+            "value": [
+              {
+                "span": {
+                  "start": 600,
+                  "end": 604
+                },
+                "value": "/dir"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 607,
+          "end": 614
+        }
+      },
+      "instruction": {
+        "kind": "WORKDIR",
+        "workdir": {
+          "span": {
+            "start": 615,
+            "end": 622
+          }
+        },
+        "arguments": {
+          "span": {
+            "start": 623,
+            "end": 627
+          },
+          "value": "/dir"
+        }
+      }
+    }
+  ]
+}

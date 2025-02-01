@@ -1,0 +1,59 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 15
+        },
+        "value": "foo bar=baz"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 16,
+          "end": 20
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 21,
+          "end": 27
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 28,
+          "end": 31
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 32,
+          "end": 49
+        },
+        "value": "abc=\"123 456\" def"
+      }
+    }
+  ]
+}

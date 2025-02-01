@@ -1,0 +1,267 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 18,
+          "end": 23
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 24,
+          "end": 72
+        },
+        "value": "maintainer\tSeongyeol Lim <seongyeol37@gmail.com>"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 74,
+          "end": 78
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 79,
+              "end": 80
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 81,
+          "end": 113
+        },
+        "value": "/go/src/github.com/docker/docker"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 114,
+          "end": 117
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 119,
+              "end": 120
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 121,
+          "end": 122
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 123,
+          "end": 126
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 128,
+              "end": 132
+            },
+            "value": "null"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 133,
+          "end": 134
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 135,
+          "end": 139
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 140,
+              "end": 148
+            },
+            "value": "nullfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 149,
+          "end": 153
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 154,
+          "end": 157
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 162,
+              "end": 167
+            },
+            "value": "vimrc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 171,
+          "end": 175
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 179,
+          "end": 183
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 187,
+              "end": 193
+            },
+            "value": "bashrc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 197,
+          "end": 201
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 205,
+          "end": 209
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 213,
+              "end": 222
+            },
+            "value": "test file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 226,
+          "end": 230
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 234,
+          "end": 237
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 242,
+              "end": 251
+            },
+            "value": "test file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 255,
+          "end": 269
+        },
+        "value": "/tmp/test file"
+      }
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 20
+        },
+        "value": "GOVERSION=1.18.2"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 21,
+          "end": 25
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 26,
+          "end": 45
+        },
+        "value": "golang:${GOVERSION}"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 63,
+          "end": 66
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 67,
+          "end": 77
+        },
+        "value": "GOOS=linux"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 78,
+          "end": 81
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 82,
+          "end": 94
+        },
+        "value": "GOARCH=amd64"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 95,
+          "end": 98
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 99,
+          "end": 179
+        },
+        "value": "GOOS=${GOOS} GOARCH=${GOARCH} CGO_ENABLED=0 GOFLAGS='-v -ldflags=-s -ldflags=-w'"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 228,
+          "end": 231
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 232,
+            "end": 247
+          },
+          "value": "go build -a std"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 278,
+          "end": 285
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 286,
+          "end": 289
+        },
+        "value": "pty"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 290,
+          "end": 293
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 294,
+              "end": 295
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 296,
+          "end": 297
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 316,
+          "end": 319
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 320,
+            "end": 328
+          },
+          "value": "go build"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 19,
+          "end": 22
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 23,
+            "end": 87
+          },
+          "value": "apt-get update -qy && apt-get install tmux zsh weechat-curses -y"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 89,
+          "end": 92
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 93,
+              "end": 101
+            },
+            "value": ".weechat"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 102,
+          "end": 111
+        },
+        "value": "/.weechat"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 112,
+          "end": 115
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 116,
+              "end": 126
+            },
+            "value": ".tmux.conf"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 127,
+          "end": 128
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 129,
+          "end": 132
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 133,
+            "end": 177
+          },
+          "value": "echo \"export TERM=screen-256color\" >/.zshenv"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 179,
+          "end": 182
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 183,
+            "end": 197
+          },
+          "value": "zsh -c weechat"
+        }
+      }
+    }
+  ]
+}

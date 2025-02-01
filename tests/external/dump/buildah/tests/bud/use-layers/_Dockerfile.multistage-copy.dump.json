@@ -1,0 +1,239 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 19
+          },
+          "value": "uuid"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 20,
+          "end": 24
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 25,
+              "end": 29
+            },
+            "value": "uuid"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 30,
+          "end": 34
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 36,
+          "end": 40
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 41,
+          "end": 47
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 48,
+            "end": 50
+          }
+        },
+        {
+          "span": {
+            "start": 51,
+            "end": 55
+          },
+          "value": "date"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 56,
+          "end": 60
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 61,
+              "end": 65
+            },
+            "value": "date"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 66,
+          "end": 70
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 72,
+          "end": 76
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 77,
+          "end": 83
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 84,
+          "end": 88
+        }
+      },
+      "options": [
+        {
+          "flag_start": 89,
+          "name": {
+            "span": {
+              "start": 91,
+              "end": 95
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 96,
+              "end": 100
+            },
+            "value": "uuid"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 101,
+              "end": 110
+            },
+            "value": "/src/data"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 111,
+          "end": 116
+        },
+        "value": "/uuid"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 117,
+          "end": 121
+        }
+      },
+      "options": [
+        {
+          "flag_start": 122,
+          "name": {
+            "span": {
+              "start": 124,
+              "end": 128
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 129,
+              "end": 133
+            },
+            "value": "date"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 134,
+              "end": 143
+            },
+            "value": "/src/data"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 144,
+          "end": 149
+        },
+        "value": "/date"
+      }
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 19
+        },
+        "value": "busybox:latest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 20,
+            "end": 22
+          }
+        },
+        {
+          "span": {
+            "start": 23,
+            "end": 30
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 31,
+          "end": 34
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 35,
+          "end": 55
+        },
+        "value": "\"BUILD_LOGLEVEL\"=\"5\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 56,
+          "end": 59
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 60,
+            "end": 80
+          },
+          "value": "touch /tmp/preCommit"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 81,
+          "end": 91
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 92,
+            "end": 106
+          },
+          "value": "/bin/sleep 600"
+        }
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 107,
+          "end": 110
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 111,
+          "end": 188
+        },
+        "value": "\"OPENSHIFT_BUILD_NAME\"=\"mydockertest-1\" \"OPENSHIFT_BUILD_NAMESPACE\"=\"default\""
+      }
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 189,
+          "end": 194
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 195,
+          "end": 278
+        },
+        "value": "\"io.openshift.build.name\"=\"mydockertest-1\" \"io.openshift.build.namespace\"=\"default\""
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 280,
+          "end": 284
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 285,
+          "end": 292
+        },
+        "value": "builder"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 293,
+          "end": 296
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 297,
+          "end": 317
+        },
+        "value": "\"BUILD_LOGLEVEL\"=\"5\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 318,
+          "end": 321
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 322,
+            "end": 343
+          },
+          "value": "touch /tmp/postCommit"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 345,
+          "end": 349
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 350,
+          "end": 357
+        },
+        "value": "builder"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 358,
+          "end": 361
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 362,
+          "end": 382
+        },
+        "value": "\"BUILD_LOGLEVEL\"=\"5\""
+      }
+    }
+  ]
+}

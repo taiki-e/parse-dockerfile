@@ -1,0 +1,125 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 19
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 20,
+          "end": 23
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 24,
+            "end": 59
+          },
+          "value": "echo \"stdin-context\" > /scratchfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 61,
+          "end": 65
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 66,
+          "end": 73
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 74,
+          "end": 78
+        }
+      },
+      "options": [
+        {
+          "flag_start": 79,
+          "name": {
+            "span": {
+              "start": 81,
+              "end": 85
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 86,
+              "end": 90
+            },
+            "value": "base"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 91,
+              "end": 103
+            },
+            "value": "/scratchfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 104,
+          "end": 105
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 16,
+          "end": 22
+        },
+        "value": "SECRET"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 39
+          },
+          "value": "echo $SECRET"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 41,
+          "end": 45
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 46,
+          "end": 52
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 53,
+          "end": 56
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 57,
+            "end": 83
+          },
+          "value": "echo \"$SECRET\" > test_file"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

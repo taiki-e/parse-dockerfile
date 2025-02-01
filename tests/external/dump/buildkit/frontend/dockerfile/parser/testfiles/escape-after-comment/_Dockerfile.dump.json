@@ -1,0 +1,59 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 197,
+          "end": 201
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 202,
+          "end": 207
+        },
+        "value": "image"
+      },
+      "as_": null
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 208,
+          "end": 213
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 214,
+          "end": 236
+        },
+        "value": "maintainer foo@bar.com"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 237,
+          "end": 240
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 241,
+          "end": 253
+        },
+        "value": "GOPATH \\go"
+      }
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [
+        {
+          "flag_start": 18,
+          "name": {
+            "span": {
+              "start": 20,
+              "end": 25
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 26,
+              "end": 29
+            },
+            "value": "777"
+          }
+        },
+        {
+          "flag_start": 30,
+          "name": {
+            "span": {
+              "start": 32,
+              "end": 37
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 38,
+              "end": 47
+            },
+            "value": "2367:3267"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 48,
+              "end": 61
+            },
+            "value": "copychmod.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 62,
+          "end": 66
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 68,
+          "end": 71
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 72,
+            "end": 127
+          },
+          "value": "stat -c \"chmod:%a user:%u group:%g\"  /tmp/copychmod.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 129,
+          "end": 132
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 133,
+            "end": 140
+          },
+          "value": "/bin/sh"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,503 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 13
+        },
+        "value": "SAFEIMAGE"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 14,
+          "end": 18
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 19,
+          "end": 29
+        },
+        "value": "$SAFEIMAGE"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 34,
+            "end": 71
+          },
+          "value": "touch -r /etc/os-release /timestamped"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 72,
+          "end": 75
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 76,
+            "end": 83
+          },
+          "value": "sleep 0"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 84,
+          "end": 88
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 89,
+          "end": 99
+        },
+        "value": "$SAFEIMAGE"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 100,
+          "end": 104
+        }
+      },
+      "options": [
+        {
+          "flag_start": 105,
+          "name": {
+            "span": {
+              "start": 107,
+              "end": 111
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 112,
+              "end": 113
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 114,
+              "end": 126
+            },
+            "value": "/timestamped"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 127,
+          "end": 139
+        },
+        "value": "/timestamped"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 140,
+          "end": 143
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 144,
+            "end": 151
+          },
+          "value": "sleep 0"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 152,
+          "end": 156
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 157,
+          "end": 167
+        },
+        "value": "$SAFEIMAGE"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 168,
+          "end": 172
+        }
+      },
+      "options": [
+        {
+          "flag_start": 173,
+          "name": {
+            "span": {
+              "start": 175,
+              "end": 179
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 180,
+              "end": 181
+            },
+            "value": "1"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 182,
+              "end": 194
+            },
+            "value": "/timestamped"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 195,
+          "end": 207
+        },
+        "value": "/timestamped"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 208,
+          "end": 211
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 212,
+            "end": 219
+          },
+          "value": "sleep 0"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 220,
+          "end": 224
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 225,
+          "end": 235
+        },
+        "value": "$SAFEIMAGE"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 236,
+          "end": 240
+        }
+      },
+      "options": [
+        {
+          "flag_start": 241,
+          "name": {
+            "span": {
+              "start": 243,
+              "end": 247
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 248,
+              "end": 249
+            },
+            "value": "2"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 250,
+              "end": 262
+            },
+            "value": "/timestamped"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 263,
+          "end": 275
+        },
+        "value": "/timestamped"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 276,
+          "end": 279
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 280,
+            "end": 285
+          },
+          "value": "false"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 286,
+          "end": 290
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 291,
+          "end": 301
+        },
+        "value": "$SAFEIMAGE"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 302,
+          "end": 306
+        }
+      },
+      "options": [
+        {
+          "flag_start": 307,
+          "name": {
+            "span": {
+              "start": 309,
+              "end": 313
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 314,
+              "end": 315
+            },
+            "value": "3"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 316,
+              "end": 328
+            },
+            "value": "/timestamped"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 329,
+          "end": 341
+        },
+        "value": "/timestamped"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 342,
+          "end": 345
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 346,
+            "end": 353
+          },
+          "value": "sleep 0"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 354,
+          "end": 358
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 359,
+          "end": 369
+        },
+        "value": "$SAFEIMAGE"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 370,
+          "end": 374
+        }
+      },
+      "options": [
+        {
+          "flag_start": 375,
+          "name": {
+            "span": {
+              "start": 377,
+              "end": 381
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 382,
+              "end": 383
+            },
+            "value": "4"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 384,
+              "end": 396
+            },
+            "value": "/timestamped"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 397,
+          "end": 409
+        },
+        "value": "/timestamped"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 410,
+          "end": 413
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 414,
+            "end": 421
+          },
+          "value": "sleep 0"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

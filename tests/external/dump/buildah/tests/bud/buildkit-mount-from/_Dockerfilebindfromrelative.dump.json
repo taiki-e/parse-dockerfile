@@ -1,0 +1,85 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 27
+          },
+          "value": "mkdir /test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 63,
+          "end": 66
+        }
+      },
+      "options": [
+        {
+          "flag_start": 67,
+          "name": {
+            "span": {
+              "start": 69,
+              "end": 74
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 75,
+              "end": 137
+            },
+            "value": "type=bind,source=subdir,from=buildkitbaserelative,target=/test"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 138,
+            "end": 153
+          },
+          "value": "cat /test/hello"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

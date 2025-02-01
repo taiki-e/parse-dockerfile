@@ -1,0 +1,254 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 21
+          },
+          "value": "common"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 54
+          },
+          "value": "echo \"common\" > /common.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 56,
+          "end": 60
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 61,
+          "end": 67
+        },
+        "value": "common"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 68,
+            "end": 70
+          }
+        },
+        {
+          "span": {
+            "start": 71,
+            "end": 77
+          },
+          "value": "buildA"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 78,
+          "end": 81
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 82,
+            "end": 103
+          },
+          "value": "echo \"foo\" > /foo.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 105,
+          "end": 109
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 110,
+          "end": 116
+        },
+        "value": "common"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 117,
+            "end": 119
+          }
+        },
+        {
+          "span": {
+            "start": 120,
+            "end": 126
+          },
+          "value": "buildB"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 249,
+          "end": 252
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 253,
+            "end": 274
+          },
+          "value": "echo \"foo\" > /foo.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 276,
+          "end": 280
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 281,
+          "end": 287
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 289,
+          "end": 292
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 293,
+          "end": 298
+        },
+        "value": "NONCE"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 300,
+          "end": 303
+        }
+      },
+      "options": [
+        {
+          "flag_start": 304,
+          "name": {
+            "span": {
+              "start": 306,
+              "end": 311
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 312,
+              "end": 348
+            },
+            "value": "type=bind,from=buildA,target=/buildA"
+          }
+        },
+        {
+          "flag_start": 355,
+          "name": {
+            "span": {
+              "start": 357,
+              "end": 362
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 363,
+              "end": 399
+            },
+            "value": "type=bind,from=buildB,target=/buildB"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 406,
+            "end": 559
+          },
+          "value": "set -ex; \\\n    cat /buildA/common.txt; \\\n    cat /buildA/foo.txt; \\\n    cat /buildB/common.txt; \\\n    cat /buildB/foo.txt; \\\n    echo \"Worked\"; \\\n    : ;"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

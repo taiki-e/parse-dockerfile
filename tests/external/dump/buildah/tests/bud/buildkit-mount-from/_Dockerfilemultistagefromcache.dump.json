@@ -1,0 +1,277 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 39
+          },
+          "value": "mkdir subdir"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 40,
+          "end": 43
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 44,
+            "end": 64
+          },
+          "value": "mkdir subdir/subdir2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 65,
+          "end": 69
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 70,
+              "end": 75
+            },
+            "value": "hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 76,
+          "end": 85
+        },
+        "value": "./subdir/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 86,
+          "end": 90
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 91,
+              "end": 97
+            },
+            "value": "hello2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 98,
+          "end": 115
+        },
+        "value": "./subdir/subdir2/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 117,
+          "end": 121
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 122,
+          "end": 128
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 129,
+            "end": 131
+          }
+        },
+        {
+          "span": {
+            "start": 132,
+            "end": 138
+          },
+          "value": "second"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 139,
+          "end": 142
+        }
+      },
+      "options": [
+        {
+          "flag_start": 143,
+          "name": {
+            "span": {
+              "start": 145,
+              "end": 150
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 151,
+              "end": 207
+            },
+            "value": "type=cache,id=1,source=/subdir,from=builder,target=/test"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 208,
+            "end": 223
+          },
+          "value": "cat /test/hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 225,
+          "end": 229
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 230,
+          "end": 236
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 237,
+            "end": 239
+          }
+        },
+        {
+          "span": {
+            "start": 240,
+            "end": 245
+          },
+          "value": "third"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 246,
+          "end": 249
+        }
+      },
+      "options": [
+        {
+          "flag_start": 250,
+          "name": {
+            "span": {
+              "start": 252,
+              "end": 257
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 258,
+              "end": 322
+            },
+            "value": "type=cache,id=2,source=/subdir/subdir2,from=builder,target=/test"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 323,
+            "end": 339
+          },
+          "value": "cat /test/hello2"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

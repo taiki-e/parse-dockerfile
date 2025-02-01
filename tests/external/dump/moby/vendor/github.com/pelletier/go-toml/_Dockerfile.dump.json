@@ -1,0 +1,293 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "golang:1.12-alpine3.9"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 27,
+            "end": 29
+          }
+        },
+        {
+          "span": {
+            "start": 30,
+            "end": 37
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 38,
+          "end": 45
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 46,
+          "end": 82
+        },
+        "value": "/go/src/github.com/pelletier/go-toml"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 83,
+          "end": 87
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 88,
+              "end": 89
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 90,
+          "end": 91
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 92,
+          "end": 95
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 96,
+          "end": 109
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 110,
+          "end": 113
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 114,
+          "end": 124
+        },
+        "value": "GOOS=linux"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 125,
+          "end": 128
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 129,
+            "end": 145
+          },
+          "value": "go install ./..."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 147,
+          "end": 151
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 152,
+          "end": 159
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 160,
+          "end": 164
+        }
+      },
+      "options": [
+        {
+          "flag_start": 165,
+          "name": {
+            "span": {
+              "start": 167,
+              "end": 171
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 172,
+              "end": 179
+            },
+            "value": "builder"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 180,
+              "end": 193
+            },
+            "value": "/go/bin/tomll"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 194,
+          "end": 208
+        },
+        "value": "/usr/bin/tomll"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 209,
+          "end": 213
+        }
+      },
+      "options": [
+        {
+          "flag_start": 214,
+          "name": {
+            "span": {
+              "start": 216,
+              "end": 220
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 221,
+              "end": 228
+            },
+            "value": "builder"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 229,
+              "end": 245
+            },
+            "value": "/go/bin/tomljson"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 246,
+          "end": 263
+        },
+        "value": "/usr/bin/tomljson"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 264,
+          "end": 268
+        }
+      },
+      "options": [
+        {
+          "flag_start": 269,
+          "name": {
+            "span": {
+              "start": 271,
+              "end": 275
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 276,
+              "end": 283
+            },
+            "value": "builder"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 284,
+              "end": 300
+            },
+            "value": "/go/bin/jsontoml"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 301,
+          "end": 318
+        },
+        "value": "/usr/bin/jsontoml"
+      }
+    }
+  ]
+}

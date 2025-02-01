@@ -1,0 +1,99 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 13,
+          "end": 19
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 20,
+            "end": 26
+          },
+          "value": "80/tcp"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 27,
+          "end": 31
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 32,
+              "end": 42
+            },
+            "value": "httpserver"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 43,
+          "end": 44
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 45,
+          "end": 48
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 49,
+            "end": 65
+          },
+          "value": [
+            {
+              "span": {
+                "start": 51,
+                "end": 63
+              },
+              "value": "./httpserver"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

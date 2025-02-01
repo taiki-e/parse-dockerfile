@@ -1,0 +1,559 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 31,
+          "end": 34
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 35,
+          "end": 50
+        },
+        "value": "GO_VERSION=1.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 51,
+          "end": 54
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 55,
+          "end": 71
+        },
+        "value": "XX_VERSION=1.5.0"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 73,
+          "end": 77
+        }
+      },
+      "options": [
+        {
+          "flag_start": 78,
+          "name": {
+            "span": {
+              "start": 80,
+              "end": 88
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 89,
+              "end": 103
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 104,
+          "end": 131
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 132,
+            "end": 134
+          }
+        },
+        {
+          "span": {
+            "start": 135,
+            "end": 137
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 139,
+          "end": 143
+        }
+      },
+      "options": [
+        {
+          "flag_start": 144,
+          "name": {
+            "span": {
+              "start": 146,
+              "end": 154
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 155,
+              "end": 169
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 170,
+          "end": 197
+        },
+        "value": "golang:${GO_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 198,
+            "end": 200
+          }
+        },
+        {
+          "span": {
+            "start": 201,
+            "end": 205
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 206,
+          "end": 209
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 210,
+            "end": 232
+          },
+          "value": "apk add --no-cache git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 233,
+          "end": 237
+        }
+      },
+      "options": [
+        {
+          "flag_start": 238,
+          "name": {
+            "span": {
+              "start": 240,
+              "end": 244
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 245,
+              "end": 247
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 248,
+              "end": 249
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 250,
+          "end": 251
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 252,
+          "end": 259
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 260,
+          "end": 264
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 266,
+          "end": 270
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 271,
+          "end": 275
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 276,
+            "end": 278
+          }
+        },
+        {
+          "span": {
+            "start": 279,
+            "end": 284
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 285,
+          "end": 288
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 289,
+          "end": 303
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 304,
+          "end": 307
+        }
+      },
+      "options": [
+        {
+          "flag_start": 308,
+          "name": {
+            "span": {
+              "start": 310,
+              "end": 315
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 316,
+              "end": 324
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 325,
+          "name": {
+            "span": {
+              "start": 327,
+              "end": 332
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 333,
+              "end": 362
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        },
+        {
+          "flag_start": 369,
+          "name": {
+            "span": {
+              "start": 371,
+              "end": 376
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 377,
+              "end": 407
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 414,
+            "end": 431
+          },
+          "value": "xx-go build ./..."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 433,
+          "end": 437
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 438,
+          "end": 442
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 443,
+            "end": 445
+          }
+        },
+        {
+          "span": {
+            "start": 446,
+            "end": 450
+          },
+          "value": "test"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 451,
+          "end": 454
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 455,
+          "end": 464
+        },
+        "value": "TESTFLAGS"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 465,
+          "end": 468
+        }
+      },
+      "options": [
+        {
+          "flag_start": 469,
+          "name": {
+            "span": {
+              "start": 471,
+              "end": 476
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 477,
+              "end": 485
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 486,
+          "name": {
+            "span": {
+              "start": 488,
+              "end": 493
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 494,
+              "end": 523
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        },
+        {
+          "flag_start": 530,
+          "name": {
+            "span": {
+              "start": 532,
+              "end": 537
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 538,
+              "end": 568
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 575,
+            "end": 658
+          },
+          "value": "xx-go test -v -coverprofile=/tmp/coverage.txt  -covermode=atomic ${TESTFLAGS} ./..."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 660,
+          "end": 664
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 665,
+          "end": 672
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 673,
+            "end": 675
+          }
+        },
+        {
+          "span": {
+            "start": 676,
+            "end": 689
+          },
+          "value": "test-coverage"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 690,
+          "end": 694
+        }
+      },
+      "options": [
+        {
+          "flag_start": 695,
+          "name": {
+            "span": {
+              "start": 697,
+              "end": 701
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 702,
+              "end": 706
+            },
+            "value": "test"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 707,
+              "end": 724
+            },
+            "value": "/tmp/coverage.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 725,
+          "end": 743
+        },
+        "value": "/coverage-root.txt"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 745,
+          "end": 749
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 750,
+          "end": 755
+        },
+        "value": "build"
+      },
+      "as_": null
+    }
+  ]
+}

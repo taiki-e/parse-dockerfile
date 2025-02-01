@@ -1,0 +1,325 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 19
+        },
+        "value": "GO_VERSION=1.17"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 21,
+          "end": 25
+        }
+      },
+      "options": [
+        {
+          "flag_start": 26,
+          "name": {
+            "span": {
+              "start": 28,
+              "end": 36
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 37,
+              "end": 51
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 52,
+          "end": 65
+        },
+        "value": "tonistiigi/xx"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 66,
+            "end": 68
+          }
+        },
+        {
+          "span": {
+            "start": 69,
+            "end": 71
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 73,
+          "end": 77
+        }
+      },
+      "options": [
+        {
+          "flag_start": 78,
+          "name": {
+            "span": {
+              "start": 80,
+              "end": 88
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 89,
+              "end": 103
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 104,
+          "end": 131
+        },
+        "value": "golang:${GO_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 132,
+            "end": 134
+          }
+        },
+        {
+          "span": {
+            "start": 135,
+            "end": 140
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 141,
+          "end": 145
+        }
+      },
+      "options": [
+        {
+          "flag_start": 146,
+          "name": {
+            "span": {
+              "start": 148,
+              "end": 152
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 153,
+              "end": 155
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 156,
+              "end": 157
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 158,
+          "end": 159
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 160,
+          "end": 163
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 164,
+            "end": 186
+          },
+          "value": "apk add --no-cache git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 187,
+          "end": 194
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 195,
+          "end": 199
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 200,
+          "end": 203
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 204,
+          "end": 218
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 219,
+          "end": 222
+        }
+      },
+      "options": [
+        {
+          "flag_start": 223,
+          "name": {
+            "span": {
+              "start": 225,
+              "end": 230
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 231,
+              "end": 239
+            },
+            "value": "target=."
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 244,
+            "end": 373
+          },
+          "value": "TARGETPLATFORM=$TARGETPLATFORM xx-go build -o /out/amd64variant ./cmd/amd64variant &&  \\\n    xx-verify --static /out/amd64variant"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 375,
+          "end": 379
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 380,
+          "end": 387
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 388,
+          "end": 392
+        }
+      },
+      "options": [
+        {
+          "flag_start": 393,
+          "name": {
+            "span": {
+              "start": 395,
+              "end": 399
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 400,
+              "end": 405
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 406,
+              "end": 423
+            },
+            "value": "/out/amd64variant"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 424,
+          "end": 425
+        },
+        "value": "."
+      }
+    }
+  ]
+}

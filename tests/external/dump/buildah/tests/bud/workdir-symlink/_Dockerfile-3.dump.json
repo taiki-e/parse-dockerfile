@@ -1,0 +1,207 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 53,
+          "end": 57
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 58,
+          "end": 64
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 65,
+          "end": 68
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 69,
+            "end": 101
+          },
+          "value": "ln -sf /var/lib/tempest /tempest"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 102,
+          "end": 109
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 110,
+          "end": 127
+        },
+        "value": "/tempest/lowerdir"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 128,
+          "end": 131
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 132,
+            "end": 156
+          },
+          "value": "touch /etc/notareal.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 157,
+          "end": 160
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 161,
+            "end": 189
+          },
+          "value": "chmod 664 /etc/notareal.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 190,
+          "end": 193
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 194,
+            "end": 220
+          },
+          "value": "mkdir -p /tempest/lowerdir"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 221,
+          "end": 225
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 226,
+              "end": 238
+            },
+            "value": "Dockerfile-3"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 239,
+          "end": 253
+        },
+        "value": "./Dockerfile-3"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 254,
+          "end": 258
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 259,
+              "end": 271
+            },
+            "value": "Dockerfile-3"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 272,
+          "end": 293
+        },
+        "value": "/tempest/Dockerfile-3"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 294,
+          "end": 298
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 299,
+              "end": 311
+            },
+            "value": "Dockerfile-3"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 312,
+          "end": 342
+        },
+        "value": "/tempest/lowerdir/Dockerfile-3"
+      }
+    }
+  ]
+}

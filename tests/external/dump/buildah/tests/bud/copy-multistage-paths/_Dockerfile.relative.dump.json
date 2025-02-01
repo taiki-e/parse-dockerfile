@@ -1,0 +1,125 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "ubuntu"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 23,
+          "end": 27
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 28,
+          "end": 34
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 35,
+          "end": 39
+        }
+      },
+      "options": [
+        {
+          "flag_start": 40,
+          "name": {
+            "span": {
+              "start": 42,
+              "end": 46
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 47,
+              "end": 54
+            },
+            "value": "builder"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 55,
+              "end": 64
+            },
+            "value": "/bin/bash"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 65,
+          "end": 76
+        },
+        "value": "my/bin/bash"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 77,
+          "end": 80
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 81,
+            "end": 112
+          },
+          "value": "stat -c \"permissions=%a\" my/bin"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

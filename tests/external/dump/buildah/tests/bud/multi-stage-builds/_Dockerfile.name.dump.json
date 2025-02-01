@@ -1,0 +1,133 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 21
+          },
+          "value": "myname"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 22,
+          "end": 26
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 27,
+              "end": 42
+            },
+            "value": "Dockerfile.name"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 43,
+          "end": 44
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 46,
+          "end": 50
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 51,
+          "end": 58
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 59,
+          "end": 63
+        }
+      },
+      "options": [
+        {
+          "flag_start": 64,
+          "name": {
+            "span": {
+              "start": 66,
+              "end": 70
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 71,
+              "end": 77
+            },
+            "value": "myname"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 78,
+              "end": 94
+            },
+            "value": "/Dockerfile.name"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 95,
+          "end": 111
+        },
+        "value": "/Dockerfile.name"
+      }
+    }
+  ]
+}

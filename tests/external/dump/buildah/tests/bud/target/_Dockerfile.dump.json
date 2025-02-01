@@ -1,0 +1,263 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 18
+        },
+        "value": "ubuntu:latest"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 19,
+          "end": 22
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 23,
+            "end": 31
+          },
+          "value": "touch /1"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 32,
+          "end": 35
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 36,
+            "end": 47
+          },
+          "value": "touch hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 49,
+          "end": 53
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 54,
+          "end": 67
+        },
+        "value": "alpine:latest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 68,
+            "end": 70
+          }
+        },
+        {
+          "span": {
+            "start": 71,
+            "end": 79
+          },
+          "value": "mytarget"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 80,
+          "end": 83
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 84,
+            "end": 92
+          },
+          "value": "touch /2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 136,
+          "end": 140
+        }
+      },
+      "options": [
+        {
+          "flag_start": 141,
+          "name": {
+            "span": {
+              "start": 143,
+              "end": 147
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 148,
+              "end": 149
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 150,
+              "end": 155
+            },
+            "value": "hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 156,
+          "end": 157
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 159,
+          "end": 163
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 164,
+          "end": 178
+        },
+        "value": "busybox:latest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 179,
+            "end": 181
+          }
+        },
+        {
+          "span": {
+            "start": 182,
+            "end": 191
+          },
+          "value": "mytarget2"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 193,
+          "end": 196
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 197,
+            "end": 205
+          },
+          "value": "touch /3"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 249,
+          "end": 253
+        }
+      },
+      "options": [
+        {
+          "flag_start": 254,
+          "name": {
+            "span": {
+              "start": 256,
+              "end": 260
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 261,
+              "end": 262
+            },
+            "value": "1"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 263,
+              "end": 268
+            },
+            "value": "hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 269,
+          "end": 270
+        },
+        "value": "."
+      }
+    }
+  ]
+}

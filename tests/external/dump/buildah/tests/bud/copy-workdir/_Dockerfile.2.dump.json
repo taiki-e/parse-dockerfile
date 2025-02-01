@@ -1,0 +1,91 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 12,
+          "end": 19
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 20,
+          "end": 27
+        },
+        "value": "/subdir"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 28,
+          "end": 32
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 33,
+              "end": 42
+            },
+            "value": "file1.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 43,
+          "end": 50
+        },
+        "value": "/subdir"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 51,
+          "end": 54
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 55,
+            "end": 57
+          },
+          "value": "ls"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

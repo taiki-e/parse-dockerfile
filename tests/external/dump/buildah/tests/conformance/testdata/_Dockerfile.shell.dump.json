@@ -1,0 +1,72 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 28
+        },
+        "value": "quay.io/libpod/centos:7"
+      },
+      "as_": null
+    },
+    {
+      "kind": "SHELL",
+      "shell": {
+        "span": {
+          "start": 29,
+          "end": 34
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 37,
+            "end": 46
+          },
+          "value": "/bin/bash"
+        },
+        {
+          "span": {
+            "start": 50,
+            "end": 53
+          },
+          "value": "-xc"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 56,
+          "end": 59
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 60,
+            "end": 63
+          },
+          "value": "env"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

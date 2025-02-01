@@ -1,0 +1,207 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 19,
+          "end": 22
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 23,
+            "end": 80
+          },
+          "value": "echo hello\\\n  world\\\n  goodnight  \\\n  moon\\\n  light\\\nning"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 81,
+          "end": 84
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 85,
+            "end": 106
+          },
+          "value": "echo hello  \\\n  world"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 107,
+          "end": 110
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 111,
+            "end": 130
+          },
+          "value": "echo hello  \\\nworld"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 131,
+          "end": 134
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 135,
+            "end": 161
+          },
+          "value": "echo hello \\\ngoodbye\\\nfrog"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 162,
+          "end": 165
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 166,
+            "end": 187
+          },
+          "value": "echo hello  \\  \nworld"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 188,
+          "end": 191
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 192,
+            "end": 230
+          },
+          "value": "echo hi \\\n \\\n world \\\n\\\n good\\\n\\\nnight"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 231,
+          "end": 234
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 235,
+            "end": 253
+          },
+          "value": "echo goodbye\\\nfrog"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 254,
+          "end": 257
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 258,
+            "end": 278
+          },
+          "value": "echo good\\\nbye\\\nfrog"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 280,
+          "end": 283
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 284,
+            "end": 402
+          },
+          "value": "echo hello \\\n# this is a comment\n\n# this is a comment with a blank line surrounding it\n\nthis is some more useful stuff"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

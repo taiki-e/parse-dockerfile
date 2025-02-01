@@ -1,0 +1,800 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 600,
+          "end": 603
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 604,
+          "end": 629
+        },
+        "value": "FUSEOVERLAYFS_COMMIT=main"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 630,
+          "end": 633
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 634,
+          "end": 659
+        },
+        "value": "ROOTLESSKIT_COMMIT=v1.1.0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 661,
+          "end": 664
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 665,
+          "end": 680
+        },
+        "value": "GO_VERSION=1.22"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 681,
+          "end": 684
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 685,
+          "end": 702
+        },
+        "value": "DEBIAN_VERSION=11"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 703,
+          "end": 706
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 707,
+          "end": 726
+        },
+        "value": "ALPINE_VERSION=3.18"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 728,
+          "end": 732
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 733,
+          "end": 760
+        },
+        "value": "golang:${GO_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 761,
+            "end": 763
+          }
+        },
+        {
+          "span": {
+            "start": 764,
+            "end": 794
+          },
+          "value": "containerd-fuse-overlayfs-test"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 795,
+          "end": 799
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 800,
+              "end": 801
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 802,
+          "end": 858
+        },
+        "value": "/go/src/github.com/containerd/fuse-overlayfs-snapshotter"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 859,
+          "end": 866
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 868,
+          "end": 924
+        },
+        "value": "/go/src/github.com/containerd/fuse-overlayfs-snapshotter"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 925,
+          "end": 928
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 929,
+          "end": 942
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 943,
+          "end": 946
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 947,
+          "end": 961
+        },
+        "value": "GO111MODULE=on"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 962,
+          "end": 965
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 966,
+            "end": 980
+          },
+          "value": "go build ./..."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 981,
+          "end": 984
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 985,
+            "end": 1048
+          },
+          "value": "mkdir /out && go test -c -o /out/containerd-fuse-overlayfs.test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1173,
+          "end": 1177
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1178,
+          "end": 1202
+        },
+        "value": "debian:${DEBIAN_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1203,
+            "end": 1205
+          }
+        },
+        {
+          "span": {
+            "start": 1206,
+            "end": 1220
+          },
+          "value": "fuse-overlayfs"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1221,
+          "end": 1224
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1225,
+            "end": 1389
+          },
+          "value": "apt-get update && \\\n    apt-get install --no-install-recommends -y \\\n        git ca-certificates libc6-dev gcc g++ make automake autoconf clang pkgconf libfuse3-dev"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1390,
+          "end": 1393
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1394,
+            "end": 1448
+          },
+          "value": "git clone https://github.com/containers/fuse-overlayfs"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1449,
+          "end": 1456
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1457,
+          "end": 1471
+        },
+        "value": "fuse-overlayfs"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1472,
+          "end": 1475
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1476,
+          "end": 1496
+        },
+        "value": "FUSEOVERLAYFS_COMMIT"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1497,
+          "end": 1500
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1501,
+            "end": 1549
+          },
+          "value": "git pull && git checkout ${FUSEOVERLAYFS_COMMIT}"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1550,
+          "end": 1553
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1555,
+            "end": 1674
+          },
+          "value": "./autogen.sh && \\\n     LIBS=\"-ldl\" LDFLAGS=\"-static\" ./configure && \\\n     make && mkdir /out && cp fuse-overlayfs /out"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1676,
+          "end": 1680
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1681,
+          "end": 1708
+        },
+        "value": "golang:${GO_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1709,
+            "end": 1711
+          }
+        },
+        {
+          "span": {
+            "start": 1712,
+            "end": 1723
+          },
+          "value": "rootlesskit"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1724,
+          "end": 1727
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1728,
+            "end": 1750
+          },
+          "value": "apk add --no-cache git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1751,
+          "end": 1754
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1755,
+            "end": 1870
+          },
+          "value": "git clone https://github.com/rootless-containers/rootlesskit.git /go/src/github.com/rootless-containers/rootlesskit"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1871,
+          "end": 1878
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1879,
+          "end": 1929
+        },
+        "value": "/go/src/github.com/rootless-containers/rootlesskit"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1930,
+          "end": 1933
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1934,
+          "end": 1952
+        },
+        "value": "ROOTLESSKIT_COMMIT"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1953,
+          "end": 1956
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1957,
+            "end": 2003
+          },
+          "value": "git pull && git checkout ${ROOTLESSKIT_COMMIT}"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 2004,
+          "end": 2007
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2008,
+          "end": 2021
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2022,
+          "end": 2025
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2026,
+            "end": 2127
+          },
+          "value": "mkdir /out && go build -o /out/rootlesskit github.com/rootless-containers/rootlesskit/cmd/rootlesskit"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2130,
+          "end": 2134
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2135,
+          "end": 2159
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2160,
+          "end": 2164
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2165,
+          "name": {
+            "span": {
+              "start": 2167,
+              "end": 2171
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2172,
+              "end": 2202
+            },
+            "value": "containerd-fuse-overlayfs-test"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2203,
+              "end": 2238
+            },
+            "value": "/out/containerd-fuse-overlayfs.test"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2239,
+          "end": 2253
+        },
+        "value": "/usr/local/bin"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2254,
+          "end": 2258
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2259,
+          "name": {
+            "span": {
+              "start": 2261,
+              "end": 2265
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2266,
+              "end": 2277
+            },
+            "value": "rootlesskit"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2278,
+              "end": 2294
+            },
+            "value": "/out/rootlesskit"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2295,
+          "end": 2309
+        },
+        "value": "/usr/local/bin"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2310,
+          "end": 2314
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2315,
+          "name": {
+            "span": {
+              "start": 2317,
+              "end": 2321
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2322,
+              "end": 2336
+            },
+            "value": "fuse-overlayfs"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2337,
+              "end": 2356
+            },
+            "value": "/out/fuse-overlayfs"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2357,
+          "end": 2371
+        },
+        "value": "/usr/local/bin"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2372,
+          "end": 2375
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2376,
+            "end": 2628
+          },
+          "value": "apk add --no-cache fuse3 libcap shadow-uidmap && \\\n    setcap CAP_SETUID=ep /usr/bin/newuidmap && \\\n    setcap CAP_SETGID=ep /usr/bin/newgidmap && \\\n    adduser -D -u 1000 testuser && \\\n    echo testuser:100000:65536 | tee /etc/subuid | tee /etc/subgid"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 2629,
+          "end": 2633
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2634,
+          "end": 2642
+        },
+        "value": "testuser"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 2744,
+          "end": 2750
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 2751,
+              "end": 2755
+            },
+            "value": "/tmp"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 2856,
+          "end": 2859
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 2860,
+            "end": 2934
+          },
+          "value": [
+            {
+              "span": {
+                "start": 2862,
+                "end": 2873
+              },
+              "value": "rootlesskit"
+            },
+            {
+              "span": {
+                "start": 2877,
+                "end": 2907
+              },
+              "value": "containerd-fuse-overlayfs.test"
+            },
+            {
+              "span": {
+                "start": 2911,
+                "end": 2921
+              },
+              "value": "-test.root"
+            },
+            {
+              "span": {
+                "start": 2925,
+                "end": 2932
+              },
+              "value": "-test.v"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

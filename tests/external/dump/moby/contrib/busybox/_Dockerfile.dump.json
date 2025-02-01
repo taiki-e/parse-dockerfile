@@ -1,0 +1,257 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 458,
+          "end": 461
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 462,
+          "end": 517
+        },
+        "value": "WINDOWS_BASE_IMAGE=mcr.microsoft.com/windows/servercore"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 518,
+          "end": 521
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 522,
+          "end": 553
+        },
+        "value": "WINDOWS_BASE_IMAGE_TAG=ltsc2022"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 554,
+          "end": 557
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 558,
+          "end": 593
+        },
+        "value": "BUSYBOX_VERSION=FRP-5007-g82accfc19"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 662,
+          "end": 665
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 666,
+          "end": 748
+        },
+        "value": "BUSYBOX_SHA256SUM=2d6fff0b2de5c034c92990d696c0d85a677b8a75931fa1ec30694fbf1f1df5c9"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 750,
+          "end": 754
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 755,
+          "end": 802
+        },
+        "value": "${WINDOWS_BASE_IMAGE}:${WINDOWS_BASE_IMAGE_TAG}"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 803,
+          "end": 806
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 807,
+            "end": 835
+          },
+          "value": "mkdir C:\\tmp && mkdir C:\\bin"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 836,
+          "end": 839
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 840,
+          "end": 855
+        },
+        "value": "BUSYBOX_VERSION"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 856,
+          "end": 859
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 860,
+          "end": 877
+        },
+        "value": "BUSYBOX_SHA256SUM"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 878,
+          "end": 881
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 882,
+              "end": 985
+            },
+            "value": "https://github.com/moby/busybox/releases/download/${BUSYBOX_VERSION}/busybox-w32-${BUSYBOX_VERSION}.exe"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 986,
+          "end": 1002
+        },
+        "value": "/bin/busybox.exe"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1003,
+          "end": 1006
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1007,
+            "end": 1173
+          },
+          "value": "powershell \\\n    if ((Get-FileHash -Path /bin/busybox.exe -Algorithm SHA256).Hash -ne $Env:BUSYBOX_SHA256SUM) { \\\n        Throw \\\"Checksum validation failed\\\" \\\n    }"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1175,
+          "end": 1178
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1179,
+            "end": 1207
+          },
+          "value": "setx /M PATH \"C:\\bin;%PATH%\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1208,
+          "end": 1211
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1212,
+            "end": 1293
+          },
+          "value": "powershell busybox.exe --list ^|%{$nul = cmd /c mklink C:\\bin\\$_.exe busybox.exe}"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 1294,
+          "end": 1297
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 1298,
+            "end": 1304
+          },
+          "value": [
+            {
+              "span": {
+                "start": 1300,
+                "end": 1302
+              },
+              "value": "sh"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

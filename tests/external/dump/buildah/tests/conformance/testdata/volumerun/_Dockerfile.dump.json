@@ -1,0 +1,151 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 28,
+          "end": 31
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 32,
+              "end": 36
+            },
+            "value": "file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 37,
+          "end": 46
+        },
+        "value": "/var/www/"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 47,
+          "end": 53
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 54,
+              "end": 62
+            },
+            "value": "/var/www"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 63,
+          "end": 66
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 67,
+              "end": 72
+            },
+            "value": "file2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 73,
+          "end": 82
+        },
+        "value": "/var/www/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 83,
+          "end": 86
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 87,
+            "end": 125
+          },
+          "value": "touch -r /var/www/file2 /var/www/file3"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 126,
+          "end": 129
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 130,
+              "end": 135
+            },
+            "value": "file4"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 136,
+          "end": 145
+        },
+        "value": "/var/www/"
+      }
+    }
+  ]
+}

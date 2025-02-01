@@ -1,0 +1,47 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 184,
+          "end": 188
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 189,
+          "end": 195
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 196,
+          "end": 199
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 200,
+            "end": 220
+          },
+          "value": "test `arch` = x86_64"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 19
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 20,
+          "end": 23
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 24,
+            "end": 32
+          },
+          "value": "touch /1"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 33,
+          "end": 36
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 37,
+          "end": 45
+        },
+        "value": "LOCAL=/1"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 46,
+          "end": 49
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 50,
+            "end": 61
+          },
+          "value": "find $LOCAL"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 62,
+          "end": 65
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 66,
+            "end": 77
+          },
+          "value": "touch hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 79,
+          "end": 83
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 84,
+          "end": 88
+        },
+        "value": "base"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 89,
+          "end": 92
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 93,
+            "end": 104
+          },
+          "value": "find $LOCAL"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 105,
+          "end": 108
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 109,
+            "end": 117
+          },
+          "value": "touch /2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 118,
+          "end": 121
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 122,
+          "end": 131
+        },
+        "value": "LOCAL2=/2"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 132,
+          "end": 135
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 136,
+            "end": 148
+          },
+          "value": "find $LOCAL2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 188,
+          "end": 192
+        }
+      },
+      "options": [
+        {
+          "flag_start": 193,
+          "name": {
+            "span": {
+              "start": 195,
+              "end": 199
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 200,
+              "end": 201
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 202,
+              "end": 207
+            },
+            "value": "hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 208,
+          "end": 209
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 211,
+          "end": 215
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 216,
+          "end": 220
+        },
+        "value": "base"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 221,
+          "end": 224
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 225,
+            "end": 236
+          },
+          "value": "find $LOCAL"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 237,
+          "end": 240
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 241,
+            "end": 245
+          },
+          "value": "ls /"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 285,
+          "end": 289
+        }
+      },
+      "options": [
+        {
+          "flag_start": 290,
+          "name": {
+            "span": {
+              "start": 292,
+              "end": 296
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 297,
+              "end": 298
+            },
+            "value": "1"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 299,
+              "end": 304
+            },
+            "value": "hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 305,
+          "end": 306
+        },
+        "value": "."
+      }
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 28
+          },
+          "value": "mkdir /hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 29,
+          "end": 35
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 36,
+              "end": 53
+            },
+            "value": "/var/lib/testdata"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 54,
+          "end": 57
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 58,
+            "end": 72
+          },
+          "value": "touch file.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 73,
+          "end": 79
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 80,
+            "end": 84
+          },
+          "value": "8080"
+        }
+      ]
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 85,
+          "end": 88
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 89,
+              "end": 146
+            },
+            "value": "https://github.com/containers/buildah/blob/main/README.md"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 147,
+          "end": 152
+        },
+        "value": "/tmp/"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 153,
+          "end": 156
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 157,
+          "end": 164
+        },
+        "value": "foo=bar"
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 12
+        },
+        "value": "my_env=a"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 14,
+          "end": 18
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 19,
+          "end": 25
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 26,
+            "end": 28
+          }
+        },
+        {
+          "span": {
+            "start": 29,
+            "end": 36
+          },
+          "value": "stage_a"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 37,
+          "end": 40
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 41,
+            "end": 50
+          },
+          "value": "/bin/true"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 52,
+          "end": 56
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 57,
+          "end": 72
+        },
+        "value": "stage_${my_env}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 73,
+            "end": 75
+          }
+        },
+        {
+          "span": {
+            "start": 76,
+            "end": 83
+          },
+          "value": "stage_b"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 84,
+          "end": 87
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 88,
+            "end": 97
+          },
+          "value": "/bin/true"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

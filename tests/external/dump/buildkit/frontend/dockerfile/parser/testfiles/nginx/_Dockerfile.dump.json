@@ -1,0 +1,235 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 17
+        },
+        "value": "ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 18,
+          "end": 23
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 24,
+          "end": 70
+        },
+        "value": "maintainer Erik Hollensbe <erik@hollensbe.org>"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 72,
+          "end": 75
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 76,
+            "end": 123
+          },
+          "value": "apt-get update && apt-get install nginx-full -y"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 124,
+          "end": 127
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 128,
+            "end": 145
+          },
+          "value": "rm -rf /etc/nginx"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 146,
+          "end": 149
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 150,
+              "end": 153
+            },
+            "value": "etc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 154,
+          "end": 164
+        },
+        "value": "/etc/nginx"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 165,
+          "end": 168
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 169,
+            "end": 198
+          },
+          "value": "chown -R root:root /etc/nginx"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 199,
+          "end": 202
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 203,
+            "end": 222
+          },
+          "value": "/usr/sbin/nginx -qt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 223,
+          "end": 226
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 227,
+            "end": 237
+          },
+          "value": "mkdir /www"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 239,
+          "end": 242
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 243,
+            "end": 262
+          },
+          "value": [
+            {
+              "span": {
+                "start": 245,
+                "end": 260
+              },
+              "value": "/usr/sbin/nginx"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 264,
+          "end": 270
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 271,
+              "end": 275
+            },
+            "value": "/www"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 276,
+          "end": 282
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 283,
+            "end": 285
+          },
+          "value": "80"
+        }
+      ]
+    }
+  ]
+}

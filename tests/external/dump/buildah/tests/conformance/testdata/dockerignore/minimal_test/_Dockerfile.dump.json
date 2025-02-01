@@ -1,0 +1,55 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 14,
+          "end": 18
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 19,
+              "end": 24
+            },
+            "value": "stuff"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 25,
+          "end": 35
+        },
+        "value": "/tmp/stuff"
+      }
+    }
+  ]
+}

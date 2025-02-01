@@ -1,0 +1,123 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 13,
+          "end": 16
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 17,
+            "end": 39
+          },
+          "value": "mkdir /var/lib/tempest"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 40,
+          "end": 43
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 44,
+            "end": 76
+          },
+          "value": "ln -sf /var/lib/tempest /tempest"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 77,
+          "end": 84
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 85,
+          "end": 93
+        },
+        "value": "/tempest"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 94,
+          "end": 97
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 98,
+            "end": 122
+          },
+          "value": "touch /etc/notareal.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 123,
+          "end": 126
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 127,
+            "end": 155
+          },
+          "value": "chmod 664 /etc/notareal.conf"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

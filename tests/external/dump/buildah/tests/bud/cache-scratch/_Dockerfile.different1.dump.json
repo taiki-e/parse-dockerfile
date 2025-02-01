@@ -1,0 +1,171 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 20
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 22,
+          "end": 26
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 27,
+          "end": 34
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 35,
+          "end": 39
+        }
+      },
+      "options": [
+        {
+          "flag_start": 40,
+          "name": {
+            "span": {
+              "start": 42,
+              "end": 46
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 47,
+              "end": 52
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 53,
+              "end": 54
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 55,
+          "end": 56
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 57,
+          "end": 60
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 61,
+            "end": 96
+          },
+          "value": "touch cache-invalidating-difference"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 97,
+          "end": 101
+        }
+      },
+      "options": [
+        {
+          "flag_start": 102,
+          "name": {
+            "span": {
+              "start": 104,
+              "end": 108
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 109,
+              "end": 114
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 115,
+              "end": 116
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 117,
+          "end": 118
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

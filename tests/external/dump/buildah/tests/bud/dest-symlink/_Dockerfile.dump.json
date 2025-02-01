@@ -1,0 +1,127 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 13,
+          "end": 16
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 17,
+          "end": 46
+        },
+        "value": "HBASE_HOME=\"/usr/local/hbase\""
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 47,
+          "end": 50
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 51,
+          "end": 78
+        },
+        "value": "HBASE_CONF_DIR=\"/etc/hbase\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 80,
+          "end": 83
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 84,
+            "end": 101
+          },
+          "value": "mkdir $HBASE_HOME"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 102,
+          "end": 105
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 106,
+            "end": 139
+          },
+          "value": "ln -s $HBASE_HOME $HBASE_CONF_DIR"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 141,
+          "end": 145
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 146,
+              "end": 156
+            },
+            "value": "Dockerfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 157,
+          "end": 172
+        },
+        "value": "$HBASE_CONF_DIR"
+      }
+    }
+  ]
+}

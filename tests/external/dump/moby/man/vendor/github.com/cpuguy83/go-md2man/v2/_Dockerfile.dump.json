@@ -1,0 +1,280 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 19
+        },
+        "value": "GO_VERSION=1.21"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 21,
+          "end": 25
+        }
+      },
+      "options": [
+        {
+          "flag_start": 26,
+          "name": {
+            "span": {
+              "start": 28,
+              "end": 36
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 37,
+              "end": 53
+            },
+            "value": "${BUILDPLATFORM}"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 54,
+          "end": 74
+        },
+        "value": "golang:${GO_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 75,
+            "end": 77
+          }
+        },
+        {
+          "span": {
+            "start": 78,
+            "end": 83
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 84,
+          "end": 88
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 89,
+              "end": 90
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 91,
+          "end": 128
+        },
+        "value": "/go/src/github.com/cpuguy83/go-md2man"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 129,
+          "end": 136
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 137,
+          "end": 174
+        },
+        "value": "/go/src/github.com/cpuguy83/go-md2man"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 175,
+          "end": 178
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 179,
+          "end": 212
+        },
+        "value": "TARGETOS TARGETARCH TARGETVARIANT"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 213,
+          "end": 216
+        }
+      },
+      "options": [
+        {
+          "flag_start": 223,
+          "name": {
+            "span": {
+              "start": 225,
+              "end": 230
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 231,
+              "end": 260
+            },
+            "value": "type=cache,target=/go/pkg/mod"
+          }
+        },
+        {
+          "flag_start": 267,
+          "name": {
+            "span": {
+              "start": 269,
+              "end": 274
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 275,
+              "end": 314
+            },
+            "value": "type=cache,target=/root/.cache/go-build"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 321,
+            "end": 331
+          },
+          "value": "make build"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 333,
+          "end": 337
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 338,
+          "end": 345
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 346,
+          "end": 350
+        }
+      },
+      "options": [
+        {
+          "flag_start": 351,
+          "name": {
+            "span": {
+              "start": 353,
+              "end": 357
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 358,
+              "end": 363
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 364,
+              "end": 415
+            },
+            "value": "/go/src/github.com/cpuguy83/go-md2man/bin/go-md2man"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 416,
+          "end": 426
+        },
+        "value": "/go-md2man"
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 427,
+          "end": 437
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 438,
+            "end": 452
+          },
+          "value": [
+            {
+              "span": {
+                "start": 440,
+                "end": 450
+              },
+              "value": "/go-md2man"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

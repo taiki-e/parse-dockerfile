@@ -1,0 +1,768 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 49
+        },
+        "value": "GO_VERSION=1.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 50,
+          "end": 53
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 54,
+          "end": 73
+        },
+        "value": "ALPINE_VERSION=3.21"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 75,
+          "end": 79
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 80,
+          "end": 124
+        },
+        "value": "golang:${GO_VERSION}-alpine${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 125,
+            "end": 127
+          }
+        },
+        {
+          "span": {
+            "start": 128,
+            "end": 136
+          },
+          "value": "golatest"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 138,
+          "end": 142
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 143,
+          "end": 151
+        },
+        "value": "golatest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 152,
+            "end": 154
+          }
+        },
+        {
+          "span": {
+            "start": 155,
+            "end": 163
+          },
+          "value": "buildctl"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 164,
+          "end": 171
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 172,
+          "end": 176
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 177,
+          "end": 180
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 181,
+          "end": 194
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 195,
+          "end": 198
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 199,
+          "end": 213
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 214,
+          "end": 217
+        }
+      },
+      "options": [
+        {
+          "flag_start": 218,
+          "name": {
+            "span": {
+              "start": 220,
+              "end": 225
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 226,
+              "end": 234
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 239,
+          "name": {
+            "span": {
+              "start": 241,
+              "end": 246
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 247,
+              "end": 277
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 282,
+          "name": {
+            "span": {
+              "start": 284,
+              "end": 289
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 290,
+              "end": 319
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 324,
+            "end": 380
+          },
+          "value": "go build -mod=vendor -o /usr/bin/buildctl ./cmd/buildctl"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 382,
+          "end": 386
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 387,
+          "end": 395
+        },
+        "value": "golatest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 396,
+            "end": 398
+          }
+        },
+        {
+          "span": {
+            "start": 399,
+            "end": 406
+          },
+          "value": "docsgen"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 407,
+          "end": 414
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 415,
+          "end": 419
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 420,
+          "end": 423
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 424,
+          "end": 437
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 438,
+          "end": 441
+        }
+      },
+      "options": [
+        {
+          "flag_start": 442,
+          "name": {
+            "span": {
+              "start": 444,
+              "end": 449
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 450,
+              "end": 458
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 463,
+          "name": {
+            "span": {
+              "start": 465,
+              "end": 470
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 471,
+              "end": 501
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 506,
+          "name": {
+            "span": {
+              "start": 508,
+              "end": 513
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 514,
+              "end": 543
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 548,
+            "end": 603
+          },
+          "value": "go build -mod=vendor -o /out/docsgen ./docs/generate.go"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 605,
+          "end": 609
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 610,
+          "end": 616
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 617,
+            "end": 619
+          }
+        },
+        {
+          "span": {
+            "start": 620,
+            "end": 623
+          },
+          "value": "gen"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 624,
+          "end": 627
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 628,
+            "end": 656
+          },
+          "value": "apk add --no-cache rsync git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 657,
+          "end": 664
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 665,
+          "end": 669
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 670,
+          "end": 674
+        }
+      },
+      "options": [
+        {
+          "flag_start": 675,
+          "name": {
+            "span": {
+              "start": 677,
+              "end": 681
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 682,
+              "end": 689
+            },
+            "value": "docsgen"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 690,
+              "end": 702
+            },
+            "value": "/out/docsgen"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 703,
+          "end": 711
+        },
+        "value": "/usr/bin"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 712,
+          "end": 716
+        }
+      },
+      "options": [
+        {
+          "flag_start": 717,
+          "name": {
+            "span": {
+              "start": 719,
+              "end": 723
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 724,
+              "end": 732
+            },
+            "value": "buildctl"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 733,
+              "end": 750
+            },
+            "value": "/usr/bin/buildctl"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 751,
+          "end": 760
+        },
+        "value": "/usr/bin/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 761,
+          "end": 764
+        }
+      },
+      "options": [
+        {
+          "flag_start": 765,
+          "name": {
+            "span": {
+              "start": 767,
+              "end": 772
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 773,
+              "end": 788
+            },
+            "value": "target=/context"
+          }
+        },
+        {
+          "flag_start": 793,
+          "name": {
+            "span": {
+              "start": 795,
+              "end": 800
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 801,
+              "end": 820
+            },
+            "value": "target=.,type=tmpfs"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 826,
+            "end": 826
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 827,
+            "end": 893
+          },
+          "expand": true,
+          "value": "set -e\nrsync -a /context/. .\ndocsgen\nmkdir /out\ncp -r docs/* /out\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 898,
+          "end": 902
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 903,
+          "end": 910
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 911,
+            "end": 913
+          }
+        },
+        {
+          "span": {
+            "start": 914,
+            "end": 920
+          },
+          "value": "update"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 921,
+          "end": 925
+        }
+      },
+      "options": [
+        {
+          "flag_start": 926,
+          "name": {
+            "span": {
+              "start": 928,
+              "end": 932
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 933,
+              "end": 936
+            },
+            "value": "gen"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 937,
+              "end": 941
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 942,
+          "end": 943
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 945,
+          "end": 949
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 950,
+          "end": 953
+        },
+        "value": "gen"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 954,
+            "end": 956
+          }
+        },
+        {
+          "span": {
+            "start": 957,
+            "end": 965
+          },
+          "value": "validate"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 966,
+          "end": 969
+        }
+      },
+      "options": [
+        {
+          "flag_start": 970,
+          "name": {
+            "span": {
+              "start": 972,
+              "end": 977
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 978,
+              "end": 993
+            },
+            "value": "target=/context"
+          }
+        },
+        {
+          "flag_start": 998,
+          "name": {
+            "span": {
+              "start": 1000,
+              "end": 1005
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1006,
+              "end": 1025
+            },
+            "value": "target=.,type=tmpfs"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1031,
+            "end": 1031
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1032,
+            "end": 1279
+          },
+          "expand": true,
+          "value": "set -e\nrsync -a /context/. .\ngit add -A\nrm -rf docs/*\ncp -rf /out/* ./docs/\nif [ -n \"$(git status --porcelain -- docs/)\" ]; then\n  echo >&2 'ERROR: Docs result differs. Please update with \"make docs\"'\n  git status --porcelain -- docs/\n  exit 1\nfi\n"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,570 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 49
+        },
+        "value": "GO_VERSION=1.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 50,
+          "end": 53
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 54,
+          "end": 73
+        },
+        "value": "ALPINE_VERSION=3.21"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 75,
+          "end": 79
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 80,
+          "end": 124
+        },
+        "value": "golang:${GO_VERSION}-alpine${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 125,
+            "end": 127
+          }
+        },
+        {
+          "span": {
+            "start": 128,
+            "end": 136
+          },
+          "value": "golatest"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 138,
+          "end": 142
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 143,
+          "end": 151
+        },
+        "value": "golatest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 152,
+            "end": 154
+          }
+        },
+        {
+          "span": {
+            "start": 155,
+            "end": 162
+          },
+          "value": "docsgen"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 163,
+          "end": 170
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 171,
+          "end": 175
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 176,
+          "end": 179
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 180,
+          "end": 193
+        },
+        "value": "CGO_ENABLED=0"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 194,
+          "end": 197
+        }
+      },
+      "options": [
+        {
+          "flag_start": 198,
+          "name": {
+            "span": {
+              "start": 200,
+              "end": 205
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 206,
+              "end": 214
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 219,
+          "name": {
+            "span": {
+              "start": 221,
+              "end": 226
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 227,
+              "end": 257
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 262,
+          "name": {
+            "span": {
+              "start": 264,
+              "end": 269
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 270,
+              "end": 299
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 304,
+            "end": 381
+          },
+          "value": "go build -mod=vendor -o /out/docsgen ./frontend/dockerfile/linter/generate.go"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 383,
+          "end": 387
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 388,
+          "end": 394
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 395,
+            "end": 397
+          }
+        },
+        {
+          "span": {
+            "start": 398,
+            "end": 401
+          },
+          "value": "gen"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 402,
+          "end": 405
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 406,
+            "end": 434
+          },
+          "value": "apk add --no-cache rsync git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 435,
+          "end": 442
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 443,
+          "end": 447
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 448,
+          "end": 452
+        }
+      },
+      "options": [
+        {
+          "flag_start": 453,
+          "name": {
+            "span": {
+              "start": 455,
+              "end": 459
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 460,
+              "end": 467
+            },
+            "value": "docsgen"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 468,
+              "end": 480
+            },
+            "value": "/out/docsgen"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 481,
+          "end": 489
+        },
+        "value": "/usr/bin"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 490,
+          "end": 493
+        }
+      },
+      "options": [
+        {
+          "flag_start": 494,
+          "name": {
+            "span": {
+              "start": 496,
+              "end": 501
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 502,
+              "end": 517
+            },
+            "value": "target=/context"
+          }
+        },
+        {
+          "flag_start": 522,
+          "name": {
+            "span": {
+              "start": 524,
+              "end": 529
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 530,
+              "end": 549
+            },
+            "value": "target=.,type=tmpfs"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 555,
+            "end": 555
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 556,
+            "end": 660
+          },
+          "expand": true,
+          "value": "set -ex\nrsync -a /context/. .\ncd frontend/dockerfile/linter\ndocsgen ./dist\nmkdir /out\ncp -r dist/* /out\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 665,
+          "end": 669
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 670,
+          "end": 677
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 678,
+            "end": 680
+          }
+        },
+        {
+          "span": {
+            "start": 681,
+            "end": 687
+          },
+          "value": "update"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 688,
+          "end": 692
+        }
+      },
+      "options": [
+        {
+          "flag_start": 693,
+          "name": {
+            "span": {
+              "start": 695,
+              "end": 699
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 700,
+              "end": 703
+            },
+            "value": "gen"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 704,
+              "end": 708
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 709,
+          "end": 710
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 712,
+          "end": 716
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 717,
+          "end": 720
+        },
+        "value": "gen"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 721,
+            "end": 723
+          }
+        },
+        {
+          "span": {
+            "start": 724,
+            "end": 732
+          },
+          "value": "validate"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 733,
+          "end": 736
+        }
+      },
+      "options": [
+        {
+          "flag_start": 737,
+          "name": {
+            "span": {
+              "start": 739,
+              "end": 744
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 745,
+              "end": 760
+            },
+            "value": "target=/context"
+          }
+        },
+        {
+          "flag_start": 765,
+          "name": {
+            "span": {
+              "start": 767,
+              "end": 772
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 773,
+              "end": 792
+            },
+            "value": "target=.,type=tmpfs"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 798,
+            "end": 798
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 799,
+            "end": 1172
+          },
+          "expand": true,
+          "value": "set -e\nrsync -a /context/. .\ngit add -A\nrm -rf frontend/dockerfile/docs/rules/*\ncp -rf /out/* ./frontend/dockerfile/docs/rules/\nif [ -n \"$(git status --porcelain -- frontend/dockerfile/docs/rules/)\" ]; then\n  echo >&2 'ERROR: Dockerfile docs result differs. Please update with \"make docs-dockerfile\"'\n  git status --porcelain -- frontend/dockerfile/docs/rules/\n  exit 1\nfi\n"
+        }
+      ]
+    }
+  ]
+}

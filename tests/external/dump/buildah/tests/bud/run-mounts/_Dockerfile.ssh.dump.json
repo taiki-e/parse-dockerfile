@@ -1,0 +1,85 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 13,
+          "end": 16
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 17,
+            "end": 39
+          },
+          "value": "apk add openssh-client"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 41,
+          "end": 44
+        }
+      },
+      "options": [
+        {
+          "flag_start": 45,
+          "name": {
+            "span": {
+              "start": 47,
+              "end": 52
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 53,
+              "end": 72
+            },
+            "value": "type=ssh,id=default"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 73,
+            "end": 90
+          },
+          "value": "ssh-add -l -E md5"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

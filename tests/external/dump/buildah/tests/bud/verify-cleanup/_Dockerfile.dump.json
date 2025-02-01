@@ -1,0 +1,438 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 39
+          },
+          "value": "mkdir subdir"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 40,
+          "end": 44
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 45,
+              "end": 48
+            },
+            "value": "hey"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 49,
+          "end": 50
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 52,
+          "end": 56
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 57,
+          "end": 63
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 64,
+          "end": 67
+        }
+      },
+      "options": [
+        {
+          "flag_start": 69,
+          "name": {
+            "span": {
+              "start": 71,
+              "end": 76
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 77,
+              "end": 106
+            },
+            "value": "type=bind,source=.,dst=/tmp,z"
+          }
+        },
+        {
+          "flag_start": 114,
+          "name": {
+            "span": {
+              "start": 116,
+              "end": 121
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 122,
+              "end": 145
+            },
+            "value": "type=tmpfs,dst=/var/tmp"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 152,
+            "end": 164
+          },
+          "value": "cat /tmp/hey"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 165,
+          "end": 168
+        }
+      },
+      "options": [
+        {
+          "flag_start": 169,
+          "name": {
+            "span": {
+              "start": 171,
+              "end": 176
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 177,
+              "end": 217
+            },
+            "value": "type=cache,from=builder,target=/cachedir"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 218,
+            "end": 235
+          },
+          "value": "cat /cachedir/hey"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 236,
+          "end": 239
+        }
+      },
+      "options": [
+        {
+          "flag_start": 240,
+          "name": {
+            "span": {
+              "start": 242,
+              "end": 247
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 248,
+              "end": 289
+            },
+            "value": "type=secret,id=secret-foo,dst=secret1.txt"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 290,
+            "end": 305
+          },
+          "value": "cat secret1.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 306,
+          "end": 309
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 310,
+          "end": 320
+        },
+        "value": "TMP=\"/tmp\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 321,
+          "end": 324
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 325,
+          "end": 342
+        },
+        "value": "VARTMP=\"/var/tmp\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 343,
+          "end": 346
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 347,
+          "end": 367
+        },
+        "value": "CACHEDIR=\"/cachedir\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 368,
+          "end": 371
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 372,
+          "end": 390
+        },
+        "value": "TESTDIR=\"/testdir\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 391,
+          "end": 394
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 395,
+          "end": 419
+        },
+        "value": "SECRETFILE=\"secret1.txt\""
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 420,
+          "end": 423
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 424,
+            "end": 470
+          },
+          "value": "[ -d \"/tmp\" ] && echo \"Directory $TMP exists.\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 471,
+          "end": 474
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 475,
+            "end": 528
+          },
+          "value": "[ -d \"/var/tmp\" ] && echo \"Directory $VARTMP exists.\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 587,
+          "end": 590
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 591,
+            "end": 656
+          },
+          "value": "[ ! -d \"/testdir\" ] && echo \"Directory $TESTDIR DOES NOT exists.\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 657,
+          "end": 660
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 661,
+            "end": 734
+          },
+          "value": "[ ! -d \"/cachedir\" ] && echo \"Cache Directory $CACHEDIR DOES NOT exists.\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 735,
+          "end": 738
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 739,
+            "end": 812
+          },
+          "value": "[ ! -f \"secret1.txt\" ] && echo \"Secret File $SECRETFILE DOES NOT exists.\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 832,
+          "end": 835
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 836,
+            "end": 848
+          },
+          "value": "cat /tmp/hey"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

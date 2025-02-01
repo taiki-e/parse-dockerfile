@@ -1,0 +1,544 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 52,
+          "end": 56
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 57,
+          "end": 64
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 65,
+            "end": 67
+          }
+        },
+        {
+          "span": {
+            "start": 68,
+            "end": 74
+          },
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 75,
+          "end": 78
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 79,
+            "end": 275
+          },
+          "value": "touch /file && chown 100:200 /file \\\n && mkdir -p /dir/subdir \\\n && touch /dir/subdir/nestedfile \\\n && chown 100:200 /dir \\\n && chown 101:201 /dir/subdir \\\n && chown 102:202 /dir/subdir/nestedfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 277,
+          "end": 281
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 282,
+          "end": 289
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 290,
+            "end": 292
+          }
+        },
+        {
+          "span": {
+            "start": 293,
+            "end": 302
+          },
+          "value": "test_base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 303,
+          "end": 306
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 307,
+            "end": 508
+          },
+          "value": "mkdir -p /existingdir/existingsubdir \\\n && touch /existingdir/existingfile \\\n && chown 500:600 /existingdir \\\n && chown 501:601 /existingdir/existingsubdir \\\n && chown 501:601 /existingdir/existingfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 546,
+          "end": 550
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 551,
+          "end": 560
+        },
+        "value": "test_base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 561,
+            "end": 563
+          }
+        },
+        {
+          "span": {
+            "start": 564,
+            "end": 573
+          },
+          "value": "copy_from"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 574,
+          "end": 578
+        }
+      },
+      "options": [
+        {
+          "flag_start": 579,
+          "name": {
+            "span": {
+              "start": 581,
+              "end": 585
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 586,
+              "end": 592
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 593,
+              "end": 598
+            },
+            "value": "/file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 599,
+          "end": 600
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 742,
+          "end": 746
+        }
+      },
+      "options": [
+        {
+          "flag_start": 747,
+          "name": {
+            "span": {
+              "start": 749,
+              "end": 753
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 754,
+              "end": 760
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 761,
+              "end": 765
+            },
+            "value": "/dir"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 766,
+          "end": 770
+        },
+        "value": "/dir"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 870,
+          "end": 874
+        }
+      },
+      "options": [
+        {
+          "flag_start": 875,
+          "name": {
+            "span": {
+              "start": 877,
+              "end": 881
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 882,
+              "end": 888
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 889,
+              "end": 895
+            },
+            "value": "/dir/."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 896,
+          "end": 908
+        },
+        "value": "/existingdir"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 910,
+          "end": 913
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 914,
+            "end": 2594
+          },
+          "value": "e=\"100:200\"; p=\"/file\"                         ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"0:0\";     p=\"/dir\"                          ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"101:201\"; p=\"/dir/subdir\"                   ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"102:202\"; p=\"/dir/subdir/nestedfile\"        ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n# Existing files and directories ownership should not be modified\n && e=\"500:600\"; p=\"/existingdir\"                  ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"501:601\"; p=\"/existingdir/existingsubdir\"   ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"501:601\"; p=\"/existingdir/existingfile\"     ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n# But new files and directories should maintain their ownership\n && e=\"101:201\"; p=\"/existingdir/subdir\"           ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"102:202\"; p=\"/existingdir/subdir/nestedfile\"; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2648,
+          "end": 2652
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2653,
+          "end": 2662
+        },
+        "value": "test_base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2663,
+            "end": 2665
+          }
+        },
+        {
+          "span": {
+            "start": 2666,
+            "end": 2683
+          },
+          "value": "copy_from_chowned"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2684,
+          "end": 2688
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2689,
+          "name": {
+            "span": {
+              "start": 2691,
+              "end": 2695
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2696,
+              "end": 2702
+            },
+            "value": "source"
+          }
+        },
+        {
+          "flag_start": 2703,
+          "name": {
+            "span": {
+              "start": 2705,
+              "end": 2710
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 2711,
+              "end": 2718
+            },
+            "value": "300:400"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2719,
+              "end": 2724
+            },
+            "value": "/file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2725,
+          "end": 2726
+        },
+        "value": "."
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2868,
+          "end": 2872
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2873,
+          "name": {
+            "span": {
+              "start": 2875,
+              "end": 2879
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2880,
+              "end": 2886
+            },
+            "value": "source"
+          }
+        },
+        {
+          "flag_start": 2887,
+          "name": {
+            "span": {
+              "start": 2889,
+              "end": 2894
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 2895,
+              "end": 2902
+            },
+            "value": "300:400"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2903,
+              "end": 2907
+            },
+            "value": "/dir"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2908,
+          "end": 2912
+        },
+        "value": "/dir"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3009,
+          "end": 3013
+        }
+      },
+      "options": [
+        {
+          "flag_start": 3014,
+          "name": {
+            "span": {
+              "start": 3016,
+              "end": 3020
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 3021,
+              "end": 3027
+            },
+            "value": "source"
+          }
+        },
+        {
+          "flag_start": 3028,
+          "name": {
+            "span": {
+              "start": 3030,
+              "end": 3035
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 3036,
+              "end": 3043
+            },
+            "value": "300:400"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3044,
+              "end": 3050
+            },
+            "value": "/dir/."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3051,
+          "end": 3063
+        },
+        "value": "/existingdir"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 3065,
+          "end": 3068
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 3069,
+            "end": 4735
+          },
+          "value": "e=\"300:400\"; p=\"/file\"                         ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"300:400\"; p=\"/dir\"                          ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"300:400\"; p=\"/dir/subdir\"                   ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"300:400\"; p=\"/dir/subdir/nestedfile\"        ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n# Existing files and directories ownership should not be modified\n && e=\"500:600\"; p=\"/existingdir\"                  ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"501:601\"; p=\"/existingdir/existingsubdir\"   ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"501:601\"; p=\"/existingdir/existingfile\"     ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n# But new files and directories should be chowned\n && e=\"300:400\"; p=\"/existingdir/subdir\"           ; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi \\\n && e=\"300:400\"; p=\"/existingdir/subdir/nestedfile\"; a=`stat -c \"%u:%g\" \"$p\"`; if [ \"$a\" != \"$e\" ]; then echo \"incorrect ownership on $p. expected $e, got $a\"; exit 1; fi"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

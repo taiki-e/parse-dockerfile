@@ -1,0 +1,131 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 53,
+          "end": 57
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 58,
+          "end": 64
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 65,
+          "end": 68
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 69,
+            "end": 101
+          },
+          "value": "ln -sf /var/lib/tempest /tempest"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 102,
+          "end": 109
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 110,
+          "end": 118
+        },
+        "value": "/tempest"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 119,
+          "end": 122
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 123,
+            "end": 147
+          },
+          "value": "touch /etc/notareal.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 148,
+          "end": 151
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 152,
+            "end": 180
+          },
+          "value": "chmod 664 /etc/notareal.conf"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 181,
+          "end": 185
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 186,
+              "end": 198
+            },
+            "value": "Dockerfile-2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 199,
+          "end": 213
+        },
+        "value": "./Dockerfile-2"
+      }
+    }
+  ]
+}

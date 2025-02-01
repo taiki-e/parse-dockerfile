@@ -1,0 +1,378 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 49
+        },
+        "value": "GO_VERSION=1.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 50,
+          "end": 53
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 54,
+          "end": 80
+        },
+        "value": "GOVULNCHECK_VERSION=v1.1.3"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 81,
+          "end": 84
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 85,
+          "end": 98
+        },
+        "value": "FORMAT=\"text\""
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 100,
+          "end": 104
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 105,
+          "end": 132
+        },
+        "value": "golang:${GO_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 133,
+            "end": 135
+          }
+        },
+        {
+          "span": {
+            "start": 136,
+            "end": 140
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 141,
+          "end": 148
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 149,
+          "end": 181
+        },
+        "value": "/go/src/github.com/moby/buildkit"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 182,
+          "end": 185
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 186,
+            "end": 217
+          },
+          "value": "apk add --no-cache jq moreutils"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 218,
+          "end": 221
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 222,
+          "end": 241
+        },
+        "value": "GOVULNCHECK_VERSION"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 242,
+          "end": 245
+        }
+      },
+      "options": [
+        {
+          "flag_start": 246,
+          "name": {
+            "span": {
+              "start": 248,
+              "end": 253
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 254,
+              "end": 284
+            },
+            "value": "type=cache,target=/root/.cache"
+          }
+        },
+        {
+          "flag_start": 291,
+          "name": {
+            "span": {
+              "start": 293,
+              "end": 298
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 299,
+              "end": 328
+            },
+            "value": "type=cache,target=/go/pkg/mod"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 335,
+            "end": 400
+          },
+          "value": "go install golang.org/x/vuln/cmd/govulncheck@$GOVULNCHECK_VERSION"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 402,
+          "end": 406
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 407,
+          "end": 411
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 412,
+            "end": 414
+          }
+        },
+        {
+          "span": {
+            "start": 415,
+            "end": 418
+          },
+          "value": "run"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 419,
+          "end": 422
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 423,
+          "end": 429
+        },
+        "value": "FORMAT"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 430,
+          "end": 433
+        }
+      },
+      "options": [
+        {
+          "flag_start": 434,
+          "name": {
+            "span": {
+              "start": 436,
+              "end": 441
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 442,
+              "end": 460
+            },
+            "value": "type=bind,target=."
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 466,
+            "end": 466
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 467,
+            "end": 1022
+          },
+          "expand": true,
+          "value": "  set -ex\n  mkdir /out\n  govulncheck -format ${FORMAT} ./... | tee /out/govulncheck.out\n  if [ \"${FORMAT}\" = \"sarif\" ]; then\n    # Make sure \"results\" field is defined in SARIF output otherwise GitHub Code Scanning\n    # will fail when uploading report with \"Invalid SARIF. Missing 'results' array in run.\"\n    # Relates to https://github.com/golang/vuln/blob/ffdef74cc44d7eb71931d8d414c478b966812488/internal/sarif/sarif.go#L69\n    jq '(.runs[] | select(.results == null) | .results) |= []' /out/govulncheck.out | tee >(sponge /out/govulncheck.out)\n  fi\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1027,
+          "end": 1031
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1032,
+          "end": 1039
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1040,
+            "end": 1042
+          }
+        },
+        {
+          "span": {
+            "start": 1043,
+            "end": 1049
+          },
+          "value": "output"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1050,
+          "end": 1054
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1055,
+          "name": {
+            "span": {
+              "start": 1057,
+              "end": 1061
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1062,
+              "end": 1065
+            },
+            "value": "run"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1066,
+              "end": 1070
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1071,
+          "end": 1072
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

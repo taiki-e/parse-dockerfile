@@ -1,0 +1,145 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 27,
+            "end": 29
+          }
+        },
+        {
+          "span": {
+            "start": 30,
+            "end": 34
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 35,
+          "end": 38
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 39,
+            "end": 79
+          },
+          "value": "mkdir -p /a && touch -t @1485449953 /a/1"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 80,
+          "end": 84
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 85,
+          "end": 106
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 107,
+          "end": 111
+        }
+      },
+      "options": [
+        {
+          "flag_start": 112,
+          "name": {
+            "span": {
+              "start": 114,
+              "end": 118
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 119,
+              "end": 123
+            },
+            "value": "base"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 124,
+              "end": 128
+            },
+            "value": "/a/1"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 129,
+          "end": 135
+        },
+        "value": "/a/b/c"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 136,
+          "end": 139
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 140,
+            "end": 172
+          },
+          "value": "ls -al /a/b/c && ! ls -al /a/b/1"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,1215 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 224,
+          "end": 228
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 229,
+          "end": 235
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 237,
+          "end": 240
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 241,
+              "end": 245
+            },
+            "value": "/foo"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 246,
+          "end": 250
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 251,
+          "end": 254
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 266,
+              "end": 266
+            },
+            "expand": true,
+            "value": ""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 261,
+          "end": 265
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 270,
+          "end": 273
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 285,
+              "end": 293
+            },
+            "expand": true,
+            "value": "TESTING\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 280,
+          "end": 284
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 297,
+          "end": 300
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 313,
+              "end": 322
+            },
+            "expand": true,
+            "value": "TESTING\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 308,
+          "end": 312
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 326,
+          "end": 329
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 343,
+              "end": 351
+            },
+            "expand": false,
+            "value": "TESTING\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 338,
+          "end": 342
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 355,
+          "end": 358
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 378,
+              "end": 401
+            },
+            "expand": true,
+            "value": "this is the first file\n"
+          }
+        },
+        {
+          "here_doc": {
+            "span": {
+              "start": 406,
+              "end": 430
+            },
+            "expand": true,
+            "value": "this is the second file\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 373,
+          "end": 377
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 435,
+          "end": 438
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 458,
+              "end": 473
+            },
+            "expand": true,
+            "value": "this is inline\n"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 445,
+              "end": 452
+            },
+            "value": "foo.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 453,
+          "end": 457
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 477,
+          "end": 480
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 495,
+              "end": 504
+            },
+            "expand": true,
+            "value": "\"quotes\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 487,
+          "end": 494
+        },
+        "value": "/quotes"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 509,
+          "end": 513
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 514,
+              "end": 518
+            },
+            "value": "/foo"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 519,
+          "end": 523
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 524,
+          "end": 528
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 540,
+              "end": 540
+            },
+            "expand": true,
+            "value": ""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 535,
+          "end": 539
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 544,
+          "end": 548
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 560,
+              "end": 568
+            },
+            "expand": true,
+            "value": "TESTING\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 555,
+          "end": 559
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 572,
+          "end": 576
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 589,
+              "end": 598
+            },
+            "expand": true,
+            "value": "TESTING\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 584,
+          "end": 588
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 602,
+          "end": 606
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 620,
+              "end": 628
+            },
+            "expand": false,
+            "value": "TESTING\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 615,
+          "end": 619
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 632,
+          "end": 636
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 656,
+              "end": 679
+            },
+            "expand": true,
+            "value": "this is the first file\n"
+          }
+        },
+        {
+          "here_doc": {
+            "span": {
+              "start": 684,
+              "end": 708
+            },
+            "expand": true,
+            "value": "this is the second file\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 651,
+          "end": 655
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 713,
+          "end": 717
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 737,
+              "end": 752
+            },
+            "expand": true,
+            "value": "this is inline\n"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 724,
+              "end": 731
+            },
+            "value": "foo.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 732,
+          "end": 736
+        },
+        "value": "/bar"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 756,
+          "end": 760
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 775,
+              "end": 784
+            },
+            "expand": true,
+            "value": "\"quotes\"\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 767,
+          "end": 774
+        },
+        "value": "/quotes"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 789,
+          "end": 792
+        }
+      },
+      "options": [],
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 793,
+            "end": 804
+          },
+          "value": [
+            {
+              "span": {
+                "start": 795,
+                "end": 797
+              },
+              "value": "ls"
+            },
+            {
+              "span": {
+                "start": 801,
+                "end": 802
+              },
+              "value": "/"
+            }
+          ]
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 805,
+          "end": 808
+        }
+      },
+      "options": [],
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 809,
+            "end": 818
+          },
+          "value": [
+            {
+              "span": {
+                "start": 811,
+                "end": 816
+              },
+              "value": "<<EOF"
+            }
+          ]
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 819,
+          "end": 822
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 823,
+            "end": 827
+          },
+          "value": "ls /"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 828,
+          "end": 831
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 837,
+            "end": 837
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 838,
+            "end": 850
+          },
+          "expand": true,
+          "value": "ls /\nwhoami\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 861,
+          "end": 864
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 872,
+            "end": 881
+          },
+          "value": " | python"
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 882,
+            "end": 912
+          },
+          "expand": false,
+          "value": "print(\"hello\")\nprint(\"world\")\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 916,
+          "end": 919
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 926,
+            "end": 926
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 927,
+            "end": 938
+          },
+          "expand": true,
+          "value": "echo test\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1167,
+          "end": 1171
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1172,
+          "end": 1182
+        },
+        "value": "alpine:3.6"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1184,
+          "end": 1187
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1188,
+          "end": 1195
+        },
+        "value": "NAME=me"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1197,
+          "end": 1200
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1201,
+            "end": 1203
+          },
+          "value": "ls"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1270,
+          "end": 1273
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1281,
+            "end": 1281
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1282,
+            "end": 1282
+          },
+          "expand": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1358,
+          "end": 1361
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1362,
+            "end": 1375
+          },
+          "value": "\"<<NOHEREDOC\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1377,
+          "end": 1380
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1389,
+            "end": 1389
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1390,
+            "end": 1400
+          },
+          "expand": true,
+          "value": "\tfoo\n\tbar\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1408,
+          "end": 1411
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1423,
+            "end": 1423
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1424,
+            "end": 1435
+          },
+          "expand": true,
+          "value": "baz\nquux\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1445,
+          "end": 1448
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1461,
+            "end": 1461
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1462,
+            "end": 1474
+          },
+          "expand": true,
+          "value": "baz\nquux\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1485,
+          "end": 1488
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1498,
+            "end": 1498
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1499,
+            "end": 1513
+          },
+          "expand": true,
+          "value": "expand $NAME\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1521,
+          "end": 1524
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1538,
+            "end": 1538
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1539,
+            "end": 1560
+          },
+          "expand": false,
+          "value": "do not expand $NAME\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1570,
+          "end": 1573
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1580,
+            "end": 1580
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1581,
+            "end": 1611
+          },
+          "expand": true,
+          "value": "echo hello world\necho foo bar\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1617,
+          "end": 1620
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1630,
+            "end": 1630
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1631,
+            "end": 1699
+          },
+          "expand": true,
+          "value": "# internal comment\necho hello world\necho foo bar # trailing comment\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1708,
+          "end": 1711
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1712,
+          "name": {
+            "span": {
+              "start": 1714,
+              "end": 1719
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1720,
+              "end": 1742
+            },
+            "value": "type=cache,target=/foo"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1750,
+            "end": 1750
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1751,
+            "end": 1762
+          },
+          "expand": true,
+          "value": "echo hello\n"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1769,
+          "end": 1773
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 1796,
+              "end": 1806
+            },
+            "expand": true,
+            "value": "content 1\n"
+          }
+        },
+        {
+          "here_doc": {
+            "span": {
+              "start": 1812,
+              "end": 1822
+            },
+            "expand": true,
+            "value": "content 2\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1790,
+          "end": 1795
+        },
+        "value": "/dest"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1829,
+          "end": 1833
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 1848,
+              "end": 1860
+            },
+            "expand": true,
+            "value": "\"foo\"\n'bar'\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1840,
+          "end": 1847
+        },
+        "value": "/quotes"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1865,
+          "end": 1869
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 1884,
+              "end": 1886
+            },
+            "expand": true,
+            "value": "Y\n"
+          }
+        },
+        {
+          "here_doc": {
+            "span": {
+              "start": 1888,
+              "end": 1890
+            },
+            "expand": true,
+            "value": "X\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1878,
+          "end": 1883
+        },
+        "value": "/dest"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1900,
+          "end": 1903
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1913,
+            "end": 1921
+          },
+          "value": " python3"
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1922,
+            "end": 1943
+          },
+          "expand": true,
+          "value": "print('hello world')\n"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1952,
+          "end": 1956
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 1974,
+              "end": 1986
+            },
+            "expand": true,
+            "value": "hello world\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1968,
+          "end": 1973
+        },
+        "value": "/dest"
+      }
+    }
+  ]
+}

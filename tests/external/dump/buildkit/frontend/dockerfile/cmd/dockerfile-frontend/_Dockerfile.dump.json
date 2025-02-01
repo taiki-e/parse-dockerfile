@@ -1,0 +1,677 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 42
+        },
+        "value": "docker/dockerfile-upstream:master"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 44,
+          "end": 47
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 48,
+          "end": 63
+        },
+        "value": "GO_VERSION=1.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 64,
+          "end": 67
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 68,
+          "end": 87
+        },
+        "value": "ALPINE_VERSION=3.21"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 88,
+          "end": 91
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 92,
+          "end": 108
+        },
+        "value": "XX_VERSION=1.6.1"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 149,
+          "end": 153
+        }
+      },
+      "options": [
+        {
+          "flag_start": 154,
+          "name": {
+            "span": {
+              "start": 156,
+              "end": 164
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 165,
+              "end": 179
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 180,
+          "end": 207
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 208,
+            "end": 210
+          }
+        },
+        {
+          "span": {
+            "start": 211,
+            "end": 213
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 215,
+          "end": 219
+        }
+      },
+      "options": [
+        {
+          "flag_start": 220,
+          "name": {
+            "span": {
+              "start": 222,
+              "end": 230
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 231,
+              "end": 245
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 246,
+          "end": 290
+        },
+        "value": "golang:${GO_VERSION}-alpine${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 291,
+            "end": 293
+          }
+        },
+        {
+          "span": {
+            "start": 294,
+            "end": 298
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 299,
+          "end": 302
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 303,
+            "end": 319
+          },
+          "value": "apk add git bash"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 320,
+          "end": 324
+        }
+      },
+      "options": [
+        {
+          "flag_start": 325,
+          "name": {
+            "span": {
+              "start": 327,
+              "end": 331
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 332,
+              "end": 334
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 335,
+              "end": 336
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 337,
+          "end": 338
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 339,
+          "end": 346
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 347,
+          "end": 351
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 352,
+          "end": 355
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 356,
+          "end": 375
+        },
+        "value": "GOFLAGS=-mod=vendor"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 377,
+          "end": 381
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 382,
+          "end": 386
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 387,
+            "end": 389
+          }
+        },
+        {
+          "span": {
+            "start": 390,
+            "end": 397
+          },
+          "value": "version"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 398,
+          "end": 401
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 402,
+          "end": 409
+        },
+        "value": "CHANNEL"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 457,
+          "end": 460
+        }
+      },
+      "options": [
+        {
+          "flag_start": 461,
+          "name": {
+            "span": {
+              "start": 463,
+              "end": 468
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 469,
+              "end": 477
+            },
+            "value": "target=."
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 483,
+            "end": 895
+          },
+          "value": "PKG=github.com/moby/buildkit/frontend/dockerfile/cmd/dockerfile-frontend VERSION=$(./frontend/dockerfile/cmd/dockerfile-frontend/hack/detect \"$CHANNEL\") REVISION=$(git rev-parse HEAD)$(if ! git diff --no-ext-diff --quiet --exit-code; then echo .m; fi) \\\n  && echo \"-X main.Version=${VERSION} -X main.Revision=${REVISION} -X main.Package=${PKG}\" | tee /tmp/.ldflags \\\n  && echo -n \"${VERSION}\" | tee /tmp/.version"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 897,
+          "end": 901
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 902,
+          "end": 906
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 907,
+            "end": 909
+          }
+        },
+        {
+          "span": {
+            "start": 910,
+            "end": 915
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 916,
+          "end": 919
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 920,
+            "end": 943
+          },
+          "value": "apk add --no-cache file"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 944,
+          "end": 947
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 948,
+          "end": 960
+        },
+        "value": "BUILDTAGS=\"\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 961,
+          "end": 964
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 965,
+          "end": 979
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 980,
+          "end": 983
+        }
+      },
+      "options": [
+        {
+          "flag_start": 984,
+          "name": {
+            "span": {
+              "start": 986,
+              "end": 991
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 992,
+              "end": 1000
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 1001,
+          "name": {
+            "span": {
+              "start": 1003,
+              "end": 1008
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1009,
+              "end": 1039
+            },
+            "value": "type=cache,target=/root/.cache"
+          }
+        },
+        {
+          "flag_start": 1044,
+          "name": {
+            "span": {
+              "start": 1046,
+              "end": 1051
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1052,
+              "end": 1081
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        },
+        {
+          "flag_start": 1086,
+          "name": {
+            "span": {
+              "start": 1088,
+              "end": 1093
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1094,
+              "end": 1148
+            },
+            "value": "source=/tmp/.ldflags,target=/tmp/.ldflags,from=version"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1153,
+            "end": 1377
+          },
+          "value": "CGO_ENABLED=0 xx-go build -o /dockerfile-frontend -ldflags \"-d $(cat /tmp/.ldflags)\" -tags \"$BUILDTAGS netgo static_build osusergo\" ./frontend/dockerfile/cmd/dockerfile-frontend && \\\n  xx-verify --static /dockerfile-frontend"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1379,
+          "end": 1383
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1384,
+          "end": 1391
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1392,
+            "end": 1394
+          }
+        },
+        {
+          "span": {
+            "start": 1395,
+            "end": 1402
+          },
+          "value": "release"
+        }
+      ]
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 1403,
+          "end": 1408
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1409,
+          "end": 1451
+        },
+        "value": "moby.buildkit.frontend.network.none=\"true\""
+      }
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 1452,
+          "end": 1457
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1458,
+          "end": 1584
+        },
+        "value": "moby.buildkit.frontend.caps=\"moby.buildkit.frontend.inputs,moby.buildkit.frontend.subrequests,moby.buildkit.frontend.contexts\""
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1585,
+          "end": 1589
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1590,
+          "name": {
+            "span": {
+              "start": 1592,
+              "end": 1596
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1597,
+              "end": 1602
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1603,
+              "end": 1623
+            },
+            "value": "/dockerfile-frontend"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1624,
+          "end": 1648
+        },
+        "value": "/bin/dockerfile-frontend"
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 1649,
+          "end": 1659
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 1660,
+            "end": 1688
+          },
+          "value": [
+            {
+              "span": {
+                "start": 1662,
+                "end": 1686
+              },
+              "value": "/bin/dockerfile-frontend"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1690,
+          "end": 1694
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1695,
+          "end": 1702
+        },
+        "value": "release"
+      },
+      "as_": null
+    }
+  ]
+}

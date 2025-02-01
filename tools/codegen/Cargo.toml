@@ -1,0 +1,15 @@
+[package]
+name = "parse-dockerfile-internal-codegen"
+edition = "2021"
+
+[dependencies]
+fs-err = "3"
+globset = { version = "0.4", default-features = false }
+prettyplease = "0.2"
+proc-macro2 = { version = "1", default-features = false }
+quote = { version = "1", default-features = false }
+syn = { version = "2", default-features = false, features = ["parsing", "printing", "full", "visit-mut"] }
+test-helper = { features = ["git"], git = "https://github.com/taiki-e/test-helper.git", rev = "295ad29" }
+
+[lints]
+workspace = true

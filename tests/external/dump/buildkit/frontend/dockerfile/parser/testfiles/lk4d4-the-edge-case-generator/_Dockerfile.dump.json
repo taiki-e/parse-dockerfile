@@ -1,0 +1,693 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 30
+        },
+        "value": "busybox:buildroot-2014.02"
+      },
+      "as_": null
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 32,
+          "end": 37
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 38,
+          "end": 74
+        },
+        "value": "maintainer docker <docker@docker.io>"
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 76,
+          "end": 83
+        }
+      },
+      "instruction": {
+        "kind": "RUN",
+        "run": {
+          "span": {
+            "start": 84,
+            "end": 87
+          }
+        },
+        "options": [],
+        "arguments": {
+          "exec": {
+            "span": {
+              "start": 88,
+              "end": 104
+            },
+            "value": [
+              {
+                "span": {
+                  "start": 90,
+                  "end": 94
+                },
+                "value": "echo"
+              },
+              {
+                "span": {
+                  "start": 98,
+                  "end": 102
+                },
+                "value": "test"
+              }
+            ]
+          }
+        },
+        "here_docs": []
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 105,
+          "end": 112
+        }
+      },
+      "instruction": {
+        "kind": "RUN",
+        "run": {
+          "span": {
+            "start": 113,
+            "end": 116
+          }
+        },
+        "options": [],
+        "arguments": {
+          "shell": {
+            "span": {
+              "start": 117,
+              "end": 126
+            },
+            "value": "echo test"
+          }
+        },
+        "here_docs": []
+      }
+    },
+    {
+      "kind": "ONBUILD",
+      "onbuild": {
+        "span": {
+          "start": 127,
+          "end": 134
+        }
+      },
+      "instruction": {
+        "kind": "COPY",
+        "copy": {
+          "span": {
+            "start": 135,
+            "end": 139
+          }
+        },
+        "options": [],
+        "src": [
+          {
+            "path": {
+              "span": {
+                "start": 140,
+                "end": 141
+              },
+              "value": "."
+            }
+          }
+        ],
+        "dest": {
+          "span": {
+            "start": 142,
+            "end": 143
+          },
+          "value": "/"
+        }
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 188,
+          "end": 191
+        }
+      },
+      "options": [],
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 192,
+            "end": 205
+          },
+          "value": [
+            {
+              "span": {
+                "start": 194,
+                "end": 196
+              },
+              "value": "ls"
+            },
+            {
+              "span": {
+                "start": 200,
+                "end": 203
+              },
+              "value": "-la"
+            }
+          ]
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 206,
+          "end": 209
+        }
+      },
+      "options": [],
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 210,
+            "end": 228
+          },
+          "value": [
+            {
+              "span": {
+                "start": 212,
+                "end": 216
+              },
+              "value": "echo"
+            },
+            {
+              "span": {
+                "start": 220,
+                "end": 226
+              },
+              "value": "'1234'"
+            }
+          ]
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 229,
+          "end": 232
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 233,
+            "end": 244
+          },
+          "value": "echo \"1234\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 245,
+          "end": 248
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 249,
+            "end": 258
+          },
+          "value": "echo 1234"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 259,
+          "end": 262
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 263,
+            "end": 312
+          },
+          "value": "echo '1234' && \\\n    echo \"456\" && \\\n    echo 789"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 313,
+          "end": 316
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 320,
+            "end": 370
+          },
+          "value": "sh -c 'echo root:testpass \\\n        > /tmp/passwd'"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 371,
+          "end": 374
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 375,
+            "end": 408
+          },
+          "value": "mkdir -p /test /test2 /test3/test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 418,
+          "end": 421
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 422,
+          "end": 436
+        },
+        "value": "SCUBA 1 DUBA 3"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 437,
+          "end": 440
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 441,
+          "end": 457
+        },
+        "value": "SCUBA \"1 DUBA 3\""
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 467,
+          "end": 470
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 471,
+            "end": 487
+          },
+          "value": [
+            {
+              "span": {
+                "start": 473,
+                "end": 477
+              },
+              "value": "echo"
+            },
+            {
+              "span": {
+                "start": 481,
+                "end": 485
+              },
+              "value": "test"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 488,
+          "end": 491
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 492,
+            "end": 501
+          },
+          "value": "echo test"
+        }
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 502,
+          "end": 505
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 506,
+            "end": 517
+          },
+          "value": "echo \"test\""
+        }
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 518,
+          "end": 521
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 522,
+            "end": 533
+          },
+          "value": "echo 'test'"
+        }
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 534,
+          "end": 537
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 538,
+            "end": 556
+          },
+          "value": "echo 'test' | wc -"
+        }
+      }
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 567,
+          "end": 573
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 574,
+            "end": 578
+          },
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 579,
+          "end": 585
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 586,
+            "end": 590
+          },
+          "value": "9000"
+        },
+        {
+          "span": {
+            "start": 591,
+            "end": 595
+          },
+          "value": "5000"
+        },
+        {
+          "span": {
+            "start": 596,
+            "end": 600
+          },
+          "value": "6000"
+        }
+      ]
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 602,
+          "end": 606
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 607,
+          "end": 613
+        },
+        "value": "docker"
+      }
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 614,
+          "end": 618
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 619,
+          "end": 630
+        },
+        "value": "docker:root"
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 632,
+          "end": 638
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 639,
+            "end": 648
+          },
+          "value": [
+            {
+              "span": {
+                "start": 641,
+                "end": 646
+              },
+              "value": "/test"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 649,
+          "end": 655
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 656,
+            "end": 675
+          },
+          "value": [
+            {
+              "span": {
+                "start": 658,
+                "end": 663
+              },
+              "value": "/test"
+            },
+            {
+              "span": {
+                "start": 667,
+                "end": 673
+              },
+              "value": "/test2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 676,
+          "end": 682
+        }
+      },
+      "arguments": {
+        "string": [
+          {
+            "span": {
+              "start": 683,
+              "end": 689
+            },
+            "value": "/test3"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 691,
+          "end": 698
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 699,
+          "end": 704
+        },
+        "value": "/test"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 706,
+          "end": 709
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 710,
+              "end": 711
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 712,
+          "end": 713
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 714,
+          "end": 718
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 719,
+              "end": 720
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 721,
+          "end": 725
+        },
+        "value": "copy"
+      }
+    }
+  ]
+}

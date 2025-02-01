@@ -1,0 +1,1504 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 42
+        },
+        "value": "docker/dockerfile-upstream:master"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 44,
+          "end": 47
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 48,
+          "end": 63
+        },
+        "value": "GO_VERSION=1.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 64,
+          "end": 67
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 68,
+          "end": 87
+        },
+        "value": "ALPINE_VERSION=3.21"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 88,
+          "end": 91
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 92,
+          "end": 108
+        },
+        "value": "XX_VERSION=1.6.1"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 109,
+          "end": 112
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 113,
+          "end": 137
+        },
+        "value": "PROTOLINT_VERSION=0.50.5"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 138,
+          "end": 141
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 142,
+          "end": 170
+        },
+        "value": "GOLANGCI_LINT_VERSION=1.61.0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 171,
+          "end": 174
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 175,
+          "end": 196
+        },
+        "value": "GOPLS_VERSION=v0.26.0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 311,
+          "end": 314
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 315,
+          "end": 484
+        },
+        "value": "GOPLS_ANALYZERS=\"embeddirective fillreturns infertypeargs nonewvars norangeoverfunc noresultvalues simplifycompositelit simplifyslice undeclaredname unusedparams useany\""
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 486,
+          "end": 490
+        }
+      },
+      "options": [
+        {
+          "flag_start": 491,
+          "name": {
+            "span": {
+              "start": 493,
+              "end": 501
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 502,
+              "end": 516
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 517,
+          "end": 561
+        },
+        "value": "golang:${GO_VERSION}-alpine${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 562,
+            "end": 564
+          }
+        },
+        {
+          "span": {
+            "start": 565,
+            "end": 576
+          },
+          "value": "golang-base"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 577,
+          "end": 581
+        }
+      },
+      "options": [
+        {
+          "flag_start": 582,
+          "name": {
+            "span": {
+              "start": 584,
+              "end": 592
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 593,
+              "end": 607
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 608,
+          "end": 648
+        },
+        "value": "yoheimuta/protolint:${PROTOLINT_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 649,
+            "end": 651
+          }
+        },
+        {
+          "span": {
+            "start": 652,
+            "end": 666
+          },
+          "value": "protolint-base"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 667,
+          "end": 671
+        }
+      },
+      "options": [
+        {
+          "flag_start": 672,
+          "name": {
+            "span": {
+              "start": 674,
+              "end": 682
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 683,
+              "end": 697
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 698,
+          "end": 725
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 726,
+            "end": 728
+          }
+        },
+        {
+          "span": {
+            "start": 729,
+            "end": 731
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 733,
+          "end": 737
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 738,
+          "end": 749
+        },
+        "value": "golang-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 750,
+            "end": 752
+          }
+        },
+        {
+          "span": {
+            "start": 753,
+            "end": 757
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 758,
+          "end": 761
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 762,
+          "end": 787
+        },
+        "value": "GOFLAGS=\"-buildvcs=false\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 788,
+          "end": 791
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 792,
+          "end": 813
+        },
+        "value": "GOLANGCI_LINT_VERSION"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 814,
+          "end": 817
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 818,
+            "end": 858
+          },
+          "value": "apk add --no-cache gcc musl-dev yamllint"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 859,
+          "end": 862
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 863,
+            "end": 984
+          },
+          "value": "wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v${GOLANGCI_LINT_VERSION}"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 985,
+          "end": 989
+        }
+      },
+      "options": [
+        {
+          "flag_start": 990,
+          "name": {
+            "span": {
+              "start": 992,
+              "end": 996
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 997,
+          "name": {
+            "span": {
+              "start": 999,
+              "end": 1003
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1004,
+              "end": 1018
+            },
+            "value": "protolint-base"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1019,
+              "end": 1043
+            },
+            "value": "/usr/local/bin/protolint"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1044,
+          "end": 1068
+        },
+        "value": "/usr/local/bin/protolint"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1069,
+          "end": 1073
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1074,
+          "name": {
+            "span": {
+              "start": 1076,
+              "end": 1080
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 1081,
+          "name": {
+            "span": {
+              "start": 1083,
+              "end": 1087
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1088,
+              "end": 1090
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1091,
+              "end": 1092
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1093,
+          "end": 1094
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1095,
+          "end": 1102
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1103,
+          "end": 1135
+        },
+        "value": "/go/src/github.com/moby/buildkit"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1137,
+          "end": 1141
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1142,
+          "end": 1146
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1147,
+            "end": 1149
+          }
+        },
+        {
+          "span": {
+            "start": 1150,
+            "end": 1163
+          },
+          "value": "golangci-lint"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1164,
+          "end": 1167
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1168,
+          "end": 1178
+        },
+        "value": "TARGETNAME"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1179,
+          "end": 1182
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1183,
+          "end": 1192
+        },
+        "value": "BUILDTAGS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1193,
+          "end": 1196
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1197,
+          "end": 1211
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1212,
+          "end": 1215
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1216,
+          "name": {
+            "span": {
+              "start": 1218,
+              "end": 1223
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1224,
+              "end": 1263
+            },
+            "value": "target=/go/src/github.com/moby/buildkit"
+          }
+        },
+        {
+          "flag_start": 1270,
+          "name": {
+            "span": {
+              "start": 1272,
+              "end": 1277
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1278,
+              "end": 1354
+            },
+            "value": "target=/root/.cache,type=cache,id=lint-cache-${TARGETNAME}-${TARGETPLATFORM}"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1359,
+            "end": 1457
+          },
+          "value": "xx-go --wrap && \\\n  golangci-lint run --build-tags \"${BUILDTAGS}\" && \\\n  touch /golangci-lint.done"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1462,
+          "end": 1466
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1467,
+          "end": 1471
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1472,
+            "end": 1474
+          }
+        },
+        {
+          "span": {
+            "start": 1475,
+            "end": 1490
+          },
+          "value": "golangci-verify"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1491,
+          "end": 1494
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1495,
+          "name": {
+            "span": {
+              "start": 1497,
+              "end": 1502
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1503,
+              "end": 1542
+            },
+            "value": "target=/go/src/github.com/moby/buildkit"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1547,
+            "end": 1609
+          },
+          "value": "golangci-lint config verify && \\\n  touch /golangci-verify.done"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1611,
+          "end": 1615
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1616,
+          "end": 1620
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1621,
+            "end": 1623
+          }
+        },
+        {
+          "span": {
+            "start": 1624,
+            "end": 1632
+          },
+          "value": "yamllint"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1633,
+          "end": 1636
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1637,
+          "name": {
+            "span": {
+              "start": 1639,
+              "end": 1644
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1645,
+              "end": 1684
+            },
+            "value": "target=/go/src/github.com/moby/buildkit"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1689,
+            "end": 1753
+          },
+          "value": "yamllint -c .yamllint.yml --strict . && \\\n  touch /yamllint.done"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1755,
+          "end": 1759
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1760,
+          "end": 1764
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1765,
+            "end": 1767
+          }
+        },
+        {
+          "span": {
+            "start": 1768,
+            "end": 1777
+          },
+          "value": "protolint"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1778,
+          "end": 1781
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1782,
+          "name": {
+            "span": {
+              "start": 1784,
+              "end": 1789
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1790,
+              "end": 1829
+            },
+            "value": "target=/go/src/github.com/moby/buildkit"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1834,
+            "end": 1879
+          },
+          "value": "protolint lint . && \\\n  touch /protolint.done"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1881,
+          "end": 1885
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1886,
+          "end": 1897
+        },
+        "value": "golang-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1898,
+            "end": 1900
+          }
+        },
+        {
+          "span": {
+            "start": 1901,
+            "end": 1906
+          },
+          "value": "gopls"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1907,
+          "end": 1910
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1911,
+            "end": 1933
+          },
+          "value": "apk add --no-cache git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1934,
+          "end": 1937
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1938,
+          "end": 1951
+        },
+        "value": "GOPLS_VERSION"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1952,
+          "end": 1959
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1960,
+          "end": 1964
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1965,
+          "end": 1968
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1969,
+            "end": 2063
+          },
+          "value": "git clone https://github.com/golang/tools.git && \\\n  cd tools && git checkout ${GOPLS_VERSION}"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 2064,
+          "end": 2071
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2072,
+          "end": 2083
+        },
+        "value": "tools/gopls"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 2084,
+          "end": 2087
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2088,
+          "end": 2103
+        },
+        "value": "GOPLS_ANALYZERS"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2104,
+          "end": 2107
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2115,
+            "end": 2115
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2116,
+            "end": 2567
+          },
+          "expand": false,
+          "value": "  set -ex\n  mkdir -p /out\n  for analyzer in ${GOPLS_ANALYZERS}; do\n    mkdir -p internal/cmd/$analyzer\n    cat <<eot > internal/cmd/$analyzer/main.go\npackage main\n\nimport (\n\t\"golang.org/x/tools/go/analysis/singlechecker\"\n\tanalyzer \"golang.org/x/tools/gopls/internal/analysis/$analyzer\"\n)\n\nfunc main() { singlechecker.Main(analyzer.Analyzer) }\neot\n    echo \"Analyzing with ${analyzer}...\"\n    go build -o /out/$analyzer ./internal/cmd/$analyzer\n  done\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2572,
+          "end": 2576
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2577,
+          "end": 2588
+        },
+        "value": "golang-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2589,
+            "end": 2591
+          }
+        },
+        {
+          "span": {
+            "start": 2592,
+            "end": 2605
+          },
+          "value": "gopls-analyze"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2606,
+          "end": 2610
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2611,
+          "name": {
+            "span": {
+              "start": 2613,
+              "end": 2617
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 2618,
+          "name": {
+            "span": {
+              "start": 2620,
+              "end": 2624
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2625,
+              "end": 2627
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2628,
+              "end": 2629
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2630,
+          "end": 2631
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 2632,
+          "end": 2635
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2636,
+          "end": 2651
+        },
+        "value": "GOPLS_ANALYZERS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 2652,
+          "end": 2655
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2656,
+          "end": 2666
+        },
+        "value": "TARGETNAME"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 2667,
+          "end": 2670
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2671,
+          "end": 2685
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 2686,
+          "end": 2693
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2694,
+          "end": 2726
+        },
+        "value": "/go/src/github.com/moby/buildkit"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2727,
+          "end": 2730
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2731,
+          "name": {
+            "span": {
+              "start": 2733,
+              "end": 2738
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 2739,
+              "end": 2747
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 2752,
+          "name": {
+            "span": {
+              "start": 2754,
+              "end": 2759
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 2760,
+              "end": 2836
+            },
+            "value": "target=/root/.cache,type=cache,id=lint-cache-${TARGETNAME}-${TARGETPLATFORM}"
+          }
+        },
+        {
+          "flag_start": 2841,
+          "name": {
+            "span": {
+              "start": 2843,
+              "end": 2848
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 2849,
+              "end": 2895
+            },
+            "value": "target=/gopls-analyzers,from=gopls,source=/out"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2901,
+            "end": 2901
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2902,
+            "end": 3028
+          },
+          "expand": true,
+          "value": "  set -ex\n  xx-go --wrap\n  for analyzer in ${GOPLS_ANALYZERS}; do\n    go vet -vettool=/gopls-analyzers/$analyzer ./...\n  done\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 3034,
+          "end": 3038
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 3039,
+          "end": 3046
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3047,
+          "end": 3051
+        }
+      },
+      "options": [
+        {
+          "flag_start": 3052,
+          "name": {
+            "span": {
+              "start": 3054,
+              "end": 3058
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 3059,
+          "name": {
+            "span": {
+              "start": 3061,
+              "end": 3065
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 3066,
+              "end": 3079
+            },
+            "value": "golangci-lint"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3080,
+              "end": 3099
+            },
+            "value": "/golangci-lint.done"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3100,
+          "end": 3101
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3102,
+          "end": 3106
+        }
+      },
+      "options": [
+        {
+          "flag_start": 3107,
+          "name": {
+            "span": {
+              "start": 3109,
+              "end": 3113
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 3114,
+          "name": {
+            "span": {
+              "start": 3116,
+              "end": 3120
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 3121,
+              "end": 3136
+            },
+            "value": "golangci-verify"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3137,
+              "end": 3158
+            },
+            "value": "/golangci-verify.done"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3159,
+          "end": 3160
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3161,
+          "end": 3165
+        }
+      },
+      "options": [
+        {
+          "flag_start": 3166,
+          "name": {
+            "span": {
+              "start": 3168,
+              "end": 3172
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 3173,
+          "name": {
+            "span": {
+              "start": 3175,
+              "end": 3179
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 3180,
+              "end": 3188
+            },
+            "value": "yamllint"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3189,
+              "end": 3203
+            },
+            "value": "/yamllint.done"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3204,
+          "end": 3205
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3206,
+          "end": 3210
+        }
+      },
+      "options": [
+        {
+          "flag_start": 3211,
+          "name": {
+            "span": {
+              "start": 3213,
+              "end": 3217
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 3218,
+          "name": {
+            "span": {
+              "start": 3220,
+              "end": 3224
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 3225,
+              "end": 3234
+            },
+            "value": "protolint"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 3235,
+              "end": 3250
+            },
+            "value": "/protolint.done"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 3251,
+          "end": 3252
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

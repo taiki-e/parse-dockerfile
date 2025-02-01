@@ -1,0 +1,159 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 41
+          },
+          "value": "touch /tmpfile"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 42,
+          "end": 46
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 47,
+          "end": 53
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 54,
+            "end": 56
+          }
+        },
+        {
+          "span": {
+            "start": 57,
+            "end": 61
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 62,
+          "end": 66
+        }
+      },
+      "options": [
+        {
+          "flag_start": 67,
+          "name": {
+            "span": {
+              "start": 69,
+              "end": 73
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 74,
+              "end": 81
+            },
+            "value": "builder"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 82,
+              "end": 90
+            },
+            "value": "/tmpfile"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 91,
+          "end": 92
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 93,
+          "end": 96
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 97,
+            "end": 110
+          },
+          "value": "stat /tmpfile"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 25
+        },
+        "value": "debian:bookworm-slim"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 26,
+          "end": 29
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 30,
+            "end": 104
+          },
+          "value": "apt-get update && apt-get install -y gcc libc6-dev --no-install-recommends"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 106,
+          "end": 110
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 111,
+              "end": 112
+            },
+            "value": "."
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 113,
+          "end": 122
+        },
+        "value": "/usr/src/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 124,
+          "end": 131
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 132,
+          "end": 141
+        },
+        "value": "/usr/src/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 143,
+          "end": 146
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 147,
+            "end": 199
+          },
+          "value": "gcc -g -Wall -static nnp-test.c -o /usr/bin/nnp-test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 201,
+          "end": 204
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 205,
+            "end": 231
+          },
+          "value": "chmod +s /usr/bin/nnp-test"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

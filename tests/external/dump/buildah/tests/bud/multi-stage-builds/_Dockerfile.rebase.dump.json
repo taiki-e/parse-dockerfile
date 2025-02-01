@@ -1,0 +1,145 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 21
+          },
+          "value": "myname"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 22,
+          "end": 26
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 27,
+              "end": 42
+            },
+            "value": "Dockerfile.name"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 43,
+          "end": 44
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 46,
+          "end": 50
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 51,
+          "end": 57
+        },
+        "value": "myname"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 58,
+          "end": 61
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 62,
+            "end": 65
+          },
+          "value": "pwd"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 67,
+          "end": 71
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 72,
+          "end": 78
+        },
+        "value": "myname"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 79,
+          "end": 82
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 83,
+            "end": 85
+          },
+          "value": "id"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

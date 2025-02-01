@@ -1,0 +1,101 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 12,
+          "end": 16
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 17,
+              "end": 21
+            },
+            "value": "file"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 22,
+              "end": 27
+            },
+            "value": "file2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 28,
+          "end": 37
+        },
+        "value": "/var/www/"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 38,
+          "end": 41
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 42,
+              "end": 46
+            },
+            "value": "file"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 47,
+              "end": 52
+            },
+            "value": "file2"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 53,
+          "end": 63
+        },
+        "value": "/var/html/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 30
+          },
+          "value": "mkdir -p /data"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 31,
+          "end": 34
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 35,
+            "end": 56
+          },
+          "value": "ln -s /test-log /blah"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 57,
+          "end": 60
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 61,
+            "end": 86
+          },
+          "value": "ln -s /data/log /test-log"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "VOLUME",
+      "volume": {
+        "span": {
+          "start": 87,
+          "end": 93
+        }
+      },
+      "arguments": {
+        "json": {
+          "span": {
+            "start": 94,
+            "end": 114
+          },
+          "value": [
+            {
+              "span": {
+                "start": 97,
+                "end": 111
+              },
+              "value": "/test-log/test"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 115,
+          "end": 118
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 119,
+            "end": 152
+          },
+          "value": "echo \"hello\" > /data/log/blah.txt"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

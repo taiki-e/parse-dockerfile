@@ -1,0 +1,43 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 17
+        },
+        "value": "IMAGE=busybox"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 18,
+          "end": 22
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 23,
+          "end": 31
+        },
+        "value": "${IMAGE}"
+      },
+      "as_": null
+    }
+  ]
+}

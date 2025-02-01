@@ -1,0 +1,161 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 27
+          },
+          "value": "mkdir /test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 64,
+          "end": 67
+        }
+      },
+      "options": [
+        {
+          "flag_start": 68,
+          "name": {
+            "span": {
+              "start": 70,
+              "end": 75
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 76,
+              "end": 117
+            },
+            "value": "type=cache,from=buildkitbase,target=/test"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 118,
+            "end": 133
+          },
+          "value": "cat /test/hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 175,
+          "end": 178
+        }
+      },
+      "options": [
+        {
+          "flag_start": 179,
+          "name": {
+            "span": {
+              "start": 181,
+              "end": 186
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 187,
+              "end": 228
+            },
+            "value": "type=cache,from=buildkitbase,target=/test"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 229,
+            "end": 243
+          },
+          "value": "rm /test/hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 328,
+          "end": 331
+        }
+      },
+      "options": [
+        {
+          "flag_start": 332,
+          "name": {
+            "span": {
+              "start": 334,
+              "end": 339
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 340,
+              "end": 381
+            },
+            "value": "type=cache,from=buildkitbase,target=/test"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 382,
+            "end": 396
+          },
+          "value": "rm /test/hello"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

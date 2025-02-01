@@ -1,0 +1,73 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 149,
+          "end": 153
+        }
+      },
+      "options": [
+        {
+          "flag_start": 154,
+          "name": {
+            "span": {
+              "start": 156,
+              "end": 160
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 161,
+              "end": 194
+            },
+            "value": "quay.io/libpod/testimage:20221018"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 195,
+              "end": 220
+            },
+            "value": "/home/podman/testimage-id"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 221,
+          "end": 260
+        },
+        "value": "/home/busyboxpodman/copied-testimage-id"
+      }
+    }
+  ]
+}

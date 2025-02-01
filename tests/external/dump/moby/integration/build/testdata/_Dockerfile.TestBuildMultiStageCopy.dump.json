@@ -1,0 +1,503 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 13,
+            "end": 15
+          }
+        },
+        {
+          "span": {
+            "start": 16,
+            "end": 20
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 21,
+          "end": 24
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 25,
+            "end": 42
+          },
+          "value": "mkdir existingdir"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 44,
+          "end": 48
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 49,
+          "end": 53
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 54,
+            "end": 56
+          }
+        },
+        {
+          "span": {
+            "start": 57,
+            "end": 63
+          },
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 64,
+          "end": 67
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 68,
+            "end": 95
+          },
+          "value": "echo \"Hello World\" > /hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 97,
+          "end": 101
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 102,
+          "end": 106
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 107,
+            "end": 109
+          }
+        },
+        {
+          "span": {
+            "start": 110,
+            "end": 122
+          },
+          "value": "copy_to_root"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 123,
+          "end": 127
+        }
+      },
+      "options": [
+        {
+          "flag_start": 128,
+          "name": {
+            "span": {
+              "start": 130,
+              "end": 134
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 135,
+              "end": 141
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 142,
+              "end": 148
+            },
+            "value": "/hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 149,
+          "end": 155
+        },
+        "value": "/hello"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 157,
+          "end": 161
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 162,
+          "end": 166
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 167,
+            "end": 169
+          }
+        },
+        {
+          "span": {
+            "start": 170,
+            "end": 184
+          },
+          "value": "copy_to_newdir"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 185,
+          "end": 189
+        }
+      },
+      "options": [
+        {
+          "flag_start": 190,
+          "name": {
+            "span": {
+              "start": 192,
+              "end": 196
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 197,
+              "end": 203
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 204,
+              "end": 210
+            },
+            "value": "/hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 211,
+          "end": 224
+        },
+        "value": "/newdir/hello"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 226,
+          "end": 230
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 231,
+          "end": 235
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 236,
+            "end": 238
+          }
+        },
+        {
+          "span": {
+            "start": 239,
+            "end": 260
+          },
+          "value": "copy_to_newdir_nested"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 261,
+          "end": 265
+        }
+      },
+      "options": [
+        {
+          "flag_start": 266,
+          "name": {
+            "span": {
+              "start": 268,
+              "end": 272
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 273,
+              "end": 279
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 280,
+              "end": 286
+            },
+            "value": "/hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 287,
+          "end": 310
+        },
+        "value": "/newdir/newsubdir/hello"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 312,
+          "end": 316
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 317,
+          "end": 321
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 322,
+            "end": 324
+          }
+        },
+        {
+          "span": {
+            "start": 325,
+            "end": 344
+          },
+          "value": "copy_to_existingdir"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 345,
+          "end": 349
+        }
+      },
+      "options": [
+        {
+          "flag_start": 350,
+          "name": {
+            "span": {
+              "start": 352,
+              "end": 356
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 357,
+              "end": 363
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 364,
+              "end": 370
+            },
+            "value": "/hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 371,
+          "end": 389
+        },
+        "value": "/existingdir/hello"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 391,
+          "end": 395
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 396,
+          "end": 400
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 401,
+            "end": 403
+          }
+        },
+        {
+          "span": {
+            "start": 404,
+            "end": 421
+          },
+          "value": "copy_to_newsubdir"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 422,
+          "end": 426
+        }
+      },
+      "options": [
+        {
+          "flag_start": 427,
+          "name": {
+            "span": {
+              "start": 429,
+              "end": 433
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 434,
+              "end": 440
+            },
+            "value": "source"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 441,
+              "end": 447
+            },
+            "value": "/hello"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 448,
+          "end": 476
+        },
+        "value": "/existingdir/newsubdir/hello"
+      }
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 27
+          },
+          "value": "mkdir /test"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 65,
+          "end": 68
+        }
+      },
+      "options": [
+        {
+          "flag_start": 69,
+          "name": {
+            "span": {
+              "start": 71,
+              "end": 76
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 77,
+              "end": 116
+            },
+            "value": "type=bind,source=subdir/,target=/test,z"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 117,
+            "end": 137
+          },
+          "value": "cat /test/input_file"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

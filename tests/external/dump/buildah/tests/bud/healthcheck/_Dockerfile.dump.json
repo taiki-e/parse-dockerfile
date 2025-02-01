@@ -1,0 +1,141 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "HEALTHCHECK",
+      "healthcheck": {
+        "span": {
+          "start": 12,
+          "end": 23
+        }
+      },
+      "options": [
+        {
+          "flag_start": 24,
+          "name": {
+            "span": {
+              "start": 26,
+              "end": 40
+            },
+            "value": "start-interval"
+          },
+          "value": {
+            "span": {
+              "start": 41,
+              "end": 44
+            },
+            "value": "30s"
+          }
+        },
+        {
+          "flag_start": 45,
+          "name": {
+            "span": {
+              "start": 47,
+              "end": 59
+            },
+            "value": "start-period"
+          },
+          "value": {
+            "span": {
+              "start": 60,
+              "end": 63
+            },
+            "value": "10m"
+          }
+        },
+        {
+          "flag_start": 64,
+          "name": {
+            "span": {
+              "start": 66,
+              "end": 74
+            },
+            "value": "interval"
+          },
+          "value": {
+            "span": {
+              "start": 75,
+              "end": 77
+            },
+            "value": "5m"
+          }
+        },
+        {
+          "flag_start": 78,
+          "name": {
+            "span": {
+              "start": 80,
+              "end": 87
+            },
+            "value": "timeout"
+          },
+          "value": {
+            "span": {
+              "start": 88,
+              "end": 90
+            },
+            "value": "3s"
+          }
+        },
+        {
+          "flag_start": 91,
+          "name": {
+            "span": {
+              "start": 93,
+              "end": 100
+            },
+            "value": "retries"
+          },
+          "value": {
+            "span": {
+              "start": 101,
+              "end": 102
+            },
+            "value": "4"
+          }
+        }
+      ],
+      "arguments": {
+        "kind": "CMD",
+        "cmd": {
+          "span": {
+            "start": 107,
+            "end": 110
+          }
+        },
+        "arguments": {
+          "shell": {
+            "span": {
+              "start": 111,
+              "end": 146
+            },
+            "value": "curl -f http://localhost/ || exit 1"
+          }
+        }
+      }
+    }
+  ]
+}

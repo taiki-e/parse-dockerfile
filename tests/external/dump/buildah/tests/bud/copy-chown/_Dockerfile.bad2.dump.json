@@ -1,0 +1,91 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [
+        {
+          "flag_start": 18,
+          "name": {
+            "span": {
+              "start": 20,
+              "end": 25
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 26,
+              "end": 43
+            },
+            "value": "${BOGUS}:${BOGUS}"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 44,
+              "end": 57
+            },
+            "value": "copychown.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 58,
+          "end": 62
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 63,
+          "end": 66
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 67,
+            "end": 74
+          },
+          "value": "/bin/sh"
+        }
+      }
+    }
+  ]
+}

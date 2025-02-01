@@ -1,0 +1,139 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 26
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 27,
+          "end": 30
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 31,
+            "end": 57
+          },
+          "value": "touch -t @1485449953 /file"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 58,
+          "end": 62
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 63,
+          "end": 70
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 71,
+          "end": 75
+        }
+      },
+      "options": [
+        {
+          "flag_start": 76,
+          "name": {
+            "span": {
+              "start": 78,
+              "end": 82
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 83,
+              "end": 84
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 85,
+              "end": 90
+            },
+            "value": "/file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 91,
+          "end": 92
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 93,
+          "end": 96
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 97,
+              "end": 98
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 99,
+          "end": 100
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

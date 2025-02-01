@@ -1,0 +1,114 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 13,
+          "end": 16
+        }
+      },
+      "options": [
+        {
+          "flag_start": 17,
+          "name": {
+            "span": {
+              "start": 19,
+              "end": 24
+            },
+            "value": "chmod"
+          },
+          "value": null
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 25,
+              "end": 28
+            },
+            "value": "777"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 29,
+              "end": 41
+            },
+            "value": "addchmod.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 42,
+          "end": 46
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 48,
+          "end": 51
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 52,
+            "end": 75
+          },
+          "value": "ls -l /tmp/addchmod.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 77,
+          "end": 80
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 81,
+            "end": 88
+          },
+          "value": "/bin/sh"
+        }
+      }
+    }
+  ]
+}

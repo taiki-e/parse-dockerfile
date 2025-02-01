@@ -1,0 +1,68 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 11,
+          "end": 12
+        },
+        "value": "`"
+      }
+    },
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 122,
+          "end": 126
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 127,
+          "end": 132
+        },
+        "value": "image"
+      },
+      "as_": null
+    },
+    {
+      "kind": "LABEL",
+      "label": {
+        "span": {
+          "start": 133,
+          "end": 138
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 139,
+          "end": 161
+        },
+        "value": "maintainer foo@bar.com"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 162,
+          "end": 165
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 166,
+          "end": 178
+        },
+        "value": "GOPATH \\go"
+      }
+    }
+  ]
+}

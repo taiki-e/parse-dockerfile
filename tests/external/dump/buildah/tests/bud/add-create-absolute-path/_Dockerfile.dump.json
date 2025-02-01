@@ -1,0 +1,75 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 16,
+              "end": 29
+            },
+            "value": "distutils.cfg"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 30,
+          "end": 72
+        },
+        "value": "/usr/lib/python3.7/distutils/distutils.cfg"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 73,
+          "end": 76
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 77,
+            "end": 130
+          },
+          "value": "stat -c \"permissions=%a\" /usr/lib/python3.7/distutils"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

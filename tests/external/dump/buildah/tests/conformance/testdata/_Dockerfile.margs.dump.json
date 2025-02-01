@@ -1,0 +1,727 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 25
+        },
+        "value": "mirror.gcr.io/alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 26,
+          "end": 29
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 30,
+          "end": 43
+        },
+        "value": "BUILDPLATFORM"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 44,
+          "end": 47
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 48,
+          "end": 55
+        },
+        "value": "BUILDOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 56,
+          "end": 59
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 60,
+          "end": 69
+        },
+        "value": "BUILDARCH"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 70,
+          "end": 73
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 74,
+          "end": 86
+        },
+        "value": "BUILDVARIANT"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 87,
+          "end": 90
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 91,
+          "end": 105
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 106,
+          "end": 109
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 110,
+          "end": 118
+        },
+        "value": "TARGETOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 119,
+          "end": 122
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 123,
+          "end": 133
+        },
+        "value": "TARGETARCH"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 134,
+          "end": 137
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 138,
+          "end": 151
+        },
+        "value": "TARGETVARIANT"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 152,
+          "end": 155
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 156,
+            "end": 167
+          },
+          "value": "mkdir first"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 168,
+          "end": 171
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 172,
+            "end": 254
+          },
+          "value": "echo ${BUILDPLATFORM}  > first/buildplatform=`echo ${BUILDPLATFORM} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 255,
+          "end": 258
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 259,
+            "end": 329
+          },
+          "value": "echo ${BUILDOS}        > first/buildos=`echo ${BUILDOS} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 330,
+          "end": 333
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 334,
+            "end": 408
+          },
+          "value": "echo ${BUILDARCH}      > first/buildarch=`echo ${BUILDARCH} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 409,
+          "end": 412
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 413,
+            "end": 493
+          },
+          "value": "echo ${BUILDVARIANT}   > first/buildvariant=`echo ${BUILDVARIANT} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 494,
+          "end": 497
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 498,
+            "end": 582
+          },
+          "value": "echo ${TARGETPLATFORM} > first/targetplatform=`echo ${TARGETPLATFORM} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 583,
+          "end": 586
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 587,
+            "end": 659
+          },
+          "value": "echo ${TARGETOS}       > first/targetos=`echo ${TARGETOS} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 660,
+          "end": 663
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 664,
+            "end": 740
+          },
+          "value": "echo ${TARGETARCH}     > first/targetarch=`echo ${TARGETARCH} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 741,
+          "end": 744
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 745,
+            "end": 827
+          },
+          "value": "echo ${TARGETVARIANT}  > first/targetvariant=`echo ${TARGETVARIANT} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 829,
+          "end": 833
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 834,
+          "end": 854
+        },
+        "value": "mirror.gcr.io/alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 855,
+          "end": 858
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 859,
+          "end": 872
+        },
+        "value": "BUILDPLATFORM"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 873,
+          "end": 876
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 877,
+          "end": 884
+        },
+        "value": "BUILDOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 885,
+          "end": 888
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 889,
+          "end": 898
+        },
+        "value": "BUILDARCH"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 899,
+          "end": 902
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 903,
+          "end": 915
+        },
+        "value": "BUILDVARIANT"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 916,
+          "end": 919
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 920,
+          "end": 934
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 935,
+          "end": 938
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 939,
+          "end": 947
+        },
+        "value": "TARGETOS"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 948,
+          "end": 951
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 952,
+          "end": 962
+        },
+        "value": "TARGETARCH"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 963,
+          "end": 966
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 967,
+          "end": 980
+        },
+        "value": "TARGETVARIANT"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 981,
+          "end": 984
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 985,
+            "end": 997
+          },
+          "value": "mkdir second"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 998,
+          "end": 1001
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1002,
+            "end": 1085
+          },
+          "value": "echo ${BUILDPLATFORM}  > second/buildplatform=`echo ${BUILDPLATFORM} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1086,
+          "end": 1089
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1090,
+            "end": 1161
+          },
+          "value": "echo ${BUILDOS}        > second/buildos=`echo ${BUILDOS} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1162,
+          "end": 1165
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1166,
+            "end": 1241
+          },
+          "value": "echo ${BUILDARCH}      > second/buildarch=`echo ${BUILDARCH} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1242,
+          "end": 1245
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1246,
+            "end": 1327
+          },
+          "value": "echo ${BUILDVARIANT}   > second/buildvariant=`echo ${BUILDVARIANT} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1328,
+          "end": 1331
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1332,
+            "end": 1417
+          },
+          "value": "echo ${TARGETPLATFORM} > second/targetplatform=`echo ${TARGETPLATFORM} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1418,
+          "end": 1421
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1422,
+            "end": 1495
+          },
+          "value": "echo ${TARGETOS}       > second/targetos=`echo ${TARGETOS} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1496,
+          "end": 1499
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1500,
+            "end": 1577
+          },
+          "value": "echo ${TARGETARCH}     > second/targetarch=`echo ${TARGETARCH} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1578,
+          "end": 1581
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1582,
+            "end": 1665
+          },
+          "value": "echo ${TARGETVARIANT}  > second/targetvariant=`echo ${TARGETVARIANT} | sed s,/,_,g`"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1666,
+          "end": 1670
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1671,
+          "name": {
+            "span": {
+              "start": 1673,
+              "end": 1677
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1678,
+              "end": 1679
+            },
+            "value": "0"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1680,
+              "end": 1687
+            },
+            "value": "first/*"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1688,
+          "end": 1696
+        },
+        "value": "./first/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1697,
+          "end": 1700
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1701,
+            "end": 1755
+          },
+          "value": "touch -r /etc/os-release first first/* second second/*"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

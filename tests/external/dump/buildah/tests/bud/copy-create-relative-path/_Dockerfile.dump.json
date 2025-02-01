@@ -1,0 +1,75 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "ubuntu"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 12,
+          "end": 16
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 17,
+              "end": 30
+            },
+            "value": "distutils.cfg"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 31,
+          "end": 55
+        },
+        "value": "lib/custom/distutils.cfg"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 56,
+          "end": 59
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 60,
+            "end": 95
+          },
+          "value": "stat -c \"permissions=%a\" lib/custom"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

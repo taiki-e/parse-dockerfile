@@ -1,0 +1,248 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 27
+        },
+        "value": "brimstone/ubuntu:14.04"
+      },
+      "as_": null
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 29,
+          "end": 32
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 33,
+            "end": 35
+          },
+          "value": []
+        }
+      }
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 37,
+          "end": 47
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 48,
+            "end": 145
+          },
+          "value": [
+            {
+              "span": {
+                "start": 50,
+                "end": 65
+              },
+              "value": "/usr/bin/consul"
+            },
+            {
+              "span": {
+                "start": 69,
+                "end": 74
+              },
+              "value": "agent"
+            },
+            {
+              "span": {
+                "start": 78,
+                "end": 85
+              },
+              "value": "-server"
+            },
+            {
+              "span": {
+                "start": 89,
+                "end": 106
+              },
+              "value": "-data-dir=/consul"
+            },
+            {
+              "span": {
+                "start": 110,
+                "end": 125
+              },
+              "value": "-client=0.0.0.0"
+            },
+            {
+              "span": {
+                "start": 129,
+                "end": 143
+              },
+              "value": "-ui-dir=/webui"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "EXPOSE",
+      "expose": {
+        "span": {
+          "start": 147,
+          "end": 153
+        }
+      },
+      "arguments": [
+        {
+          "span": {
+            "start": 154,
+            "end": 158
+          },
+          "value": "8500"
+        },
+        {
+          "span": {
+            "start": 159,
+            "end": 163
+          },
+          "value": "8600"
+        },
+        {
+          "span": {
+            "start": 164,
+            "end": 168
+          },
+          "value": "8400"
+        },
+        {
+          "span": {
+            "start": 169,
+            "end": 173
+          },
+          "value": "8301"
+        },
+        {
+          "span": {
+            "start": 174,
+            "end": 178
+          },
+          "value": "8302"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 180,
+          "end": 183
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 184,
+            "end": 313
+          },
+          "value": "apt-get update \\\n    && apt-get --no-install-recommends install -y unzip wget \\\n\t&& apt-get clean \\\n\t&& rm -rf /var/lib/apt/lists"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 315,
+          "end": 318
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 319,
+            "end": 493
+          },
+          "value": "cd /tmp \\\n    && wget https://dl.bintray.com/mitchellh/consul/0.3.1_web_ui.zip \\\n       -O web_ui.zip \\\n    && unzip web_ui.zip \\\n    && mv dist /webui \\\n    && rm web_ui.zip"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 495,
+          "end": 498
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 499,
+            "end": 1051
+          },
+          "value": "apt-get update \\\n\t&& dpkg -l | awk '/^ii/ {print $2}' > /tmp/dpkg.clean \\\n    && apt-get --no-install-recommends install -y unzip wget \\\n    && apt-get clean \\\n    && rm -rf /var/lib/apt/lists \\\n\n    && cd /tmp \\\n    && wget https://dl.bintray.com/mitchellh/consul/0.3.1_web_ui.zip \\\n       -O web_ui.zip \\\n    && unzip web_ui.zip \\\n    && mv dist /webui \\\n    && rm web_ui.zip \\\n\n\t&& dpkg -l | awk '/^ii/ {print $2}' > /tmp/dpkg.dirty \\\n\t&& apt-get remove --purge -y $(diff /tmp/dpkg.clean /tmp/dpkg.dirty | awk '/^>/ {print $2}') \\\n\t&& rm /tmp/dpkg.*"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 1053,
+          "end": 1056
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1057,
+          "end": 1067
+        },
+        "value": "GOPATH /go"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1069,
+          "end": 1072
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1073,
+            "end": 1582
+          },
+          "value": "apt-get update \\\n\t&& dpkg -l | awk '/^ii/ {print $2}' > /tmp/dpkg.clean \\\n    && apt-get --no-install-recommends install -y git golang ca-certificates build-essential \\\n    && apt-get clean \\\n    && rm -rf /var/lib/apt/lists \\\n\n\t&& go get -v github.com/hashicorp/consul \\\n\t&& mv $GOPATH/bin/consul /usr/bin/consul \\\n\n\t&& dpkg -l | awk '/^ii/ {print $2}' > /tmp/dpkg.dirty \\\n\t&& apt-get remove --purge -y $(diff /tmp/dpkg.clean /tmp/dpkg.dirty | awk '/^>/ {print $2}') \\\n\t&& rm /tmp/dpkg.* \\\n\t&& rm -rf $GOPATH"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

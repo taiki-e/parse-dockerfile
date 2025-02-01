@@ -1,0 +1,153 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 44,
+          "end": 48
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 49,
+          "end": 56
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 57,
+            "end": 59
+          }
+        },
+        {
+          "span": {
+            "start": 60,
+            "end": 63
+          },
+          "value": "one"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 64,
+          "end": 67
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 68,
+            "end": 78
+          },
+          "value": "echo hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 79,
+          "end": 82
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 83,
+            "end": 101
+          },
+          "value": "echo hello > world"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 171,
+          "end": 175
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 176,
+          "end": 183
+        },
+        "value": "busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 184,
+            "end": 186
+          }
+        },
+        {
+          "span": {
+            "start": 187,
+            "end": 190
+          },
+          "value": "two"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 191,
+          "end": 194
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 195,
+            "end": 206
+          },
+          "value": "echo hello1"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 207,
+          "end": 210
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 211,
+            "end": 226
+          },
+          "value": "echo helloworld"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

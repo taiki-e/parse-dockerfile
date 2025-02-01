@@ -1,0 +1,111 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 37
+        },
+        "value": "non-existent-registry.com/alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 38,
+          "end": 41
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 42,
+            "end": 54
+          },
+          "value": "mkdir /hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 55,
+          "end": 58
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 59,
+            "end": 73
+          },
+          "value": "touch blah.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 74,
+          "end": 78
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 79,
+              "end": 91
+            },
+            "value": "non-existent"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 92,
+          "end": 98
+        },
+        "value": "world/"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 99,
+          "end": 102
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 103,
+          "end": 110
+        },
+        "value": "foo=bar"
+      }
+    }
+  ]
+}

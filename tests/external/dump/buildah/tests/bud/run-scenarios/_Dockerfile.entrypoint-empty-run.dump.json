@@ -1,0 +1,73 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENTRYPOINT",
+      "entrypoint": {
+        "span": {
+          "start": 12,
+          "end": 22
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 23,
+            "end": 32
+          },
+          "value": [
+            {
+              "span": {
+                "start": 26,
+                "end": 29
+              },
+              "value": "pwd"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 33,
+          "end": 36
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 36,
+            "end": 36
+          },
+          "value": ""
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

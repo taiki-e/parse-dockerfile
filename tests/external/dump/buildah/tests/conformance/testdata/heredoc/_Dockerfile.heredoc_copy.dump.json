@@ -1,0 +1,222 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 35
+        },
+        "value": "docker/dockerfile:1.3-labs"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 36,
+          "end": 40
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 41,
+          "end": 62
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 63,
+            "end": 65
+          }
+        },
+        {
+          "span": {
+            "start": 66,
+            "end": 69
+          },
+          "value": "one"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 70,
+          "end": 73
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 74,
+            "end": 102
+          },
+          "value": "echo helloworld > image_file"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 103,
+          "end": 107
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 108,
+          "end": 129
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 130,
+          "end": 133
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 134,
+            "end": 144
+          },
+          "value": "echo hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 185,
+          "end": 189
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 228,
+              "end": 295
+            },
+            "expand": true,
+            "value": "(robots content)\nLong file with random text\nRandom line\nHelloWorld\n"
+          }
+        },
+        {
+          "here_doc": {
+            "span": {
+              "start": 306,
+              "end": 323
+            },
+            "expand": true,
+            "value": "(humans content)\n"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 216,
+              "end": 220
+            },
+            "value": "file"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 221,
+          "end": 227
+        },
+        "value": "/test/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 380,
+          "end": 384
+        }
+      },
+      "options": [
+        {
+          "flag_start": 385,
+          "name": {
+            "span": {
+              "start": 387,
+              "end": 391
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 392,
+              "end": 395
+            },
+            "value": "one"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 396,
+              "end": 406
+            },
+            "value": "image_file"
+          }
+        },
+        {
+          "here_doc": {
+            "span": {
+              "start": 441,
+              "end": 508
+            },
+            "expand": true,
+            "value": "(robots content)\nLong file with random text\nRandom line\nHelloWorld\n"
+          }
+        },
+        {
+          "here_doc": {
+            "span": {
+              "start": 519,
+              "end": 536
+            },
+            "expand": true,
+            "value": "(humans content)\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 433,
+          "end": 440
+        },
+        "value": "/test2/"
+      }
+    }
+  ]
+}

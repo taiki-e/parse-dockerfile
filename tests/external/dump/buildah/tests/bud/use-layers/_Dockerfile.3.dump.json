@@ -1,0 +1,111 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 28
+          },
+          "value": "mkdir /hello"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 29,
+          "end": 32
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 33,
+            "end": 47
+          },
+          "value": "touch blah.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 48,
+          "end": 52
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 53,
+              "end": 58
+            },
+            "value": "mount"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 59,
+          "end": 65
+        },
+        "value": "world/"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 66,
+          "end": 69
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 70,
+          "end": 77
+        },
+        "value": "foo=bar"
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 0,
+          "end": 3
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4,
+          "end": 18
+        },
+        "value": "VERSION=latest"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 19,
+          "end": 22
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 23,
+          "end": 30
+        },
+        "value": "FOO=bar"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 31,
+          "end": 35
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 36,
+          "end": 52
+        },
+        "value": "busybox:$VERSION"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 53,
+          "end": 56
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 57,
+          "end": 65
+        },
+        "value": "FOO $FOO"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 66,
+          "end": 69
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 70,
+            "end": 88
+          },
+          "value": "echo $FOO $VERSION"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

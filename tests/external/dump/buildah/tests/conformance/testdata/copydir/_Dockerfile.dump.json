@@ -1,0 +1,75 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 28
+        },
+        "value": "quay.io/libpod/centos:7"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 29,
+          "end": 33
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 34,
+              "end": 37
+            },
+            "value": "dir"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 38,
+          "end": 42
+        },
+        "value": "/dir"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 43,
+          "end": 46
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 47,
+            "end": 63
+          },
+          "value": "ls -al /dir/file"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

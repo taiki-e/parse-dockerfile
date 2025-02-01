@@ -1,0 +1,55 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 12
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 13,
+          "end": 16
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 17,
+              "end": 21
+            },
+            "value": "sub/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 22,
+          "end": 26
+        },
+        "value": "sub/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 13,
+          "end": 16
+        }
+      },
+      "options": [
+        {
+          "flag_start": 17,
+          "name": {
+            "span": {
+              "start": 19,
+              "end": 24
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 25,
+              "end": 28
+            },
+            "value": "777"
+          }
+        },
+        {
+          "flag_start": 29,
+          "name": {
+            "span": {
+              "start": 31,
+              "end": 36
+            },
+            "value": "chown"
+          },
+          "value": {
+            "span": {
+              "start": 37,
+              "end": 46
+            },
+            "value": "2367:3267"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 47,
+              "end": 59
+            },
+            "value": "addchmod.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 60,
+          "end": 64
+        },
+        "value": "/tmp"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 66,
+          "end": 69
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 70,
+            "end": 124
+          },
+          "value": "stat -c \"chmod:%a user:%u group:%g\"  /tmp/addchmod.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 126,
+          "end": 129
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 130,
+            "end": 137
+          },
+          "value": "/bin/sh"
+        }
+      }
+    }
+  ]
+}

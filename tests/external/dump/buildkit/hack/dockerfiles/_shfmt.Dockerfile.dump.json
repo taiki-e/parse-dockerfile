@@ -1,0 +1,316 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 42
+        },
+        "value": "docker/dockerfile-upstream:master"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 44,
+          "end": 48
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 49,
+          "end": 74
+        },
+        "value": "mvdan/shfmt:v3.1.2-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 75,
+            "end": 77
+          }
+        },
+        {
+          "span": {
+            "start": 78,
+            "end": 83
+          },
+          "value": "shfmt"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 84,
+          "end": 91
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 92,
+          "end": 96
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 97,
+          "end": 100
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 101,
+          "end": 123
+        },
+        "value": "SHFMT_FLAGS=\"-i 2 -ci\""
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 125,
+          "end": 129
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 130,
+          "end": 135
+        },
+        "value": "shfmt"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 136,
+            "end": 138
+          }
+        },
+        {
+          "span": {
+            "start": 139,
+            "end": 147
+          },
+          "value": "generate"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 148,
+          "end": 155
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 156,
+          "end": 165
+        },
+        "value": "/out/hack"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 166,
+          "end": 169
+        }
+      },
+      "options": [
+        {
+          "flag_start": 170,
+          "name": {
+            "span": {
+              "start": 172,
+              "end": 177
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 178,
+              "end": 189
+            },
+            "value": "target=/src"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 194,
+            "end": 248
+          },
+          "value": "cp -a /src/hack/. ./ && \\\n  shfmt -l -w $SHFMT_FLAGS ."
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 250,
+          "end": 254
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 255,
+          "end": 262
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 263,
+            "end": 265
+          }
+        },
+        {
+          "span": {
+            "start": 266,
+            "end": 272
+          },
+          "value": "update"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 273,
+          "end": 277
+        }
+      },
+      "options": [
+        {
+          "flag_start": 278,
+          "name": {
+            "span": {
+              "start": 280,
+              "end": 284
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 285,
+              "end": 293
+            },
+            "value": "generate"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 294,
+              "end": 298
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 299,
+          "end": 300
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 302,
+          "end": 306
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 307,
+          "end": 312
+        },
+        "value": "shfmt"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 313,
+            "end": 315
+          }
+        },
+        {
+          "span": {
+            "start": 316,
+            "end": 324
+          },
+          "value": "validate"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 325,
+          "end": 328
+        }
+      },
+      "options": [
+        {
+          "flag_start": 329,
+          "name": {
+            "span": {
+              "start": 331,
+              "end": 336
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 337,
+              "end": 345
+            },
+            "value": "target=."
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 350,
+            "end": 378
+          },
+          "value": "shfmt $SHFMT_FLAGS -d ./hack"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

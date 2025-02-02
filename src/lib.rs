@@ -340,13 +340,13 @@ pub struct AddInstruction<'a> {
     /// ADD [options] <src> ... <dest>
     ///     ^^^^^^^^^
     /// ```
-    pub options: SmallVec<[Flag<'a>; 1]>,
+    pub options: SmallVec<Flag<'a>, 1>,
     /// ```text
     /// ADD [options] <src> ... <dest>
     ///               ^^^^^^^^^
     /// ```
     // At least 1
-    pub src: SmallVec<[Source<'a>; 1]>,
+    pub src: SmallVec<Source<'a>, 1>,
     /// ```text
     /// ADD [options] <src> ... <dest>
     ///                         ^^^^^^
@@ -370,7 +370,7 @@ pub struct ArgInstruction<'a> {
     /// ARG <name>[=<default value>] [<name>[=<default value>]...]
     ///     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     /// ```
-    // TODO: SmallVec<[NameOptValue<'a>; 1]>
+    // TODO: SmallVec<NameOptValue<'a>, 1>
     pub arguments: UnescapedString<'a>,
 }
 /// A `CMD` instruction.
@@ -409,13 +409,13 @@ pub struct CopyInstruction<'a> {
     /// COPY [options] <src> ... <dest>
     ///      ^^^^^^^^^
     /// ```
-    pub options: SmallVec<[Flag<'a>; 1]>,
+    pub options: SmallVec<Flag<'a>, 1>,
     /// ```text
     /// COPY [options] <src> ... <dest>
     ///                ^^^^^^^^^
     /// ```
     // At least 1
-    pub src: SmallVec<[Source<'a>; 1]>,
+    pub src: SmallVec<Source<'a>, 1>,
     /// ```text
     /// COPY [options] <src> ... <dest>
     ///                          ^^^^^^
@@ -470,7 +470,7 @@ pub struct EnvInstruction<'a> {
     /// ENV <key>=<value> [<key>=<value>...]
     ///     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     /// ```
-    // TODO: SmallVec<[NameValue<'a>; 1]>
+    // TODO: SmallVec<NameValue<'a>, 1>
     pub arguments: UnescapedString<'a>,
 }
 /// An `EXPOSE` instruction.
@@ -490,7 +490,7 @@ pub struct ExposeInstruction<'a> {
     /// EXPOSE <port>[/<protocol>] [<port>[/<protocol>]...]
     ///        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     /// ```
-    pub arguments: SmallVec<[UnescapedString<'a>; 1]>,
+    pub arguments: SmallVec<UnescapedString<'a>, 1>,
 }
 /// A `FROM` instruction.
 ///
@@ -593,7 +593,7 @@ pub struct LabelInstruction<'a> {
     /// LABEL <key>=<value> [<key>=<value>...]
     ///       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     /// ```
-    // TODO: SmallVec<[NameValue<'a>; 1]>
+    // TODO: SmallVec<NameValue<'a>, 1>
     pub arguments: UnescapedString<'a>,
 }
 /// A `MAINTAINER` instruction (deprecated).
@@ -651,7 +651,7 @@ pub struct RunInstruction<'a> {
     /// RUN [options] <command> ...
     ///     ^^^^^^^^^
     /// ```
-    pub options: SmallVec<[Flag<'a>; 1]>,
+    pub options: SmallVec<Flag<'a>, 1>,
     /// ```text
     /// RUN [options] <command> ...
     ///               ^^^^^^^^^^^^^
@@ -685,7 +685,7 @@ pub struct ShellInstruction<'a> {
     /// ```
     // Usually at least 2, e.g., ["/bin/sh", "-c"]
     // Common cases are 4, e.g., ["/bin/bash", "-o", "pipefail", "-c"]
-    pub arguments: SmallVec<[UnescapedString<'a>; 4]>,
+    pub arguments: SmallVec<UnescapedString<'a>, 4>,
 }
 /// A `STOPSIGNAL` instruction.
 ///
@@ -842,7 +842,7 @@ pub struct UnescapedString<'a> {
 pub enum Command<'a> {
     /// Exec-form (JSON array)
     // At least 1
-    Exec(Spanned<SmallVec<[UnescapedString<'a>; 1]>>),
+    Exec(Spanned<SmallVec<UnescapedString<'a>, 1>>),
     /// Shell-form (space-separated string or here-documents), escape preserved
     Shell(Spanned<&'a str>),
 }
@@ -857,9 +857,9 @@ pub enum Command<'a> {
 #[allow(clippy::exhaustive_enums)]
 pub enum JsonOrStringArray<'a, const N: usize> {
     /// JSON array.
-    Json(Spanned<SmallVec<[UnescapedString<'a>; N]>>),
+    Json(Spanned<SmallVec<UnescapedString<'a>, N>>),
     /// Space-separated string.
-    String(SmallVec<[UnescapedString<'a>; N]>),
+    String(SmallVec<UnescapedString<'a>, N>),
 }
 
 /// A here-document.
@@ -1294,7 +1294,7 @@ fn parse_add_or_copy<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: &Keyword,
-) -> Result<(SmallVec<[Flag<'a>; 1]>, SmallVec<[Source<'a>; 1]>, UnescapedString<'a>), ErrorKind> {
+) -> Result<(SmallVec<Flag<'a>, 1>, SmallVec<Source<'a>, 1>, UnescapedString<'a>), ErrorKind> {
     debug_assert!(
         token_slow(&mut p.text[instruction.span.clone()].as_bytes(), b"ADD", p.escape_byte,)
             || token_slow(&mut p.text[instruction.span.clone()].as_bytes(), b"COPY", p.escape_byte,)
@@ -1303,7 +1303,7 @@ fn parse_add_or_copy<'a>(
     if is_maybe_json(s) {
         let mut tmp = *s;
         if let Ok(((src, dest), _array_span)) = parse_json_array::<(
-            SmallVec<[Source<'_>; 1]>,
+            SmallVec<Source<'_>, 1>,
             Option<_>,
         )>(&mut tmp, p.text, p.escape_byte)
         {
@@ -1322,7 +1322,7 @@ fn parse_add_or_copy<'a>(
         }
     }
     let (mut src, dest) = collect_space_separated_unescaped_consume_line::<(
-        SmallVec<[Source<'_>; 1]>,
+        SmallVec<Source<'_>, 1>,
         Option<_>,
     )>(s, p.text, p.escape_byte);
     if src.is_empty() {
@@ -1384,7 +1384,7 @@ fn parse_cmd<'a>(
     if is_maybe_json(s) {
         let mut tmp = *s;
         if let Ok((arguments, array_span)) =
-            parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
+            parse_json_array::<SmallVec<_, 1>>(&mut tmp, p.text, p.escape_byte)
         {
             debug_assert!(is_line_end(tmp.first()));
             if tmp.is_empty() {
@@ -1442,7 +1442,7 @@ fn parse_expose<'a>(
         b"EXPOSE",
         p.escape_byte,
     ));
-    let arguments: SmallVec<[_; 1]> =
+    let arguments: SmallVec<_, 1> =
         collect_space_separated_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.is_empty() {
         return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
@@ -1464,7 +1464,7 @@ fn parse_entrypoint<'a>(
     if is_maybe_json(s) {
         let mut tmp = *s;
         if let Ok((arguments, array_span)) =
-            parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
+            parse_json_array::<SmallVec<_, 1>>(&mut tmp, p.text, p.escape_byte)
         {
             debug_assert!(is_line_end(tmp.first()));
             if tmp.is_empty() {
@@ -1564,7 +1564,7 @@ fn parse_healthcheck<'a>(
                     if is_maybe_json(s) {
                         let mut tmp = *s;
                         if let Ok((arguments, array_span)) =
-                            parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
+                            parse_json_array::<SmallVec<_, 1>>(&mut tmp, p.text, p.escape_byte)
                         {
                             debug_assert!(is_line_end(tmp.first()));
                             if tmp.is_empty() {
@@ -1737,7 +1737,7 @@ fn parse_run<'a>(
     if is_maybe_json(s) {
         let mut tmp = *s;
         if let Ok((arguments, array_span)) =
-            parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
+            parse_json_array::<SmallVec<_, 1>>(&mut tmp, p.text, p.escape_byte)
         {
             debug_assert!(is_line_end(tmp.first()));
             if tmp.is_empty() {
@@ -1857,7 +1857,7 @@ fn parse_shell<'a>(
     if !is_maybe_json(s) {
         return Err(ErrorKind::Expected("JSON array", p.text.len() - s.len()));
     }
-    match parse_json_array::<SmallVec<[_; 4]>>(s, p.text, p.escape_byte) {
+    match parse_json_array::<SmallVec<_, 4>>(s, p.text, p.escape_byte) {
         Ok((arguments, _array_span)) => {
             if !s.is_empty() {
                 *s = &s[1..];
@@ -1938,7 +1938,7 @@ fn parse_volume<'a>(
             }));
         }
     }
-    let arguments: SmallVec<[_; 1]> =
+    let arguments: SmallVec<_, 1> =
         collect_space_separated_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.is_empty() {
         // TODO: "VOLUME" too?
@@ -2024,7 +2024,7 @@ impl<T> Store<T> for Vec<T> {
         self.push(val);
     }
 }
-impl<T, const N: usize> Store<T> for SmallVec<[T; N]> {
+impl<T, const N: usize> Store<T> for SmallVec<T, N> {
     #[inline]
     fn new() -> Self {
         Self::new()
@@ -2035,7 +2035,7 @@ impl<T, const N: usize> Store<T> for SmallVec<[T; N]> {
     }
 }
 impl<'a, const N: usize> Store<UnescapedString<'a>>
-    for (SmallVec<[Source<'a>; N]>, Option<UnescapedString<'a>>)
+    for (SmallVec<Source<'a>, N>, Option<UnescapedString<'a>>)
 {
     #[inline]
     fn new() -> Self {

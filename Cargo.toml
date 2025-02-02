@@ -44,7 +44,7 @@ serde = ["dep:serde", "dep:serde_derive", "smallvec/serde"]
 
 # Note: smallvec and serde are public dependencies.
 [dependencies]
-smallvec = { version = "1.13.2", features = ["union", "const_generics"] }
+smallvec = { version = "=2.0.0-alpha.10" }
 
 lexopt = { version = "0.3", optional = true }
 serde = { version = "1.0.165", optional = true }

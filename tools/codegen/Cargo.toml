@@ -1,6 +1,8 @@
 [package]
 name = "parse-dockerfile-internal-codegen"
+version = "0.0.0"
 edition = "2021"
+publish = false
 
 [dependencies]
 fs-err = "3"

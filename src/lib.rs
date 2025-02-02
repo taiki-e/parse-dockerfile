@@ -2830,6 +2830,27 @@ fn test_starts_with_ignore_ascii_case() {
     ));
 }
 
+// trim_ascii_end requires Rust 1.80
+#[allow(dead_code)] // Only used on pre-1.80 rustc
+trait StrExt {
+    fn trim_ascii_end(&self) -> &Self;
+}
+impl StrExt for str {
+    fn trim_ascii_end(&self) -> &Self {
+        let mut bytes = self.as_bytes();
+        // Note: A pattern matching based approach (instead of indexing) allows
+        // making the function const.
+        while let [rest @ .., last] = bytes {
+            if last.is_ascii_whitespace() {
+                bytes = rest;
+            } else {
+                break;
+            }
+        }
+        str::from_utf8(bytes).unwrap()
+    }
+}
+
 // Lookup table for ascii to hex decoding.
 #[rustfmt::skip]
 static HEX_DECODE_TABLE: [u8; 256] = {

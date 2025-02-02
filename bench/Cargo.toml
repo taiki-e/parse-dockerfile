@@ -1,6 +1,8 @@
 [package]
 name = "bench"
+version = "0.0.0"
 edition = "2021"
+publish = false
 
 [dev-dependencies]
 parse-dockerfile = { path = "..", default-features = false }

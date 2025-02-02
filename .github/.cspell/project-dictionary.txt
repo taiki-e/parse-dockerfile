@@ -3,12 +3,9 @@ binstall
 buildah
 buildkit
 Dockerfilefromarg
-dockerfiles
 enquote
 hfuzz
 jeztah
-libunwind
-machdep
 memrchr
 moby
 nofrom
@@ -17,4 +14,3 @@ shykes
 TARGETPLATFORM
 testdata
 thrpt
-unparse

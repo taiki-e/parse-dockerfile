@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use std::{mem, path::Path, str};
+use std::{path::Path, str};
 
 use fs_err as fs;
 use parse_dockerfile::*;
@@ -8,49 +8,6 @@ use test_helper::git::assert_diff;
 
 fn fixtures_dir() -> &'static Path {
     Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/tests/fixtures"))
-}
-
-// Test the size of public types. This is not intended to keep a specific size and
-// is intended to be used only as a help in optimization.
-#[test]
-#[cfg_attr(any(not(target_pointer_width = "64"), miri, careful), ignore)] // We set -Z randomize-layout for Miri/cargo-careful.
-fn size() {
-    assert_eq!(mem::size_of::<Error>(), 8);
-    assert_eq!(mem::size_of::<Dockerfile<'_>>(), 208);
-    assert_eq!(mem::size_of::<Stage<'_, '_>>(), 24);
-    assert_eq!(mem::size_of::<ParserDirectives<'_>>(), 112);
-    assert_eq!(mem::size_of::<ParserDirective<()>>(), 24);
-    assert_eq!(mem::size_of::<Instruction<'_>>(), 216);
-    assert_eq!(mem::size_of::<AddInstruction<'_>>(), 208);
-    assert_eq!(mem::size_of::<ArgInstruction<'_>>(), 56);
-    assert_eq!(mem::size_of::<CmdInstruction<'_>>(), 88);
-    assert_eq!(mem::size_of::<CopyInstruction<'_>>(), 208);
-    assert_eq!(mem::size_of::<Source<'_>>(), 48);
-    assert_eq!(mem::size_of::<EntrypointInstruction<'_>>(), 88);
-    assert_eq!(mem::size_of::<EnvInstruction<'_>>(), 56);
-    assert_eq!(mem::size_of::<ExposeInstruction<'_>>(), 64);
-    assert_eq!(mem::size_of::<FromInstruction<'_>>(), 136);
-    assert_eq!(mem::size_of::<HealthcheckInstruction<'_>>(), 128);
-    assert_eq!(mem::size_of::<HealthcheckArguments<'_>>(), 88);
-    assert_eq!(mem::size_of::<LabelInstruction<'_>>(), 56);
-    assert_eq!(mem::size_of::<MaintainerInstruction<'_>>(), 56);
-    assert_eq!(mem::size_of::<OnbuildInstruction<'_>>(), 24);
-    assert_eq!(mem::size_of::<RunInstruction<'_>>(), 208);
-    assert_eq!(mem::size_of::<ShellInstruction<'_>>(), 184);
-    assert_eq!(mem::size_of::<StopsignalInstruction<'_>>(), 56);
-    assert_eq!(mem::size_of::<UserInstruction<'_>>(), 56);
-    assert_eq!(mem::size_of::<VolumeInstruction<'_>>(), 88);
-    assert_eq!(mem::size_of::<WorkdirInstruction<'_>>(), 56);
-    assert_eq!(mem::size_of::<Keyword>(), 16);
-    assert_eq!(mem::size_of::<Flag<'_>>(), 88);
-    assert_eq!(mem::size_of::<UnescapedString<'_>>(), 40);
-    assert_eq!(mem::size_of::<Command<'_>>(), 72);
-    assert_eq!(mem::size_of::<JsonOrStringArray<'_, 1>>(), 72);
-    assert_eq!(mem::size_of::<HereDoc<'_>>(), 48);
-    assert_eq!(mem::size_of::<Spanned<()>>(), 16);
-    assert_eq!(mem::size_of::<Option<Spanned<&str>>>(), mem::size_of::<Spanned<&str>>());
-    assert_eq!(mem::size_of::<Span>(), 16);
-    assert_eq!(mem::size_of::<ParseIter<'_>>(), 152);
 }
 
 #[test]

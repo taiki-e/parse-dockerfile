@@ -76,6 +76,9 @@ const _README: () = ();
 #[cfg(test)]
 #[path = "gen/tests/assert_impl.rs"]
 mod assert_impl;
+#[cfg(test)]
+#[path = "gen/tests/track_size.rs"]
+mod track_size;
 
 mod error;
 

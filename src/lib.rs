@@ -3,7 +3,30 @@
 /*!
 Dockerfile parser, written in Rust.
 
-# Examples
+### Usage
+
+<!-- Note: Document from sync-markdown-to-rustdoc:start through sync-markdown-to-rustdoc:end
+     is synchronized from README.md. Any changes to that range are not preserved. -->
+<!-- tidy:sync-markdown-to-rustdoc:start -->
+
+To use this crate as a library, add this to your `Cargo.toml`:
+
+```toml
+[dependencies]
+parse-dockerfile = { version = "0.1", default-features = false }
+```
+
+<div class="rustdoc-alert rustdoc-alert-note">
+
+> **ⓘ Note**
+>
+> We recommend disabling default features because they enable CLI-related
+> dependencies which the library part does not use.
+
+</div>
+
+<!-- omit in toc -->
+### Examples
 
 ```
 use parse_dockerfile::{parse, Instruction};
@@ -40,11 +63,14 @@ assert!(matches!(stage1_instructions.next(), None));
 assert!(matches!(stages.next(), None));
 ```
 
-# Optional features
+<!-- omit in toc -->
+### Optional features
 
 - **`serde`** — Implements [`serde::Serialize`] trait for parse-dockerfile types.
 
 [`serde::Serialize`]: https://docs.rs/serde/latest/serde/trait.Serialize.html
+
+<!-- tidy:sync-markdown-to-rustdoc:end -->
 */
 
 #![doc(test(
@@ -68,10 +94,6 @@ assert!(matches!(stages.next(), None));
     clippy::std_instead_of_core,
 )]
 #![allow(clippy::inline_always)]
-
-#[cfg(doctest)]
-#[doc = include_str!("../README.md")]
-const _README: () = ();
 
 #[cfg(test)]
 #[path = "gen/tests/assert_impl.rs"]

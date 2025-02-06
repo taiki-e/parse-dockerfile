@@ -186,6 +186,8 @@ This makes the installation faster and may avoid the impact of [problems caused 
 
 ## Usage (Library)
 
+<!-- tidy:sync-markdown-to-rustdoc:start:src/lib.rs -->
+
 To use this crate as a library, add this to your `Cargo.toml`:
 
 ```toml
@@ -235,8 +237,21 @@ assert!(matches!(stage1_instructions.next(), None));
 assert!(matches!(stages.next(), None));
 ```
 
+<!-- tidy:sync-markdown-to-rustdoc:ignore:start -->
+
 See [documentation](https://docs.rs/parse-dockerfile) for more information on
 `parse-dockerfile` as a library.
+
+<!-- tidy:sync-markdown-to-rustdoc:ignore:end -->
+
+<!-- omit in toc -->
+### Optional features
+
+- **`serde`** — Implements [`serde::Serialize`] trait for parse-dockerfile types.
+
+[`serde::Serialize`]: https://docs.rs/serde/latest/serde/trait.Serialize.html
+
+<!-- tidy:sync-markdown-to-rustdoc:end -->
 
 ## License
 

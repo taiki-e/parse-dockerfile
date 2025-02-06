@@ -194,9 +194,8 @@ parse-dockerfile = { version = "0.1", default-features = false }
 ```
 
 > [!NOTE]
-> When using this crate as a library, we recommend disabling the default
-> features because the default features enable CLI-related dependencies and the
-> library part of this crate does not use them.
+> We recommend disabling default features because they enable CLI-related
+> dependencies which the library part does not use.
 
 <!-- omit in toc -->
 ### Examples

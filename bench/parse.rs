@@ -196,7 +196,7 @@ Found 10 outliers among 100 measurements (10.00%)
 
 use std::{hint::black_box, path::PathBuf};
 
-use criterion::{criterion_group, criterion_main, Criterion, Throughput};
+use criterion::{Criterion, Throughput, criterion_group, criterion_main};
 use fs_err as fs;
 
 fn workspace_root() -> PathBuf {

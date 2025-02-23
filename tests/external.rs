@@ -92,12 +92,14 @@ fn test() {
             if num_dockerfiles != 0 {
                 break;
             }
-            assert!(Command::new("git")
-                .current_dir(manifest_dir)
-                .args(["submodule", "update", "--init", "--recursive",])
-                .status()
-                .unwrap()
-                .success());
+            assert!(
+                Command::new("git")
+                    .current_dir(manifest_dir)
+                    .args(["submodule", "update", "--init", "--recursive",])
+                    .status()
+                    .unwrap()
+                    .success()
+            );
         }
         assert_eq!(num_dockerfiles, expected);
         all.sort_unstable();

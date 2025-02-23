@@ -2236,11 +2236,7 @@ fn parse_json_hex_escape(s: &mut &[u8], array_start: usize) -> Result<char, usiz
 
     fn decode_hex_val(val: u8) -> Option<u16> {
         let n = HEX_DECODE_TABLE[val as usize] as u16;
-        if n == u8::MAX as u16 {
-            None
-        } else {
-            Some(n)
-        }
+        if n == u8::MAX as u16 { None } else { Some(n) }
     }
 
     let c = match decode_hex_escape(s, array_start)? {

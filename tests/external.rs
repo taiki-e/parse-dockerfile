@@ -69,7 +69,7 @@ fn test() {
                 }
 
                 eprintln!();
-                eprintln!("parsing {:?}", abs.strip_prefix(manifest_dir).unwrap());
+                eprintln!("parsing {}", abs.strip_prefix(manifest_dir).unwrap().display());
                 num_dockerfiles += 1;
                 let text = &*fs::read_to_string(abs).unwrap();
                 let res = parse_dockerfile::parse(text);

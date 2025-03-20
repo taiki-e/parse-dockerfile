@@ -7,7 +7,7 @@ Just for reference purposes, leave results of local benchmarks.
 
 ## Versions
 
-- parse-dockerfile 0.1.0
+- parse-dockerfile 0.1.0 (ab3193449b973e2bd0cd26c8026ae06db750b078)
   - smallvec 1.13.2
 - dockerfile-parser 0.9.0
   - enquote 1.1.0
@@ -15,13 +15,13 @@ Just for reference purposes, leave results of local benchmarks.
   - regex 1.11.1
 
 
-## Apple M1 Pro (MacBook Pro 2021, macOS 15.2)
+## Apple M4 Pro (MacBook Pro 2024/11, macOS 15.3.1)
 
 ```console
 $ sysctl machdep.cpu.brand_string
-machdep.cpu.brand_string: Apple M1 Pro
+machdep.cpu.brand_string: Apple M4 Pro
 
-$ rustc -vV
+$ rustc +nightly-2025-02-01 -vV
 rustc 1.86.0-nightly (854f22563 2025-01-31)
 binary: rustc
 commit-hash: 854f22563c8daf92709fae18ee6aed52953835cd
@@ -30,7 +30,97 @@ host: aarch64-apple-darwin
 release: 1.86.0-nightly
 LLVM version: 19.1.7
 
-$ cargo bench -p bench
+$ cargo +nightly-2025-02-01 bench -p bench
+<cargo log omitted>
+
+parse_dockerfile_unix_28.3kb/parse_pull
+                        time:   [20.949 µs 20.991 µs 21.036 µs]
+                        thrpt:  [1.2536 GiB/s 1.2563 GiB/s 1.2589 GiB/s]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low severe
+parse_dockerfile_unix_28.3kb/parse_dom
+                        time:   [25.756 µs 25.810 µs 25.871 µs]
+                        thrpt:  [1.0193 GiB/s 1.0217 GiB/s 1.0239 GiB/s]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) high mild
+  2 (2.00%) high severe
+
+parse_dockerfile_unix_17.6kb/parse_pull
+                        time:   [14.390 µs 14.416 µs 14.442 µs]
+                        thrpt:  [1.1365 GiB/s 1.1386 GiB/s 1.1407 GiB/s]
+Found 5 outliers among 100 measurements (5.00%)
+  4 (4.00%) low mild
+  1 (1.00%) high severe
+parse_dockerfile_unix_17.6kb/parse_dom
+                        time:   [17.848 µs 17.883 µs 17.920 µs]
+                        thrpt:  [937.98 MiB/s 939.89 MiB/s 941.77 MiB/s]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high severe
+
+parse_dockerfile_windows_13.6kb/parse_pull
+                        time:   [6.4389 µs 6.4552 µs 6.4736 µs]
+                        thrpt:  [1.9669 GiB/s 1.9725 GiB/s 1.9775 GiB/s]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+parse_dockerfile_windows_13.6kb/parse_dom
+                        time:   [6.6282 µs 6.6416 µs 6.6567 µs]
+                        thrpt:  [1.9128 GiB/s 1.9172 GiB/s 1.9210 GiB/s]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) low mild
+  1 (1.00%) high mild
+  3 (3.00%) high severe
+
+parse_dockerfile_unix_4.7kb_no_here_doc/parse_pull
+                        time:   [2.8549 µs 2.8620 µs 2.8686 µs]
+                        thrpt:  [1.5376 GiB/s 1.5411 GiB/s 1.5450 GiB/s]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) low mild
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+parse_dockerfile_unix_4.7kb_no_here_doc/parse_dom
+                        time:   [3.1404 µs 3.1468 µs 3.1533 µs]
+                        thrpt:  [1.3988 GiB/s 1.4017 GiB/s 1.4045 GiB/s]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+
+parse_dockerfile_unix_4.7kb_many_here_doc/parse_pull
+                        time:   [2.7702 µs 2.7811 µs 2.7927 µs]
+                        thrpt:  [1.6004 GiB/s 1.6071 GiB/s 1.6134 GiB/s]
+parse_dockerfile_unix_4.7kb_many_here_doc/parse_dom
+                        time:   [3.1087 µs 3.1167 µs 3.1248 µs]
+                        thrpt:  [1.4303 GiB/s 1.4340 GiB/s 1.4377 GiB/s]
+Found 6 outliers among 100 measurements (6.00%)
+  3 (3.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+
+dockerfile_parser_unix_4.7kb_no_here_doc/parse_dom
+                        time:   [49.719 µs 50.100 µs 50.533 µs]
+                        thrpt:  [89.379 MiB/s 90.151 MiB/s 90.843 MiB/s]
+Found 8 outliers among 100 measurements (8.00%)
+  8 (8.00%) high mild
+
+```
+
+
+## Apple M1 Pro (MacBook Pro 2021, macOS 15.2)
+
+```console
+$ sysctl machdep.cpu.brand_string
+machdep.cpu.brand_string: Apple M1 Pro
+
+$ rustc +nightly-2025-02-01 -vV
+rustc 1.86.0-nightly (854f22563 2025-01-31)
+binary: rustc
+commit-hash: 854f22563c8daf92709fae18ee6aed52953835cd
+commit-date: 2025-01-31
+host: aarch64-apple-darwin
+release: 1.86.0-nightly
+LLVM version: 19.1.7
+
+$ cargo +nightly-2025-02-01 bench -p bench
 <cargo log omitted>
 
 parse_dockerfile_unix_28.3kb/parse_pull
@@ -112,7 +202,7 @@ Found 5 outliers among 100 measurements (5.00%)
 $ sysctl machdep.cpu.brand_string
 machdep.cpu.brand_string: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
 
-$ rustc -vV
+$ rustc +nightly-2025-02-01 -vV
 rustc 1.86.0-nightly (854f22563 2025-01-31)
 binary: rustc
 commit-hash: 854f22563c8daf92709fae18ee6aed52953835cd
@@ -121,7 +211,7 @@ host: x86_64-apple-darwin
 release: 1.86.0-nightly
 LLVM version: 19.1.7
 
-$ cargo bench -p bench
+$ cargo +nightly-2025-02-01 bench -p bench
 <cargo log omitted>
 
 parse_dockerfile_unix_28.3kb/parse_pull

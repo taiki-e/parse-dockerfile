@@ -2,7 +2,7 @@
 name = "parse-dockerfile"
 version = "0.1.1" #publish:version
 edition = "2021"
-rust-version = "1.80" # For str::trim_ascii_end
+rust-version = "1.65" # For let-else
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/taiki-e/parse-dockerfile"
 keywords = ["dockerfile", "parser"]

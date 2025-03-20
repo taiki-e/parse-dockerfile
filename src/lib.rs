@@ -93,7 +93,7 @@ assert!(matches!(stages.next(), None));
     // clippy::std_instead_of_alloc,
     clippy::std_instead_of_core,
 )]
-#![allow(clippy::inline_always)]
+#![allow(unstable_name_collisions, clippy::inline_always)]
 
 #[cfg(test)]
 #[path = "gen/tests/assert_impl.rs"]
@@ -2849,6 +2849,27 @@ fn test_starts_with_ignore_ascii_case() {
         b"aBcDeFgHiJkLmNoPqRsTuVwXyc",
         b"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     ));
+}
+
+// trim_ascii_end requires Rust 1.80
+#[allow(dead_code)] // Only used on pre-1.80 rustc
+trait StrExt {
+    fn trim_ascii_end(&self) -> &Self;
+}
+impl StrExt for str {
+    fn trim_ascii_end(&self) -> &Self {
+        let mut bytes = self.as_bytes();
+        // Note: A pattern matching based approach (instead of indexing) allows
+        // making the function const.
+        while let [rest @ .., last] = bytes {
+            if last.is_ascii_whitespace() {
+                bytes = rest;
+            } else {
+                break;
+            }
+        }
+        str::from_utf8(bytes).unwrap()
+    }
 }
 
 // Lookup table for ascii to hex decoding.

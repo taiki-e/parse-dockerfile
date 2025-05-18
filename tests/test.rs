@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use std::{path::Path, str};
+use std::path::Path;
 
 use fs_err as fs;
 use parse_dockerfile::*;

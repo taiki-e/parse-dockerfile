@@ -219,7 +219,9 @@ fn dump() {
         }
         let text = &fs::read_to_string(p).unwrap();
         let dockerfile = parse(text).unwrap();
-        parse_dockerfile::parse_iter(text).unwrap().for_each(|r| drop(r.unwrap()));
+        for r in parse_dockerfile::parse_iter(text).unwrap() {
+            r.unwrap();
+        }
         let dump = serde_json::to_vec_pretty(&dockerfile).unwrap();
         let mut dump_path = fixtures_dir.join("dump").join(p.file_name().unwrap());
         dump_path.as_mut_os_string().push(".dump.json"); // TODO: Use .add_extension("dump.json") once stabilized.

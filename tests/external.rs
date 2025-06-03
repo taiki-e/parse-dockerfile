@@ -79,7 +79,9 @@ fn test() {
                     continue;
                 }
                 let dockerfile = res.unwrap();
-                parse_dockerfile::parse_iter(text).unwrap().for_each(|r| drop(r.unwrap()));
+                for r in parse_dockerfile::parse_iter(text).unwrap() {
+                    r.unwrap();
+                }
                 let dump = serde_json::to_vec_pretty(&dockerfile).unwrap();
                 let mut dump_path = external_dir.join("dump").join(base).join(&rel);
                 let file_name = dump_path.file_name().unwrap().to_str().unwrap();

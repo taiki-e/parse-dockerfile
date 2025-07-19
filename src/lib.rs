@@ -104,7 +104,8 @@ mod track_size;
 
 mod error;
 
-use std::{borrow::Cow, collections::HashMap, mem, ops::Range, str};
+use core::{mem, ops::Range, str};
+use std::{borrow::Cow, collections::HashMap};
 
 use smallvec::SmallVec;
 

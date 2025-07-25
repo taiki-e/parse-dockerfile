@@ -1,19 +1,18 @@
 4799 tests/conformance/testdata/Dockerfile.heredoc-quoting
 1756 tests/conformance/testdata/Dockerfile.margs
-1458 tests/tools/vendor/github.com/golangci/misspell/Dockerfile
 1208 tests/bud/preserve-volumes/Dockerfile
-849 tests/bud/verify-cleanup/Dockerfile
+846 tests/bud/verify-cleanup/Dockerfile
 813 tests/conformance/testdata/Dockerfile.edgecases
 759 tests/conformance/testdata/header-builtin/Dockerfile
 704 tests/bud/env/Dockerfile.env-precedence
 662 tests/conformance/testdata/builtins/Dockerfile
 597 tests/conformance/testdata/transientmount/Dockerfile.env
 597 tests/conformance/testdata/Dockerfile.env
+561 tests/conformance/testdata/heredoc/Dockerfile.heredoc_copy
 560 tests/bud/cache-stages/Dockerfile.3
-547 tests/conformance/testdata/heredoc/Dockerfile.heredoc_copy
 535 contrib/docker/Dockerfile
-522 tests/conformance/testdata/Dockerfile.add
 512 tests/conformance/testdata/copy-escape-glob/Dockerfile
+510 tests/conformance/testdata/Dockerfile.add
 485 tests/conformance/testdata/copychown/Dockerfile
 422 tests/bud/multiarch/Dockerfile.fail-multistage
 421 tests/bud/volume-perms/Dockerfile
@@ -24,6 +23,7 @@
 385 tests/bud/multiarch/Dockerfile
 383 tests/bud/multi-stage-builds/Dockerfile.extended
 380 tests/conformance/testdata/multistage/copyback/Dockerfile
+362 tests/conformance/testdata/mount-targets/Dockerfile.mount
 343 tests/bud/workdir-symlink/Dockerfile-3
 340 tests/bud/buildkit-mount-from/Dockerfilemultistagefromcache
 329 tests/bud/buildkit-mount/Dockerfilecachewritesharing
@@ -32,6 +32,7 @@
 300 tests/bud/multi-stage-builds/Dockerfile.mixed
 300 tests/bud/multi-stage-builds-small-as/Dockerfile.mixed
 287 tests/bud/buildkit-mount/Dockerfilemultiplemounts
+277 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
 277 hack/Dockerfile
 272 tests/bud/buildkit-mount-from/Dockerfilecachemultiplefrom
 271 tests/bud/target/Dockerfile
@@ -46,6 +47,7 @@
 227 tests/bud/layers-squash/Dockerfile.multi-stage
 221 tests/bud/multiarch/Dockerfile.fail
 214 tests/bud/workdir-symlink/Dockerfile-2
+208 tests/conformance/testdata/mount-targets/Dockerfile
 206 tests/conformance/testdata/copysymlink/Dockerfile2
 198 tests/bud/secret-relative/Dockerfile
 195 tests/conformance/testdata/Dockerfile.copyfrom_6
@@ -89,6 +91,7 @@
 141 tests/conformance/testdata/Dockerfile.copyfrom_7
 141 tests/conformance/testdata/Dockerfile.copyfrom_3_1
 139 tests/bud/add-chmod/Dockerfile.combined
+138 tests/conformance/testdata/env/precedence/Dockerfile
 138 tests/conformance/testdata/Dockerfile.copyfrom_3
 138 tests/bud/buildkit-mount/Dockerfile4
 132 tests/bud/copy-create-absolute-path/Dockerfile
@@ -107,7 +110,6 @@
 126 tests/conformance/testdata/Dockerfile.copyfrom_2
 125 tests/bud/run-mounts/Dockerfile.ssh_options
 125 tests/bud/buildkit-mount-from/Dockerfilebindfrom
-124 tests/conformance/testdata/env/precedence/Dockerfile
 123 tests/bud/dest-final-slash/Dockerfile
 123 tests/bud/buildkit-mount/Dockerfile2
 120 tests/bud/copy-chown/Dockerfile.bad

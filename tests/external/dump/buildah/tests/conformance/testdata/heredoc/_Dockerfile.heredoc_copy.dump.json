@@ -5,9 +5,9 @@
       "value": {
         "span": {
           "start": 9,
-          "end": 35
+          "end": 49
         },
-        "value": "docker/dockerfile:1.3-labs"
+        "value": "mirror.gcr.io/docker/dockerfile:1.3-labs"
       }
     },
     "escape": null,
@@ -18,29 +18,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 36,
-          "end": 40
+          "start": 50,
+          "end": 54
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 41,
-          "end": 62
+          "start": 55,
+          "end": 76
         },
         "value": "mirror.gcr.io/busybox"
       },
       "as_": [
         {
           "span": {
-            "start": 63,
-            "end": 65
+            "start": 77,
+            "end": 79
           }
         },
         {
           "span": {
-            "start": 66,
-            "end": 69
+            "start": 80,
+            "end": 83
           },
           "value": "one"
         }
@@ -50,16 +50,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 70,
-          "end": 73
+          "start": 84,
+          "end": 87
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 74,
-            "end": 102
+            "start": 88,
+            "end": 116
           },
           "value": "echo helloworld > image_file"
         }
@@ -70,15 +70,15 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 103,
-          "end": 107
+          "start": 117,
+          "end": 121
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 108,
-          "end": 129
+          "start": 122,
+          "end": 143
         },
         "value": "mirror.gcr.io/busybox"
       },
@@ -88,16 +88,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 130,
-          "end": 133
+          "start": 144,
+          "end": 147
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 134,
-            "end": 144
+            "start": 148,
+            "end": 158
           },
           "value": "echo hello"
         }
@@ -108,8 +108,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 185,
-          "end": 189
+          "start": 199,
+          "end": 203
         }
       },
       "options": [],
@@ -117,8 +117,8 @@
         {
           "here_doc": {
             "span": {
-              "start": 228,
-              "end": 295
+              "start": 242,
+              "end": 309
             },
             "expand": true,
             "value": "(robots content)\nLong file with random text\nRandom line\nHelloWorld\n"
@@ -127,8 +127,8 @@
         {
           "here_doc": {
             "span": {
-              "start": 306,
-              "end": 323
+              "start": 320,
+              "end": 337
             },
             "expand": true,
             "value": "(humans content)\n"
@@ -137,8 +137,8 @@
         {
           "path": {
             "span": {
-              "start": 216,
-              "end": 220
+              "start": 230,
+              "end": 234
             },
             "value": "file"
           }
@@ -146,8 +146,8 @@
       ],
       "dest": {
         "span": {
-          "start": 221,
-          "end": 227
+          "start": 235,
+          "end": 241
         },
         "value": "/test/"
       }
@@ -156,24 +156,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 380,
-          "end": 384
+          "start": 394,
+          "end": 398
         }
       },
       "options": [
         {
-          "flag_start": 385,
+          "flag_start": 399,
           "name": {
             "span": {
-              "start": 387,
-              "end": 391
+              "start": 401,
+              "end": 405
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 392,
-              "end": 395
+              "start": 406,
+              "end": 409
             },
             "value": "one"
           }
@@ -183,8 +183,8 @@
         {
           "path": {
             "span": {
-              "start": 396,
-              "end": 406
+              "start": 410,
+              "end": 420
             },
             "value": "image_file"
           }
@@ -192,8 +192,8 @@
         {
           "here_doc": {
             "span": {
-              "start": 441,
-              "end": 508
+              "start": 455,
+              "end": 522
             },
             "expand": true,
             "value": "(robots content)\nLong file with random text\nRandom line\nHelloWorld\n"
@@ -202,8 +202,8 @@
         {
           "here_doc": {
             "span": {
-              "start": 519,
-              "end": 536
+              "start": 533,
+              "end": 550
             },
             "expand": true,
             "value": "(humans content)\n"
@@ -212,8 +212,8 @@
       ],
       "dest": {
         "span": {
-          "start": 433,
-          "end": 440
+          "start": 447,
+          "end": 454
         },
         "value": "/test2/"
       }

@@ -7,10 +7,17 @@ use std::{env, fmt::Write as _, path::Path, process::Command};
 use fs_err as fs;
 use test_helper::git::{assert_diff, ls_files};
 
+// https://github.com/moby/moby
+const MOBY: (&str, usize) = ("moby", 26);
+// https://github.com/moby/buildkit
+const BUILDKIT: (&str, usize) = ("buildkit", 58);
+// https://github.com/containers/buildah
+const BUILDAH: (&str, usize) = ("buildah", 309);
+
 #[test]
 #[cfg_attr(windows, ignore)] // git submodule eol issue
 fn test() {
-    let repos = [("moby", 26), ("buildkit", 58), ("buildah", 307)];
+    let repos = [MOBY, BUILDKIT, BUILDAH];
 
     let manifest_dir = Path::new(env!("CARGO_MANIFEST_DIR"));
     let external_dir = &manifest_dir.join("tests/external");

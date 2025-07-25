@@ -10,7 +10,7 @@ use test_helper::git::{assert_diff, ls_files};
 // https://github.com/moby/moby
 const MOBY: (&str, usize) = ("moby", 26);
 // https://github.com/moby/buildkit
-const BUILDKIT: (&str, usize) = ("buildkit", 58);
+const BUILDKIT: (&str, usize) = ("buildkit", 59);
 // https://github.com/containers/buildah
 const BUILDAH: (&str, usize) = ("buildah", 309);
 
@@ -110,7 +110,7 @@ fn test() {
                     .success()
             );
         }
-        assert_eq!(num_dockerfiles, expected);
+        assert_eq!(num_dockerfiles, expected, "{base}");
         all.sort_unstable();
         all.reverse();
         let mut out = String::new();

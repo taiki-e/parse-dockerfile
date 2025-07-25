@@ -27,7 +27,7 @@
           "start": 34,
           "end": 49
         },
-        "value": "GO_VERSION=1.23"
+        "value": "GO_VERSION=1.24"
       }
     },
     {
@@ -43,7 +43,7 @@
           "start": 54,
           "end": 70
         },
-        "value": "XX_VERSION=1.5.0"
+        "value": "XX_VERSION=1.6.1"
       }
     },
     {
@@ -309,63 +309,77 @@
       }
     },
     {
-      "kind": "RUN",
-      "run": {
+      "kind": "ARG",
+      "arg": {
         "span": {
           "start": 349,
           "end": 352
         }
       },
+      "arguments": {
+        "span": {
+          "start": 353,
+          "end": 384
+        },
+        "value": "ACTIONS_CACHE_API_FORCE_VERSION"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 385,
+          "end": 388
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 389,
+          "end": 413
+        },
+        "value": "ACTIONS_CACHE_SERVICE_V2"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 414,
+          "end": 417
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 418,
+          "end": 437
+        },
+        "value": "ACTIONS_RESULTS_URL"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 438,
+          "end": 441
+        }
+      },
       "options": [
         {
-          "flag_start": 353,
+          "flag_start": 442,
           "name": {
             "span": {
-              "start": 355,
-              "end": 360
+              "start": 444,
+              "end": 449
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 361,
-              "end": 369
-            },
-            "value": "target=."
-          }
-        },
-        {
-          "flag_start": 376,
-          "name": {
-            "span": {
-              "start": 378,
-              "end": 383
-            },
-            "value": "mount"
-          },
-          "value": {
-            "span": {
-              "start": 384,
-              "end": 413
-            },
-            "value": "target=/go/pkg/mod,type=cache"
-          }
-        },
-        {
-          "flag_start": 420,
-          "name": {
-            "span": {
-              "start": 422,
-              "end": 427
-            },
-            "value": "mount"
-          },
-          "value": {
-            "span": {
-              "start": 428,
+              "start": 450,
               "end": 458
             },
-            "value": "target=/root/.cache,type=cache"
+            "value": "target=."
           }
         },
         {
@@ -380,24 +394,58 @@
           "value": {
             "span": {
               "start": 473,
-              "end": 517
+              "end": 502
             },
-            "value": "type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN"
+            "value": "target=/go/pkg/mod,type=cache"
           }
         },
         {
-          "flag_start": 524,
+          "flag_start": 509,
           "name": {
             "span": {
-              "start": 526,
-              "end": 531
+              "start": 511,
+              "end": 516
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 532,
-              "end": 594
+              "start": 517,
+              "end": 547
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        },
+        {
+          "flag_start": 554,
+          "name": {
+            "span": {
+              "start": 556,
+              "end": 561
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 562,
+              "end": 606
+            },
+            "value": "type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN"
+          }
+        },
+        {
+          "flag_start": 613,
+          "name": {
+            "span": {
+              "start": 615,
+              "end": 620
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 621,
+              "end": 683
             },
             "value": "type=secret,id=ACTIONS_RUNTIME_TOKEN,env=ACTIONS_RUNTIME_TOKEN"
           }
@@ -406,8 +454,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 601,
-            "end": 697
+            "start": 690,
+            "end": 786
           },
           "value": "CGO_ENABLED=0 xx-go test -v -coverprofile=/tmp/coverage.txt -covermode=atomic ${TESTFLAGS} ./..."
         }
@@ -418,29 +466,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 699,
-          "end": 703
+          "start": 788,
+          "end": 792
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 704,
-          "end": 711
+          "start": 793,
+          "end": 800
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 712,
-            "end": 714
+            "start": 801,
+            "end": 803
           }
         },
         {
           "span": {
-            "start": 715,
-            "end": 728
+            "start": 804,
+            "end": 817
           },
           "value": "test-coverage"
         }
@@ -450,24 +498,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 729,
-          "end": 733
+          "start": 818,
+          "end": 822
         }
       },
       "options": [
         {
-          "flag_start": 734,
+          "flag_start": 823,
           "name": {
             "span": {
-              "start": 736,
-              "end": 740
+              "start": 825,
+              "end": 829
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 741,
-              "end": 745
+              "start": 830,
+              "end": 834
             },
             "value": "test"
           }
@@ -477,8 +525,8 @@
         {
           "path": {
             "span": {
-              "start": 746,
-              "end": 763
+              "start": 835,
+              "end": 852
             },
             "value": "/tmp/coverage.txt"
           }
@@ -486,8 +534,8 @@
       ],
       "dest": {
         "span": {
-          "start": 764,
-          "end": 765
+          "start": 853,
+          "end": 854
         },
         "value": "/"
       }

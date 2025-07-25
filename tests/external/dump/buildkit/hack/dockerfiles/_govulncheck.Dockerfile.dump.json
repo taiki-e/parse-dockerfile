@@ -27,7 +27,7 @@
           "start": 34,
           "end": 49
         },
-        "value": "GO_VERSION=1.23"
+        "value": "GO_VERSION=1.24"
       }
     },
     {
@@ -43,7 +43,7 @@
           "start": 54,
           "end": 80
         },
-        "value": "GOVULNCHECK_VERSION=v1.1.3"
+        "value": "GOVULNCHECK_VERSION=v1.1.4"
       }
     },
     {
@@ -289,10 +289,10 @@
         {
           "span": {
             "start": 467,
-            "end": 1022
+            "end": 555
           },
           "expand": true,
-          "value": "  set -ex\n  mkdir /out\n  govulncheck -format ${FORMAT} ./... | tee /out/govulncheck.out\n  if [ \"${FORMAT}\" = \"sarif\" ]; then\n    # Make sure \"results\" field is defined in SARIF output otherwise GitHub Code Scanning\n    # will fail when uploading report with \"Invalid SARIF. Missing 'results' array in run.\"\n    # Relates to https://github.com/golang/vuln/blob/ffdef74cc44d7eb71931d8d414c478b966812488/internal/sarif/sarif.go#L69\n    jq '(.runs[] | select(.results == null) | .results) |= []' /out/govulncheck.out | tee >(sponge /out/govulncheck.out)\n  fi\n"
+          "value": "  set -ex\n  mkdir /out\n  govulncheck -format ${FORMAT} ./... | tee /out/govulncheck.out\n"
         }
       ]
     },
@@ -300,29 +300,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1027,
-          "end": 1031
+          "start": 560,
+          "end": 564
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1032,
-          "end": 1039
+          "start": 565,
+          "end": 572
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 1040,
-            "end": 1042
+            "start": 573,
+            "end": 575
           }
         },
         {
           "span": {
-            "start": 1043,
-            "end": 1049
+            "start": 576,
+            "end": 582
           },
           "value": "output"
         }
@@ -332,24 +332,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1050,
-          "end": 1054
+          "start": 583,
+          "end": 587
         }
       },
       "options": [
         {
-          "flag_start": 1055,
+          "flag_start": 588,
           "name": {
             "span": {
-              "start": 1057,
-              "end": 1061
+              "start": 590,
+              "end": 594
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 1062,
-              "end": 1065
+              "start": 595,
+              "end": 598
             },
             "value": "run"
           }
@@ -359,8 +359,8 @@
         {
           "path": {
             "span": {
-              "start": 1066,
-              "end": 1070
+              "start": 599,
+              "end": 603
             },
             "value": "/out"
           }
@@ -368,8 +368,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1071,
-          "end": 1072
+          "start": 604,
+          "end": 605
         },
         "value": "/"
       }

@@ -36,7 +36,7 @@
           "start": 67,
           "end": 82
         },
-        "value": "GO_VERSION=1.23"
+        "value": "GO_VERSION=1.24"
       }
     },
     {
@@ -52,7 +52,7 @@
           "start": 87,
           "end": 106
         },
-        "value": "ALPINE_VERSION=3.21"
+        "value": "ALPINE_VERSION=3.22"
       }
     },
     {

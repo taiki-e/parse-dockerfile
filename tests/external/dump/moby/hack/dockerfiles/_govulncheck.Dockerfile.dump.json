@@ -27,7 +27,7 @@
           "start": 34,
           "end": 51
         },
-        "value": "GO_VERSION=1.23.5"
+        "value": "GO_VERSION=1.24.5"
       }
     },
     {
@@ -43,7 +43,7 @@
           "start": 56,
           "end": 82
         },
-        "value": "GOVULNCHECK_VERSION=v1.1.3"
+        "value": "GOVULNCHECK_VERSION=v1.1.4"
       }
     },
     {
@@ -289,10 +289,10 @@
         {
           "span": {
             "start": 470,
-            "end": 1077
+            "end": 610
           },
           "expand": true,
-          "value": "  set -ex\n  mkdir /out\n  ln -s vendor.mod go.mod\n  ln -s vendor.sum go.sum\n  govulncheck -format ${FORMAT} ./... | tee /out/govulncheck.out\n  if [ \"${FORMAT}\" = \"sarif\" ]; then\n    # Make sure \"results\" field is defined in SARIF output otherwise GitHub Code Scanning\n    # will fail when uploading report with \"Invalid SARIF. Missing 'results' array in run.\"\n    # Relates to https://github.com/golang/vuln/blob/ffdef74cc44d7eb71931d8d414c478b966812488/internal/sarif/sarif.go#L69\n    jq '(.runs[] | select(.results == null) | .results) |= []' /out/govulncheck.out | tee >(sponge /out/govulncheck.out)\n  fi\n"
+          "value": "  set -ex\n  mkdir /out\n  ln -s vendor.mod go.mod\n  ln -s vendor.sum go.sum\n  govulncheck -format ${FORMAT} ./... | tee /out/govulncheck.out\n"
         }
       ]
     },
@@ -300,29 +300,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1082,
-          "end": 1086
+          "start": 615,
+          "end": 619
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1087,
-          "end": 1094
+          "start": 620,
+          "end": 627
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 1095,
-            "end": 1097
+            "start": 628,
+            "end": 630
           }
         },
         {
           "span": {
-            "start": 1098,
-            "end": 1104
+            "start": 631,
+            "end": 637
           },
           "value": "output"
         }
@@ -332,24 +332,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1105,
-          "end": 1109
+          "start": 638,
+          "end": 642
         }
       },
       "options": [
         {
-          "flag_start": 1110,
+          "flag_start": 643,
           "name": {
             "span": {
-              "start": 1112,
-              "end": 1116
+              "start": 645,
+              "end": 649
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 1117,
-              "end": 1120
+              "start": 650,
+              "end": 653
             },
             "value": "run"
           }
@@ -359,8 +359,8 @@
         {
           "path": {
             "span": {
-              "start": 1121,
-              "end": 1125
+              "start": 654,
+              "end": 658
             },
             "value": "/out"
           }
@@ -368,8 +368,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1126,
-          "end": 1127
+          "start": 659,
+          "end": 660
         },
         "value": "/"
       }

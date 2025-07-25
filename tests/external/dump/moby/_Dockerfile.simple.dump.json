@@ -18,7 +18,7 @@
           "start": 378,
           "end": 395
         },
-        "value": "GO_VERSION=1.23.5"
+        "value": "GO_VERSION=1.24.5"
       }
     },
     {
@@ -127,8 +127,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1175,
-          "end": 1179
+          "start": 1162,
+          "end": 1166
         }
       },
       "options": [],
@@ -136,8 +136,8 @@
         {
           "path": {
             "span": {
-              "start": 1180,
-              "end": 1203
+              "start": 1167,
+              "end": 1190
             },
             "value": "hack/dockerfile/install"
           }
@@ -145,8 +145,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1204,
-          "end": 1227
+          "start": 1191,
+          "end": 1214
         },
         "value": "hack/dockerfile/install"
       }
@@ -155,18 +155,18 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1228,
-          "end": 1231
+          "start": 1215,
+          "end": 1218
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1232,
-            "end": 1332
+            "start": 1219,
+            "end": 1321
           },
-          "value": "for i in runc containerd tini proxy dockercli; \\\n\t\tdo hack/dockerfile/install/install.sh $i; \\\n\tdone"
+          "value": "set -e; for i in runc containerd tini dockercli; \\\n\t\tdo hack/dockerfile/install/install.sh $i; \\\n\tdone"
         }
       },
       "here_docs": []
@@ -175,14 +175,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1333,
-          "end": 1336
+          "start": 1322,
+          "end": 1325
         }
       },
       "arguments": {
         "span": {
-          "start": 1337,
-          "end": 1362
+          "start": 1326,
+          "end": 1351
         },
         "value": "PATH=/usr/local/cli:$PATH"
       }
@@ -191,14 +191,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1364,
-          "end": 1367
+          "start": 1353,
+          "end": 1356
         }
       },
       "arguments": {
         "span": {
-          "start": 1368,
-          "end": 1381
+          "start": 1357,
+          "end": 1370
         },
         "value": "AUTO_GOPATH 1"
       }
@@ -207,14 +207,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 1382,
-          "end": 1389
+          "start": 1371,
+          "end": 1378
         }
       },
       "arguments": {
         "span": {
-          "start": 1390,
-          "end": 1405
+          "start": 1379,
+          "end": 1394
         },
         "value": "/usr/src/docker"
       }
@@ -223,8 +223,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1406,
-          "end": 1410
+          "start": 1395,
+          "end": 1399
         }
       },
       "options": [],
@@ -232,8 +232,8 @@
         {
           "path": {
             "span": {
-              "start": 1411,
-              "end": 1412
+              "start": 1400,
+              "end": 1401
             },
             "value": "."
           }
@@ -241,8 +241,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1413,
-          "end": 1428
+          "start": 1402,
+          "end": 1417
         },
         "value": "/usr/src/docker"
       }

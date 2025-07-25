@@ -27,7 +27,7 @@
           "start": 48,
           "end": 63
         },
-        "value": "GO_VERSION=1.23"
+        "value": "GO_VERSION=1.24"
       }
     },
     {
@@ -487,10 +487,10 @@
         {
           "span": {
             "start": 1411,
-            "end": 1593
+            "end": 1625
           },
           "expand": true,
-          "value": "  set -e\n  mkdir -p /opt/vtprotobuf\n  go mod download github.com/planetscale/vtprotobuf\n  cp -r $(go list -m -f='{{.Dir}}' github.com/planetscale/vtprotobuf)/include /opt/vtprotobuf\n"
+          "value": "  set -e\n  mkdir -p /opt/vtprotobuf\n  go mod download github.com/planetscale/vtprotobuf\n  cp -R $(go list -m -f='{{.Dir}}' github.com/planetscale/vtprotobuf)/include /opt/vtprotobuf\n  chmod -R 0755 /opt/vtprotobuf\n"
         }
       ]
     },
@@ -498,29 +498,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1598,
-          "end": 1602
+          "start": 1630,
+          "end": 1634
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1603,
-          "end": 1615
+          "start": 1635,
+          "end": 1647
         },
         "value": "gobuild-base"
       },
       "as_": [
         {
           "span": {
-            "start": 1616,
-            "end": 1618
+            "start": 1648,
+            "end": 1650
           }
         },
         {
           "span": {
-            "start": 1619,
-            "end": 1627
+            "start": 1651,
+            "end": 1659
           },
           "value": "vendored"
         }
@@ -530,24 +530,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1628,
-          "end": 1631
+          "start": 1660,
+          "end": 1663
         }
       },
       "options": [
         {
-          "flag_start": 1632,
+          "flag_start": 1664,
           "name": {
             "span": {
-              "start": 1634,
-              "end": 1639
+              "start": 1666,
+              "end": 1671
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1640,
-              "end": 1675
+              "start": 1672,
+              "end": 1707
             },
             "value": "type=bind,source=vendor,target=/app"
           }
@@ -556,8 +556,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 1681,
-            "end": 1681
+            "start": 1713,
+            "end": 1713
           },
           "value": ""
         }
@@ -565,8 +565,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 1682,
-            "end": 1813
+            "start": 1714,
+            "end": 1845
           },
           "expand": true,
           "value": "  set -e\n  mkdir -p /opt/vendored/include\n  find . -name '*.proto' | tar -cf - --files-from - | tar -C /opt/vendored/include -xf -\n"
@@ -577,29 +577,289 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1818,
-          "end": 1822
+          "start": 1850,
+          "end": 1854
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1823,
-          "end": 1835
+          "start": 1855,
+          "end": 1862
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1863,
+            "end": 1865
+          }
+        },
+        {
+          "span": {
+            "start": 1866,
+            "end": 1874
+          },
+          "value": "protobuf"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1875,
+          "end": 1879
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1880,
+          "name": {
+            "span": {
+              "start": 1882,
+              "end": 1886
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 1887,
+          "name": {
+            "span": {
+              "start": 1889,
+              "end": 1893
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1894,
+              "end": 1900
+            },
+            "value": "protoc"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1901,
+              "end": 1912
+            },
+            "value": "/opt/protoc"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1913,
+          "end": 1914
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1915,
+          "end": 1919
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1920,
+          "name": {
+            "span": {
+              "start": 1922,
+              "end": 1926
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 1927,
+          "name": {
+            "span": {
+              "start": 1929,
+              "end": 1933
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1934,
+              "end": 1944
+            },
+            "value": "googleapis"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1945,
+              "end": 1960
+            },
+            "value": "/opt/googleapis"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1961,
+          "end": 1962
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1963,
+          "end": 1967
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1968,
+          "name": {
+            "span": {
+              "start": 1970,
+              "end": 1974
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 1975,
+          "name": {
+            "span": {
+              "start": 1977,
+              "end": 1981
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1982,
+              "end": 1992
+            },
+            "value": "vtprotobuf"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1993,
+              "end": 2008
+            },
+            "value": "/opt/vtprotobuf"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2009,
+          "end": 2010
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2011,
+          "end": 2015
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2016,
+          "name": {
+            "span": {
+              "start": 2018,
+              "end": 2022
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 2023,
+          "name": {
+            "span": {
+              "start": 2025,
+              "end": 2029
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2030,
+              "end": 2038
+            },
+            "value": "vendored"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2039,
+              "end": 2052
+            },
+            "value": "/opt/vendored"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2053,
+          "end": 2054
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2056,
+          "end": 2060
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2061,
+          "end": 2073
         },
         "value": "gobuild-base"
       },
       "as_": [
         {
           "span": {
-            "start": 1836,
-            "end": 1838
+            "start": 2074,
+            "end": 2076
           }
         },
         {
           "span": {
-            "start": 1839,
-            "end": 1844
+            "start": 2077,
+            "end": 2082
           },
           "value": "tools"
         }
@@ -609,75 +869,75 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1845,
-          "end": 1848
+          "start": 2083,
+          "end": 2086
         }
       },
       "options": [
         {
-          "flag_start": 1849,
+          "flag_start": 2087,
           "name": {
             "span": {
-              "start": 1851,
-              "end": 1856
+              "start": 2089,
+              "end": 2094
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1857,
-              "end": 1899
+              "start": 2095,
+              "end": 2137
             },
             "value": "type=bind,source=go.mod,target=/app/go.mod"
           }
         },
         {
-          "flag_start": 1906,
+          "flag_start": 2144,
           "name": {
             "span": {
-              "start": 1908,
-              "end": 1913
+              "start": 2146,
+              "end": 2151
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1914,
-              "end": 1956
+              "start": 2152,
+              "end": 2194
             },
             "value": "type=bind,source=go.sum,target=/app/go.sum"
           }
         },
         {
-          "flag_start": 1963,
+          "flag_start": 2201,
           "name": {
             "span": {
-              "start": 1965,
-              "end": 1970
+              "start": 2203,
+              "end": 2208
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1971,
-              "end": 2001
+              "start": 2209,
+              "end": 2239
             },
             "value": "type=cache,target=/root/.cache"
           }
         },
         {
-          "flag_start": 2008,
+          "flag_start": 2246,
           "name": {
             "span": {
-              "start": 2010,
-              "end": 2015
+              "start": 2248,
+              "end": 2253
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 2016,
-              "end": 2045
+              "start": 2254,
+              "end": 2283
             },
             "value": "type=cache,target=/go/pkg/mod"
           }
@@ -686,8 +946,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 2050,
-            "end": 2229
+            "start": 2288,
+            "end": 2467
           },
           "value": "go install \\\n    github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto \\\n    google.golang.org/grpc/cmd/protoc-gen-go-grpc \\\n    google.golang.org/protobuf/cmd/protoc-gen-go"
         }
@@ -698,37 +958,37 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 2230,
-          "end": 2234
+          "start": 2468,
+          "end": 2472
         }
       },
       "options": [
         {
-          "flag_start": 2235,
+          "flag_start": 2473,
           "name": {
             "span": {
-              "start": 2237,
-              "end": 2241
+              "start": 2475,
+              "end": 2479
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 2242,
+          "flag_start": 2480,
           "name": {
             "span": {
-              "start": 2244,
-              "end": 2248
+              "start": 2482,
+              "end": 2486
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 2249,
-              "end": 2255
+              "start": 2487,
+              "end": 2495
             },
-            "value": "protoc"
+            "value": "protobuf"
           }
         }
       ],
@@ -736,188 +996,17 @@
         {
           "path": {
             "span": {
-              "start": 2256,
-              "end": 2267
+              "start": 2496,
+              "end": 2497
             },
-            "value": "/opt/protoc"
+            "value": "/"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 2268,
-          "end": 2278
-        },
-        "value": "/usr/local"
-      }
-    },
-    {
-      "kind": "COPY",
-      "copy": {
-        "span": {
-          "start": 2279,
-          "end": 2283
-        }
-      },
-      "options": [
-        {
-          "flag_start": 2284,
-          "name": {
-            "span": {
-              "start": 2286,
-              "end": 2290
-            },
-            "value": "link"
-          },
-          "value": null
-        },
-        {
-          "flag_start": 2291,
-          "name": {
-            "span": {
-              "start": 2293,
-              "end": 2297
-            },
-            "value": "from"
-          },
-          "value": {
-            "span": {
-              "start": 2298,
-              "end": 2308
-            },
-            "value": "googleapis"
-          }
-        }
-      ],
-      "src": [
-        {
-          "path": {
-            "span": {
-              "start": 2309,
-              "end": 2324
-            },
-            "value": "/opt/googleapis"
-          }
-        }
-      ],
-      "dest": {
-        "span": {
-          "start": 2325,
-          "end": 2335
-        },
-        "value": "/usr/local"
-      }
-    },
-    {
-      "kind": "COPY",
-      "copy": {
-        "span": {
-          "start": 2336,
-          "end": 2340
-        }
-      },
-      "options": [
-        {
-          "flag_start": 2341,
-          "name": {
-            "span": {
-              "start": 2343,
-              "end": 2347
-            },
-            "value": "link"
-          },
-          "value": null
-        },
-        {
-          "flag_start": 2348,
-          "name": {
-            "span": {
-              "start": 2350,
-              "end": 2354
-            },
-            "value": "from"
-          },
-          "value": {
-            "span": {
-              "start": 2355,
-              "end": 2365
-            },
-            "value": "vtprotobuf"
-          }
-        }
-      ],
-      "src": [
-        {
-          "path": {
-            "span": {
-              "start": 2366,
-              "end": 2381
-            },
-            "value": "/opt/vtprotobuf"
-          }
-        }
-      ],
-      "dest": {
-        "span": {
-          "start": 2382,
-          "end": 2392
-        },
-        "value": "/usr/local"
-      }
-    },
-    {
-      "kind": "COPY",
-      "copy": {
-        "span": {
-          "start": 2393,
-          "end": 2397
-        }
-      },
-      "options": [
-        {
-          "flag_start": 2398,
-          "name": {
-            "span": {
-              "start": 2400,
-              "end": 2404
-            },
-            "value": "link"
-          },
-          "value": null
-        },
-        {
-          "flag_start": 2405,
-          "name": {
-            "span": {
-              "start": 2407,
-              "end": 2411
-            },
-            "value": "from"
-          },
-          "value": {
-            "span": {
-              "start": 2412,
-              "end": 2420
-            },
-            "value": "vendored"
-          }
-        }
-      ],
-      "src": [
-        {
-          "path": {
-            "span": {
-              "start": 2421,
-              "end": 2434
-            },
-            "value": "/opt/vendored"
-          }
-        }
-      ],
-      "dest": {
-        "span": {
-          "start": 2435,
-          "end": 2445
+          "start": 2498,
+          "end": 2508
         },
         "value": "/usr/local"
       }
@@ -926,29 +1015,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 2447,
-          "end": 2451
+          "start": 2510,
+          "end": 2514
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 2452,
-          "end": 2457
+          "start": 2515,
+          "end": 2520
         },
         "value": "tools"
       },
       "as_": [
         {
           "span": {
-            "start": 2458,
-            "end": 2460
+            "start": 2521,
+            "end": 2523
           }
         },
         {
           "span": {
-            "start": 2461,
-            "end": 2470
+            "start": 2524,
+            "end": 2533
           },
           "value": "generated"
         }
@@ -958,24 +1047,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 2471,
-          "end": 2474
+          "start": 2534,
+          "end": 2537
         }
       },
       "options": [
         {
-          "flag_start": 2475,
+          "flag_start": 2538,
           "name": {
             "span": {
-              "start": 2477,
-              "end": 2482
+              "start": 2540,
+              "end": 2545
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 2483,
-              "end": 2524
+              "start": 2546,
+              "end": 2587
             },
             "value": "type=bind,target=github.com/moby/buildkit"
           }
@@ -984,8 +1073,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 2530,
-            "end": 2530
+            "start": 2593,
+            "end": 2593
           },
           "value": ""
         }
@@ -993,8 +1082,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 2531,
-            "end": 2806
+            "start": 2594,
+            "end": 2869
           },
           "expand": true,
           "value": "  set -ex\n  mkdir /out\n  find github.com/moby/buildkit -name '*.proto' -o -name vendor -prune -false | xargs \\\n    protoc --go_out=/out --go-grpc_out=require_unimplemented_servers=false:/out \\\n           --go-vtproto_out=features=marshal+unmarshal+size+equal+pool+clone:/out\n"
@@ -1005,29 +1094,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 2811,
-          "end": 2815
+          "start": 2874,
+          "end": 2878
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 2816,
-          "end": 2823
+          "start": 2879,
+          "end": 2886
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 2824,
-            "end": 2826
+            "start": 2887,
+            "end": 2889
           }
         },
         {
           "span": {
-            "start": 2827,
-            "end": 2833
+            "start": 2890,
+            "end": 2896
           },
           "value": "update"
         }
@@ -1037,24 +1126,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 2834,
-          "end": 2838
+          "start": 2897,
+          "end": 2901
         }
       },
       "options": [
         {
-          "flag_start": 2839,
+          "flag_start": 2902,
           "name": {
             "span": {
-              "start": 2841,
-              "end": 2845
+              "start": 2904,
+              "end": 2908
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 2846,
-              "end": 2855
+              "start": 2909,
+              "end": 2918
             },
             "value": "generated"
           }
@@ -1064,8 +1153,8 @@
         {
           "path": {
             "span": {
-              "start": 2856,
-              "end": 2885
+              "start": 2919,
+              "end": 2948
             },
             "value": "/out/github.com/moby/buildkit"
           }
@@ -1073,8 +1162,8 @@
       ],
       "dest": {
         "span": {
-          "start": 2886,
-          "end": 2887
+          "start": 2949,
+          "end": 2950
         },
         "value": "/"
       }
@@ -1083,29 +1172,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 2889,
-          "end": 2893
+          "start": 2952,
+          "end": 2956
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 2894,
-          "end": 2906
+          "start": 2957,
+          "end": 2969
         },
         "value": "gobuild-base"
       },
       "as_": [
         {
           "span": {
-            "start": 2907,
-            "end": 2909
+            "start": 2970,
+            "end": 2972
           }
         },
         {
           "span": {
-            "start": 2910,
-            "end": 2918
+            "start": 2973,
+            "end": 2981
           },
           "value": "validate"
         }
@@ -1115,41 +1204,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 2919,
-          "end": 2922
+          "start": 2982,
+          "end": 2985
         }
       },
       "options": [
         {
-          "flag_start": 2923,
+          "flag_start": 2986,
           "name": {
             "span": {
-              "start": 2925,
-              "end": 2930
+              "start": 2988,
+              "end": 2993
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 2931,
-              "end": 2952
+              "start": 2994,
+              "end": 3015
             },
             "value": "type=bind,target=.,rw"
           }
         },
         {
-          "flag_start": 2959,
+          "flag_start": 3022,
           "name": {
             "span": {
-              "start": 2961,
-              "end": 2966
+              "start": 3024,
+              "end": 3029
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 2967,
-              "end": 3012
+              "start": 3030,
+              "end": 3075
             },
             "value": "type=bind,from=update,target=/generated-files"
           }
@@ -1158,8 +1247,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 3018,
-            "end": 3018
+            "start": 3081,
+            "end": 3081
           },
           "value": ""
         }
@@ -1167,8 +1256,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 3019,
-            "end": 3341
+            "start": 3082,
+            "end": 3404
           },
           "expand": true,
           "value": "  set -e\n  git add -A\n  if [ \"$(ls -A /generated-files)\" ]; then\n    cp -rf /generated-files/* .\n  fi\n  diff=$(git status --porcelain -- ':!vendor' '**/*.pb.go')\n  if [ -n \"$diff\" ]; then\n    echo >&2 'ERROR: The result of \"go generate\" differs. Please update with \"make generated-files\"'\n    echo \"$diff\"\n    exit 1\n  fi\n"

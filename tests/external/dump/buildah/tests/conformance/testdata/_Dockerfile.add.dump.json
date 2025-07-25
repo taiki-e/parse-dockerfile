@@ -37,16 +37,16 @@
           "path": {
             "span": {
               "start": 31,
-              "end": 87
+              "end": 85
             },
-            "value": "https://github.com/openshift/origin/raw/master/README.md"
+            "value": "https://github.com/openshift/origin/raw/main/README.md"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 88,
-          "end": 97
+          "start": 86,
+          "end": 95
         },
         "value": "README.md"
       }
@@ -55,14 +55,14 @@
       "kind": "USER",
       "user": {
         "span": {
-          "start": 98,
-          "end": 102
+          "start": 96,
+          "end": 100
         }
       },
       "arguments": {
         "span": {
-          "start": 103,
-          "end": 107
+          "start": 101,
+          "end": 105
         },
         "value": "1001"
       }
@@ -71,8 +71,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 108,
-          "end": 111
+          "start": 106,
+          "end": 109
         }
       },
       "options": [],
@@ -80,17 +80,17 @@
         {
           "path": {
             "span": {
-              "start": 112,
-              "end": 166
+              "start": 110,
+              "end": 162
             },
-            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+            "value": "https://github.com/openshift/origin/raw/main/LICENSE"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 167,
-          "end": 168
+          "start": 163,
+          "end": 164
         },
         "value": "."
       }
@@ -99,8 +99,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 169,
-          "end": 172
+          "start": 165,
+          "end": 168
         }
       },
       "options": [],
@@ -108,17 +108,17 @@
         {
           "path": {
             "span": {
-              "start": 173,
-              "end": 227
+              "start": 169,
+              "end": 221
             },
-            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+            "value": "https://github.com/openshift/origin/raw/main/LICENSE"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 228,
-          "end": 229
+          "start": 222,
+          "end": 223
         },
         "value": "A"
       }
@@ -127,8 +127,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 230,
-          "end": 233
+          "start": 224,
+          "end": 227
         }
       },
       "options": [],
@@ -136,17 +136,17 @@
         {
           "path": {
             "span": {
-              "start": 234,
-              "end": 288
+              "start": 228,
+              "end": 280
             },
-            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+            "value": "https://github.com/openshift/origin/raw/main/LICENSE"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 289,
-          "end": 292
+          "start": 281,
+          "end": 284
         },
         "value": "./a"
       }
@@ -155,14 +155,14 @@
       "kind": "USER",
       "user": {
         "span": {
-          "start": 293,
-          "end": 297
+          "start": 285,
+          "end": 289
         }
       },
       "arguments": {
         "span": {
-          "start": 298,
-          "end": 302
+          "start": 290,
+          "end": 294
         },
         "value": "root"
       }
@@ -171,16 +171,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 303,
-          "end": 306
+          "start": 295,
+          "end": 298
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 307,
-            "end": 316
+            "start": 299,
+            "end": 308
           },
           "value": "mkdir ./b"
         }
@@ -191,8 +191,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 317,
-          "end": 320
+          "start": 309,
+          "end": 312
         }
       },
       "options": [],
@@ -200,17 +200,17 @@
         {
           "path": {
             "span": {
-              "start": 321,
-              "end": 375
+              "start": 313,
+              "end": 365
             },
-            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+            "value": "https://github.com/openshift/origin/raw/main/LICENSE"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 376,
-          "end": 381
+          "start": 366,
+          "end": 371
         },
         "value": "./b/a"
       }
@@ -219,8 +219,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 382,
-          "end": 385
+          "start": 372,
+          "end": 375
         }
       },
       "options": [],
@@ -228,17 +228,17 @@
         {
           "path": {
             "span": {
-              "start": 386,
-              "end": 440
+              "start": 376,
+              "end": 428
             },
-            "value": "https://github.com/openshift/origin/raw/master/LICENSE"
+            "value": "https://github.com/openshift/origin/raw/main/LICENSE"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 441,
-          "end": 446
+          "start": 429,
+          "end": 434
         },
         "value": "./b/."
       }
@@ -247,8 +247,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 447,
-          "end": 450
+          "start": 435,
+          "end": 438
         }
       },
       "options": [],
@@ -256,8 +256,8 @@
         {
           "path": {
             "span": {
-              "start": 451,
-              "end": 515
+              "start": 439,
+              "end": 503
             },
             "value": "https://github.com/openshift/ruby-hello-world/archive/master.zip"
           }
@@ -265,8 +265,8 @@
       ],
       "dest": {
         "span": {
-          "start": 516,
-          "end": 521
+          "start": 504,
+          "end": 509
         },
         "value": "/tmp/"
       }

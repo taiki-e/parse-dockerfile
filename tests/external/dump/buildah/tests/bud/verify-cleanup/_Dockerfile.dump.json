@@ -367,9 +367,9 @@
         "shell": {
           "span": {
             "start": 591,
-            "end": 656
+            "end": 655
           },
-          "value": "[ ! -d \"/testdir\" ] && echo \"Directory $TESTDIR DOES NOT exists.\""
+          "value": "[ ! -d \"/testdir\" ] && echo \"Directory $TESTDIR DOES NOT exist.\""
         }
       },
       "here_docs": []
@@ -378,18 +378,18 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 657,
-          "end": 660
+          "start": 656,
+          "end": 659
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 661,
-            "end": 734
+            "start": 660,
+            "end": 732
           },
-          "value": "[ ! -d \"/cachedir\" ] && echo \"Cache Directory $CACHEDIR DOES NOT exists.\""
+          "value": "[ ! -d \"/cachedir\" ] && echo \"Cache Directory $CACHEDIR DOES NOT exist.\""
         }
       },
       "here_docs": []
@@ -398,18 +398,18 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 735,
-          "end": 738
+          "start": 733,
+          "end": 736
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 739,
-            "end": 812
+            "start": 737,
+            "end": 809
           },
-          "value": "[ ! -f \"secret1.txt\" ] && echo \"Secret File $SECRETFILE DOES NOT exists.\""
+          "value": "[ ! -f \"secret1.txt\" ] && echo \"Secret File $SECRETFILE DOES NOT exist.\""
         }
       },
       "here_docs": []
@@ -418,16 +418,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 832,
-          "end": 835
+          "start": 829,
+          "end": 832
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 836,
-            "end": 848
+            "start": 833,
+            "end": 845
           },
           "value": "cat /tmp/hey"
         }

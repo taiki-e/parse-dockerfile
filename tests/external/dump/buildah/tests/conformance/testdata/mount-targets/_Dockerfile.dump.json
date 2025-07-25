@@ -1,0 +1,206 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 49
+        },
+        "value": "mirror.gcr.io/docker/dockerfile:1.9-labs"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 51,
+          "end": 55
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 56,
+          "end": 77
+        },
+        "value": "mirror.gcr.io/busybox"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 78,
+            "end": 80
+          }
+        },
+        {
+          "span": {
+            "start": 81,
+            "end": 88
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 89,
+          "end": 93
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 94,
+              "end": 98
+            },
+            "value": "true"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 99,
+          "end": 105
+        },
+        "value": "/true/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 106,
+          "end": 113
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 114,
+          "end": 119
+        },
+        "value": "/true"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 120,
+          "end": 123
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 124,
+            "end": 146
+          },
+          "value": "touch -d @0 /true/true"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 148,
+          "end": 152
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 153,
+          "end": 160
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 161,
+          "end": 165
+        }
+      },
+      "options": [
+        {
+          "flag_start": 166,
+          "name": {
+            "span": {
+              "start": 168,
+              "end": 172
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 173,
+              "end": 180
+            },
+            "value": "builder"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 181,
+              "end": 191
+            },
+            "value": "/true/true"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 192,
+          "end": 193
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 194,
+          "end": 197
+        }
+      },
+      "options": [],
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 198,
+            "end": 207
+          },
+          "value": [
+            {
+              "span": {
+                "start": 200,
+                "end": 205
+              },
+              "value": "/true"
+            }
+          ]
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

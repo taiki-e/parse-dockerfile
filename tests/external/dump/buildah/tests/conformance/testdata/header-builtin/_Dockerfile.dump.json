@@ -19,7 +19,7 @@
           "start": 60,
           "end": 126
         },
-        "value": "registry.fedoraproject.org/fedora-minimal:41${TARGETARCH:+-x86_64}"
+        "value": "registry.fedoraproject.org/fedora-minimal:42${TARGETARCH:+-x86_64}"
       },
       "as_": [
         {
@@ -51,7 +51,7 @@
           "start": 197,
           "end": 264
         },
-        "value": "registry.fedoraproject.org/fedora-minimal:41${TARGETARCH:+-aarch64}"
+        "value": "registry.fedoraproject.org/fedora-minimal:42${TARGETARCH:+-aarch64}"
       },
       "as_": [
         {

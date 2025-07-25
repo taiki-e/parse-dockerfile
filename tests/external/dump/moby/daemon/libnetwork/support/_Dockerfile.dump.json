@@ -1,0 +1,129 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 19
+        },
+        "value": "docker:18-dind"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 21,
+          "end": 24
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 25,
+            "end": 203
+          },
+          "value": "set -ex \\\n    && echo \"http://nl.alpinelinux.org/alpine/edge/main\" >> /etc/apk/repositories \\\n    && echo \"http://nl.alpinelinux.org/alpine/edge/testing\" >> /etc/apk/repositories"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 204,
+          "end": 207
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 208,
+            "end": 362
+          },
+          "value": "apk add --no-cache \\\n    util-linux \\\n    bridge-utils \\\n    iptables \\\n    iputils \\\n    iproute2 \\\n    ipvsadm \\\n    conntrack-tools \\\n    jq \\\n    bash"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 364,
+          "end": 371
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 372,
+          "end": 376
+        },
+        "value": "/bin"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 377,
+          "end": 381
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 382,
+              "end": 386
+            },
+            "value": "*.sh"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 387,
+          "end": 392
+        },
+        "value": "/bin/"
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 394,
+          "end": 397
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 398,
+            "end": 409
+          },
+          "value": "/bin/run.sh"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 55,
+          "end": 59
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 60,
+          "end": 159
+        },
+        "value": "python:3.13.2-slim-bullseye@sha256:31b581c8218e1f3c58672481b3b7dba8e898852866b408c6a984c22832523935"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 160,
+            "end": 162
+          }
+        },
+        {
+          "span": {
+            "start": 163,
+            "end": 169
+          },
+          "value": "python"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 170,
+          "end": 174
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 175,
+          "end": 266
+        },
+        "value": "otel/weaver:v0.13.2@sha256:ae7346b992e477f629ea327e0979e8a416a97f7956ab1f7e95ac1f44edf1a893"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 267,
+            "end": 269
+          }
+        },
+        {
+          "span": {
+            "start": 270,
+            "end": 276
+          },
+          "value": "weaver"
+        }
+      ]
+    }
+  ]
+}

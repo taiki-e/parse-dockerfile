@@ -1,0 +1,361 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 57
+        },
+        "value": "DEBIAN_VERSION=bookworm"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 58,
+          "end": 61
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 62,
+          "end": 78
+        },
+        "value": "XX_VERSION=1.6.1"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 119,
+          "end": 123
+        }
+      },
+      "options": [
+        {
+          "flag_start": 124,
+          "name": {
+            "span": {
+              "start": 126,
+              "end": 134
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 135,
+              "end": 149
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 150,
+          "end": 177
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 178,
+            "end": 180
+          }
+        },
+        {
+          "span": {
+            "start": 181,
+            "end": 183
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 185,
+          "end": 189
+        }
+      },
+      "options": [
+        {
+          "flag_start": 190,
+          "name": {
+            "span": {
+              "start": 192,
+              "end": 200
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 201,
+              "end": 215
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 216,
+          "end": 245
+        },
+        "value": "debian:${DEBIAN_VERSION}-slim"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 246,
+            "end": 248
+          }
+        },
+        {
+          "span": {
+            "start": 249,
+            "end": 254
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 255,
+          "end": 259
+        }
+      },
+      "options": [
+        {
+          "flag_start": 260,
+          "name": {
+            "span": {
+              "start": 262,
+              "end": 266
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 267,
+          "name": {
+            "span": {
+              "start": 269,
+              "end": 273
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 274,
+              "end": 276
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 277,
+              "end": 278
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 279,
+          "end": 280
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 281,
+          "end": 284
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 285,
+          "end": 299
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 300,
+          "end": 303
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 304,
+            "end": 376
+          },
+          "value": "apt-get update && xx-apt-get --no-install-recommends install -y binutils"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 377,
+          "end": 384
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 385,
+          "end": 389
+        },
+        "value": "/out"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 390,
+          "end": 393
+        }
+      },
+      "options": [
+        {
+          "flag_start": 394,
+          "name": {
+            "span": {
+              "start": 396,
+              "end": 401
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 402,
+              "end": 432
+            },
+            "value": "type=bind,target=/winresources"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 439,
+            "end": 543
+          },
+          "value": "x86_64-w64-mingw32-windmc -v /winresources/event_messages.mc \\\n    && mv MSG00001.bin event_messages.bin"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 545,
+          "end": 549
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 550,
+          "end": 557
+        },
+        "value": "scratch"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 558,
+          "end": 562
+        }
+      },
+      "options": [
+        {
+          "flag_start": 563,
+          "name": {
+            "span": {
+              "start": 565,
+              "end": 569
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 570,
+              "end": 575
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 576,
+              "end": 580
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 581,
+          "end": 582
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

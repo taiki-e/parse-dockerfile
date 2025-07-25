@@ -4,6 +4,7 @@ buildah
 buildkit
 Dockerfilefromarg
 enquote
+gitsubmodule
 hfuzz
 jeztah
 memrchr

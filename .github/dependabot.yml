@@ -17,3 +17,10 @@ updates:
     commit-message:
       prefix: ''
     labels: []
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ''
+    labels: []

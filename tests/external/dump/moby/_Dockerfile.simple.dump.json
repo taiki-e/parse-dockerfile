@@ -82,23 +82,7 @@
       "arguments": {
         "span": {
           "start": 519,
-          "end": 534
-        },
-        "value": "GO111MODULE=off"
-      }
-    },
-    {
-      "kind": "ENV",
-      "env": {
-        "span": {
-          "start": 535,
-          "end": 538
-        }
-      },
-      "arguments": {
-        "span": {
-          "start": 539,
-          "end": 556
+          "end": 536
         },
         "value": "GOTOOLCHAIN=local"
       }
@@ -107,16 +91,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 761,
-          "end": 764
+          "start": 733,
+          "end": 736
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 765,
-            "end": 1052
+            "start": 737,
+            "end": 1024
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends \\\n\t\tbuild-essential \\\n\t\tcurl \\\n\t\tcmake \\\n\t\tgit \\\n\t\tlibseccomp-dev \\\n\t\tca-certificates \\\n\t\te2fsprogs \\\n\t\tiptables \\\n\t\tpkg-config \\\n\t\tpigz \\\n\t\tprocps \\\n\t\txfsprogs \\\n\t\txz-utils \\\n\t\t\\\n\t\tvim-common \\\n\t&& rm -rf /var/lib/apt/lists/*"
         }
@@ -127,8 +111,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1162,
-          "end": 1166
+          "start": 1134,
+          "end": 1138
         }
       },
       "options": [],
@@ -136,8 +120,8 @@
         {
           "path": {
             "span": {
-              "start": 1167,
-              "end": 1190
+              "start": 1139,
+              "end": 1162
             },
             "value": "hack/dockerfile/install"
           }
@@ -145,8 +129,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1191,
-          "end": 1214
+          "start": 1163,
+          "end": 1186
         },
         "value": "hack/dockerfile/install"
       }
@@ -155,16 +139,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1215,
-          "end": 1218
+          "start": 1187,
+          "end": 1190
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1219,
-            "end": 1321
+            "start": 1191,
+            "end": 1293
           },
           "value": "set -e; for i in runc containerd tini dockercli; \\\n\t\tdo hack/dockerfile/install/install.sh $i; \\\n\tdone"
         }
@@ -175,14 +159,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1322,
-          "end": 1325
+          "start": 1294,
+          "end": 1297
         }
       },
       "arguments": {
         "span": {
-          "start": 1326,
-          "end": 1351
+          "start": 1298,
+          "end": 1323
         },
         "value": "PATH=/usr/local/cli:$PATH"
       }
@@ -191,14 +175,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1353,
-          "end": 1356
+          "start": 1325,
+          "end": 1328
         }
       },
       "arguments": {
         "span": {
-          "start": 1357,
-          "end": 1370
+          "start": 1329,
+          "end": 1342
         },
         "value": "AUTO_GOPATH 1"
       }
@@ -207,14 +191,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 1371,
-          "end": 1378
+          "start": 1343,
+          "end": 1350
         }
       },
       "arguments": {
         "span": {
-          "start": 1379,
-          "end": 1394
+          "start": 1351,
+          "end": 1366
         },
         "value": "/usr/src/docker"
       }
@@ -223,8 +207,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1395,
-          "end": 1399
+          "start": 1367,
+          "end": 1371
         }
       },
       "options": [],
@@ -232,8 +216,8 @@
         {
           "path": {
             "span": {
-              "start": 1400,
-              "end": 1401
+              "start": 1372,
+              "end": 1373
             },
             "value": "."
           }
@@ -241,8 +225,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1402,
-          "end": 1417
+          "start": 1374,
+          "end": 1389
         },
         "value": "/usr/src/docker"
       }

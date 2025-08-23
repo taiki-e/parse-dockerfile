@@ -6,4 +6,5 @@ honggfuzz
 lexopt
 libfuzzer
 prettyplease
+rustversion
 smallvec

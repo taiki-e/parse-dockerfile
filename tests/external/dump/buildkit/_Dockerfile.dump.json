@@ -43,7 +43,7 @@
           "start": 72,
           "end": 97
         },
-        "value": "CONTAINERD_VERSION=v2.1.1"
+        "value": "CONTAINERD_VERSION=v2.1.4"
       }
     },
     {
@@ -59,7 +59,7 @@
           "start": 189,
           "end": 221
         },
-        "value": "CONTAINERD_ALT_VERSION_20=v2.0.5"
+        "value": "CONTAINERD_ALT_VERSION_20=v2.0.6"
       }
     },
     {
@@ -75,7 +75,7 @@
           "start": 226,
           "end": 259
         },
-        "value": "CONTAINERD_ALT_VERSION_17=v1.7.27"
+        "value": "CONTAINERD_ALT_VERSION_17=v1.7.28"
       }
     },
     {

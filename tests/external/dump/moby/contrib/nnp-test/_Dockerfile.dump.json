@@ -1,25 +1,50 @@
 {
   "parser_directives": {
-    "syntax": null,
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
     "escape": null,
     "check": null
   },
   "instructions": [
     {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 59
+        },
+        "value": "BASE_DEBIAN_DISTRO=trixie"
+      }
+    },
+    {
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 0,
-          "end": 4
+          "start": 61,
+          "end": 65
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 5,
-          "end": 25
+          "start": 66,
+          "end": 99
         },
-        "value": "debian:bookworm-slim"
+        "value": "debian:${BASE_DEBIAN_DISTRO}-slim"
       },
       "as_": null
     },
@@ -27,16 +52,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 26,
-          "end": 29
+          "start": 100,
+          "end": 103
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 30,
-            "end": 104
+            "start": 104,
+            "end": 178
           },
           "value": "apt-get update && apt-get install -y gcc libc6-dev --no-install-recommends"
         }
@@ -47,8 +72,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 106,
-          "end": 110
+          "start": 180,
+          "end": 184
         }
       },
       "options": [],
@@ -56,8 +81,8 @@
         {
           "path": {
             "span": {
-              "start": 111,
-              "end": 112
+              "start": 185,
+              "end": 186
             },
             "value": "."
           }
@@ -65,8 +90,8 @@
       ],
       "dest": {
         "span": {
-          "start": 113,
-          "end": 122
+          "start": 187,
+          "end": 196
         },
         "value": "/usr/src/"
       }
@@ -75,14 +100,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 124,
-          "end": 131
+          "start": 198,
+          "end": 205
         }
       },
       "arguments": {
         "span": {
-          "start": 132,
-          "end": 141
+          "start": 206,
+          "end": 215
         },
         "value": "/usr/src/"
       }
@@ -91,16 +116,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 143,
-          "end": 146
+          "start": 217,
+          "end": 220
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 147,
-            "end": 199
+            "start": 221,
+            "end": 273
           },
           "value": "gcc -g -Wall -static nnp-test.c -o /usr/bin/nnp-test"
         }
@@ -111,16 +136,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 201,
-          "end": 204
+          "start": 275,
+          "end": 278
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 205,
-            "end": 231
+            "start": 279,
+            "end": 305
           },
           "value": "chmod +s /usr/bin/nnp-test"
         }

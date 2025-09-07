@@ -1,8 +1,8 @@
-27121 Dockerfile
+26446 Dockerfile
 13659 Dockerfile.windows
 4736 integration/build/testdata/Dockerfile.TestBuildPreserveOwnership
 2458 vendor/github.com/docker/distribution/Dockerfile
-2201 hack/dockerfiles/generate-files.Dockerfile
+2197 hack/dockerfiles/generate-files.Dockerfile
 1390 Dockerfile.simple
 1305 contrib/busybox/Dockerfile
 1126 vendor/github.com/tonistiigi/fsutil/Dockerfile
@@ -10,8 +10,8 @@
 917 daemon/libnetwork/cmd/ssd/Dockerfile
 855 vendor/github.com/tonistiigi/go-actions-cache/Dockerfile
 755 vendor/github.com/tonistiigi/dchapes-mode/Dockerfile
-643 contrib/syscall-test/Dockerfile
-609 hack/dockerfiles/govulncheck.Dockerfile
+717 contrib/syscall-test/Dockerfile
+605 hack/dockerfiles/govulncheck.Dockerfile
 583 cmd/dockerd/winresources/Dockerfile
 477 integration/build/testdata/Dockerfile.TestBuildMultiStageCopy
 453 man/vendor/github.com/cpuguy83/go-md2man/v2/Dockerfile
@@ -19,10 +19,9 @@
 410 daemon/libnetwork/support/Dockerfile
 329 vendor/github.com/creack/pty/Dockerfile.golang
 319 vendor/github.com/pelletier/go-toml/Dockerfile
+306 contrib/nnp-test/Dockerfile
 277 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
-232 contrib/nnp-test/Dockerfile
 167 daemon/libnetwork/cmd/diagnostic/Dockerfile.dind
 141 daemon/libnetwork/cmd/diagnostic/Dockerfile.client
 113 vendor/github.com/pelletier/go-toml/v2/Dockerfile
 105 daemon/libnetwork/cmd/networkdb-test/Dockerfile
-66 contrib/httpserver/Dockerfile

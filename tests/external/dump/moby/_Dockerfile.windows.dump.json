@@ -109,7 +109,7 @@
           "start": 7460,
           "end": 7477
         },
-        "value": "GO_VERSION=1.24.5"
+        "value": "GO_VERSION=1.24.6"
       }
     },
     {
@@ -157,7 +157,7 @@
           "start": 7674,
           "end": 7700
         },
-        "value": "CONTAINERD_VERSION=v1.7.27"
+        "value": "CONTAINERD_VERSION=v1.7.28"
       }
     },
     {

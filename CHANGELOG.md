@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Distribute prebuilt binaries for powerpc64le/riscv64gc/s390x Linux.
+
 ## [0.1.1] - 2025-02-06
 
 - Documentation improvements.

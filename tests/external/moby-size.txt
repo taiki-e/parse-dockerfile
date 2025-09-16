@@ -1,5 +1,5 @@
 26446 Dockerfile
-13659 Dockerfile.windows
+13541 Dockerfile.windows
 4736 integration/build/testdata/Dockerfile.TestBuildPreserveOwnership
 2458 vendor/github.com/docker/distribution/Dockerfile
 2197 hack/dockerfiles/generate-files.Dockerfile

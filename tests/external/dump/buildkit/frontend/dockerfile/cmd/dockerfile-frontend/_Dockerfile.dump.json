@@ -27,7 +27,7 @@
           "start": 48,
           "end": 63
         },
-        "value": "GO_VERSION=1.24"
+        "value": "GO_VERSION=1.25"
       }
     },
     {
@@ -578,33 +578,33 @@
       "arguments": {
         "span": {
           "start": 1458,
-          "end": 1584
+          "end": 1622
         },
-        "value": "moby.buildkit.frontend.caps=\"moby.buildkit.frontend.inputs,moby.buildkit.frontend.subrequests,moby.buildkit.frontend.contexts\""
+        "value": "moby.buildkit.frontend.caps=\"moby.buildkit.frontend.inputs,moby.buildkit.frontend.subrequests,moby.buildkit.frontend.contexts,moby.buildkit.frontend.gitquerystring\""
       }
     },
     {
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1585,
-          "end": 1589
+          "start": 1623,
+          "end": 1627
         }
       },
       "options": [
         {
-          "flag_start": 1590,
+          "flag_start": 1628,
           "name": {
             "span": {
-              "start": 1592,
-              "end": 1596
+              "start": 1630,
+              "end": 1634
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 1597,
-              "end": 1602
+              "start": 1635,
+              "end": 1640
             },
             "value": "build"
           }
@@ -614,8 +614,8 @@
         {
           "path": {
             "span": {
-              "start": 1603,
-              "end": 1623
+              "start": 1641,
+              "end": 1661
             },
             "value": "/dockerfile-frontend"
           }
@@ -623,8 +623,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1624,
-          "end": 1648
+          "start": 1662,
+          "end": 1686
         },
         "value": "/bin/dockerfile-frontend"
       }
@@ -633,21 +633,21 @@
       "kind": "ENTRYPOINT",
       "entrypoint": {
         "span": {
-          "start": 1649,
-          "end": 1659
+          "start": 1687,
+          "end": 1697
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 1660,
-            "end": 1688
+            "start": 1698,
+            "end": 1726
           },
           "value": [
             {
               "span": {
-                "start": 1662,
-                "end": 1686
+                "start": 1700,
+                "end": 1724
               },
               "value": "/bin/dockerfile-frontend"
             }
@@ -659,15 +659,15 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1690,
-          "end": 1694
+          "start": 1728,
+          "end": 1732
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1695,
-          "end": 1702
+          "start": 1733,
+          "end": 1740
         },
         "value": "release"
       },

@@ -27,7 +27,7 @@
           "start": 48,
           "end": 63
         },
-        "value": "GO_VERSION=1.24"
+        "value": "GO_VERSION=1.25"
       }
     },
     {
@@ -947,9 +947,9 @@
         "shell": {
           "span": {
             "start": 2288,
-            "end": 2467
+            "end": 2472
           },
-          "value": "go install \\\n    github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto \\\n    google.golang.org/grpc/cmd/protoc-gen-go-grpc \\\n    google.golang.org/protobuf/cmd/protoc-gen-go"
+          "value": "go install tool \\\n    github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto \\\n    google.golang.org/grpc/cmd/protoc-gen-go-grpc \\\n    google.golang.org/protobuf/cmd/protoc-gen-go"
         }
       },
       "here_docs": []
@@ -958,35 +958,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 2468,
-          "end": 2472
+          "start": 2473,
+          "end": 2477
         }
       },
       "options": [
         {
-          "flag_start": 2473,
+          "flag_start": 2478,
           "name": {
             "span": {
-              "start": 2475,
-              "end": 2479
+              "start": 2480,
+              "end": 2484
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 2480,
+          "flag_start": 2485,
           "name": {
             "span": {
-              "start": 2482,
-              "end": 2486
+              "start": 2487,
+              "end": 2491
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 2487,
-              "end": 2495
+              "start": 2492,
+              "end": 2500
             },
             "value": "protobuf"
           }
@@ -996,8 +996,8 @@
         {
           "path": {
             "span": {
-              "start": 2496,
-              "end": 2497
+              "start": 2501,
+              "end": 2502
             },
             "value": "/"
           }
@@ -1005,8 +1005,8 @@
       ],
       "dest": {
         "span": {
-          "start": 2498,
-          "end": 2508
+          "start": 2503,
+          "end": 2513
         },
         "value": "/usr/local"
       }
@@ -1015,29 +1015,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 2510,
-          "end": 2514
+          "start": 2515,
+          "end": 2519
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 2515,
-          "end": 2520
+          "start": 2520,
+          "end": 2525
         },
         "value": "tools"
       },
       "as_": [
         {
           "span": {
-            "start": 2521,
-            "end": 2523
+            "start": 2526,
+            "end": 2528
           }
         },
         {
           "span": {
-            "start": 2524,
-            "end": 2533
+            "start": 2529,
+            "end": 2538
           },
           "value": "generated"
         }
@@ -1047,24 +1047,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 2534,
-          "end": 2537
+          "start": 2539,
+          "end": 2542
         }
       },
       "options": [
         {
-          "flag_start": 2538,
+          "flag_start": 2543,
           "name": {
             "span": {
-              "start": 2540,
-              "end": 2545
+              "start": 2545,
+              "end": 2550
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 2546,
-              "end": 2587
+              "start": 2551,
+              "end": 2592
             },
             "value": "type=bind,target=github.com/moby/buildkit"
           }
@@ -1073,8 +1073,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 2593,
-            "end": 2593
+            "start": 2598,
+            "end": 2598
           },
           "value": ""
         }
@@ -1082,8 +1082,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 2594,
-            "end": 2869
+            "start": 2599,
+            "end": 2874
           },
           "expand": true,
           "value": "  set -ex\n  mkdir /out\n  find github.com/moby/buildkit -name '*.proto' -o -name vendor -prune -false | xargs \\\n    protoc --go_out=/out --go-grpc_out=require_unimplemented_servers=false:/out \\\n           --go-vtproto_out=features=marshal+unmarshal+size+equal+pool+clone:/out\n"
@@ -1094,29 +1094,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 2874,
-          "end": 2878
+          "start": 2879,
+          "end": 2883
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 2879,
-          "end": 2886
+          "start": 2884,
+          "end": 2891
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 2887,
-            "end": 2889
+            "start": 2892,
+            "end": 2894
           }
         },
         {
           "span": {
-            "start": 2890,
-            "end": 2896
+            "start": 2895,
+            "end": 2901
           },
           "value": "update"
         }
@@ -1126,24 +1126,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 2897,
-          "end": 2901
+          "start": 2902,
+          "end": 2906
         }
       },
       "options": [
         {
-          "flag_start": 2902,
+          "flag_start": 2907,
           "name": {
             "span": {
-              "start": 2904,
-              "end": 2908
+              "start": 2909,
+              "end": 2913
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 2909,
-              "end": 2918
+              "start": 2914,
+              "end": 2923
             },
             "value": "generated"
           }
@@ -1153,8 +1153,8 @@
         {
           "path": {
             "span": {
-              "start": 2919,
-              "end": 2948
+              "start": 2924,
+              "end": 2953
             },
             "value": "/out/github.com/moby/buildkit"
           }
@@ -1162,8 +1162,8 @@
       ],
       "dest": {
         "span": {
-          "start": 2949,
-          "end": 2950
+          "start": 2954,
+          "end": 2955
         },
         "value": "/"
       }
@@ -1172,29 +1172,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 2952,
-          "end": 2956
+          "start": 2957,
+          "end": 2961
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 2957,
-          "end": 2969
+          "start": 2962,
+          "end": 2974
         },
         "value": "gobuild-base"
       },
       "as_": [
         {
           "span": {
-            "start": 2970,
-            "end": 2972
+            "start": 2975,
+            "end": 2977
           }
         },
         {
           "span": {
-            "start": 2973,
-            "end": 2981
+            "start": 2978,
+            "end": 2986
           },
           "value": "validate"
         }
@@ -1204,41 +1204,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 2982,
-          "end": 2985
+          "start": 2987,
+          "end": 2990
         }
       },
       "options": [
         {
-          "flag_start": 2986,
+          "flag_start": 2991,
           "name": {
             "span": {
-              "start": 2988,
-              "end": 2993
+              "start": 2993,
+              "end": 2998
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 2994,
-              "end": 3015
+              "start": 2999,
+              "end": 3020
             },
             "value": "type=bind,target=.,rw"
           }
         },
         {
-          "flag_start": 3022,
+          "flag_start": 3027,
           "name": {
             "span": {
-              "start": 3024,
-              "end": 3029
+              "start": 3029,
+              "end": 3034
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 3030,
-              "end": 3075
+              "start": 3035,
+              "end": 3080
             },
             "value": "type=bind,from=update,target=/generated-files"
           }
@@ -1247,8 +1247,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 3081,
-            "end": 3081
+            "start": 3086,
+            "end": 3086
           },
           "value": ""
         }
@@ -1256,8 +1256,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 3082,
-            "end": 3404
+            "start": 3087,
+            "end": 3409
           },
           "expand": true,
           "value": "  set -e\n  git add -A\n  if [ \"$(ls -A /generated-files)\" ]; then\n    cp -rf /generated-files/* .\n  fi\n  diff=$(git status --porcelain -- ':!vendor' '**/*.pb.go')\n  if [ -n \"$diff\" ]; then\n    echo >&2 'ERROR: The result of \"go generate\" differs. Please update with \"make generated-files\"'\n    echo \"$diff\"\n    exit 1\n  fi\n"

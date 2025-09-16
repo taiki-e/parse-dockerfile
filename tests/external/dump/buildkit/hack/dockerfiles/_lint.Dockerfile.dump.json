@@ -27,7 +27,7 @@
           "start": 48,
           "end": 63
         },
-        "value": "GO_VERSION=1.24"
+        "value": "GO_VERSION=1.25"
       }
     },
     {
@@ -1784,15 +1784,342 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 3931,
-          "end": 3935
+          "start": 3930,
+          "end": 3934
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 3936,
-          "end": 3943
+          "start": 3935,
+          "end": 3946
+        },
+        "value": "golang-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 3947,
+            "end": 3949
+          }
+        },
+        {
+          "span": {
+            "start": 3950,
+            "end": 3967
+          },
+          "value": "modernize-fix-run"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 3968,
+          "end": 3971
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 3972,
+            "end": 3994
+          },
+          "value": "apk add --no-cache git"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 3995,
+          "end": 3999
+        }
+      },
+      "options": [
+        {
+          "flag_start": 4000,
+          "name": {
+            "span": {
+              "start": 4002,
+              "end": 4006
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 4007,
+          "name": {
+            "span": {
+              "start": 4009,
+              "end": 4013
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 4014,
+              "end": 4016
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 4017,
+              "end": 4018
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 4019,
+          "end": 4020
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 4021,
+          "end": 4024
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4025,
+          "end": 4035
+        },
+        "value": "TARGETNAME"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 4036,
+          "end": 4039
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4040,
+          "end": 4054
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 4055,
+          "end": 4062
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 4063,
+          "end": 4095
+        },
+        "value": "/go/src/github.com/moby/buildkit"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 4096,
+          "end": 4099
+        }
+      },
+      "options": [
+        {
+          "flag_start": 4100,
+          "name": {
+            "span": {
+              "start": 4102,
+              "end": 4107
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 4108,
+              "end": 4119
+            },
+            "value": "target=.,rw"
+          }
+        },
+        {
+          "flag_start": 4124,
+          "name": {
+            "span": {
+              "start": 4126,
+              "end": 4131
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 4132,
+              "end": 4208
+            },
+            "value": "target=/root/.cache,type=cache,id=lint-cache-${TARGETNAME}-${TARGETPLATFORM}"
+          }
+        },
+        {
+          "flag_start": 4213,
+          "name": {
+            "span": {
+              "start": 4215,
+              "end": 4220
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 4221,
+              "end": 4267
+            },
+            "value": "target=/gopls-analyzers,from=gopls,source=/out"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 4273,
+            "end": 4273
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 4274,
+            "end": 4487
+          },
+          "expand": true,
+          "value": "  set -ex\n  xx-go --wrap\n  mkdir /out\n  /gopls-analyzers/modernize -fix ./...\n  for file in $(git status --porcelain | awk '/^ M/ {print $2}'); do\n    mkdir -p /out/$(dirname $file)\n    cp $file /out/$file\n  done\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 4492,
+          "end": 4496
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 4497,
+          "end": 4504
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 4505,
+            "end": 4507
+          }
+        },
+        {
+          "span": {
+            "start": 4508,
+            "end": 4521
+          },
+          "value": "modernize-fix"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 4522,
+          "end": 4526
+        }
+      },
+      "options": [
+        {
+          "flag_start": 4527,
+          "name": {
+            "span": {
+              "start": 4529,
+              "end": 4533
+            },
+            "value": "link"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 4534,
+          "name": {
+            "span": {
+              "start": 4536,
+              "end": 4540
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 4541,
+              "end": 4558
+            },
+            "value": "modernize-fix-run"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 4559,
+              "end": 4563
+            },
+            "value": "/out"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 4564,
+          "end": 4565
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 4567,
+          "end": 4571
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 4572,
+          "end": 4579
         },
         "value": "scratch"
       },
@@ -1802,35 +2129,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 3944,
-          "end": 3948
+          "start": 4580,
+          "end": 4584
         }
       },
       "options": [
         {
-          "flag_start": 3949,
+          "flag_start": 4585,
           "name": {
             "span": {
-              "start": 3951,
-              "end": 3955
+              "start": 4587,
+              "end": 4591
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 3956,
+          "flag_start": 4592,
           "name": {
             "span": {
-              "start": 3958,
-              "end": 3962
+              "start": 4594,
+              "end": 4598
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 3963,
-              "end": 3976
+              "start": 4599,
+              "end": 4612
             },
             "value": "golangci-lint"
           }
@@ -1840,8 +2167,8 @@
         {
           "path": {
             "span": {
-              "start": 3977,
-              "end": 3996
+              "start": 4613,
+              "end": 4632
             },
             "value": "/golangci-lint.done"
           }
@@ -1849,8 +2176,8 @@
       ],
       "dest": {
         "span": {
-          "start": 3997,
-          "end": 3998
+          "start": 4633,
+          "end": 4634
         },
         "value": "/"
       }
@@ -1859,35 +2186,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 3999,
-          "end": 4003
+          "start": 4635,
+          "end": 4639
         }
       },
       "options": [
         {
-          "flag_start": 4004,
+          "flag_start": 4640,
           "name": {
             "span": {
-              "start": 4006,
-              "end": 4010
+              "start": 4642,
+              "end": 4646
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 4011,
+          "flag_start": 4647,
           "name": {
             "span": {
-              "start": 4013,
-              "end": 4017
+              "start": 4649,
+              "end": 4653
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 4018,
-              "end": 4033
+              "start": 4654,
+              "end": 4669
             },
             "value": "golangci-verify"
           }
@@ -1897,8 +2224,8 @@
         {
           "path": {
             "span": {
-              "start": 4034,
-              "end": 4055
+              "start": 4670,
+              "end": 4691
             },
             "value": "/golangci-verify.done"
           }
@@ -1906,8 +2233,8 @@
       ],
       "dest": {
         "span": {
-          "start": 4056,
-          "end": 4057
+          "start": 4692,
+          "end": 4693
         },
         "value": "/"
       }
@@ -1916,35 +2243,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 4058,
-          "end": 4062
+          "start": 4694,
+          "end": 4698
         }
       },
       "options": [
         {
-          "flag_start": 4063,
+          "flag_start": 4699,
           "name": {
             "span": {
-              "start": 4065,
-              "end": 4069
+              "start": 4701,
+              "end": 4705
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 4070,
+          "flag_start": 4706,
           "name": {
             "span": {
-              "start": 4072,
-              "end": 4076
+              "start": 4708,
+              "end": 4712
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 4077,
-              "end": 4085
+              "start": 4713,
+              "end": 4721
             },
             "value": "yamllint"
           }
@@ -1954,8 +2281,8 @@
         {
           "path": {
             "span": {
-              "start": 4086,
-              "end": 4100
+              "start": 4722,
+              "end": 4736
             },
             "value": "/yamllint.done"
           }
@@ -1963,8 +2290,8 @@
       ],
       "dest": {
         "span": {
-          "start": 4101,
-          "end": 4102
+          "start": 4737,
+          "end": 4738
         },
         "value": "/"
       }
@@ -1973,35 +2300,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 4103,
-          "end": 4107
+          "start": 4739,
+          "end": 4743
         }
       },
       "options": [
         {
-          "flag_start": 4108,
+          "flag_start": 4744,
           "name": {
             "span": {
-              "start": 4110,
-              "end": 4114
+              "start": 4746,
+              "end": 4750
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 4115,
+          "flag_start": 4751,
           "name": {
             "span": {
-              "start": 4117,
-              "end": 4121
+              "start": 4753,
+              "end": 4757
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 4122,
-              "end": 4131
+              "start": 4758,
+              "end": 4767
             },
             "value": "protolint"
           }
@@ -2011,8 +2338,8 @@
         {
           "path": {
             "span": {
-              "start": 4132,
-              "end": 4147
+              "start": 4768,
+              "end": 4783
             },
             "value": "/protolint.done"
           }
@@ -2020,8 +2347,8 @@
       ],
       "dest": {
         "span": {
-          "start": 4148,
-          "end": 4149
+          "start": 4784,
+          "end": 4785
         },
         "value": "/"
       }

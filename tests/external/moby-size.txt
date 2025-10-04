@@ -1,4 +1,4 @@
-26446 Dockerfile
+26582 Dockerfile
 13541 Dockerfile.windows
 4736 integration/build/testdata/Dockerfile.TestBuildPreserveOwnership
 2458 vendor/github.com/docker/distribution/Dockerfile
@@ -10,9 +10,9 @@
 917 daemon/libnetwork/cmd/ssd/Dockerfile
 855 vendor/github.com/tonistiigi/go-actions-cache/Dockerfile
 755 vendor/github.com/tonistiigi/dchapes-mode/Dockerfile
+719 cmd/dockerd/winresources/Dockerfile
 717 contrib/syscall-test/Dockerfile
 605 hack/dockerfiles/govulncheck.Dockerfile
-583 cmd/dockerd/winresources/Dockerfile
 477 integration/build/testdata/Dockerfile.TestBuildMultiStageCopy
 453 man/vendor/github.com/cpuguy83/go-md2man/v2/Dockerfile
 425 vendor/github.com/tonistiigi/go-archvariant/Dockerfile

@@ -20,6 +20,7 @@
 403 tests/conformance/testdata/chown-volume/Dockerfile
 399 tests/bud/volume-ownership/Dockerfile
 397 tests/bud/buildkit-mount-from/Dockerfilecachefromimage
+391 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
 385 tests/bud/multiarch/Dockerfile
 383 tests/bud/multi-stage-builds/Dockerfile.extended
 380 tests/conformance/testdata/multistage/copyback/Dockerfile
@@ -32,7 +33,6 @@
 300 tests/bud/multi-stage-builds/Dockerfile.mixed
 300 tests/bud/multi-stage-builds-small-as/Dockerfile.mixed
 287 tests/bud/buildkit-mount/Dockerfilemultiplemounts
-277 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
 277 hack/Dockerfile
 272 tests/bud/buildkit-mount-from/Dockerfilecachemultiplefrom
 271 tests/bud/target/Dockerfile

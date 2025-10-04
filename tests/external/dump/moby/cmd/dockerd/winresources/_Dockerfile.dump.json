@@ -34,121 +34,21 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 58,
-          "end": 61
+          "start": 194,
+          "end": 197
         }
       },
       "arguments": {
         "span": {
-          "start": 62,
-          "end": 78
+          "start": 198,
+          "end": 214
         },
-        "value": "XX_VERSION=1.6.1"
+        "value": "XX_VERSION=1.7.0"
       }
     },
     {
       "kind": "FROM",
       "from": {
-        "span": {
-          "start": 119,
-          "end": 123
-        }
-      },
-      "options": [
-        {
-          "flag_start": 124,
-          "name": {
-            "span": {
-              "start": 126,
-              "end": 134
-            },
-            "value": "platform"
-          },
-          "value": {
-            "span": {
-              "start": 135,
-              "end": 149
-            },
-            "value": "$BUILDPLATFORM"
-          }
-        }
-      ],
-      "image": {
-        "span": {
-          "start": 150,
-          "end": 177
-        },
-        "value": "tonistiigi/xx:${XX_VERSION}"
-      },
-      "as_": [
-        {
-          "span": {
-            "start": 178,
-            "end": 180
-          }
-        },
-        {
-          "span": {
-            "start": 181,
-            "end": 183
-          },
-          "value": "xx"
-        }
-      ]
-    },
-    {
-      "kind": "FROM",
-      "from": {
-        "span": {
-          "start": 185,
-          "end": 189
-        }
-      },
-      "options": [
-        {
-          "flag_start": 190,
-          "name": {
-            "span": {
-              "start": 192,
-              "end": 200
-            },
-            "value": "platform"
-          },
-          "value": {
-            "span": {
-              "start": 201,
-              "end": 215
-            },
-            "value": "$BUILDPLATFORM"
-          }
-        }
-      ],
-      "image": {
-        "span": {
-          "start": 216,
-          "end": 245
-        },
-        "value": "debian:${DEBIAN_VERSION}-slim"
-      },
-      "as_": [
-        {
-          "span": {
-            "start": 246,
-            "end": 248
-          }
-        },
-        {
-          "span": {
-            "start": 249,
-            "end": 254
-          },
-          "value": "build"
-        }
-      ]
-    },
-    {
-      "kind": "COPY",
-      "copy": {
         "span": {
           "start": 255,
           "end": 259
@@ -160,25 +60,125 @@
           "name": {
             "span": {
               "start": 262,
-              "end": 266
+              "end": 270
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 271,
+              "end": 285
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 286,
+          "end": 313
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 314,
+            "end": 316
+          }
+        },
+        {
+          "span": {
+            "start": 317,
+            "end": 319
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 321,
+          "end": 325
+        }
+      },
+      "options": [
+        {
+          "flag_start": 326,
+          "name": {
+            "span": {
+              "start": 328,
+              "end": 336
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 337,
+              "end": 351
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 352,
+          "end": 381
+        },
+        "value": "debian:${DEBIAN_VERSION}-slim"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 382,
+            "end": 384
+          }
+        },
+        {
+          "span": {
+            "start": 385,
+            "end": 390
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 391,
+          "end": 395
+        }
+      },
+      "options": [
+        {
+          "flag_start": 396,
+          "name": {
+            "span": {
+              "start": 398,
+              "end": 402
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 267,
+          "flag_start": 403,
           "name": {
             "span": {
-              "start": 269,
-              "end": 273
+              "start": 405,
+              "end": 409
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 274,
-              "end": 276
+              "start": 410,
+              "end": 412
             },
             "value": "xx"
           }
@@ -188,8 +188,8 @@
         {
           "path": {
             "span": {
-              "start": 277,
-              "end": 278
+              "start": 413,
+              "end": 414
             },
             "value": "/"
           }
@@ -197,8 +197,8 @@
       ],
       "dest": {
         "span": {
-          "start": 279,
-          "end": 280
+          "start": 415,
+          "end": 416
         },
         "value": "/"
       }
@@ -207,14 +207,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 281,
-          "end": 284
+          "start": 417,
+          "end": 420
         }
       },
       "arguments": {
         "span": {
-          "start": 285,
-          "end": 299
+          "start": 421,
+          "end": 435
         },
         "value": "TARGETPLATFORM"
       }
@@ -223,16 +223,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 300,
-          "end": 303
+          "start": 436,
+          "end": 439
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 304,
-            "end": 376
+            "start": 440,
+            "end": 512
           },
           "value": "apt-get update && xx-apt-get --no-install-recommends install -y binutils"
         }
@@ -243,14 +243,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 377,
-          "end": 384
+          "start": 513,
+          "end": 520
         }
       },
       "arguments": {
         "span": {
-          "start": 385,
-          "end": 389
+          "start": 521,
+          "end": 525
         },
         "value": "/out"
       }
@@ -259,24 +259,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 390,
-          "end": 393
+          "start": 526,
+          "end": 529
         }
       },
       "options": [
         {
-          "flag_start": 394,
+          "flag_start": 530,
           "name": {
             "span": {
-              "start": 396,
-              "end": 401
+              "start": 532,
+              "end": 537
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 402,
-              "end": 432
+              "start": 538,
+              "end": 568
             },
             "value": "type=bind,target=/winresources"
           }
@@ -285,8 +285,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 439,
-            "end": 543
+            "start": 575,
+            "end": 679
           },
           "value": "x86_64-w64-mingw32-windmc -v /winresources/event_messages.mc \\\n    && mv MSG00001.bin event_messages.bin"
         }
@@ -297,15 +297,15 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 545,
-          "end": 549
+          "start": 681,
+          "end": 685
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 550,
-          "end": 557
+          "start": 686,
+          "end": 693
         },
         "value": "scratch"
       },
@@ -315,24 +315,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 558,
-          "end": 562
+          "start": 694,
+          "end": 698
         }
       },
       "options": [
         {
-          "flag_start": 563,
+          "flag_start": 699,
           "name": {
             "span": {
-              "start": 565,
-              "end": 569
+              "start": 701,
+              "end": 705
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 570,
-              "end": 575
+              "start": 706,
+              "end": 711
             },
             "value": "build"
           }
@@ -342,8 +342,8 @@
         {
           "path": {
             "span": {
-              "start": 576,
-              "end": 580
+              "start": 712,
+              "end": 716
             },
             "value": "/out"
           }
@@ -351,8 +351,8 @@
       ],
       "dest": {
         "span": {
-          "start": 581,
-          "end": 582
+          "start": 717,
+          "end": 718
         },
         "value": "/"
       }

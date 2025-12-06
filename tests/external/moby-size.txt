@@ -1,5 +1,5 @@
-26582 Dockerfile
-13541 Dockerfile.windows
+26717 Dockerfile
+13668 Dockerfile.windows
 4736 integration/build/testdata/Dockerfile.TestBuildPreserveOwnership
 2458 vendor/github.com/docker/distribution/Dockerfile
 2197 hack/dockerfiles/generate-files.Dockerfile
@@ -17,10 +17,10 @@
 453 man/vendor/github.com/cpuguy83/go-md2man/v2/Dockerfile
 425 vendor/github.com/tonistiigi/go-archvariant/Dockerfile
 410 daemon/libnetwork/support/Dockerfile
+391 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
 329 vendor/github.com/creack/pty/Dockerfile.golang
 319 vendor/github.com/pelletier/go-toml/Dockerfile
 306 contrib/nnp-test/Dockerfile
-277 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
 167 daemon/libnetwork/cmd/diagnostic/Dockerfile.dind
 141 daemon/libnetwork/cmd/diagnostic/Dockerfile.client
 113 vendor/github.com/pelletier/go-toml/v2/Dockerfile

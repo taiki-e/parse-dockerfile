@@ -1,11 +1,11 @@
-18572 Dockerfile
+19001 Dockerfile
 5219 hack/dockerfiles/archutil.Dockerfile
 4786 hack/dockerfiles/lint.Dockerfile
 3413 hack/dockerfiles/generated-files.Dockerfile
 3388 frontend/dockerfile/parser/testfiles/docker/Dockerfile
 3370 frontend/dockerfile/parser/testfiles/cpuguy83-nagios/Dockerfile
 2935 vendor/github.com/containerd/fuse-overlayfs-snapshotter/v2/Dockerfile
-1741 frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile
+2147 frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile
 1583 frontend/dockerfile/parser/testfiles/brimstone-docker-consul/Dockerfile
 1340 hack/dockerfiles/vendor.Dockerfile
 1283 hack/dockerfiles/docs.Dockerfile
@@ -25,12 +25,12 @@
 583 frontend/dockerfile/parser/testfiles/env/Dockerfile
 425 vendor/github.com/tonistiigi/go-archvariant/Dockerfile
 403 frontend/dockerfile/parser/testfiles/continueIndent/Dockerfile
+391 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
 388 frontend/dockerfile/parser/testfiles/mail/Dockerfile
 379 hack/dockerfiles/shfmt.Dockerfile
 376 frontend/dockerfile/parser/testfiles/influxdb/Dockerfile
 319 vendor/github.com/pelletier/go-toml/Dockerfile
 286 frontend/dockerfile/parser/testfiles/nginx/Dockerfile
-277 vendor/go.opentelemetry.io/otel/dependencies.Dockerfile
 273 frontend/dockerfile/parser/testfiles/ADD-COPY-with-JSON/Dockerfile
 253 frontend/dockerfile/parser/testfiles/escape-after-comment/Dockerfile
 240 frontend/dockerfile/parser/testfiles/kartar-entrypoint-oddities/Dockerfile

@@ -33,7 +33,6 @@
 300 tests/bud/multi-stage-builds/Dockerfile.mixed
 300 tests/bud/multi-stage-builds-small-as/Dockerfile.mixed
 287 tests/bud/buildkit-mount/Dockerfilemultiplemounts
-277 hack/Dockerfile
 272 tests/bud/buildkit-mount-from/Dockerfilecachemultiplefrom
 271 tests/bud/target/Dockerfile
 269 tests/conformance/testdata/dockerignore/allowlist/alternating/Dockerfile

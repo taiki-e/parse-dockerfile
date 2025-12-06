@@ -1,5 +1,16 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
+/*
+When update submodule:
+
+```sh
+rm -rf tests/external/dump
+cargo test --all-features --all
+```
+
+When failed, update expected file count and run cargo test again.
+*/
+
 #![cfg(not(miri))] // Miri doesn't support pipe2 (inside std::process::Command::output)
 
 use std::{env, fmt::Write as _, path::Path, process::Command};
@@ -12,7 +23,7 @@ const MOBY: (&str, usize) = ("moby", 27);
 // https://github.com/moby/buildkit
 const BUILDKIT: (&str, usize) = ("buildkit", 59);
 // https://github.com/containers/buildah
-const BUILDAH: (&str, usize) = ("buildah", 309);
+const BUILDAH: (&str, usize) = ("buildah", 308);
 
 #[test]
 #[cfg_attr(windows, ignore)] // git submodule eol issue

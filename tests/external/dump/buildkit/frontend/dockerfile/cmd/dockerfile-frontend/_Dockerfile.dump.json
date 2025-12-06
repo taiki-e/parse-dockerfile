@@ -303,33 +303,49 @@
       "arguments": {
         "span": {
           "start": 402,
-          "end": 409
+          "end": 418
         },
-        "value": "CHANNEL"
+        "value": "CHANNEL=mainline"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 419,
+          "end": 422
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 423,
+          "end": 432
+        },
+        "value": "BUILDTAGS"
       }
     },
     {
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 457,
-          "end": 460
+          "start": 433,
+          "end": 436
         }
       },
       "options": [
         {
-          "flag_start": 461,
+          "flag_start": 437,
           "name": {
             "span": {
-              "start": 463,
-              "end": 468
+              "start": 439,
+              "end": 444
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 469,
-              "end": 477
+              "start": 445,
+              "end": 453
             },
             "value": "target=."
           }
@@ -338,41 +354,50 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 483,
-            "end": 895
+            "start": 459,
+            "end": 459
           },
-          "value": "PKG=github.com/moby/buildkit/frontend/dockerfile/cmd/dockerfile-frontend VERSION=$(./frontend/dockerfile/cmd/dockerfile-frontend/hack/detect \"$CHANNEL\") REVISION=$(git rev-parse HEAD)$(if ! git diff --no-ext-diff --quiet --exit-code; then echo .m; fi) \\\n  && echo \"-X main.Version=${VERSION} -X main.Revision=${REVISION} -X main.Package=${PKG}\" | tee /tmp/.ldflags \\\n  && echo -n \"${VERSION}\" | tee /tmp/.version"
+          "value": ""
         }
       },
-      "here_docs": []
+      "here_docs": [
+        {
+          "span": {
+            "start": 460,
+            "end": 1169
+          },
+          "expand": true,
+          "value": "  set -e\n  tagsFile=\"./frontend/dockerfile/release/$CHANNEL/tags\"\n  if [ ! -f \"$tagsFile\" ]; then\n    echo \"No build tags found for $CHANNEL.\"\n    exit 1\n  fi\n  if [ \"$CHANNEL\" = \"mainline\" ]; then\n    VERSION=$(git describe --always --tags --match \"dockerfile/[0-9]*\")\n  else\n    VERSION=$(git describe --always --tags --match \"dockerfile/[0-9]*-$CHANNEL\")\n  fi\n  PKG=github.com/moby/buildkit/frontend/dockerfile/cmd/dockerfile-frontend\n  REVISION=$(git rev-parse HEAD)$(if ! git diff --no-ext-diff --quiet --exit-code; then echo .m; fi)\n  echo \"-X main.Version=${VERSION} -X main.Revision=${REVISION} -X main.Package=${PKG}\" | tee /tmp/.ldflags\n  echo -n \"$BUILDTAGS $(cat $tagsFile)\" | tee /tmp/.buildtags\n"
+        }
+      ]
     },
     {
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 897,
-          "end": 901
+          "start": 1174,
+          "end": 1178
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 902,
-          "end": 906
+          "start": 1179,
+          "end": 1183
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 907,
-            "end": 909
+            "start": 1184,
+            "end": 1186
           }
         },
         {
           "span": {
-            "start": 910,
-            "end": 915
+            "start": 1187,
+            "end": 1192
           },
           "value": "build"
         }
@@ -382,16 +407,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 916,
-          "end": 919
+          "start": 1193,
+          "end": 1196
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 920,
-            "end": 943
+            "start": 1197,
+            "end": 1220
           },
           "value": "apk add --no-cache file"
         }
@@ -402,30 +427,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 944,
-          "end": 947
+          "start": 1221,
+          "end": 1224
         }
       },
       "arguments": {
         "span": {
-          "start": 948,
-          "end": 960
-        },
-        "value": "BUILDTAGS=\"\""
-      }
-    },
-    {
-      "kind": "ARG",
-      "arg": {
-        "span": {
-          "start": 961,
-          "end": 964
-        }
-      },
-      "arguments": {
-        "span": {
-          "start": 965,
-          "end": 979
+          "start": 1225,
+          "end": 1239
         },
         "value": "TARGETPLATFORM"
       }
@@ -434,118 +443,144 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 980,
-          "end": 983
+          "start": 1240,
+          "end": 1243
         }
       },
       "options": [
         {
-          "flag_start": 984,
+          "flag_start": 1244,
           "name": {
             "span": {
-              "start": 986,
-              "end": 991
+              "start": 1246,
+              "end": 1251
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 992,
-              "end": 1000
+              "start": 1252,
+              "end": 1260
             },
             "value": "target=."
           }
         },
         {
-          "flag_start": 1001,
+          "flag_start": 1261,
           "name": {
             "span": {
-              "start": 1003,
-              "end": 1008
+              "start": 1263,
+              "end": 1268
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1009,
-              "end": 1039
+              "start": 1269,
+              "end": 1299
             },
             "value": "type=cache,target=/root/.cache"
           }
         },
         {
-          "flag_start": 1044,
+          "flag_start": 1304,
           "name": {
             "span": {
-              "start": 1046,
-              "end": 1051
+              "start": 1306,
+              "end": 1311
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1052,
-              "end": 1081
+              "start": 1312,
+              "end": 1341
             },
             "value": "target=/go/pkg/mod,type=cache"
           }
         },
         {
-          "flag_start": 1086,
+          "flag_start": 1346,
           "name": {
             "span": {
-              "start": 1088,
-              "end": 1093
+              "start": 1348,
+              "end": 1353
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1094,
-              "end": 1148
+              "start": 1354,
+              "end": 1408
             },
             "value": "source=/tmp/.ldflags,target=/tmp/.ldflags,from=version"
+          }
+        },
+        {
+          "flag_start": 1413,
+          "name": {
+            "span": {
+              "start": 1415,
+              "end": 1420
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1421,
+              "end": 1479
+            },
+            "value": "source=/tmp/.buildtags,target=/tmp/.buildtags,from=version"
           }
         }
       ],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1153,
-            "end": 1377
+            "start": 1485,
+            "end": 1485
           },
-          "value": "CGO_ENABLED=0 xx-go build -o /dockerfile-frontend -ldflags \"-d $(cat /tmp/.ldflags)\" -tags \"$BUILDTAGS netgo static_build osusergo\" ./frontend/dockerfile/cmd/dockerfile-frontend && \\\n  xx-verify --static /dockerfile-frontend"
+          "value": ""
         }
       },
-      "here_docs": []
+      "here_docs": [
+        {
+          "span": {
+            "start": 1486,
+            "end": 1780
+          },
+          "expand": true,
+          "value": "  set -e\n  ldflags=$(cat /tmp/.ldflags)\n  buildtags=$(cat /tmp/.buildtags)\n  set -x\n  CGO_ENABLED=0 xx-go build -o /dockerfile-frontend -ldflags \"-d $ldflags\" -tags \"$buildtags netgo static_build osusergo\" ./frontend/dockerfile/cmd/dockerfile-frontend\n  xx-verify --static /dockerfile-frontend\n"
+        }
+      ]
     },
     {
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1379,
-          "end": 1383
+          "start": 1785,
+          "end": 1789
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1384,
-          "end": 1391
+          "start": 1790,
+          "end": 1797
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 1392,
-            "end": 1394
+            "start": 1798,
+            "end": 1800
           }
         },
         {
           "span": {
-            "start": 1395,
-            "end": 1402
+            "start": 1801,
+            "end": 1808
           },
           "value": "release"
         }
@@ -555,14 +590,14 @@
       "kind": "LABEL",
       "label": {
         "span": {
-          "start": 1403,
-          "end": 1408
+          "start": 1809,
+          "end": 1814
         }
       },
       "arguments": {
         "span": {
-          "start": 1409,
-          "end": 1451
+          "start": 1815,
+          "end": 1857
         },
         "value": "moby.buildkit.frontend.network.none=\"true\""
       }
@@ -571,14 +606,14 @@
       "kind": "LABEL",
       "label": {
         "span": {
-          "start": 1452,
-          "end": 1457
+          "start": 1858,
+          "end": 1863
         }
       },
       "arguments": {
         "span": {
-          "start": 1458,
-          "end": 1622
+          "start": 1864,
+          "end": 2028
         },
         "value": "moby.buildkit.frontend.caps=\"moby.buildkit.frontend.inputs,moby.buildkit.frontend.subrequests,moby.buildkit.frontend.contexts,moby.buildkit.frontend.gitquerystring\""
       }
@@ -587,24 +622,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1623,
-          "end": 1627
+          "start": 2029,
+          "end": 2033
         }
       },
       "options": [
         {
-          "flag_start": 1628,
+          "flag_start": 2034,
           "name": {
             "span": {
-              "start": 1630,
-              "end": 1634
+              "start": 2036,
+              "end": 2040
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 1635,
-              "end": 1640
+              "start": 2041,
+              "end": 2046
             },
             "value": "build"
           }
@@ -614,8 +649,8 @@
         {
           "path": {
             "span": {
-              "start": 1641,
-              "end": 1661
+              "start": 2047,
+              "end": 2067
             },
             "value": "/dockerfile-frontend"
           }
@@ -623,8 +658,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1662,
-          "end": 1686
+          "start": 2068,
+          "end": 2092
         },
         "value": "/bin/dockerfile-frontend"
       }
@@ -633,21 +668,21 @@
       "kind": "ENTRYPOINT",
       "entrypoint": {
         "span": {
-          "start": 1687,
-          "end": 1697
+          "start": 2093,
+          "end": 2103
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 1698,
-            "end": 1726
+            "start": 2104,
+            "end": 2132
           },
           "value": [
             {
               "span": {
-                "start": 1700,
-                "end": 1724
+                "start": 2106,
+                "end": 2130
               },
               "value": "/bin/dockerfile-frontend"
             }
@@ -659,15 +694,15 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1728,
-          "end": 1732
+          "start": 2134,
+          "end": 2138
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1733,
-          "end": 1740
+          "start": 2139,
+          "end": 2146
         },
         "value": "release"
       },

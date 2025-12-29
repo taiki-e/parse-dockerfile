@@ -84,3 +84,4 @@ volumerun
 weechat
 winresources
 withfrom
+zmij

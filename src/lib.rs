@@ -2081,10 +2081,7 @@ impl<'a, const N: usize> Store<UnescapedString<'a>>
 #[inline]
 fn parse_options<'a, S: Store<Flag<'a>>>(s: &mut &[u8], start: &'a str, escape_byte: u8) -> S {
     let mut options = S::new();
-    'outer: loop {
-        let Some((&b'-', mut s_next)) = s.split_first() else {
-            break;
-        };
+    'outer: while let Some((&b'-', mut s_next)) = s.split_first() {
         loop {
             let Some((&b, s_next_next)) = s_next.split_first() else {
                 break 'outer;

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
+use alloc::borrow::Cow;
 use core::{fmt, marker::PhantomData, ops::Range, str};
-use std::borrow::Cow;
 
 use super::ParseIter;
 

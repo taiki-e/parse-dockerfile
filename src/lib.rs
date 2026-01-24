@@ -90,10 +90,12 @@ assert!(matches!(stages.next(), None));
     clippy::exhaustive_structs,
     clippy::impl_trait_in_params,
     // clippy::missing_inline_in_public_items,
-    // clippy::std_instead_of_alloc,
+    clippy::std_instead_of_alloc,
     clippy::std_instead_of_core,
 )]
 #![allow(clippy::inline_always)]
+
+extern crate alloc;
 
 #[cfg(test)]
 #[path = "gen/tests/assert_impl.rs"]
@@ -104,8 +106,9 @@ mod track_size;
 
 mod error;
 
+use alloc::borrow::Cow;
 use core::{mem, ops::Range, str};
-use std::{borrow::Cow, collections::HashMap};
+use std::collections::HashMap;
 
 use smallvec::SmallVec;
 

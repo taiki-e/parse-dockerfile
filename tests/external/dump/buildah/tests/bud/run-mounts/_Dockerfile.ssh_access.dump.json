@@ -17,54 +17,50 @@
       "image": {
         "span": {
           "start": 5,
-          "end": 11
+          "end": 28
         },
-        "value": "alpine"
+        "value": "quay.io/hummingbird/git"
       },
       "as_": null
     },
     {
-      "kind": "RUN",
-      "run": {
+      "kind": "USER",
+      "user": {
         "span": {
-          "start": 13,
-          "end": 16
+          "start": 29,
+          "end": 33
         }
       },
-      "options": [],
       "arguments": {
-        "shell": {
-          "span": {
-            "start": 17,
-            "end": 39
-          },
-          "value": "apk add openssh-client"
-        }
-      },
-      "here_docs": []
+        "span": {
+          "start": 34,
+          "end": 37
+        },
+        "value": "0:0"
+      }
     },
     {
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 41,
-          "end": 44
+          "start": 38,
+          "end": 41
         }
       },
       "options": [
         {
-          "flag_start": 45,
+          "flag_start": 42,
           "name": {
             "span": {
-              "start": 47,
-              "end": 52
+              "start": 44,
+              "end": 49
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 53,
-              "end": 72
+              "start": 50,
+              "end": 69
             },
             "value": "type=ssh,id=default"
           }
@@ -73,8 +69,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 73,
-            "end": 90
+            "start": 70,
+            "end": 87
           },
           "value": "ssh-add -l -E md5"
         }
@@ -85,16 +81,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 91,
-          "end": 94
+          "start": 88,
+          "end": 91
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 95,
-            "end": 112
+            "start": 92,
+            "end": 109
           },
           "value": "ssh-add -l -E md5"
         }
@@ -105,16 +101,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 113,
-          "end": 116
+          "start": 110,
+          "end": 113
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 117,
-            "end": 146
+            "start": 114,
+            "end": 143
           },
           "value": "cat /run/buildkit/ssh_agent.0"
         }

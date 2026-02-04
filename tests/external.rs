@@ -19,9 +19,9 @@ use fs_err as fs;
 use test_helper::git::{assert_diff, ls_files};
 
 // https://github.com/moby/moby
-const MOBY: (&str, usize) = ("moby", 27);
+const MOBY: (&str, usize) = ("moby", 29);
 // https://github.com/moby/buildkit
-const BUILDKIT: (&str, usize) = ("buildkit", 59);
+const BUILDKIT: (&str, usize) = ("buildkit", 60);
 // https://github.com/containers/buildah
 const BUILDAH: (&str, usize) = ("buildah", 308);
 

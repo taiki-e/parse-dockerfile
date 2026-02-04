@@ -17,34 +17,50 @@
       "image": {
         "span": {
           "start": 5,
-          "end": 11
+          "end": 28
         },
-        "value": "alpine"
+        "value": "quay.io/hummingbird/git"
       },
       "as_": null
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 29,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 37
+        },
+        "value": "0:0"
+      }
     },
     {
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 13,
-          "end": 16
+          "start": 38,
+          "end": 41
         }
       },
       "options": [
         {
-          "flag_start": 17,
+          "flag_start": 42,
           "name": {
             "span": {
-              "start": 19,
-              "end": 24
+              "start": 44,
+              "end": 49
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 25,
-              "end": 85
+              "start": 50,
+              "end": 110
             },
             "value": "type=ssh,id=default,dst=/dstsock,uid=1000,gid=1001,mode=0444"
           }
@@ -53,8 +69,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 87,
-            "end": 124
+            "start": 112,
+            "end": 149
           },
           "value": "stat -c \"%a\" /dstsock; ls -n /dstsock"
         }

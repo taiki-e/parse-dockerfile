@@ -24,27 +24,43 @@
       "as_": null
     },
     {
-      "kind": "ADD",
-      "add": {
+      "kind": "ARG",
+      "arg": {
         "span": {
           "start": 13,
           "end": 16
         }
       },
+      "arguments": {
+        "span": {
+          "start": 17,
+          "end": 33
+        },
+        "value": "HTTP_SERVER_PORT"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 34,
+          "end": 37
+        }
+      },
       "options": [
         {
-          "flag_start": 17,
+          "flag_start": 38,
           "name": {
             "span": {
-              "start": 19,
-              "end": 24
+              "start": 40,
+              "end": 45
             },
             "value": "chown"
           },
           "value": {
             "span": {
-              "start": 25,
-              "end": 28
+              "start": 46,
+              "end": 49
             },
             "value": "2:2"
           }
@@ -54,10 +70,10 @@
         {
           "path": {
             "span": {
-              "start": 29,
+              "start": 50,
               "end": 94
             },
-            "value": "https://raw.githubusercontent.com/containers/buildah/main/LICENSE"
+            "value": "http://0.0.0.0:${HTTP_SERVER_PORT}/README.md"
           }
         }
       ],

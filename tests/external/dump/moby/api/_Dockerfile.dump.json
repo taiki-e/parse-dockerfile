@@ -1,0 +1,341 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 28
+        },
+        "value": "docker/dockerfile:1"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 30,
+          "end": 33
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 34,
+          "end": 51
+        },
+        "value": "GO_VERSION=1.25.6"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 53,
+          "end": 57
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 58,
+          "end": 85
+        },
+        "value": "golang:${GO_VERSION}-alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 86,
+            "end": 88
+          }
+        },
+        {
+          "span": {
+            "start": 89,
+            "end": 93
+          },
+          "value": "base"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 94,
+          "end": 97
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 98,
+            "end": 135
+          },
+          "value": "apk add --no-cache bash make yamllint"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 136,
+          "end": 139
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 140,
+            "end": 153
+          },
+          "value": [
+            {
+              "span": {
+                "start": 142,
+                "end": 151
+              },
+              "value": "/bin/bash"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 168,
+          "end": 172
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 173,
+          "end": 177
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 178,
+            "end": 180
+          }
+        },
+        {
+          "span": {
+            "start": 181,
+            "end": 188
+          },
+          "value": "swagger"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 189,
+          "end": 196
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 197,
+          "end": 237
+        },
+        "value": "/go/src/github.com/go-swagger/go-swagger"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 425,
+          "end": 428
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 429,
+          "end": 455
+        },
+        "value": "GO_SWAGGER_VERSION=v0.33.1"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 456,
+          "end": 459
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 460,
+          "end": 474
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 475,
+          "end": 478
+        }
+      },
+      "options": [
+        {
+          "flag_start": 479,
+          "name": {
+            "span": {
+              "start": 481,
+              "end": 486
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 487,
+              "end": 559
+            },
+            "value": "type=cache,target=/root/.cache/go-build,id=swagger-build-$TARGETPLATFORM"
+          }
+        },
+        {
+          "flag_start": 566,
+          "name": {
+            "span": {
+              "start": 568,
+              "end": 573
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 574,
+              "end": 603
+            },
+            "value": "type=cache,target=/go/pkg/mod"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 610,
+            "end": 736
+          },
+          "value": "CGO_ENABLED=0 go install \"github.com/go-swagger/go-swagger/cmd/swagger@${GO_SWAGGER_VERSION}\" && \\\n    /go/bin/swagger version"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 794,
+          "end": 798
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 799,
+          "end": 803
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 804,
+            "end": 806
+          }
+        },
+        {
+          "span": {
+            "start": 807,
+            "end": 810
+          },
+          "value": "dev"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 811,
+          "end": 815
+        }
+      },
+      "options": [
+        {
+          "flag_start": 816,
+          "name": {
+            "span": {
+              "start": 818,
+              "end": 822
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 823,
+              "end": 830
+            },
+            "value": "swagger"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 831,
+              "end": 846
+            },
+            "value": "/go/bin/swagger"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 847,
+          "end": 869
+        },
+        "value": "/usr/local/bin/swagger"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 870,
+          "end": 877
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 878,
+          "end": 910
+        },
+        "value": "/go/src/github.com/moby/moby/api"
+      }
+    }
+  ]
+}

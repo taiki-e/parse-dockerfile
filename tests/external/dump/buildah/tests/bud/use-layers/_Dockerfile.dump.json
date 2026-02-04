@@ -102,11 +102,27 @@
       ]
     },
     {
-      "kind": "ADD",
-      "add": {
+      "kind": "ARG",
+      "arg": {
         "span": {
           "start": 85,
           "end": 88
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 89,
+          "end": 105
+        },
+        "value": "HTTP_SERVER_PORT"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 106,
+          "end": 109
         }
       },
       "options": [],
@@ -114,17 +130,17 @@
         {
           "path": {
             "span": {
-              "start": 89,
-              "end": 146
+              "start": 110,
+              "end": 154
             },
-            "value": "https://github.com/containers/buildah/blob/main/README.md"
+            "value": "http://0.0.0.0:${HTTP_SERVER_PORT}/README.md"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 147,
-          "end": 152
+          "start": 155,
+          "end": 160
         },
         "value": "/tmp/"
       }
@@ -133,14 +149,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 153,
-          "end": 156
+          "start": 161,
+          "end": 164
         }
       },
       "arguments": {
         "span": {
-          "start": 157,
-          "end": 164
+          "start": 165,
+          "end": 172
         },
         "value": "foo=bar"
       }

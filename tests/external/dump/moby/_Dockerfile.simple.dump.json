@@ -18,7 +18,7 @@
           "start": 378,
           "end": 395
         },
-        "value": "GO_VERSION=1.25.5"
+        "value": "GO_VERSION=1.25.6"
       }
     },
     {
@@ -108,49 +108,129 @@
       "here_docs": []
     },
     {
-      "kind": "COPY",
-      "copy": {
+      "kind": "ADD",
+      "add": {
         "span": {
-          "start": 1134,
-          "end": 1138
+          "start": 1229,
+          "end": 1232
         }
       },
-      "options": [],
+      "options": [
+        {
+          "flag_start": 1233,
+          "name": {
+            "span": {
+              "start": 1235,
+              "end": 1240
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 1241,
+              "end": 1245
+            },
+            "value": "0644"
+          }
+        },
+        {
+          "flag_start": 1246,
+          "name": {
+            "span": {
+              "start": 1248,
+              "end": 1256
+            },
+            "value": "checksum"
+          },
+          "value": {
+            "span": {
+              "start": 1257,
+              "end": 1328
+            },
+            "value": "sha256:1500c1f56fa9e26b9b8f42452a553675796ade0807cdce11975eb98170b3a570"
+          }
+        }
+      ],
       "src": [
         {
           "path": {
             "span": {
-              "start": 1139,
-              "end": 1162
+              "start": 1332,
+              "end": 1376
             },
-            "value": "hack/dockerfile/install"
+            "value": "https://download.docker.com/linux/debian/gpg"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 1163,
-          "end": 1186
+          "start": 1377,
+          "end": 1405
         },
-        "value": "hack/dockerfile/install"
+        "value": "/etc/apt/keyrings/docker.asc"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1406,
+          "end": 1409
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1410,
+          "end": 1428
+        },
+        "value": "BASE_DEBIAN_DISTRO"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 1429,
+          "end": 1432
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 1479,
+              "end": 1626
+            },
+            "expand": true,
+            "value": "Types: deb\nURIs: https://download.docker.com/linux/debian\nSuites: ${BASE_DEBIAN_DISTRO}\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.asc\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1440,
+          "end": 1478
+        },
+        "value": "/etc/apt/sources.list.d/docker.sources"
       }
     },
     {
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1187,
-          "end": 1190
+          "start": 1630,
+          "end": 1633
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1191,
-            "end": 1293
+            "start": 1634,
+            "end": 1833
           },
-          "value": "set -e; for i in runc containerd tini dockercli; \\\n\t\tdo hack/dockerfile/install/install.sh $i; \\\n\tdone"
+          "value": "apt-get update && apt-get install -y --no-install-recommends \\\n\t\tcontainerd.io \\\n\t\ttini \\\n\t\tdocker-ce-cli \\\n\t&& rm -rf /var/lib/apt/lists/* \\\n\t&& ln -s /usr/bin/tini-static /usr/local/bin/docker-init"
         }
       },
       "here_docs": []
@@ -159,14 +239,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1294,
-          "end": 1297
+          "start": 1835,
+          "end": 1838
         }
       },
       "arguments": {
         "span": {
-          "start": 1298,
-          "end": 1323
+          "start": 1839,
+          "end": 1864
         },
         "value": "PATH=/usr/local/cli:$PATH"
       }
@@ -175,14 +255,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1325,
-          "end": 1328
+          "start": 1866,
+          "end": 1869
         }
       },
       "arguments": {
         "span": {
-          "start": 1329,
-          "end": 1342
+          "start": 1870,
+          "end": 1883
         },
         "value": "AUTO_GOPATH 1"
       }
@@ -191,14 +271,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 1343,
-          "end": 1350
+          "start": 1884,
+          "end": 1891
         }
       },
       "arguments": {
         "span": {
-          "start": 1351,
-          "end": 1366
+          "start": 1892,
+          "end": 1907
         },
         "value": "/usr/src/docker"
       }
@@ -207,8 +287,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1367,
-          "end": 1371
+          "start": 1908,
+          "end": 1912
         }
       },
       "options": [],
@@ -216,8 +296,8 @@
         {
           "path": {
             "span": {
-              "start": 1372,
-              "end": 1373
+              "start": 1913,
+              "end": 1914
             },
             "value": "."
           }
@@ -225,8 +305,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1374,
-          "end": 1389
+          "start": 1915,
+          "end": 1930
         },
         "value": "/usr/src/docker"
       }

@@ -109,7 +109,7 @@
           "start": 7460,
           "end": 7477
         },
-        "value": "GO_VERSION=1.25.5"
+        "value": "GO_VERSION=1.25.6"
       }
     },
     {
@@ -164,14 +164,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 8112,
-          "end": 8115
+          "start": 8078,
+          "end": 8081
         }
       },
       "arguments": {
         "span": {
-          "start": 8116,
-          "end": 8371
+          "start": 8082,
+          "end": 8337
         },
         "value": "GO_VERSION=${GO_VERSION}     CONTAINERD_VERSION=${CONTAINERD_VERSION}     GIT_VERSION=2.11.1     GOPATH=C:\\gopath     GOTOOLCHAIN=local     FROM_DOCKERFILE=1     GOTESTSUM_VERSION=${GOTESTSUM_VERSION}     GOWINRES_VERSION=${GOWINRES_VERSION}"
       }
@@ -180,16 +180,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 8373,
-          "end": 8376
+          "start": 8339,
+          "end": 8342
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 8381,
-            "end": 12561
+            "start": 8347,
+            "end": 12527
           },
           "value": "Function Test-Nano() { `\n    $EditionId = (Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion' -Name 'EditionID').EditionId; `\n    return (($EditionId -eq 'ServerStandardNano') -or ($EditionId -eq 'ServerDataCenterNano') -or ($EditionId -eq 'NanoServer')); `\n  }`\n  `\n  Function Download-File([string] $source, [string] $target) { `\n    if (Test-Nano) { `\n      $handler = New-Object System.Net.Http.HttpClientHandler; `\n      $client = New-Object System.Net.Http.HttpClient($handler); `\n      $client.Timeout = New-Object System.TimeSpan(0, 30, 0); `\n      $cancelTokenSource = [System.Threading.CancellationTokenSource]::new(); `\n      $responseMsg = $client.GetAsync([System.Uri]::new($source), $cancelTokenSource.Token); `\n      $responseMsg.Wait(); `\n      if (!$responseMsg.IsCanceled) { `\n        $response = $responseMsg.Result; `\n        if ($response.IsSuccessStatusCode) { `\n          $downloadedFileStream = [System.IO.FileStream]::new($target, [System.IO.FileMode]::Create, [System.IO.FileAccess]::Write); `\n          $copyStreamOp = $response.Content.CopyToAsync($downloadedFileStream); `\n          $copyStreamOp.Wait(); `\n          $downloadedFileStream.Close(); `\n          if ($copyStreamOp.Exception -ne $null) { throw $copyStreamOp.Exception } `\n        } `\n      } else { `\n      Throw (\"Failed to download \" + $source) `\n      }`\n    } else { `\n      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `\n      $webClient = New-Object System.Net.WebClient; `\n      $webClient.DownloadFile($source, $target); `\n    } `\n  } `\n  `\n  setx /M PATH $('C:\\git\\cmd;C:\\git\\usr\\bin;'+$Env:PATH+';C:\\gcc\\bin;C:\\go\\bin;C:\\containerd\\bin'); `\n  `\n  Write-Host INFO: Downloading git...; `\n  $location='https://www.nuget.org/api/v2/package/GitForWindows/'+$Env:GIT_VERSION; `\n  Download-File $location C:\\gitsetup.zip; `\n  `\n  Write-Host INFO: Downloading go...; `\n  $dlGoVersion=$Env:GO_VERSION; `\n  Download-File \"https://go.dev/dl/go${dlGoVersion}.windows-amd64.zip\" C:\\go.zip; `\n  `\n  Write-Host INFO: Downloading compiler 1 of 3...; `\n  Download-File https://raw.githubusercontent.com/moby/docker-tdmgcc/master/gcc.zip C:\\gcc.zip; `\n  `\n  Write-Host INFO: Downloading compiler 2 of 3...; `\n  Download-File https://raw.githubusercontent.com/moby/docker-tdmgcc/master/runtime.zip C:\\runtime.zip; `\n  `\n  Write-Host INFO: Downloading compiler 3 of 3...; `\n  Download-File https://raw.githubusercontent.com/moby/docker-tdmgcc/master/binutils.zip C:\\binutils.zip; `\n  `\n  Write-Host INFO: Extracting git...; `\n  Expand-Archive C:\\gitsetup.zip C:\\git-tmp; `\n  New-Item -Type Directory C:\\git | Out-Null; `\n  Move-Item C:\\git-tmp\\tools\\* C:\\git\\.; `\n  Remove-Item -Recurse -Force C:\\git-tmp; `\n  `\n  Write-Host INFO: Expanding go...; `\n  Expand-Archive C:\\go.zip -DestinationPath C:\\; `\n  `\n  Write-Host INFO: Expanding compiler 1 of 3...; `\n  Expand-Archive C:\\gcc.zip -DestinationPath C:\\gcc -Force; `\n  Write-Host INFO: Expanding compiler 2 of 3...; `\n  Expand-Archive C:\\runtime.zip -DestinationPath C:\\gcc -Force; `\n  Write-Host INFO: Expanding compiler 3 of 3...; `\n  Expand-Archive C:\\binutils.zip -DestinationPath C:\\gcc -Force; `\n  `\n  Write-Host INFO: Removing downloaded files...; `\n  Remove-Item C:\\gcc.zip; `\n  Remove-Item C:\\runtime.zip; `\n  Remove-Item C:\\binutils.zip; `\n  Remove-Item C:\\gitsetup.zip; `\n  `\n  Write-Host INFO: Downloading containerd; `\n  $location='https://github.com/containerd/containerd/releases/download/'+$Env:CONTAINERD_VERSION+'/containerd-'+$Env:CONTAINERD_VERSION.TrimStart('v')+'-windows-amd64.tar.gz'; `\n  Download-File $location C:\\containerd.tar.gz; `\n  New-Item -Path C:\\containerd -ItemType Directory; `\n  tar -xzf C:\\containerd.tar.gz -C C:\\containerd; `\n  Remove-Item C:\\containerd.tar.gz; `\n  `\n  # Ensure all directories exist that we will require below....\n  $srcDir = \"\"\"$Env:GOPATH`\\src\\github.com\\docker\\docker\\bundles\"\"\"; `\n  Write-Host INFO: Ensuring existence of directory $srcDir...; `\n  New-Item -Force -ItemType Directory -Path $srcDir | Out-Null; `\n  `\n  Write-Host INFO: Configuring git core.autocrlf...; `\n  C:\\git\\cmd\\git config --global core.autocrlf true;"
         }
@@ -200,16 +200,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 12563,
-          "end": 12566
+          "start": 12529,
+          "end": 12532
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 12571,
-            "end": 13000
+            "start": 12537,
+            "end": 12966
           },
           "value": "Function Install-GoTestSum() { `\n    $tmpGobin = \"${Env:GOBIN_TMP}\"; `\n    $Env:GOBIN = \"\"\"${Env:GOPATH}`\\bin\"\"\"; `\n    Write-Host \"INFO: Installing gotestsum version $Env:GOTESTSUM_VERSION in $Env:GOBIN\"; `\n    &go install \"gotest.tools/gotestsum@${Env:GOTESTSUM_VERSION}\"; `\n    $Env:GOBIN = \"${tmpGobin}\"; `\n    if ($LASTEXITCODE -ne 0) {  `\n      Throw '\"gotestsum install failed...\"'; `\n    } `\n  } `\n  `\n  Install-GoTestSum"
         }
@@ -220,16 +220,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 13002,
-          "end": 13005
+          "start": 12968,
+          "end": 12971
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 13010,
-            "end": 13440
+            "start": 12976,
+            "end": 13406
           },
           "value": "Function Install-GoWinres() { `\n    $tmpGobin = \"${Env:GOBIN_TMP}\"; `\n    $Env:GOBIN = \"\"\"${Env:GOPATH}`\\bin\"\"\"; `\n    Write-Host \"INFO: Installing go-winres version $Env:GOWINRES_VERSION in $Env:GOBIN\"; `\n    &go install \"github.com/tc-hib/go-winres@${Env:GOWINRES_VERSION}\"; `\n    $Env:GOBIN = \"${tmpGobin}\"; `\n    if ($LASTEXITCODE -ne 0) {  `\n      Throw '\"go-winres install failed...\"'; `\n    } `\n  } `\n  `\n  Install-GoWinres"
         }
@@ -240,21 +240,21 @@
       "kind": "ENTRYPOINT",
       "entrypoint": {
         "span": {
-          "start": 13483,
-          "end": 13493
+          "start": 13449,
+          "end": 13459
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 13494,
-            "end": 13512
+            "start": 13460,
+            "end": 13478
           },
           "value": [
             {
               "span": {
-                "start": 13496,
-                "end": 13510
+                "start": 13462,
+                "end": 13476
               },
               "value": "powershell.exe"
             }
@@ -266,14 +266,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 13573,
-          "end": 13580
+          "start": 13539,
+          "end": 13546
         }
       },
       "arguments": {
         "span": {
-          "start": 13581,
-          "end": 13619
+          "start": 13547,
+          "end": 13585
         },
         "value": "${GOPATH}\\src\\github.com\\docker\\docker"
       }
@@ -282,8 +282,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 13659,
-          "end": 13663
+          "start": 13625,
+          "end": 13629
         }
       },
       "options": [],
@@ -291,8 +291,8 @@
         {
           "path": {
             "span": {
-              "start": 13664,
-              "end": 13665
+              "start": 13630,
+              "end": 13631
             },
             "value": "."
           }
@@ -300,8 +300,8 @@
       ],
       "dest": {
         "span": {
-          "start": 13666,
-          "end": 13667
+          "start": 13632,
+          "end": 13633
         },
         "value": "."
       }

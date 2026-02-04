@@ -1,12 +1,13 @@
-19001 Dockerfile
+20057 Dockerfile
 5219 hack/dockerfiles/archutil.Dockerfile
-4786 hack/dockerfiles/lint.Dockerfile
-3413 hack/dockerfiles/generated-files.Dockerfile
+5099 hack/dockerfiles/lint.Dockerfile
+3411 hack/dockerfiles/generated-files.Dockerfile
 3388 frontend/dockerfile/parser/testfiles/docker/Dockerfile
 3370 frontend/dockerfile/parser/testfiles/cpuguy83-nagios/Dockerfile
 2935 vendor/github.com/containerd/fuse-overlayfs-snapshotter/v2/Dockerfile
 2147 frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile
 1583 frontend/dockerfile/parser/testfiles/brimstone-docker-consul/Dockerfile
+1566 vendor/github.com/moby/policy-helpers/Dockerfile
 1340 hack/dockerfiles/vendor.Dockerfile
 1283 hack/dockerfiles/docs.Dockerfile
 1176 hack/dockerfiles/docs-dockerfile.Dockerfile

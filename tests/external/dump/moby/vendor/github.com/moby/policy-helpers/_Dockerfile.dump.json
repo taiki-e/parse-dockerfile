@@ -1,0 +1,958 @@
+{
+  "parser_directives": {
+    "syntax": {
+      "start": 2,
+      "value": {
+        "span": {
+          "start": 9,
+          "end": 36
+        },
+        "value": "docker/dockerfile:1.19-labs"
+      }
+    },
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 38,
+          "end": 41
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 42,
+          "end": 61
+        },
+        "value": "ALPINE_VERSION=3.22"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 62,
+          "end": 65
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 66,
+          "end": 91
+        },
+        "value": "ROOT_SIGNING_VERSION=main"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 92,
+          "end": 95
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 96,
+          "end": 115
+        },
+        "value": "GOLANG_VERSION=1.25"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 116,
+          "end": 119
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 120,
+          "end": 136
+        },
+        "value": "XX_VERSION=1.8.0"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 137,
+          "end": 140
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 141,
+          "end": 184
+        },
+        "value": "DOCKER_HARDENED_IMAGES_KEYRING_VERSION=main"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 186,
+          "end": 190
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 191,
+          "end": 198
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 199,
+            "end": 201
+          }
+        },
+        {
+          "span": {
+            "start": 202,
+            "end": 223
+          },
+          "value": "sigstore-root-signing"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 224,
+          "end": 227
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 228,
+          "end": 248
+        },
+        "value": "ROOT_SIGNING_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 249,
+          "end": 252
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 253,
+              "end": 325
+            },
+            "value": "https://www.github.com/sigstore/root-signing.git#${ROOT_SIGNING_VERSION}"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 326,
+          "end": 327
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 329,
+          "end": 333
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 334,
+          "end": 341
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 342,
+            "end": 344
+          }
+        },
+        {
+          "span": {
+            "start": 345,
+            "end": 353
+          },
+          "value": "tuf-root"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 354,
+          "end": 358
+        }
+      },
+      "options": [
+        {
+          "flag_start": 359,
+          "name": {
+            "span": {
+              "start": 361,
+              "end": 365
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 366,
+              "end": 387
+            },
+            "value": "sigstore-root-signing"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 388,
+              "end": 406
+            },
+            "value": "metadata/root.json"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 407,
+              "end": 429
+            },
+            "value": "metadata/snapshot.json"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 430,
+              "end": 453
+            },
+            "value": "metadata/timestamp.json"
+          }
+        },
+        {
+          "path": {
+            "span": {
+              "start": 454,
+              "end": 475
+            },
+            "value": "metadata/targets.json"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 476,
+          "end": 477
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 478,
+          "end": 482
+        }
+      },
+      "options": [
+        {
+          "flag_start": 483,
+          "name": {
+            "span": {
+              "start": 485,
+              "end": 492
+            },
+            "value": "parents"
+          },
+          "value": null
+        },
+        {
+          "flag_start": 493,
+          "name": {
+            "span": {
+              "start": 495,
+              "end": 499
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 500,
+              "end": 521
+            },
+            "value": "sigstore-root-signing"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 522,
+              "end": 547
+            },
+            "value": "targets/trusted_root.json"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 548,
+          "end": 549
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 551,
+          "end": 555
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 556,
+          "end": 580
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 581,
+            "end": 583
+          }
+        },
+        {
+          "span": {
+            "start": 584,
+            "end": 601
+          },
+          "value": "validate-tuf-root"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 602,
+          "end": 605
+        }
+      },
+      "options": [
+        {
+          "flag_start": 606,
+          "name": {
+            "span": {
+              "start": 608,
+              "end": 613
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 614,
+              "end": 647
+            },
+            "value": "type=bind,from=tuf-root,target=/a"
+          }
+        },
+        {
+          "flag_start": 654,
+          "name": {
+            "span": {
+              "start": 656,
+              "end": 661
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 662,
+              "end": 703
+            },
+            "value": "type=bind,source=roots/tuf-root,target=/b"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 710,
+            "end": 725
+          },
+          "value": "diff -ruN /a /b"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 727,
+          "end": 731
+        }
+      },
+      "options": [
+        {
+          "flag_start": 732,
+          "name": {
+            "span": {
+              "start": 734,
+              "end": 742
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 743,
+              "end": 757
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 758,
+          "end": 785
+        },
+        "value": "tonistiigi/xx:${XX_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 786,
+            "end": 788
+          }
+        },
+        {
+          "span": {
+            "start": 789,
+            "end": 791
+          },
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 793,
+          "end": 797
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 798,
+          "end": 805
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 806,
+            "end": 808
+          }
+        },
+        {
+          "span": {
+            "start": 809,
+            "end": 820
+          },
+          "value": "dhi-keyring"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 821,
+          "end": 824
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 825,
+          "end": 863
+        },
+        "value": "DOCKER_HARDENED_IMAGES_KEYRING_VERSION"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 864,
+          "end": 867
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 868,
+              "end": 967
+            },
+            "value": "https://www.github.com/docker-hardened-images/keyring.git#${DOCKER_HARDENED_IMAGES_KEYRING_VERSION}"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 968,
+          "end": 969
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 971,
+          "end": 975
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 976,
+          "end": 983
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 984,
+            "end": 986
+          }
+        },
+        {
+          "span": {
+            "start": 987,
+            "end": 997
+          },
+          "value": "dhi-pubkey"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 998,
+          "end": 1002
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1003,
+          "name": {
+            "span": {
+              "start": 1005,
+              "end": 1009
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1010,
+              "end": 1021
+            },
+            "value": "dhi-keyring"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1022,
+              "end": 1047
+            },
+            "value": "/publickey/dhi-latest.pub"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1048,
+          "end": 1056
+        },
+        "value": "/dhi.pub"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1058,
+          "end": 1062
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1063,
+          "end": 1087
+        },
+        "value": "alpine:${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1088,
+            "end": 1090
+          }
+        },
+        {
+          "span": {
+            "start": 1091,
+            "end": 1110
+          },
+          "value": "validate-dhi-pubkey"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1111,
+          "end": 1114
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1115,
+          "name": {
+            "span": {
+              "start": 1117,
+              "end": 1122
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1123,
+              "end": 1158
+            },
+            "value": "type=bind,from=dhi-pubkey,target=/a"
+          }
+        },
+        {
+          "flag_start": 1165,
+          "name": {
+            "span": {
+              "start": 1167,
+              "end": 1172
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1173,
+              "end": 1209
+            },
+            "value": "type=bind,source=roots/dhi,target=/b"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1216,
+            "end": 1252
+          },
+          "value": "diff -u /a/dhi-latest.pub /b/dhi.pub"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1254,
+          "end": 1258
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1259,
+          "name": {
+            "span": {
+              "start": 1261,
+              "end": 1269
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 1270,
+              "end": 1284
+            },
+            "value": "$BUILDPLATFORM"
+          }
+        }
+      ],
+      "image": {
+        "span": {
+          "start": 1285,
+          "end": 1333
+        },
+        "value": "golang:${GOLANG_VERSION}-alpine${ALPINE_VERSION}"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1334,
+            "end": 1336
+          }
+        },
+        {
+          "span": {
+            "start": 1337,
+            "end": 1342
+          },
+          "value": "build"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1343,
+          "end": 1347
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1348,
+          "name": {
+            "span": {
+              "start": 1350,
+              "end": 1354
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1355,
+              "end": 1357
+            },
+            "value": "xx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1358,
+              "end": 1359
+            },
+            "value": "/"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1360,
+          "end": 1361
+        },
+        "value": "/"
+      }
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1362,
+          "end": 1369
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1370,
+          "end": 1408
+        },
+        "value": "/go/src/github.com/moby/policy-helpers"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1409,
+          "end": 1412
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1413,
+          "end": 1427
+        },
+        "value": "TARGETPLATFORM"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1428,
+          "end": 1431
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1432,
+          "name": {
+            "span": {
+              "start": 1434,
+              "end": 1439
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1440,
+              "end": 1448
+            },
+            "value": "target=."
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1449,
+            "end": 1502
+          },
+          "value": "xx-go build -o /out/policy-helper ./cmd/policy-helper"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1504,
+          "end": 1508
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1509,
+          "end": 1516
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1517,
+            "end": 1519
+          }
+        },
+        {
+          "span": {
+            "start": 1520,
+            "end": 1526
+          },
+          "value": "binary"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1527,
+          "end": 1531
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1532,
+          "name": {
+            "span": {
+              "start": 1534,
+              "end": 1538
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 1539,
+              "end": 1544
+            },
+            "value": "build"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 1545,
+              "end": 1563
+            },
+            "value": "/out/policy-helper"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 1564,
+          "end": 1565
+        },
+        "value": "/"
+      }
+    }
+  ]
+}

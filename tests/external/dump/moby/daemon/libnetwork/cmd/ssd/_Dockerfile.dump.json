@@ -17,9 +17,9 @@
       "image": {
         "span": {
           "start": 5,
-          "end": 15
+          "end": 16
         },
-        "value": "alpine:3.7"
+        "value": "alpine:3.23"
       },
       "as_": null
     },
@@ -27,14 +27,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 16,
-          "end": 19
+          "start": 17,
+          "end": 20
         }
       },
       "arguments": {
         "span": {
-          "start": 20,
-          "end": 284
+          "start": 21,
+          "end": 285
         },
         "value": "PACKAGES=\"    musl     linux-headers     build-base     util-linux     bash     git     ca-certificates     python2     python2-dev     py-setuptools     iproute2     curl     strace     drill     ipvsadm     iperf     ethtool \""
       }
@@ -43,16 +43,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 286,
-          "end": 289
+          "start": 287,
+          "end": 290
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 290,
-            "end": 810
+            "start": 291,
+            "end": 811
           },
           "value": "echo \\\n    && apk add --no-cache $PACKAGES \\\n    && if [[ ! -e /usr/bin/python ]];        then ln -sf /usr/bin/python2.7 /usr/bin/python; fi \\\n    && if [[ ! -e /usr/bin/python-config ]]; then ln -sf /usr/bin/python2.7-config /usr/bin/python-config; fi \\\n    && if [[ ! -e /usr/bin/easy_install ]];  then ln -sf /usr/bin/easy_install-2.7 /usr/bin/easy_install; fi \\\n    && easy_install pip \\\n    && pip install --upgrade pip \\\n    && if [[ ! -e /usr/bin/pip ]]; then ln -sf /usr/bin/pip2.7 /usr/bin/pip; fi \\\n    && echo"
         }
@@ -63,8 +63,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 812,
-          "end": 815
+          "start": 813,
+          "end": 816
         }
       },
       "options": [],
@@ -72,8 +72,8 @@
         {
           "path": {
             "span": {
-              "start": 816,
-              "end": 822
+              "start": 817,
+              "end": 823
             },
             "value": "ssd.py"
           }
@@ -81,8 +81,8 @@
       ],
       "dest": {
         "span": {
-          "start": 823,
-          "end": 824
+          "start": 824,
+          "end": 825
         },
         "value": "/"
       }
@@ -91,16 +91,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 825,
-          "end": 828
+          "start": 826,
+          "end": 829
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 829,
-            "end": 882
+            "start": 830,
+            "end": 883
           },
           "value": "pip install git+git://github.com/docker/docker-py.git"
         }
@@ -111,28 +111,28 @@
       "kind": "ENTRYPOINT",
       "entrypoint": {
         "span": {
-          "start": 883,
-          "end": 893
+          "start": 884,
+          "end": 894
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 894,
-            "end": 916
+            "start": 895,
+            "end": 917
           },
           "value": [
             {
               "span": {
-                "start": 897,
-                "end": 903
+                "start": 898,
+                "end": 904
               },
               "value": "python"
             },
             {
               "span": {
-                "start": 907,
-                "end": 914
+                "start": 908,
+                "end": 915
               },
               "value": "/ssd.py"
             }

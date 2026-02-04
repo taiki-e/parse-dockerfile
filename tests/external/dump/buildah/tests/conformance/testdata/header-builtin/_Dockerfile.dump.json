@@ -9,29 +9,47 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 55,
-          "end": 59
+          "start": 64,
+          "end": 68
         }
       },
-      "options": [],
+      "options": [
+        {
+          "flag_start": 69,
+          "name": {
+            "span": {
+              "start": 71,
+              "end": 79
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 80,
+              "end": 91
+            },
+            "value": "linux/amd64"
+          }
+        }
+      ],
       "image": {
         "span": {
-          "start": 60,
-          "end": 126
+          "start": 92,
+          "end": 120
         },
-        "value": "registry.fedoraproject.org/fedora-minimal:42${TARGETARCH:+-x86_64}"
+        "value": "quay.io/libpod/ubuntu:latest"
       },
       "as_": [
         {
           "span": {
-            "start": 127,
-            "end": 129
+            "start": 121,
+            "end": 123
           }
         },
         {
           "span": {
-            "start": 130,
-            "end": 135
+            "start": 124,
+            "end": 129
           },
           "value": "amd64"
         }
@@ -41,29 +59,47 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 192,
-          "end": 196
+          "start": 130,
+          "end": 134
         }
       },
-      "options": [],
+      "options": [
+        {
+          "flag_start": 135,
+          "name": {
+            "span": {
+              "start": 137,
+              "end": 145
+            },
+            "value": "platform"
+          },
+          "value": {
+            "span": {
+              "start": 146,
+              "end": 157
+            },
+            "value": "linux/arm64"
+          }
+        }
+      ],
       "image": {
         "span": {
-          "start": 197,
-          "end": 264
+          "start": 158,
+          "end": 186
         },
-        "value": "registry.fedoraproject.org/fedora-minimal:42${TARGETARCH:+-aarch64}"
+        "value": "quay.io/libpod/ubuntu:latest"
       },
       "as_": [
         {
           "span": {
-            "start": 265,
-            "end": 267
+            "start": 187,
+            "end": 189
           }
         },
         {
           "span": {
-            "start": 268,
-            "end": 273
+            "start": 190,
+            "end": 195
           },
           "value": "arm64"
         }
@@ -73,29 +109,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 318,
-          "end": 322
+          "start": 240,
+          "end": 244
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 323,
-          "end": 364
+          "start": 245,
+          "end": 273
         },
-        "value": "registry.fedoraproject.org/fedora-minimal"
+        "value": "quay.io/libpod/ubuntu:latest"
       },
       "as_": [
         {
           "span": {
-            "start": 365,
-            "end": 367
+            "start": 274,
+            "end": 276
           }
         },
         {
           "span": {
-            "start": 368,
-            "end": 374
+            "start": 277,
+            "end": 283
           },
           "value": "native"
         }
@@ -105,24 +141,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 375,
-          "end": 379
+          "start": 284,
+          "end": 288
         }
       },
       "options": [
         {
-          "flag_start": 380,
+          "flag_start": 289,
           "name": {
             "span": {
-              "start": 382,
-              "end": 386
+              "start": 291,
+              "end": 295
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 387,
-              "end": 392
+              "start": 296,
+              "end": 301
             },
             "value": "amd64"
           }
@@ -132,17 +168,17 @@
         {
           "path": {
             "span": {
-              "start": 393,
-              "end": 409
+              "start": 302,
+              "end": 333
             },
-            "value": "/lib64/libc.so.6"
+            "value": "/lib/x86_64-linux-gnu/libc.so.6"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 410,
-          "end": 421
+          "start": 334,
+          "end": 345
         },
         "value": "/libc-amd64"
       }
@@ -151,24 +187,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 422,
-          "end": 426
+          "start": 346,
+          "end": 350
         }
       },
       "options": [
         {
-          "flag_start": 427,
+          "flag_start": 351,
           "name": {
             "span": {
-              "start": 429,
-              "end": 433
+              "start": 353,
+              "end": 357
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 434,
-              "end": 439
+              "start": 358,
+              "end": 363
             },
             "value": "arm64"
           }
@@ -178,17 +214,17 @@
         {
           "path": {
             "span": {
-              "start": 440,
-              "end": 456
+              "start": 364,
+              "end": 396
             },
-            "value": "/lib64/libc.so.6"
+            "value": "/lib/aarch64-linux-gnu/libc.so.6"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 457,
-          "end": 468
+          "start": 397,
+          "end": 408
         },
         "value": "/libc-arm64"
       }
@@ -197,18 +233,18 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 469,
-          "end": 472
+          "start": 409,
+          "end": 412
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 473,
-            "end": 522
+            "start": 413,
+            "end": 471
           },
-          "value": "microdnf -y install file && microdnf -y clean all"
+          "value": "apt-get update && apt-get install -y file && apt-get clean"
         }
       },
       "here_docs": []
@@ -217,16 +253,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 523,
-          "end": 526
+          "start": 472,
+          "end": 475
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 527,
-            "end": 592
+            "start": 476,
+            "end": 541
           },
           "value": "file /libc-* | tee /libc-types.txt && touch -d @0 /libc-types.txt"
         }
@@ -237,17 +273,17 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 675,
-          "end": 679
+          "start": 624,
+          "end": 628
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 680,
-          "end": 721
+          "start": 629,
+          "end": 657
         },
-        "value": "registry.fedoraproject.org/fedora-minimal"
+        "value": "quay.io/libpod/ubuntu:latest"
       },
       "as_": null
     },
@@ -255,24 +291,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 722,
-          "end": 726
+          "start": 658,
+          "end": 662
         }
       },
       "options": [
         {
-          "flag_start": 727,
+          "flag_start": 663,
           "name": {
             "span": {
-              "start": 729,
-              "end": 733
+              "start": 665,
+              "end": 669
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 734,
-              "end": 740
+              "start": 670,
+              "end": 676
             },
             "value": "native"
           }
@@ -282,8 +318,8 @@
         {
           "path": {
             "span": {
-              "start": 741,
-              "end": 756
+              "start": 677,
+              "end": 692
             },
             "value": "/libc-types.txt"
           }
@@ -291,8 +327,8 @@
       ],
       "dest": {
         "span": {
-          "start": 757,
-          "end": 758
+          "start": 693,
+          "end": 694
         },
         "value": "/"
       }

@@ -205,12 +205,12 @@ parse-dockerfile = { version = "0.1", default-features = false }
 ```rust
 use parse_dockerfile::{parse, Instruction};
 
-let text = r#"
+let text = "
 ARG UBUNTU_VERSION=latest
 
 FROM ubuntu:${UBUNTU_VERSION}
 RUN echo
-"#;
+";
 
 let dockerfile = parse(text).unwrap();
 
@@ -219,13 +219,13 @@ let mut instructions = dockerfile.instructions.iter();
 assert!(matches!(instructions.next(), Some(Instruction::Arg(..))));
 assert!(matches!(instructions.next(), Some(Instruction::From(..))));
 assert!(matches!(instructions.next(), Some(Instruction::Run(..))));
-assert!(matches!(instructions.next(), None));
+assert!(instructions.next().is_none());
 
 // Iterate over global args.
 let mut global_args = dockerfile.global_args();
 let global_arg1 = global_args.next().unwrap();
 assert_eq!(global_arg1.arguments.value, "UBUNTU_VERSION=latest");
-assert!(matches!(global_args.next(), None));
+assert!(global_args.next().is_none());
 
 // Iterate over stages.
 let mut stages = dockerfile.stages();
@@ -233,8 +233,8 @@ let stage1 = stages.next().unwrap();
 assert_eq!(stage1.from.image.value, "ubuntu:${UBUNTU_VERSION}");
 let mut stage1_instructions = stage1.instructions.iter();
 assert!(matches!(stage1_instructions.next(), Some(Instruction::Run(..))));
-assert!(matches!(stage1_instructions.next(), None));
-assert!(matches!(stages.next(), None));
+assert!(stage1_instructions.next().is_none());
+assert!(stages.next().is_none());
 ```
 
 <!-- tidy:sync-markdown-to-rustdoc:ignore:start -->

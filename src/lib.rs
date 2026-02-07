@@ -73,6 +73,7 @@ assert!(stages.next().is_none());
 <!-- tidy:sync-markdown-to-rustdoc:end -->
 */
 
+#![no_std]
 #![doc(test(
     no_crate_inject,
     attr(allow(
@@ -98,6 +99,7 @@ assert!(stages.next().is_none());
 #![allow(clippy::inline_always)]
 
 extern crate alloc;
+extern crate std;
 
 #[cfg(test)]
 #[path = "gen/tests/assert_impl.rs"]
@@ -108,7 +110,14 @@ mod track_size;
 
 mod error;
 
-use alloc::borrow::Cow;
+use alloc::{
+    borrow::{Cow, ToOwned as _},
+    boxed::Box,
+    format,
+    string::String,
+    vec,
+    vec::Vec,
+};
 use core::{mem, ops::Range, str};
 use std::collections::HashMap;
 

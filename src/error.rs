@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
 use alloc::{borrow::Cow, boxed::Box, format, string::String};
-use core::{fmt, marker::PhantomData, ops::Range, str};
+use core::{fmt, marker::PhantomData, str};
 
 use super::ParseIter;
 
@@ -34,14 +34,16 @@ struct ErrorInner {
 
 #[cfg_attr(test, derive(Debug))]
 pub(crate) enum ErrorKind {
+    Other(&'static str, /* pos */ usize),
     Expected(&'static str, /* pos */ usize),
     ExpectedOwned(String, /* pos */ usize),
+    ExpectedQuote { quote: u8, found: Option<u8>, pos: usize },
     AtLeastOneArgument { instruction_start: usize },
     AtLeastTwoArguments { instruction_start: usize },
     ExactlyOneArgument { instruction_start: usize },
     UnknownInstruction { instruction_start: usize },
     InvalidEscape { escape_start: usize },
-    DuplicateName { first: Range<usize>, second: Range<usize> },
+    DuplicateName { first_start: usize, second_start: usize },
     NoStages,
     Json { arguments_start: usize },
 }
@@ -51,18 +53,34 @@ impl ErrorKind {
     #[inline(never)]
     pub(crate) fn into_error(self, p: &ParseIter<'_>) -> Error {
         let msg = match self {
+            Self::Other(msg, ..) => msg.into(),
             Self::Expected(msg, ..) => format!("expected {msg}").into(),
             Self::ExpectedOwned(ref msg, ..) => format!("expected {msg}").into(),
+            Self::ExpectedQuote { quote, found, .. } => {
+                if let Some(found) = found {
+                    format!(
+                        "expected end of quote ({}), but found '{}'",
+                        quote as char, found as char
+                    )
+                    .into()
+                } else {
+                    format!("expected end of quote ({}), but reached eof", quote as char).into()
+                }
+            }
             Self::AtLeastOneArgument { instruction_start: pos }
             | Self::AtLeastTwoArguments { instruction_start: pos }
             | Self::ExactlyOneArgument { instruction_start: pos }
             | Self::UnknownInstruction { instruction_start: pos }
-            | Self::DuplicateName { first: Range { start: pos, .. }, .. } => {
+            | Self::DuplicateName { first_start: pos, .. } => {
                 let mut s = &p.text.as_bytes()[pos..];
-                let word =
+                let mut word =
                     super::collect_non_whitespace_unescaped(&mut s, p.text, p.escape_byte).value;
                 match self {
                     Self::AtLeastOneArgument { .. } => {
+                        // TODO
+                        if word == "HEALTHCHECK" {
+                            word = "HEALTHCHECK CMD".into();
+                        }
                         format!("{word} instruction requires at least one argument").into()
                     }
                     Self::AtLeastTwoArguments { .. } => {
@@ -88,14 +106,16 @@ impl ErrorKind {
             }
         };
         let (line, column) = match self {
-            Self::Expected(_, pos)
+            Self::Other(_, pos)
+            | Self::Expected(_, pos)
             | Self::ExpectedOwned(_, pos)
+            | Self::ExpectedQuote { pos, .. }
             | Self::AtLeastOneArgument { instruction_start: pos }
             | Self::AtLeastTwoArguments { instruction_start: pos }
             | Self::ExactlyOneArgument { instruction_start: pos }
             | Self::UnknownInstruction { instruction_start: pos, .. }
             | Self::InvalidEscape { escape_start: pos }
-            | Self::DuplicateName { second: Range { start: pos, .. }, .. }
+            | Self::DuplicateName { second_start: pos, .. }
             | Self::Json { arguments_start: pos } => find_location_from_pos(pos, p.text.as_bytes()),
             Self::NoStages => (0, 0),
         };

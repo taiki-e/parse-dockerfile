@@ -10,10 +10,48 @@ fn fixtures_dir() -> &'static Path {
     Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/tests/fixtures"))
 }
 
+static ALL_INST: &[&str] = &[
+    "ADD",
+    "ARG",
+    "CMD",
+    "COPY",
+    "ENTRYPOINT",
+    "ENV",
+    "EXPOSE",
+    "FROM",
+    "HEALTHCHECK CMD",
+    "HEALTHCHECK NONE",
+    "LABEL",
+    "MAINTAINER",
+    "RUN",
+    "SHELL",
+    "STOPSIGNAL",
+    "USER",
+    "VOLUME",
+    "WORKDIR",
+    "ONBUILD ADD",
+    "ONBUILD ARG",
+    "ONBUILD CMD",
+    "ONBUILD COPY",
+    "ONBUILD ENTRYPOINT",
+    "ONBUILD ENV",
+    "ONBUILD EXPOSE",
+    "ONBUILD FROM",
+    "ONBUILD HEALTHCHECK CMD",
+    "ONBUILD HEALTHCHECK NONE",
+    "ONBUILD LABEL",
+    "ONBUILD MAINTAINER",
+    "ONBUILD RUN",
+    "ONBUILD SHELL",
+    "ONBUILD STOPSIGNAL",
+    "ONBUILD USER",
+    "ONBUILD VOLUME",
+    "ONBUILD WORKDIR",
+];
+
 #[test]
 fn failure() {
     let tests: &[(&str, &str)] = &[
-        // Ok
         (
             "FROM a
 USER <<INVALID
@@ -21,7 +59,7 @@ INVALID
 ",
             "unknown instruction 'INVALID' at line 3 column 1",
         ),
-        // TODO
+        // TODO: shouldn't fail
         (
             "FROM a
 RUN 3<<EMPTY2
@@ -29,7 +67,7 @@ EMPTY2
 ",
             "unknown instruction 'EMPTY2' at line 3 column 1",
         ),
-        // TODO
+        // TODO: shouldn't fail
         (
             "FROM a
 RUN <<eo'f'
@@ -38,7 +76,7 @@ eof
 ",
             "expected eo at line 5 column 1",
         ),
-        // TODO
+        // TODO: shouldn't fail
         (
             "FROM a
 RUN <<eo\'f
@@ -47,7 +85,7 @@ eo'f
 ",
             "expected eo at line 5 column 1",
         ),
-        // TODO
+        // TODO: shouldn't fail
         (
             "FROM a
 RUN <<'e'o\'f
@@ -56,16 +94,16 @@ eo'f
 ",
             "expected e at line 5 column 1",
         ),
-        // TODO
+        // TODO: shouldn't fail
         (
             "FROM a
 RUN <<'one two'
 echo bar
 one two
 ",
-            "expected quote ('), but found ' ' at line 2 column 11",
+            "expected end of quote ('), but found ' ' at line 2 column 11",
         ),
-        // TODO
+        // TODO: shouldn't fail
         (
             "FROM a
 RUN <<$EOF
@@ -73,10 +111,121 @@ $EOF
 ",
             "unknown instruction '$EOF' at line 3 column 1",
         ),
+        (
+            "FROM a
+SHELL",
+            "expected JSON array at line 2 column 6",
+        ),
+        (
+            "FROM a
+HEALTHCHECK NONE a",
+            "HEALTHCHECK NONE does not accept arguments at line 2 column 18",
+        ),
+        (
+            "FROM a
+HEALTHCHECK",
+            "expected CMD or NONE at line 2 column 12",
+        ),
+        (
+            "FROM a
+ONBUILD",
+            "expected instruction after ONBUILD at line 2 column 1",
+        ),
+        (
+            "FROM a
+ONBUILD ONBUILD",
+            "ONBUILD ONBUILD is not allowed at line 2 column 9",
+        ),
     ];
-
     for &(test, expected_err) in tests {
         assert_eq!(parse(test).unwrap_err().to_string(), expected_err);
+    }
+
+    for &inst in ALL_INST {
+        fn check(inst: &str, onbuild: bool, json: bool) {
+            let m = match (inst, json) {
+                ("CMD" | "HEALTHCHECK NONE", _)
+                | ("HEALTHCHECK CMD" | "RUN", false)
+                | ("VOLUME", true) => "",
+                ("MAINTAINER" | "STOPSIGNAL" | "USER" | "WORKDIR", _) => "exactly one argument",
+                ("ADD" | "COPY", _) => "at least two arguments",
+                _ => "at least one argument",
+            };
+            let mut text = format!(
+                "FROM a
+{}{inst}",
+                if onbuild { "ONBUILD " } else { "" }
+            );
+            if json {
+                text.push_str(" []");
+            }
+            if m.is_empty() {
+                parse(&text).unwrap();
+                text.push(' ');
+                parse(&text).unwrap();
+            } else {
+                // TODO: show "ONBUILD "
+                let err = format!(
+                    "{inst} instruction requires {m} at line 2 column {}",
+                    if onbuild { 9 } else { 1 }
+                );
+                assert_eq!(parse(&text).unwrap_err().to_string(), err);
+                text.push(' ');
+                assert_eq!(parse(&text).unwrap_err().to_string(), err);
+                if json {
+                    text.pop();
+                    text.pop();
+                    text.push('"');
+                }
+                text.push('a');
+                if json {
+                    text.push_str("\"]");
+                }
+                if m == "at least two arguments" {
+                    assert_eq!(parse(&text).unwrap_err().to_string(), err);
+                    text.push(' ');
+                    assert_eq!(parse(&text).unwrap_err().to_string(), err);
+                } else {
+                    parse(&text).unwrap();
+                    text.push(' ');
+                    parse(&text).unwrap();
+                }
+                // TODO
+                // if m == "exactly one argument" {
+                //     assert_eq!(parse(&text).unwrap_err().to_string(), err);
+                //     text.push(' ');
+                //     assert_eq!(parse(&text).unwrap_err().to_string(), err);
+                // } else {
+                if inst == "FROM" {
+                    return;
+                }
+                if json {
+                    text.pop();
+                    text.pop();
+                    text.push_str(",\"");
+                }
+                text.push('b');
+                if json {
+                    text.push_str("\"]");
+                }
+                parse(&text).unwrap();
+                text.push(' ');
+                parse(&text).unwrap();
+                // }
+            }
+        }
+        let (inst, onbuild) = if let Some(inst) = inst.strip_prefix("ONBUILD ") {
+            (inst, true)
+        } else {
+            (inst, false)
+        };
+        check(inst, onbuild, matches!(inst, "SHELL"));
+        if matches!(
+            inst,
+            "ADD" | "CMD" | "COPY" | "ENTRYPOINT" | "HEALTHCHECK CMD" | "RUN" | "VOLUME"
+        ) {
+            check(inst, onbuild, true);
+        }
     }
 }
 

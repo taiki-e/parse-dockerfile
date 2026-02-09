@@ -113,7 +113,6 @@ mod error;
 use alloc::{
     borrow::{Cow, ToOwned as _},
     boxed::Box,
-    format,
     string::String,
     vec,
     vec::Vec,
@@ -178,9 +177,9 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
                 let Instruction::From(from) = &instructions[stages[first_occurrence].start] else {
                     unreachable!()
                 };
-                let first = from.as_.as_ref().unwrap().1.span.clone();
-                let second = name.span.clone();
-                return Err(ErrorKind::DuplicateName { first, second }.into_error(&p));
+                let first_start = from.as_.as_ref().unwrap().1.span.start;
+                let second_start = name.span.start;
+                return Err(ErrorKind::DuplicateName { first_start, second_start }.into_error(&p));
             }
         }
     }
@@ -301,6 +300,7 @@ impl<T> ParserDirective<T> {
 #[cfg_attr(feature = "serde", serde(tag = "kind"))]
 #[cfg_attr(feature = "serde", serde(rename_all = "SCREAMING_SNAKE_CASE"))]
 #[non_exhaustive]
+// NB: When adding new variants, update ALL_INST in tests/test.rs.
 pub enum Instruction<'a> {
     /// `ADD` instruction.
     Add(AddInstruction<'a>),
@@ -1385,14 +1385,11 @@ fn parse_add_or_copy<'a>(
                 quote = Some(b);
                 delim = delim_next;
                 if delim.last() != Some(&b) {
-                    return Err(ErrorKind::ExpectedOwned(
-                        format!(
-                            "quote ({}), but found '{}'",
-                            b as char,
-                            *delim.last().unwrap_or(&0) as char
-                        ),
-                        p.text.len() - s.len(),
-                    ));
+                    return Err(ErrorKind::ExpectedQuote {
+                        quote: b,
+                        found: delim.last().copied(),
+                        pos: p.text.len() - s.len(),
+                    });
                 }
                 delim = &delim[..delim.len() - 1];
             }
@@ -1613,10 +1610,9 @@ fn parse_healthcheck<'a>(
                                 *s = &tmp[1..];
                             }
                             if arguments.is_empty() {
-                                return Err(ErrorKind::Expected(
-                                    "at least 1 arguments",
-                                    array_span.start,
-                                ));
+                                return Err(ErrorKind::AtLeastOneArgument {
+                                    instruction_start: instruction.span.start,
+                                });
                             }
                             return Ok(Instruction::Healthcheck(HealthcheckInstruction {
                                 healthcheck: instruction,
@@ -1655,9 +1651,8 @@ fn parse_healthcheck<'a>(
                 let none_span = cmd_or_none_start..p.text.len() - s.len();
                 skip_spaces(s, p.escape_byte);
                 if !is_line_end(s.first()) {
-                    // TODO: error kind
-                    return Err(ErrorKind::Expected(
-                        "HEALTHCHECK NONE takes no arguments",
+                    return Err(ErrorKind::Other(
+                        "HEALTHCHECK NONE does not accept arguments",
                         p.text.len() - s.len(),
                     ));
                 }
@@ -1724,8 +1719,7 @@ fn parse_onbuild<'a>(
     ));
     // https://docs.docker.com/reference/dockerfile/#onbuild-limitations
     if mem::replace(&mut p.in_onbuild, true) {
-        // TODO: error kind
-        return Err(ErrorKind::Expected("ONBUILD ONBUILD is not allowed", instruction.span.start));
+        return Err(ErrorKind::Other("ONBUILD ONBUILD is not allowed", instruction.span.start));
     }
     let Some((&b, s_next)) = s.split_first() else {
         return Err(ErrorKind::Expected("instruction after ONBUILD", instruction.span.start));
@@ -1734,8 +1728,7 @@ fn parse_onbuild<'a>(
     // match b & TO_UPPER8 {
     //     b'F' => {
     //         if token(s, b"FROM") || token_slow(s, b"FROM", p.escape_byte) {
-    //             // TODO: error kind
-    //             return Err(ErrorKind::Expected(
+    //             return Err(ErrorKind::Other(
     //                 "ONBUILD FROM is not allowed",
     //                 instruction.span.start,
     //             ));
@@ -1745,8 +1738,7 @@ fn parse_onbuild<'a>(
     //         if token(s, b"MAINTAINER")
     //             || token_slow(s, b"MAINTAINER", p.escape_byte)
     //         {
-    //             // TODO: error kind
-    //             return Err(ErrorKind::Expected(
+    //             return Err(ErrorKind::Other(
     //                 "ONBUILD MAINTAINER is not allowed",
     //                 instruction.span.start,
     //             ));
@@ -1831,17 +1823,19 @@ fn parse_run<'a>(
         if let Some(quote) = quote {
             if let Some((&b, s_next)) = s.split_first() {
                 if b != quote {
-                    return Err(ErrorKind::ExpectedOwned(
-                        format!("quote ({}), but found '{}'", quote as char, b as char),
-                        p.text.len() - s.len(),
-                    ));
+                    return Err(ErrorKind::ExpectedQuote {
+                        quote,
+                        found: Some(b),
+                        pos: p.text.len() - s.len(),
+                    });
                 }
                 *s = s_next;
             } else {
-                return Err(ErrorKind::ExpectedOwned(
-                    format!("quote ({}), but reached eof", quote as char),
-                    p.text.len() - s.len(),
-                ));
+                return Err(ErrorKind::ExpectedQuote {
+                    quote,
+                    found: None,
+                    pos: p.text.len() - s.len(),
+                });
             }
         }
         // TODO: skip space

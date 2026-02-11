@@ -74,7 +74,7 @@ RUN <<eo'f'
 echo foo
 eof
 ",
-            "expected eo at line 5 column 1",
+            "expected end of here-document (eo), but reached eof at line 5 column 1",
         ),
         // TODO: shouldn't fail
         (
@@ -83,7 +83,7 @@ RUN <<eo\'f
 echo foo
 eo'f
 ",
-            "expected eo at line 5 column 1",
+            "expected end of here-document (eo), but reached eof at line 5 column 1",
         ),
         // TODO: shouldn't fail
         (
@@ -92,7 +92,7 @@ RUN <<'e'o\'f
 echo foo
 eo'f
 ",
-            "expected e at line 5 column 1",
+            "expected end of here-document (e), but reached eof at line 5 column 1",
         ),
         // TODO: shouldn't fail
         (
@@ -101,7 +101,7 @@ RUN <<'one two'
 echo bar
 one two
 ",
-            "expected end of quote ('), but found ' ' at line 2 column 11",
+            "expected end of quoted string ('), but found ' ' at line 2 column 11",
         ),
         // TODO: shouldn't fail
         (

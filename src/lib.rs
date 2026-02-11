@@ -110,13 +110,7 @@ mod track_size;
 
 mod error;
 
-use alloc::{
-    borrow::{Cow, ToOwned as _},
-    boxed::Box,
-    string::String,
-    vec,
-    vec::Vec,
-};
+use alloc::{borrow::Cow, boxed::Box, string::String, vec, vec::Vec};
 use core::{mem, ops::Range, str};
 use std::collections::HashMap;
 
@@ -150,7 +144,7 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
             arg @ Instruction::Arg(..) => instructions.push(arg),
             instruction => {
                 if current_stage.is_none() {
-                    return Err(ErrorKind::Expected("FROM", instruction.instruction_span().start)
+                    return Err(error::expected("FROM", instruction.instruction_span().start)
                         .into_error(&p));
                 }
                 instructions.push(instruction);
@@ -164,7 +158,7 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
 
     if stages.is_empty() {
         // https://github.com/moby/buildkit/blob/e83d79a51fb49aeb921d8a2348ae14a58701c98c/frontend/dockerfile/dockerfile2llb/convert.go#L263
-        return Err(ErrorKind::NoStages.into_error(&p));
+        return Err(error::no_stage().into_error(&p));
     }
     // TODO: https://github.com/moby/buildkit/blob/e83d79a51fb49aeb921d8a2348ae14a58701c98c/frontend/dockerfile/dockerfile2llb/convert.go#L302
     // > base name (%s) should not be blank
@@ -179,7 +173,7 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
                 };
                 let first_start = from.as_.as_ref().unwrap().1.span.start;
                 let second_start = name.span.start;
-                return Err(ErrorKind::DuplicateName { first_start, second_start }.into_error(&p));
+                return Err(error::duplicate_name(first_start, second_start).into_error(&p));
             }
         }
     }
@@ -995,7 +989,7 @@ impl<'a> Iterator for ParseIter<'a> {
                 Instruction::Arg(..) => {}
                 instruction => {
                     if !p.has_stage {
-                        return Some(Err(ErrorKind::Expected(
+                        return Some(Err(error::expected(
                             "FROM",
                             instruction.instruction_span().start,
                         )
@@ -1009,7 +1003,7 @@ impl<'a> Iterator for ParseIter<'a> {
         }
         if !p.has_stage {
             // https://github.com/moby/buildkit/blob/e83d79a51fb49aeb921d8a2348ae14a58701c98c/frontend/dockerfile/dockerfile2llb/convert.go#L263
-            return Some(Err(ErrorKind::NoStages.into_error(p)));
+            return Some(Err(error::no_stage().into_error(p)));
         }
         None
     }
@@ -1093,7 +1087,7 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                 match value {
                     "`" => p.escape_byte = b'`',
                     "\\" => {}
-                    _ => return Err(ErrorKind::InvalidEscape { escape_start: value_start }),
+                    _ => return Err(error::invalid_escape(value_start)),
                 }
                 p.parser_directives.escape = Some(ParserDirective {
                     start: directive_start,
@@ -1308,7 +1302,7 @@ fn parse_instruction<'a>(
         }
         _ => {}
     }
-    Err(ErrorKind::UnknownInstruction { instruction_start })
+    Err(error::unknown_instruction(instruction_start))
 }
 
 #[inline]
@@ -1324,7 +1318,7 @@ fn parse_arg<'a>(
     ));
     let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.value.is_empty() {
-        return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
+        return Err(error::at_least_one_argument(instruction.span.start));
     }
     Ok(Instruction::Arg(ArgInstruction { arg: instruction, arguments }))
 }
@@ -1354,9 +1348,7 @@ fn parse_add_or_copy<'a>(
                 *s = &tmp[1..];
             }
             if src.is_empty() {
-                return Err(ErrorKind::AtLeastTwoArguments {
-                    instruction_start: instruction.span.start,
-                });
+                return Err(error::at_least_two_arguments(instruction.span.start));
             }
             return Ok((options, src, dest.unwrap()));
         }
@@ -1366,7 +1358,7 @@ fn parse_add_or_copy<'a>(
         Option<_>,
     )>(s, p.text, p.escape_byte);
     if src.is_empty() {
-        return Err(ErrorKind::AtLeastTwoArguments { instruction_start: instruction.span.start });
+        return Err(error::at_least_two_arguments(instruction.span.start));
     }
     for src in &mut src {
         let Source::Path(path) = src else { unreachable!() };
@@ -1385,11 +1377,11 @@ fn parse_add_or_copy<'a>(
                 quote = Some(b);
                 delim = delim_next;
                 if delim.last() != Some(&b) {
-                    return Err(ErrorKind::ExpectedQuote {
-                        quote: b,
-                        found: delim.last().copied(),
-                        pos: p.text.len() - s.len(),
-                    });
+                    return Err(error::expected_quote(
+                        b,
+                        delim.last().copied(),
+                        p.text.len() - s.len(),
+                    ));
                 }
                 delim = &delim[..delim.len() - 1];
             }
@@ -1463,7 +1455,7 @@ fn parse_env<'a>(
     ));
     let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.value.is_empty() {
-        return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
+        return Err(error::at_least_one_argument(instruction.span.start));
     }
     Ok(Instruction::Env(EnvInstruction { env: instruction, arguments }))
 }
@@ -1482,7 +1474,7 @@ fn parse_expose<'a>(
     let arguments: SmallVec<[_; 1]> =
         collect_space_separated_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.is_empty() {
-        return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
+        return Err(error::at_least_one_argument(instruction.span.start));
     }
     Ok(Instruction::Expose(ExposeInstruction { expose: instruction, arguments }))
 }
@@ -1510,9 +1502,7 @@ fn parse_entrypoint<'a>(
                 *s = &tmp[1..];
             }
             if arguments.is_empty() {
-                return Err(ErrorKind::AtLeastOneArgument {
-                    instruction_start: instruction.span.start,
-                });
+                return Err(error::at_least_one_argument(instruction.span.start));
             }
             return Ok(Instruction::Entrypoint(EntrypointInstruction {
                 entrypoint: instruction,
@@ -1525,7 +1515,7 @@ fn parse_entrypoint<'a>(
     let end = p.text.len() - s.len();
     let arguments = p.text[arguments_start..end].trim_ascii_end();
     if arguments.is_empty() {
-        return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
+        return Err(error::at_least_one_argument(instruction.span.start));
     }
     Ok(Instruction::Entrypoint(EntrypointInstruction {
         entrypoint: instruction,
@@ -1552,7 +1542,7 @@ fn parse_from<'a>(
     // > base name (%s) should not be blank
     let image = collect_non_whitespace_unescaped(s, p.text, p.escape_byte);
     if image.value.is_empty() {
-        return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
+        return Err(error::at_least_one_argument(instruction.span.start));
     }
     let mut as_ = None;
     if skip_spaces(s, p.escape_byte) {
@@ -1560,16 +1550,16 @@ fn parse_from<'a>(
         if token(s, b"AS") || token_slow(s, b"AS", p.escape_byte) {
             let as_span = as_start..p.text.len() - s.len();
             if !skip_spaces(s, p.escape_byte) {
-                return Err(ErrorKind::Expected("AS", as_start));
+                return Err(error::expected("AS", as_start));
             }
             let name = collect_non_whitespace_unescaped(s, p.text, p.escape_byte);
             skip_spaces(s, p.escape_byte);
             if !is_line_end(s.first()) {
-                return Err(ErrorKind::Expected("newline or eof", p.text.len() - s.len()));
+                return Err(error::expected("newline or eof", p.text.len() - s.len()));
             }
             as_ = Some((Keyword { span: as_span }, name));
         } else if !is_line_end(s.first()) {
-            return Err(ErrorKind::Expected("AS", as_start));
+            return Err(error::expected("AS", as_start));
         }
     }
     Ok(Instruction::From(FromInstruction { from: instruction, options, image, as_ }))
@@ -1588,7 +1578,7 @@ fn parse_healthcheck<'a>(
     ));
     let options = parse_options(s, p.text, p.escape_byte);
     let Some((&b, s_next)) = s.split_first() else {
-        return Err(ErrorKind::Expected("CMD or NONE", p.text.len() - s.len()));
+        return Err(error::expected("CMD or NONE", p.text.len() - s.len()));
     };
     let cmd_or_none_start = p.text.len() - s.len();
     match b & TO_UPPER8 {
@@ -1610,9 +1600,7 @@ fn parse_healthcheck<'a>(
                                 *s = &tmp[1..];
                             }
                             if arguments.is_empty() {
-                                return Err(ErrorKind::AtLeastOneArgument {
-                                    instruction_start: instruction.span.start,
-                                });
+                                return Err(error::at_least_one_argument(instruction.span.start));
                             }
                             return Ok(Instruction::Healthcheck(HealthcheckInstruction {
                                 healthcheck: instruction,
@@ -1651,7 +1639,7 @@ fn parse_healthcheck<'a>(
                 let none_span = cmd_or_none_start..p.text.len() - s.len();
                 skip_spaces(s, p.escape_byte);
                 if !is_line_end(s.first()) {
-                    return Err(ErrorKind::Other(
+                    return Err(error::other(
                         "HEALTHCHECK NONE does not accept arguments",
                         p.text.len() - s.len(),
                     ));
@@ -1667,7 +1655,7 @@ fn parse_healthcheck<'a>(
         }
         _ => {}
     }
-    Err(ErrorKind::Expected("CMD or NONE", p.text.len() - s.len()))
+    Err(error::expected("CMD or NONE", p.text.len() - s.len()))
 }
 
 #[inline]
@@ -1683,7 +1671,7 @@ fn parse_label<'a>(
     ));
     let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.value.is_empty() {
-        return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
+        return Err(error::at_least_one_argument(instruction.span.start));
     }
     Ok(Instruction::Label(LabelInstruction { label: instruction, arguments }))
 }
@@ -1701,7 +1689,7 @@ fn parse_maintainer<'a>(
     ));
     let name = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
     if name.value.is_empty() {
-        return Err(ErrorKind::ExactlyOneArgument { instruction_start: instruction.span.start });
+        return Err(error::exactly_one_argument(instruction.span.start));
     }
     Ok(Instruction::Maintainer(MaintainerInstruction { maintainer: instruction, name }))
 }
@@ -1719,16 +1707,16 @@ fn parse_onbuild<'a>(
     ));
     // https://docs.docker.com/reference/dockerfile/#onbuild-limitations
     if mem::replace(&mut p.in_onbuild, true) {
-        return Err(ErrorKind::Other("ONBUILD ONBUILD is not allowed", instruction.span.start));
+        return Err(error::other("ONBUILD ONBUILD is not allowed", instruction.span.start));
     }
     let Some((&b, s_next)) = s.split_first() else {
-        return Err(ErrorKind::Expected("instruction after ONBUILD", instruction.span.start));
+        return Err(error::expected("instruction after ONBUILD", instruction.span.start));
     };
     // TODO: https://docs.docker.com/reference/dockerfile/#onbuild-limitations
     // match b & TO_UPPER8 {
     //     b'F' => {
     //         if token(s, b"FROM") || token_slow(s, b"FROM", p.escape_byte) {
-    //             return Err(ErrorKind::Other(
+    //             return Err(error::other(p,
     //                 "ONBUILD FROM is not allowed",
     //                 instruction.span.start,
     //             ));
@@ -1738,7 +1726,7 @@ fn parse_onbuild<'a>(
     //         if token(s, b"MAINTAINER")
     //             || token_slow(s, b"MAINTAINER", p.escape_byte)
     //         {
-    //             return Err(ErrorKind::Other(
+    //             return Err(error::other(p,
     //                 "ONBUILD MAINTAINER is not allowed",
     //                 instruction.span.start,
     //             ));
@@ -1778,9 +1766,7 @@ fn parse_run<'a>(
                 *s = &tmp[1..];
             }
             if arguments.is_empty() {
-                return Err(ErrorKind::AtLeastOneArgument {
-                    instruction_start: instruction.span.start,
-                });
+                return Err(error::at_least_one_argument(instruction.span.start));
             }
             return Ok(Instruction::Run(RunInstruction {
                 run: instruction,
@@ -1823,19 +1809,11 @@ fn parse_run<'a>(
         if let Some(quote) = quote {
             if let Some((&b, s_next)) = s.split_first() {
                 if b != quote {
-                    return Err(ErrorKind::ExpectedQuote {
-                        quote,
-                        found: Some(b),
-                        pos: p.text.len() - s.len(),
-                    });
+                    return Err(error::expected_quote(quote, Some(b), p.text.len() - s.len()));
                 }
                 *s = s_next;
             } else {
-                return Err(ErrorKind::ExpectedQuote {
-                    quote,
-                    found: None,
-                    pos: p.text.len() - s.len(),
-                });
+                return Err(error::expected_quote(quote, None, p.text.len() - s.len()));
             }
         }
         // TODO: skip space
@@ -1889,7 +1867,7 @@ fn parse_shell<'a>(
         p.escape_byte,
     ));
     if !is_maybe_json(s) {
-        return Err(ErrorKind::Expected("JSON array", p.text.len() - s.len()));
+        return Err(error::expected("JSON array", p.text.len() - s.len()));
     }
     match parse_json_array::<SmallVec<[_; 4]>>(s, p.text, p.escape_byte) {
         Ok((arguments, _array_span)) => {
@@ -1897,13 +1875,11 @@ fn parse_shell<'a>(
                 *s = &s[1..];
             }
             if arguments.is_empty() {
-                return Err(ErrorKind::AtLeastOneArgument {
-                    instruction_start: instruction.span.start,
-                });
+                return Err(error::at_least_one_argument(instruction.span.start));
             }
             Ok(Instruction::Shell(ShellInstruction { shell: instruction, arguments }))
         }
-        Err(array_start) => Err(ErrorKind::Json { arguments_start: array_start }),
+        Err(array_start) => Err(error::json(array_start)),
     }
 }
 
@@ -1921,7 +1897,7 @@ fn parse_stopsignal<'a>(
     // TODO: space is disallowed?
     let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.value.is_empty() {
-        return Err(ErrorKind::ExactlyOneArgument { instruction_start: instruction.span.start });
+        return Err(error::exactly_one_argument(instruction.span.start));
     }
     Ok(Instruction::Stopsignal(StopsignalInstruction { stopsignal: instruction, arguments }))
 }
@@ -1940,7 +1916,7 @@ fn parse_user<'a>(
     // TODO: space is disallowed?
     let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.value.is_empty() {
-        return Err(ErrorKind::ExactlyOneArgument { instruction_start: instruction.span.start });
+        return Err(error::exactly_one_argument(instruction.span.start));
     }
     Ok(Instruction::User(UserInstruction { user: instruction, arguments }))
 }
@@ -1976,7 +1952,7 @@ fn parse_volume<'a>(
         collect_space_separated_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.is_empty() {
         // TODO: "VOLUME" too?
-        return Err(ErrorKind::AtLeastOneArgument { instruction_start: instruction.span.start });
+        return Err(error::at_least_one_argument(instruction.span.start));
     }
     Ok(Instruction::Volume(VolumeInstruction {
         volume: instruction,
@@ -1998,7 +1974,7 @@ fn parse_workdir<'a>(
     // TODO: space is disallowed if not escaped/quoted?
     let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
     if arguments.value.is_empty() {
-        return Err(ErrorKind::ExactlyOneArgument { instruction_start: instruction.span.start });
+        return Err(error::exactly_one_argument(instruction.span.start));
     }
     Ok(Instruction::Workdir(WorkdirInstruction { workdir: instruction, arguments }))
 }
@@ -2456,10 +2432,7 @@ fn collect_here_doc_no_strip_tab<'a>(
     let here_doc_start = start.len() - s.len();
     loop {
         if s.len() < delim.len() {
-            return Err(ErrorKind::ExpectedOwned(
-                str::from_utf8(delim).unwrap().to_owned(),
-                start.len() - s.len(),
-            ));
+            return Err(error::expected_here_doc_end(delim, start.len() - s.len()));
         }
         if s.starts_with(delim) && is_line_end(s.get(delim.len())) {
             break;
@@ -2486,10 +2459,7 @@ fn collect_here_doc_strip_tab<'a>(
     let mut res = String::new();
     loop {
         if s.len() < delim.len() {
-            return Err(ErrorKind::ExpectedOwned(
-                str::from_utf8(delim).unwrap().to_owned(),
-                start.len() - s.len(),
-            ));
+            return Err(error::expected_here_doc_end(delim, start.len() - s.len()));
         }
         if let Some((&b'\t', s_next)) = s.split_first() {
             let end = start.len() - s.len();

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use alloc::{borrow::Cow, boxed::Box, format, string::String};
+use alloc::{boxed::Box, format};
 use core::{fmt, marker::PhantomData, str};
 
 use super::ParseIter;
@@ -25,18 +25,79 @@ impl Error {
     }
 }
 
+#[cold]
+#[inline]
+pub(crate) fn other(msg: &'static str, pos: usize) -> ErrorKind {
+    ErrorKind::Other { msg, pos }
+}
+#[cold]
+#[inline]
+pub(crate) fn expected(word: &'static str, pos: usize) -> ErrorKind {
+    ErrorKind::Expected { word, pos }
+}
+#[cold]
+#[inline]
+pub(crate) fn expected_here_doc_end(delim: &[u8], pos: usize) -> ErrorKind {
+    ErrorKind::ExpectedHereDocEnd { delim: delim.into(), pos }
+}
+#[cold]
+#[inline]
+pub(crate) fn expected_quote(quote: u8, found: Option<u8>, pos: usize) -> ErrorKind {
+    ErrorKind::ExpectedQuote { quote, found, pos }
+}
+#[cold]
+#[inline]
+pub(crate) fn at_least_one_argument(instruction_start: usize) -> ErrorKind {
+    ErrorKind::AtLeastOneArgument { instruction_start }
+}
+#[cold]
+#[inline]
+pub(crate) fn at_least_two_arguments(instruction_start: usize) -> ErrorKind {
+    ErrorKind::AtLeastTwoArguments { instruction_start }
+}
+#[cold]
+#[inline]
+pub(crate) fn exactly_one_argument(instruction_start: usize) -> ErrorKind {
+    ErrorKind::ExactlyOneArgument { instruction_start }
+}
+#[cold]
+#[inline]
+pub(crate) fn unknown_instruction(instruction_start: usize) -> ErrorKind {
+    ErrorKind::UnknownInstruction { instruction_start }
+}
+#[cold]
+#[inline]
+pub(crate) fn invalid_escape(escape_start: usize) -> ErrorKind {
+    ErrorKind::InvalidEscape { escape_start }
+}
+#[cold]
+#[inline]
+pub(crate) fn duplicate_name(first_start: usize, second_start: usize) -> ErrorKind {
+    ErrorKind::DuplicateName { first_start, second_start }
+}
+#[cold]
+#[inline]
+pub(crate) fn no_stage() -> ErrorKind {
+    ErrorKind::NoStage
+}
+#[cold]
+#[inline]
+pub(crate) fn json(arguments_start: usize) -> ErrorKind {
+    ErrorKind::Json { arguments_start }
+}
+
 #[derive(Debug)]
 struct ErrorInner {
-    msg: Cow<'static, str>,
+    msg: Box<str>,
     line: usize,
     column: usize,
 }
 
 #[cfg_attr(test, derive(Debug))]
 pub(crate) enum ErrorKind {
-    Other(&'static str, /* pos */ usize),
-    Expected(&'static str, /* pos */ usize),
-    ExpectedOwned(String, /* pos */ usize),
+    Other { msg: &'static str, pos: usize },
+    Expected { word: &'static str, pos: usize },
+    ExpectedHereDocEnd { delim: Box<[u8]>, pos: usize },
     ExpectedQuote { quote: u8, found: Option<u8>, pos: usize },
     AtLeastOneArgument { instruction_start: usize },
     AtLeastTwoArguments { instruction_start: usize },
@@ -44,7 +105,7 @@ pub(crate) enum ErrorKind {
     UnknownInstruction { instruction_start: usize },
     InvalidEscape { escape_start: usize },
     DuplicateName { first_start: usize, second_start: usize },
-    NoStages,
+    NoStage,
     Json { arguments_start: usize },
 }
 
@@ -53,18 +114,23 @@ impl ErrorKind {
     #[inline(never)]
     pub(crate) fn into_error(self, p: &ParseIter<'_>) -> Error {
         let msg = match self {
-            Self::Other(msg, ..) => msg.into(),
-            Self::Expected(msg, ..) => format!("expected {msg}").into(),
-            Self::ExpectedOwned(ref msg, ..) => format!("expected {msg}").into(),
+            Self::Other { msg, .. } => msg.into(),
+            Self::Expected { word, .. } => format!("expected {word}").into(),
+            Self::ExpectedHereDocEnd { ref delim, .. } => format!(
+                "expected end of here-document ({}), but reached eof",
+                str::from_utf8(delim).unwrap()
+            )
+            .into(),
             Self::ExpectedQuote { quote, found, .. } => {
                 if let Some(found) = found {
                     format!(
-                        "expected end of quote ({}), but found '{}'",
+                        "expected end of quoted string ({}), but found '{}'",
                         quote as char, found as char
                     )
                     .into()
                 } else {
-                    format!("expected end of quote ({}), but reached eof", quote as char).into()
+                    format!("expected end of quoted string ({}), but reached eof", quote as char)
+                        .into()
                 }
             }
             Self::AtLeastOneArgument { instruction_start: pos }
@@ -77,7 +143,7 @@ impl ErrorKind {
                     super::collect_non_whitespace_unescaped(&mut s, p.text, p.escape_byte).value;
                 match self {
                     Self::AtLeastOneArgument { .. } => {
-                        // TODO
+                        // TODO: handle in collect_non_whitespace_unescaped
                         if word == "HEALTHCHECK" {
                             word = "HEALTHCHECK CMD".into();
                         }
@@ -96,7 +162,7 @@ impl ErrorKind {
                     _ => unreachable!(),
                 }
             }
-            Self::NoStages => "expected at least one FROM instruction".into(),
+            Self::NoStage => "expected at least one FROM instruction".into(),
             Self::Json { .. } => "invalid JSON".into(),
             Self::InvalidEscape { escape_start } => {
                 let mut s = &p.text.as_bytes()[escape_start..];
@@ -106,9 +172,9 @@ impl ErrorKind {
             }
         };
         let (line, column) = match self {
-            Self::Other(_, pos)
-            | Self::Expected(_, pos)
-            | Self::ExpectedOwned(_, pos)
+            Self::Other { pos, .. }
+            | Self::Expected { pos, .. }
+            | Self::ExpectedHereDocEnd { pos, .. }
             | Self::ExpectedQuote { pos, .. }
             | Self::AtLeastOneArgument { instruction_start: pos }
             | Self::AtLeastTwoArguments { instruction_start: pos }
@@ -117,7 +183,7 @@ impl ErrorKind {
             | Self::InvalidEscape { escape_start: pos }
             | Self::DuplicateName { second_start: pos, .. }
             | Self::Json { arguments_start: pos } => find_location_from_pos(pos, p.text.as_bytes()),
-            Self::NoStages => (0, 0),
+            Self::NoStage => (0, 0),
         };
         Error(Box::new(ErrorInner { msg, line, column }), PhantomData)
     }

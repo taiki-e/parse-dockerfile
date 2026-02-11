@@ -1,6 +1,6 @@
 [package]
 name = "parse-dockerfile"
-version = "0.1.3" #publish:version
+version = "0.1.4" #publish:version
 edition = "2021"
 rust-version = "1.80" # For str::trim_ascii_end
 license = "Apache-2.0 OR MIT"

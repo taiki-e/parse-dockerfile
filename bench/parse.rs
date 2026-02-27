@@ -284,15 +284,13 @@ Found 10 outliers among 100 measurements (10.00%)
 
 #![allow(dead_code)]
 
-use std::{hint::black_box, path::PathBuf};
+use std::{hint::black_box, path::Path};
 
 use criterion::{Criterion, Throughput, criterion_group, criterion_main};
 use fs_err as fs;
 
-fn workspace_root() -> PathBuf {
-    let mut dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    dir.pop(); // bench
-    dir
+fn workspace_root() -> &'static Path {
+    Path::new(env!("CARGO_MANIFEST_DIR").strip_suffix("bench").unwrap())
 }
 
 const UNIX_28_3KB: &str = "tests/external/moby/Dockerfile";

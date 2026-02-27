@@ -56,7 +56,7 @@ serde_json = { version = "1", optional = true }
 fs-err = "3"
 rustversion = "1"
 static_assertions = "1"
-test-helper = { features = ["cli", "doc", "git"], git = "https://github.com/taiki-e/test-helper.git", rev = "c5eac31" }
+test-helper = { features = ["cli", "doc", "git"], git = "https://github.com/taiki-e/test-helper.git", rev = "c78a65c" }
 
 [lints]
 workspace = true

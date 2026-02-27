@@ -92,9 +92,9 @@ assert!(stages.next().is_none());
     clippy::exhaustive_enums,
     clippy::exhaustive_structs,
     clippy::impl_trait_in_params,
-    // clippy::missing_inline_in_public_items,
     clippy::std_instead_of_alloc,
     clippy::std_instead_of_core,
+    // clippy::missing_inline_in_public_items,
 )]
 #![allow(clippy::inline_always)]
 
@@ -2759,7 +2759,7 @@ fn token_slow(s: &mut &[u8], mut token: &'static [u8], escape_byte: u8) -> bool 
 }
 
 const TO_UPPER8: u8 = 0xDF;
-const TO_UPPER64: u64 = 0xDFDFDFDFDFDFDFDF;
+const TO_UPPER64: u64 = 0xDFDF_DFDF_DFDF_DFDF;
 
 #[inline(always)] // Ensure the code getting the length of the needle is inlined.
 fn starts_with_ignore_ascii_case(mut s: &[u8], mut needle: &'static [u8]) -> bool {

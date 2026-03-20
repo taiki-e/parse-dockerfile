@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Publish [artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations).
+
 ## [0.1.4] - 2026-02-11
 
 - Diagnostics improvements.

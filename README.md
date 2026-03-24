@@ -145,7 +145,7 @@ curl --proto '=https' --tlsv1.2 -fsSL -o parse-dockerfile.tar.gz "https://github
 # Verify release attestations.
 gh release -R https://github.com/taiki-e/parse-dockerfile verify-asset parse-dockerfile.tar.gz
 # Verify artifact attestations.
-gh attestation verify --owner taiki-e parse-dockerfile.tar.gz
+gh attestation verify --repo taiki-e/parse-dockerfile --signer-workflow taiki-e/github-actions/.github/workflows/rust-release.yml parse-dockerfile.tar.gz
 # Install to $CARGO_HOME/bin (or $HOME/.cargo/bin if CARGO_HOME is unset).
 tar xf parse-dockerfile.tar.gz -C "${CARGO_HOME:-"$HOME/.cargo"}"/bin
 # Remove archive.

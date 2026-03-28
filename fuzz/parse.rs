@@ -20,9 +20,22 @@ Run with Honggfuzz:
 ```sh
 cd fuzz
 HFUZZ_RUN_ARGS="${HFUZZ_RUN_ARGS:-} --exit_upon_crash" \
-    HFUZZ_BUILD_ARGS="${HFUZZ_BUILD_ARGS:-} --features honggfuzz" \
-    RUSTFLAGS="${RUSTFLAGS:-} -Z sanitizer=address" \
-    cargo hfuzz run parse
+  HFUZZ_BUILD_ARGS="${HFUZZ_BUILD_ARGS:-} --features honggfuzz" \
+  RUSTFLAGS="${RUSTFLAGS:-} -Z sanitizer=address" \
+  cargo hfuzz run parse
+```
+
+Run with AFL++ & cargo-llvm-cov:
+
+```sh
+cd fuzz
+source <(cargo llvm-cov show-env --sh --dep-coverage parse-dockerfile)
+cargo llvm-cov clean --workspace
+cargo llvm-cov clean -p parse-dockerfile
+cargo afl build --release --features afl
+AFL_FUZZER_LOOPCOUNT=20 \
+  cargo afl fuzz -c - -i seeds/parse -o out/parse target/release/parse
+cargo llvm-cov report --release --open
 ```
 */
 

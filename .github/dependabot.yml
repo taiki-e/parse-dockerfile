@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: cargo
+  - package-ecosystem: cargo # zizmor: ignore[dependabot-cooldown] # Unless dependencies are pinned/locked, the effect is limited.
     directories:
       - /
       # crates with [workspace] table are not recognized by the above 'directory: /'
@@ -14,10 +14,12 @@ updates:
     directory: /
     schedule:
       interval: daily
+    cooldown:
+      default-days: 7
     commit-message:
       prefix: ''
     labels: []
-  - package-ecosystem: gitsubmodule
+  - package-ecosystem: gitsubmodule # zizmor: ignore[dependabot-cooldown] # only used in tests
     directory: /
     schedule:
       interval: monthly

@@ -1,0 +1,197 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 27
+          },
+          "value": "parent-stage"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 28,
+          "end": 31
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 32,
+            "end": 79
+          },
+          "value": "echo \"builder intermediate stage\" > /output.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 81,
+          "end": 85
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 86,
+          "end": 98
+        },
+        "value": "parent-stage"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 99,
+            "end": 101
+          }
+        },
+        {
+          "span": {
+            "start": 102,
+            "end": 113
+          },
+          "value": "child-stage"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 114,
+          "end": 117
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 118,
+            "end": 164
+          },
+          "value": "echo \"final intermediate stage\" >> /output.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 166,
+          "end": 170
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 171,
+          "end": 177
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 178,
+          "end": 182
+        }
+      },
+      "options": [
+        {
+          "flag_start": 183,
+          "name": {
+            "span": {
+              "start": 185,
+              "end": 189
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 190,
+              "end": 201
+            },
+            "value": "child-stage"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 202,
+              "end": 213
+            },
+            "value": "/output.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 214,
+          "end": 229
+        },
+        "value": "/app/output.txt"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 230,
+          "end": 233
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 234,
+            "end": 253
+          },
+          "value": "cat /app/output.txt"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

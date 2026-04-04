@@ -1,4 +1,4 @@
-20057 Dockerfile
+20231 Dockerfile
 5219 hack/dockerfiles/archutil.Dockerfile
 5099 hack/dockerfiles/lint.Dockerfile
 3411 hack/dockerfiles/generated-files.Dockerfile
@@ -30,7 +30,6 @@
 388 frontend/dockerfile/parser/testfiles/mail/Dockerfile
 379 hack/dockerfiles/shfmt.Dockerfile
 376 frontend/dockerfile/parser/testfiles/influxdb/Dockerfile
-319 vendor/github.com/pelletier/go-toml/Dockerfile
 286 frontend/dockerfile/parser/testfiles/nginx/Dockerfile
 273 frontend/dockerfile/parser/testfiles/ADD-COPY-with-JSON/Dockerfile
 253 frontend/dockerfile/parser/testfiles/escape-after-comment/Dockerfile
@@ -42,6 +41,7 @@
 179 frontend/dockerfile/parser/testfiles/escape-nonewline/Dockerfile
 168 frontend/dockerfile/parser/testfiles/znc/Dockerfile
 157 frontend/dockerfile/parser/testfiles/mumble/Dockerfile
+113 vendor/github.com/pelletier/go-toml/v2/Dockerfile
 107 frontend/dockerfile/parser/testfiles/multiple-volumes/Dockerfile
 69 frontend/dockerfile/parser/testfiles/escape/Dockerfile
 60 frontend/dockerfile/parser/testfiles/escape-with-syntax/Dockerfile

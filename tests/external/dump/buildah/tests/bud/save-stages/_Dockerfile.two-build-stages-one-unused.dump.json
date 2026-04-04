@@ -1,0 +1,197 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 22
+          },
+          "value": "builder"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 23,
+          "end": 26
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 27,
+            "end": 55
+          },
+          "value": "echo \"building\" > /build.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 57,
+          "end": 61
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 62,
+          "end": 68
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 69,
+            "end": 71
+          }
+        },
+        {
+          "span": {
+            "start": 72,
+            "end": 84
+          },
+          "value": "intermediate"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 85,
+          "end": 88
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 89,
+            "end": 122
+          },
+          "value": "echo \"intermediate\" >> /build.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 124,
+          "end": 128
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 129,
+          "end": 135
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 136,
+          "end": 140
+        }
+      },
+      "options": [
+        {
+          "flag_start": 141,
+          "name": {
+            "span": {
+              "start": 143,
+              "end": 147
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 148,
+              "end": 160
+            },
+            "value": "intermediate"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 161,
+              "end": 171
+            },
+            "value": "/build.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 172,
+          "end": 186
+        },
+        "value": "/app/build.txt"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 187,
+          "end": 190
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 191,
+            "end": 203
+          },
+          "value": "echo \"final\""
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

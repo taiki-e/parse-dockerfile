@@ -1,0 +1,145 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 27
+          },
+          "value": "intermediate"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 28,
+          "end": 31
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 32,
+            "end": 65
+          },
+          "value": "echo \"intermediate\" >> /build.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 67,
+          "end": 71
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 72,
+          "end": 78
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 79,
+          "end": 83
+        }
+      },
+      "options": [
+        {
+          "flag_start": 84,
+          "name": {
+            "span": {
+              "start": 86,
+              "end": 90
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 91,
+              "end": 103
+            },
+            "value": "intermediate"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 104,
+              "end": 114
+            },
+            "value": "/build.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 115,
+          "end": 129
+        },
+        "value": "/app/build.txt"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 130,
+          "end": 133
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 134,
+            "end": 146
+          },
+          "value": "echo \"final\""
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

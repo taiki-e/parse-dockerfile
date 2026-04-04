@@ -51,7 +51,7 @@
           "start": 175,
           "end": 266
         },
-        "value": "otel/weaver:v0.17.1@sha256:32523b5e44fb44418786347e9f7dde187d8797adb6d57a2ee99c245346c3cdfe"
+        "value": "otel/weaver:v0.20.0@sha256:fa4f1c6954ecea78ab1a4e865bd6f5b4aaba80c1896f9f4a11e2c361d04e197e"
       },
       "as_": [
         {

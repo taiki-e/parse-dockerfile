@@ -1,0 +1,243 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "span": {
+            "start": 15,
+            "end": 21
+          },
+          "value": "alias1"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 22,
+          "end": 25
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 26,
+            "end": 52
+          },
+          "value": "echo \"alias1\" > /file1.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 54,
+          "end": 58
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 59,
+          "end": 65
+        },
+        "value": "alpine"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 66,
+            "end": 68
+          }
+        },
+        {
+          "span": {
+            "start": 69,
+            "end": 75
+          },
+          "value": "alias2"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 76,
+          "end": 79
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 80,
+            "end": 106
+          },
+          "value": "echo \"alias2\" > /file2.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 108,
+          "end": 112
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 113,
+          "end": 119
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 120,
+          "end": 124
+        }
+      },
+      "options": [
+        {
+          "flag_start": 125,
+          "name": {
+            "span": {
+              "start": 127,
+              "end": 131
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 132,
+              "end": 138
+            },
+            "value": "alias1"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 139,
+              "end": 149
+            },
+            "value": "/file1.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 150,
+          "end": 164
+        },
+        "value": "/app/file1.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 165,
+          "end": 169
+        }
+      },
+      "options": [
+        {
+          "flag_start": 170,
+          "name": {
+            "span": {
+              "start": 172,
+              "end": 176
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 177,
+              "end": 183
+            },
+            "value": "alias2"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 184,
+              "end": 194
+            },
+            "value": "/file2.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 195,
+          "end": 209
+        },
+        "value": "/app/file2.txt"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 210,
+          "end": 213
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 214,
+            "end": 247
+          },
+          "value": "cat /app/file1.txt /app/file2.txt"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

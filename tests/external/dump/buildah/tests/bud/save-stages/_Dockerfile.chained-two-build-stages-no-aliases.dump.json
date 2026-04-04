@@ -1,0 +1,169 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 12,
+          "end": 15
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 16,
+            "end": 44
+          },
+          "value": "echo \"stage 0\" > /output.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 46,
+          "end": 50
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 51,
+          "end": 52
+        },
+        "value": "0"
+      },
+      "as_": null
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 53,
+          "end": 56
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 57,
+            "end": 86
+          },
+          "value": "echo \"stage 1\" >> /output.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 88,
+          "end": 92
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 93,
+          "end": 99
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 100,
+          "end": 104
+        }
+      },
+      "options": [
+        {
+          "flag_start": 105,
+          "name": {
+            "span": {
+              "start": 107,
+              "end": 111
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 112,
+              "end": 113
+            },
+            "value": "1"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 114,
+              "end": 125
+            },
+            "value": "/output.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 126,
+          "end": 141
+        },
+        "value": "/app/output.txt"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 142,
+          "end": 145
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 146,
+            "end": 165
+          },
+          "value": "cat /app/output.txt"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

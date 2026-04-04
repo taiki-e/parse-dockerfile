@@ -1,0 +1,368 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 32,
+          "end": 36
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 37,
+          "end": 50
+        },
+        "value": "alpine:latest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 51,
+            "end": 53
+          }
+        },
+        {
+          "span": {
+            "start": 54,
+            "end": 60
+          },
+          "value": "parent"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 61,
+          "end": 64
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 65,
+            "end": 98
+          },
+          "value": "echo \"parent layer\" > /parent.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 142,
+          "end": 146
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 147,
+          "end": 153
+        },
+        "value": "parent"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 154,
+            "end": 156
+          }
+        },
+        {
+          "span": {
+            "start": 157,
+            "end": 162
+          },
+          "value": "child"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 163,
+          "end": 166
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 167,
+            "end": 198
+          },
+          "value": "echo \"child layer\" > /child.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 236,
+          "end": 240
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 241,
+          "end": 254
+        },
+        "value": "alpine:latest"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 255,
+            "end": 257
+          }
+        },
+        {
+          "span": {
+            "start": 258,
+            "end": 269
+          },
+          "value": "independent"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 270,
+          "end": 273
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 274,
+            "end": 317
+          },
+          "value": "echo \"independent layer\" > /independent.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 365,
+          "end": 369
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 370,
+          "end": 383
+        },
+        "value": "alpine:latest"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 384,
+          "end": 388
+        }
+      },
+      "options": [
+        {
+          "flag_start": 389,
+          "name": {
+            "span": {
+              "start": 391,
+              "end": 395
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 396,
+              "end": 402
+            },
+            "value": "parent"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 403,
+              "end": 414
+            },
+            "value": "/parent.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 415,
+          "end": 430
+        },
+        "value": "/app/parent.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 431,
+          "end": 435
+        }
+      },
+      "options": [
+        {
+          "flag_start": 436,
+          "name": {
+            "span": {
+              "start": 438,
+              "end": 442
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 443,
+              "end": 448
+            },
+            "value": "child"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 449,
+              "end": 459
+            },
+            "value": "/child.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 460,
+          "end": 474
+        },
+        "value": "/app/child.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 475,
+          "end": 479
+        }
+      },
+      "options": [
+        {
+          "flag_start": 480,
+          "name": {
+            "span": {
+              "start": 482,
+              "end": 486
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 487,
+              "end": 498
+            },
+            "value": "independent"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 499,
+              "end": 515
+            },
+            "value": "/independent.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 516,
+          "end": 536
+        },
+        "value": "/app/independent.txt"
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 537,
+          "end": 540
+        }
+      },
+      "arguments": {
+        "exec": {
+          "span": {
+            "start": 541,
+            "end": 609
+          },
+          "value": [
+            {
+              "span": {
+                "start": 543,
+                "end": 546
+              },
+              "value": "cat"
+            },
+            {
+              "span": {
+                "start": 550,
+                "end": 565
+              },
+              "value": "/app/parent.txt"
+            },
+            {
+              "span": {
+                "start": 569,
+                "end": 583
+              },
+              "value": "/app/child.txt"
+            },
+            {
+              "span": {
+                "start": 587,
+                "end": 607
+              },
+              "value": "/app/independent.txt"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

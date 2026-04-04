@@ -1,4 +1,4 @@
-25922 Dockerfile
+26034 Dockerfile
 13634 Dockerfile.windows
 4736 integration/build/testdata/Dockerfile.TestBuildPreserveOwnership
 2458 vendor/github.com/docker/distribution/Dockerfile

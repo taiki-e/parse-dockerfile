@@ -1,0 +1,185 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 28
+        },
+        "value": "quay.io/libpod/centos:7"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 29,
+            "end": 31
+          }
+        },
+        {
+          "span": {
+            "start": 32,
+            "end": 37
+          },
+          "value": "lower"
+        }
+      ]
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 39,
+          "end": 42
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 43,
+          "end": 69
+        },
+        "value": "quoted=\"words with quotes\""
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 70,
+          "end": 73
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 74,
+          "end": 90
+        },
+        "value": "expanded=$quoted"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 92,
+          "end": 95
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 96,
+            "end": 146
+          },
+          "value": "printf \"%q\\n\" lower: $quoted >> /arg-expansion.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 147,
+          "end": 150
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 151,
+            "end": 203
+          },
+          "value": "printf \"%q\\n\" lower: $expanded >> /arg-expansion.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 205,
+          "end": 209
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 210,
+          "end": 215
+        },
+        "value": "lower"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 216,
+            "end": 218
+          }
+        },
+        {
+          "span": {
+            "start": 219,
+            "end": 224
+          },
+          "value": "upper"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 226,
+          "end": 229
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 230,
+            "end": 280
+          },
+          "value": "printf \"%q\\n\" upper: $quoted >> /arg-expansion.txt"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 281,
+          "end": 284
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 285,
+            "end": 337
+          },
+          "value": "printf \"%q\\n\" upper: $expanded >> /arg-expansion.txt"
+        }
+      },
+      "here_docs": []
+    }
+  ]
+}

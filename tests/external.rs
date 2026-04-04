@@ -23,7 +23,7 @@ const MOBY: (&str, usize) = ("moby", 29);
 // https://github.com/moby/buildkit
 const BUILDKIT: (&str, usize) = ("buildkit", 60);
 // https://github.com/containers/buildah
-const BUILDAH: (&str, usize) = ("buildah", 308);
+const BUILDAH: (&str, usize) = ("buildah", 322);
 
 #[test]
 #[cfg_attr(windows, ignore)] // git submodule eol issue

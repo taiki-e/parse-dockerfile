@@ -6,6 +6,7 @@
 704 tests/bud/env/Dockerfile.env-precedence
 695 tests/conformance/testdata/header-builtin/Dockerfile
 662 tests/conformance/testdata/builtins/Dockerfile
+610 tests/bud/save-stages/Dockerfile.three-build-stages-parent-child-independent
 597 tests/conformance/testdata/transientmount/Dockerfile.env
 597 tests/conformance/testdata/Dockerfile.env
 561 tests/conformance/testdata/heredoc/Dockerfile.heredoc_copy
@@ -27,6 +28,8 @@
 362 tests/conformance/testdata/mount-targets/Dockerfile.mount
 343 tests/bud/workdir-symlink/Dockerfile-3
 340 tests/bud/buildkit-mount-from/Dockerfilemultistagefromcache
+338 tests/conformance/testdata/Dockerfile.quoted-arg
+336 tests/bud/save-stages/Dockerfile.arg-build-stages-and-chained-build-stages
 329 tests/bud/buildkit-mount/Dockerfilecachewritesharing
 320 tests/bud/multiarch/Dockerfile.no-run
 307 tests/bud/from-as/Dockerfile.skip
@@ -40,19 +43,25 @@
 269 tests/conformance/testdata/dockerignore/allowlist/alternating-nothing/Dockerfile
 261 tests/bud/symlink/Dockerfile.multiple-symlinks
 261 tests/bud/copy-from/Dockerfile
+254 tests/bud/save-stages/Dockerfile.chained-two-build-stages
 250 tests/bud/build-arg/Dockerfile3
+248 tests/bud/save-stages/Dockerfile.two-build-stages
+244 tests/bud/save-stages/Dockerfile.chained-three-build-stages
 236 tests/bud/stdio/Dockerfile
 236 tests/bud/multiarch/Dockerfile.built-in-args
 227 tests/bud/layers-squash/Dockerfile.multi-stage
+222 tests/bud/save-stages/Dockerfile.final-uses-build-stage
 221 tests/bud/multiarch/Dockerfile.fail
 214 tests/bud/workdir-symlink/Dockerfile-2
 208 tests/conformance/testdata/mount-targets/Dockerfile
 206 tests/conformance/testdata/copysymlink/Dockerfile2
+204 tests/bud/save-stages/Dockerfile.two-build-stages-one-unused
 198 tests/bud/secret-relative/Dockerfile
 195 tests/conformance/testdata/Dockerfile.copyfrom_6
 195 tests/conformance/testdata/Dockerfile.copyfrom_5
 193 tests/bud/buildkit-mount-from/Dockerfilecachefrom
 191 tests/conformance/testdata/copyblahblub/Dockerfile3
+186 tests/bud/save-stages/Dockerfile.single-build-stage-modifiable-renamed
 184 tests/conformance/testdata/Dockerfile.copyfrom_4
 184 tests/bud/volume-symlink/Dockerfile
 179 tests/conformance/testdata/dockerignore/integration3/Dockerfile
@@ -62,8 +71,10 @@
 173 tests/bud/use-layers/Dockerfile
 173 tests/bud/dest-symlink/Dockerfile
 172 tests/conformance/testdata/Dockerfile.copyfrom_10
+170 tests/bud/save-stages/Dockerfile.single-build-stage-modifiable
 168 tests/bud/buildkit-mount/Dockerfile3
 167 tests/bud/symlink/Dockerfile.relative-symlink
+166 tests/bud/save-stages/Dockerfile.chained-two-build-stages-no-aliases
 165 tests/bud/dockerignore4/Dockerfile.test
 165 tests/bud/dockerignore3/Dockerfile
 164 tests/conformance/testdata/Dockerfile.copyfrom_13
@@ -83,6 +94,7 @@
 150 tests/bud/use-layers/Dockerfile.multistage-copy
 150 tests/bud/run-mounts/Dockerfile.ssh_options
 149 tests/bud/copy-from/Dockerfile4
+147 tests/bud/save-stages/Dockerfile.single-build-stage
 147 tests/bud/healthcheck/Dockerfile
 145 tests/conformance/testdata/volumerun/Dockerfile
 144 tests/bud/run-mounts/Dockerfile.ssh_access
@@ -108,6 +120,7 @@
 127 tests/bud/workdir-user/Dockerfile
 127 tests/bud/copy-from/Dockerfile3
 126 tests/conformance/testdata/Dockerfile.copyfrom_2
+126 tests/bud/save-stages/Dockerfile.empty-intermediate-build-stage
 125 tests/bud/buildkit-mount-from/Dockerfilebindfrom
 123 tests/bud/dest-final-slash/Dockerfile
 123 tests/bud/buildkit-mount/Dockerfile2
@@ -237,6 +250,7 @@
 42 tests/conformance/testdata/overlapdirwithoutslash/Dockerfile
 42 tests/conformance/testdata/dockerignore/exceptions-weirdness-2/Dockerfile
 42 tests/conformance/testdata/dockerignore/exceptions-weirdness-1/Dockerfile
+42 tests/bud/save-stages/Dockerfile.simple
 42 tests/bud/onbuild/Dockerfile1
 42 tests/bud/cache-stages/Dockerfile.1
 41 tests/conformance/testdata/replace/symlink-with-directory/Dockerfile.2

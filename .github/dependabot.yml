@@ -21,10 +21,6 @@ updates:
     commit-message:
       prefix: ''
     labels: []
-    groups:
-      github-actions:
-        patterns:
-          - '*'
   - package-ecosystem: gitsubmodule # zizmor: ignore[dependabot-cooldown] # only used in tests
     directory: /
     schedule:

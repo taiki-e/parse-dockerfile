@@ -27,7 +27,7 @@
           "start": 34,
           "end": 51
         },
-        "value": "GO_VERSION=1.26.1"
+        "value": "GO_VERSION=1.26.3"
       }
     },
     {
@@ -147,44 +147,72 @@
       }
     },
     {
-      "kind": "RUN",
-      "run": {
+      "kind": "ADD",
+      "add": {
         "span": {
           "start": 238,
           "end": 241
         }
       },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 242,
+              "end": 318
+            },
+            "value": "https://github.com/golang/vuln.git?ref=${GOVULNCHECK_VERSION}&keep-git-dir=1"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 319,
+          "end": 344
+        },
+        "value": "/go/src/golang.org/x/vuln"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 345,
+          "end": 348
+        }
+      },
       "options": [
         {
-          "flag_start": 242,
+          "flag_start": 349,
           "name": {
             "span": {
-              "start": 244,
-              "end": 249
+              "start": 351,
+              "end": 356
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 250,
-              "end": 280
+              "start": 357,
+              "end": 387
             },
             "value": "type=cache,target=/root/.cache"
           }
         },
         {
-          "flag_start": 287,
+          "flag_start": 394,
           "name": {
             "span": {
-              "start": 289,
-              "end": 294
+              "start": 396,
+              "end": 401
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 295,
-              "end": 324
+              "start": 402,
+              "end": 431
             },
             "value": "type=cache,target=/go/pkg/mod"
           }
@@ -193,10 +221,10 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 331,
-            "end": 396
+            "start": 438,
+            "end": 504
           },
-          "value": "go install golang.org/x/vuln/cmd/govulncheck@$GOVULNCHECK_VERSION"
+          "value": "cd /go/src/golang.org/x/vuln && \\\n    go install ./cmd/govulncheck"
         }
       },
       "here_docs": []
@@ -205,29 +233,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 398,
-          "end": 402
+          "start": 506,
+          "end": 510
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 403,
-          "end": 407
+          "start": 511,
+          "end": 515
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 408,
-            "end": 410
+            "start": 516,
+            "end": 518
           }
         },
         {
           "span": {
-            "start": 411,
-            "end": 414
+            "start": 519,
+            "end": 522
           },
           "value": "run"
         }
@@ -237,14 +265,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 415,
-          "end": 418
+          "start": 523,
+          "end": 526
         }
       },
       "arguments": {
         "span": {
-          "start": 419,
-          "end": 425
+          "start": 527,
+          "end": 533
         },
         "value": "FORMAT"
       }
@@ -253,24 +281,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 426,
-          "end": 429
+          "start": 534,
+          "end": 537
         }
       },
       "options": [
         {
-          "flag_start": 430,
+          "flag_start": 538,
           "name": {
             "span": {
-              "start": 432,
-              "end": 437
+              "start": 540,
+              "end": 545
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 438,
-              "end": 459
+              "start": 546,
+              "end": 567
             },
             "value": "type=bind,target=.,rw"
           }
@@ -279,8 +307,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 465,
-            "end": 465
+            "start": 573,
+            "end": 573
           },
           "value": ""
         }
@@ -288,8 +316,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 466,
-            "end": 554
+            "start": 574,
+            "end": 662
           },
           "expand": true,
           "value": "  set -ex\n  mkdir /out\n  govulncheck -format ${FORMAT} ./... | tee /out/govulncheck.out\n"
@@ -300,29 +328,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 559,
-          "end": 563
+          "start": 667,
+          "end": 671
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 564,
-          "end": 571
+          "start": 672,
+          "end": 679
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 572,
-            "end": 574
+            "start": 680,
+            "end": 682
           }
         },
         {
           "span": {
-            "start": 575,
-            "end": 581
+            "start": 683,
+            "end": 689
           },
           "value": "output"
         }
@@ -332,24 +360,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 582,
-          "end": 586
+          "start": 690,
+          "end": 694
         }
       },
       "options": [
         {
-          "flag_start": 587,
+          "flag_start": 695,
           "name": {
             "span": {
-              "start": 589,
-              "end": 593
+              "start": 697,
+              "end": 701
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 594,
-              "end": 597
+              "start": 702,
+              "end": 705
             },
             "value": "run"
           }
@@ -359,8 +387,8 @@
         {
           "path": {
             "span": {
-              "start": 598,
-              "end": 602
+              "start": 706,
+              "end": 710
             },
             "value": "/out"
           }
@@ -368,8 +396,8 @@
       ],
       "dest": {
         "span": {
-          "start": 603,
-          "end": 604
+          "start": 711,
+          "end": 712
         },
         "value": "/"
       }

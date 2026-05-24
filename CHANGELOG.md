@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Fix bug in JSON array parsing.
+
 ## [0.1.5] - 2026-03-20
 
 - Publish [artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations).

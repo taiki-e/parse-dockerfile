@@ -2143,7 +2143,7 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                             b'n' => ('\n', 1),
                             b'r' => ('\r', 1),
                             b't' => ('\t', 1),
-                            b'u' => (parse_json_hex_escape(s, array_start)?, 5),
+                            b'u' => (parse_json_hex_escape(&s[1..], array_start)?, 5),
                             _ => return Err(array_start), // invalid escape
                         };
                         buf.push(new);

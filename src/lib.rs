@@ -2135,19 +2135,19 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                         // JSON escape
                         let word_end = start.len() - s.len();
                         buf.push_str(&start[word_start..word_end]);
+                        let (&b, s_next) = s_next.split_first().ok_or(array_start)?;
                         *s = s_next;
-                        let (new, new_start) = match *s.first().ok_or(array_start)? {
-                            b @ (b'"' | b'\\' | b'/') => (b as char, 1),
-                            b'b' => ('\x08', 1),
-                            b'f' => ('\x0c', 1),
-                            b'n' => ('\n', 1),
-                            b'r' => ('\r', 1),
-                            b't' => ('\t', 1),
-                            b'u' => (parse_json_hex_escape(s, array_start)?, 5),
+                        let new = match b {
+                            b'"' | b'\\' | b'/' => b as char,
+                            b'b' => '\x08',
+                            b'f' => '\x0c',
+                            b'n' => '\n',
+                            b'r' => '\r',
+                            b't' => '\t',
+                            b'u' => parse_json_hex_escape(s, array_start)?,
                             _ => return Err(array_start), // invalid escape
                         };
                         buf.push(new);
-                        *s = &s[new_start..];
                         word_start = start.len() - s.len();
                         continue;
                     }
@@ -2291,12 +2291,11 @@ fn test_parse_json_array() {
     ]);
     assert_eq!(s, b"\n");
     // escape
-    // TODO: \uXXXX
-    let t = "[\"a\\\"\\\\\\/\\b\\f\\n\\r\\tbc\"]";
+    let t = "[\"a\\\"\\\\\\/\\b\\f\\n\\r\\tbc\\u12ab\\uAB12\\uD83C\\uDF95\"]";
     let mut s = t.as_bytes();
     assert_eq!(&*parse_json_array::<Vec<_>>(&mut s, t, b'\\').unwrap().0, &[UnescapedString {
-        span: 2..21,
-        value: "a\"\\/\x08\x0c\n\r\tbc".into()
+        span: 2..45,
+        value: "a\"\\/\x08\x0c\n\r\tbc\u{12ab}\u{AB12}\u{1F395}".into()
     }]);
     assert_eq!(s, b"");
 
@@ -2319,7 +2318,7 @@ fn test_parse_json_array() {
     let t = "[\"ab\\c\"]";
     let mut s = t.as_bytes();
     assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
-    assert_eq!(s, b"c\"]");
+    assert_eq!(s, b"\"]");
     // TODO: more from https://github.com/serde-rs/json/blob/3f1c6de4af28b1f6c5100da323f2bffaf7c2083f/tests/test.rs#L1060
 }
 

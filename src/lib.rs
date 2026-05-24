@@ -2142,7 +2142,9 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                         // JSON escape
                         let word_end = start.len() - s.len();
                         buf.push_str(&start[word_start..word_end]);
-                        let (&b, s_next) = s_next.split_first().ok_or(array_start)?;
+                        *s = s_next;
+                        handle_continuation_line(s, escape_byte);
+                        let (&b, s_next) = s.split_first().ok_or(array_start)?;
                         *s = s_next;
                         let new = match b {
                             b'"' | b'\\' | b'/' => b as char,
@@ -2151,7 +2153,7 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                             b'n' => '\n',
                             b'r' => '\r',
                             b't' => '\t',
-                            b'u' => parse_json_hex_escape(s, array_start)?,
+                            b'u' => parse_json_hex_escape(s, escape_byte, array_start)?,
                             _ => return Err(array_start), // invalid escape
                         };
                         buf.push(new);
@@ -2201,19 +2203,32 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
     }
     Ok((res, array_start..array_end))
 }
+#[inline]
+fn handle_continuation_line(s: &mut &[u8], escape_byte: u8) {
+    if let Some((&b, s_next)) = s.split_first() {
+        if skip_line_escape(s, b, s_next, escape_byte) {
+            skip_line_escape_followup(s, escape_byte);
+        }
+    }
+}
 // Adapted from https://github.com/serde-rs/json/blob/3f1c6de4af28b1f6c5100da323f2bffaf7c2083f/src/read.rs
 #[cold]
-fn parse_json_hex_escape(s: &mut &[u8], array_start: usize) -> Result<char, usize> {
-    fn decode_hex_escape(s: &mut &[u8], array_start: usize) -> Result<u16, usize> {
+fn parse_json_hex_escape(
+    s: &mut &[u8],
+    escape_byte: u8,
+    array_start: usize,
+) -> Result<char, usize> {
+    fn decode_hex_escape(s: &mut &[u8], escape_byte: u8, array_start: usize) -> Result<u16, usize> {
         if s.len() < 4 {
             return Err(array_start); // EofWhileParsingString
         }
 
         let mut n = 0;
         for _ in 0..4 {
-            let ch = decode_hex_val(s[0]);
-            *s = &s[1..];
-            match ch {
+            handle_continuation_line(s, escape_byte);
+            let (&b, s_next) = s.split_first().ok_or(array_start)?;
+            *s = s_next;
+            match decode_hex_val(b) {
                 None => return Err(array_start), // InvalidEscape
                 Some(val) => {
                     n = (n << 4) + val;
@@ -2228,7 +2243,7 @@ fn parse_json_hex_escape(s: &mut &[u8], array_start: usize) -> Result<char, usiz
         if n == u8::MAX as u16 { None } else { Some(n) }
     }
 
-    let c = match decode_hex_escape(s, array_start)? {
+    let c = match decode_hex_escape(s, escape_byte, array_start)? {
         _n @ 0xDC00..=0xDFFF => return Err(array_start), // ErrorCode::LoneLeadingSurrogateInHexEscape)
 
         // Non-BMP characters are encoded as a sequence of two hex
@@ -2236,19 +2251,21 @@ fn parse_json_hex_escape(s: &mut &[u8], array_start: usize) -> Result<char, usiz
         // utf-8 string the surrogates are required to be paired,
         // whereas deserializing a byte string accepts lone surrogates.
         n1 @ 0xD800..=0xDBFF => {
+            handle_continuation_line(s, escape_byte);
             if s.first() == Some(&b'\\') {
                 *s = &s[1..];
             } else {
                 return Err(array_start); // UnexpectedEndOfHexEscape
             }
 
+            handle_continuation_line(s, escape_byte);
             if s.first() == Some(&b'u') {
                 *s = &s[1..];
             } else {
                 return Err(array_start); // UnexpectedEndOfHexEscape
             }
 
-            let n2 = decode_hex_escape(s, array_start)?;
+            let n2 = decode_hex_escape(s, escape_byte, array_start)?;
 
             if n2 < 0xDC00 || n2 > 0xDFFF {
                 return Err(array_start); // LoneLeadingSurrogateInHexEscape
@@ -2298,11 +2315,11 @@ fn test_parse_json_array() {
     ]);
     assert_eq!(s, b"\n");
     // escape
-    let t = "[\"a\\\"\\\\\\/\\b\\f\\n\\r\\tbc\\u12ab\\uAB12\\uD83C\\uDF95\"]";
+    let t = "[\"a\\\"\\\\\\/\\b\\f\\n\\r\\tbc\\u12ab\\uAB12\\uD83C\\uDF95\\\n\\\\\nu\\\nD\\\n8\\\n3\\\nC\\\n\\\\\nu\\\nD\\\nF\\\n9\\\n5\\\n\"]";
     let mut s = t.as_bytes();
     assert_eq!(&*parse_json_array::<Vec<_>>(&mut s, t, b'\\').unwrap().0, &[UnescapedString {
-        span: 2..45,
-        value: "a\"\\/\x08\x0c\n\r\tbc\u{12ab}\u{AB12}\u{1F395}".into()
+        span: 2..83,
+        value: "a\"\\/\x08\x0c\n\r\tbc\u{12ab}\u{AB12}\u{1F395}\u{1F395}".into()
     }]);
     assert_eq!(s, b"");
 

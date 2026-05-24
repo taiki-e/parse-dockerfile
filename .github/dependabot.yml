@@ -29,6 +29,6 @@ updates:
       prefix: ''
     labels: []
     groups:
-      github-actions:
+      gitsubmodule:
         patterns:
           - '*'

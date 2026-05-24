@@ -1,11 +1,11 @@
-20231 Dockerfile
+20245 Dockerfile
 5219 hack/dockerfiles/archutil.Dockerfile
 5099 hack/dockerfiles/lint.Dockerfile
-3411 hack/dockerfiles/generated-files.Dockerfile
+3424 hack/dockerfiles/generated-files.Dockerfile
 3388 frontend/dockerfile/parser/testfiles/docker/Dockerfile
 3370 frontend/dockerfile/parser/testfiles/cpuguy83-nagios/Dockerfile
+3071 frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile
 2935 vendor/github.com/containerd/fuse-overlayfs-snapshotter/v2/Dockerfile
-2147 frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile
 1583 frontend/dockerfile/parser/testfiles/brimstone-docker-consul/Dockerfile
 1566 vendor/github.com/moby/policy-helpers/Dockerfile
 1340 hack/dockerfiles/vendor.Dockerfile
@@ -15,11 +15,11 @@
 1126 vendor/github.com/tonistiigi/fsutil/Dockerfile
 1017 vendor/github.com/tonistiigi/go-csvvalue/Dockerfile
 908 hack/dockerfiles/authors.Dockerfile
+891 hack/dockerfiles/doctoc.Dockerfile
 855 vendor/github.com/tonistiigi/go-actions-cache/Dockerfile
 788 frontend/dockerfile/parser/testfiles/brimstone-consuldock/Dockerfile
 755 vendor/github.com/tonistiigi/dchapes-mode/Dockerfile
 726 frontend/dockerfile/parser/testfiles/lk4d4-the-edge-case-generator/Dockerfile
-725 hack/dockerfiles/doctoc.Dockerfile
 703 frontend/dockerfile/parser/testfile-line/Dockerfile
 652 examples/create-certs/Dockerfile
 606 hack/dockerfiles/govulncheck.Dockerfile

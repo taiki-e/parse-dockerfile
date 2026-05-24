@@ -27,7 +27,7 @@
           "start": 48,
           "end": 63
         },
-        "value": "NODE_VERSION=19"
+        "value": "NODE_VERSION=24"
       }
     },
     {
@@ -131,21 +131,37 @@
       ]
     },
     {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 291,
+          "end": 294
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 295,
+          "end": 316
+        },
+        "value": "DOCTOC_VERSION=v2.3.0"
+      }
+    },
+    {
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 167,
-          "end": 170
+          "start": 317,
+          "end": 320
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 171,
-            "end": 192
+            "start": 321,
+            "end": 362
           },
-          "value": "npm install -g doctoc"
+          "value": "npm install -g doctoc@${DOCTOC_VERSION#v}"
         }
       },
       "here_docs": []
@@ -154,24 +170,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 193,
-          "end": 196
+          "start": 363,
+          "end": 366
         }
       },
       "options": [
         {
-          "flag_start": 197,
+          "flag_start": 367,
           "name": {
             "span": {
-              "start": 199,
-              "end": 204
+              "start": 369,
+              "end": 374
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 205,
-              "end": 251
+              "start": 375,
+              "end": 421
             },
             "value": "type=bind,source=README.md,target=README.md,rw"
           }
@@ -180,8 +196,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 257,
-            "end": 257
+            "start": 427,
+            "end": 427
           },
           "value": ""
         }
@@ -189,8 +205,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 258,
-            "end": 320
+            "start": 428,
+            "end": 490
           },
           "expand": true,
           "value": "  set -e\n  doctoc README.md\n  mkdir /out\n  cp README.md /out/\n"
@@ -201,29 +217,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 325,
-          "end": 329
+          "start": 495,
+          "end": 499
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 330,
-          "end": 337
+          "start": 500,
+          "end": 507
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 338,
-            "end": 340
+            "start": 508,
+            "end": 510
           }
         },
         {
           "span": {
-            "start": 341,
-            "end": 347
+            "start": 511,
+            "end": 517
           },
           "value": "update"
         }
@@ -233,24 +249,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 348,
-          "end": 352
+          "start": 518,
+          "end": 522
         }
       },
       "options": [
         {
-          "flag_start": 353,
+          "flag_start": 523,
           "name": {
             "span": {
-              "start": 355,
-              "end": 359
+              "start": 525,
+              "end": 529
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 360,
-              "end": 366
+              "start": 530,
+              "end": 536
             },
             "value": "doctoc"
           }
@@ -260,8 +276,8 @@
         {
           "path": {
             "span": {
-              "start": 367,
-              "end": 371
+              "start": 537,
+              "end": 541
             },
             "value": "/out"
           }
@@ -269,8 +285,8 @@
       ],
       "dest": {
         "span": {
-          "start": 372,
-          "end": 373
+          "start": 542,
+          "end": 543
         },
         "value": "/"
       }
@@ -279,29 +295,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 375,
-          "end": 379
+          "start": 545,
+          "end": 549
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 380,
-          "end": 384
+          "start": 550,
+          "end": 554
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 385,
-            "end": 387
+            "start": 555,
+            "end": 557
           }
         },
         {
           "span": {
-            "start": 388,
-            "end": 400
+            "start": 558,
+            "end": 570
           },
           "value": "validate-toc"
         }
@@ -311,41 +327,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 401,
-          "end": 404
+          "start": 571,
+          "end": 574
         }
       },
       "options": [
         {
-          "flag_start": 405,
+          "flag_start": 575,
           "name": {
             "span": {
-              "start": 407,
-              "end": 412
+              "start": 577,
+              "end": 582
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 413,
-              "end": 434
+              "start": 583,
+              "end": 604
             },
             "value": "type=bind,target=.,rw"
           }
         },
         {
-          "flag_start": 441,
+          "flag_start": 611,
           "name": {
             "span": {
-              "start": 443,
-              "end": 448
+              "start": 613,
+              "end": 618
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 449,
-              "end": 511
+              "start": 619,
+              "end": 681
             },
             "value": "type=bind,from=doctoc,source=/out/README.md,target=./README.md"
           }
@@ -354,8 +370,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 517,
-            "end": 517
+            "start": 687,
+            "end": 687
           },
           "value": ""
         }
@@ -363,11 +379,11 @@
       "here_docs": [
         {
           "span": {
-            "start": 518,
-            "end": 721
+            "start": 688,
+            "end": 887
           },
           "expand": true,
-          "value": "  set -e\n  diff=$(git status --porcelain -- 'README.md')\n  if [ -n \"$diff\" ]; then\n    echo >&2 'ERROR: The result of \"doctoc\" differs. Please update with \"make doctoc\"'\n    echo \"$diff\"\n    exit 1\n  fi\n"
+          "value": "  set -e\n  if [ -n \"$(git status --porcelain -- 'README.md')\" ]; then\n    echo >&2 'ERROR: The result of \"doctoc\" differs. Please update with \"make doctoc\"'\n    git diff -- README.md\n    exit 1\n  fi\n"
         }
       ]
     }

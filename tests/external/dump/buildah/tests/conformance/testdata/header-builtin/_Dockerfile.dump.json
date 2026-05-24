@@ -9,47 +9,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 64,
-          "end": 68
+          "start": 125,
+          "end": 129
         }
       },
-      "options": [
-        {
-          "flag_start": 69,
-          "name": {
-            "span": {
-              "start": 71,
-              "end": 79
-            },
-            "value": "platform"
-          },
-          "value": {
-            "span": {
-              "start": 80,
-              "end": 91
-            },
-            "value": "linux/amd64"
-          }
-        }
-      ],
+      "options": [],
       "image": {
         "span": {
-          "start": 92,
-          "end": 120
+          "start": 130,
+          "end": 239
         },
-        "value": "quay.io/libpod/ubuntu:latest"
+        "value": "quay.io/libpod/busybox${TARGETARCH:+@sha256:32968e717e29f79e5b889721908b3be6d1573992e1f3ba4c9a41718e2728458c}"
       },
       "as_": [
         {
           "span": {
-            "start": 121,
-            "end": 123
+            "start": 240,
+            "end": 242
           }
         },
         {
           "span": {
-            "start": 124,
-            "end": 129
+            "start": 243,
+            "end": 248
           },
           "value": "amd64"
         }
@@ -59,47 +41,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 130,
-          "end": 134
+          "start": 374,
+          "end": 378
         }
       },
-      "options": [
-        {
-          "flag_start": 135,
-          "name": {
-            "span": {
-              "start": 137,
-              "end": 145
-            },
-            "value": "platform"
-          },
-          "value": {
-            "span": {
-              "start": 146,
-              "end": 157
-            },
-            "value": "linux/arm64"
-          }
-        }
-      ],
+      "options": [],
       "image": {
         "span": {
-          "start": 158,
-          "end": 186
+          "start": 379,
+          "end": 488
         },
-        "value": "quay.io/libpod/ubuntu:latest"
+        "value": "quay.io/libpod/busybox${TARGETARCH:+@sha256:1faaf7a75319417261267b3dcef6a2b14c8c5122d7fcc7abeb07a32bc19728fd}"
       },
       "as_": [
         {
           "span": {
-            "start": 187,
-            "end": 189
+            "start": 489,
+            "end": 491
           }
         },
         {
           "span": {
-            "start": 190,
-            "end": 195
+            "start": 492,
+            "end": 497
           },
           "value": "arm64"
         }
@@ -109,56 +73,72 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 240,
-          "end": 244
+          "start": 579,
+          "end": 583
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 245,
-          "end": 273
+          "start": 584,
+          "end": 616
         },
-        "value": "quay.io/libpod/ubuntu:latest"
+        "value": "quay.io/fedora/python-311:latest"
       },
       "as_": [
         {
           "span": {
-            "start": 274,
-            "end": 276
+            "start": 617,
+            "end": 619
           }
         },
         {
           "span": {
-            "start": 277,
-            "end": 283
+            "start": 620,
+            "end": 626
           },
           "value": "native"
         }
       ]
     },
     {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 627,
+          "end": 631
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 632,
+          "end": 635
+        },
+        "value": "0:0"
+      }
+    },
+    {
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 284,
-          "end": 288
+          "start": 636,
+          "end": 640
         }
       },
       "options": [
         {
-          "flag_start": 289,
+          "flag_start": 641,
           "name": {
             "span": {
-              "start": 291,
-              "end": 295
+              "start": 643,
+              "end": 647
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 296,
-              "end": 301
+              "start": 648,
+              "end": 653
             },
             "value": "amd64"
           }
@@ -168,17 +148,17 @@
         {
           "path": {
             "span": {
-              "start": 302,
-              "end": 333
+              "start": 654,
+              "end": 670
             },
-            "value": "/lib/x86_64-linux-gnu/libc.so.6"
+            "value": "/lib64/libc.so.6"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 334,
-          "end": 345
+          "start": 671,
+          "end": 682
         },
         "value": "/libc-amd64"
       }
@@ -187,24 +167,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 346,
-          "end": 350
+          "start": 683,
+          "end": 687
         }
       },
       "options": [
         {
-          "flag_start": 351,
+          "flag_start": 688,
           "name": {
             "span": {
-              "start": 353,
-              "end": 357
+              "start": 690,
+              "end": 694
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 358,
-              "end": 363
+              "start": 695,
+              "end": 700
             },
             "value": "arm64"
           }
@@ -214,17 +194,17 @@
         {
           "path": {
             "span": {
-              "start": 364,
-              "end": 396
+              "start": 701,
+              "end": 717
             },
-            "value": "/lib/aarch64-linux-gnu/libc.so.6"
+            "value": "/lib64/libc.so.6"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 397,
-          "end": 408
+          "start": 718,
+          "end": 729
         },
         "value": "/libc-arm64"
       }
@@ -233,38 +213,18 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 409,
-          "end": 412
+          "start": 730,
+          "end": 733
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 413,
-            "end": 471
+            "start": 734,
+            "end": 834
           },
-          "value": "apt-get update && apt-get install -y file && apt-get clean"
-        }
-      },
-      "here_docs": []
-    },
-    {
-      "kind": "RUN",
-      "run": {
-        "span": {
-          "start": 472,
-          "end": 475
-        }
-      },
-      "options": [],
-      "arguments": {
-        "shell": {
-          "span": {
-            "start": 476,
-            "end": 541
-          },
-          "value": "file /libc-* | tee /libc-types.txt && touch -d @0 /libc-types.txt"
+          "value": "readelf -h /libc-* | grep -i machine: | sort -u | tee /libc-types.txt && touch -d @0 /libc-types.txt"
         }
       },
       "here_docs": []
@@ -273,17 +233,17 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 624,
-          "end": 628
+          "start": 911,
+          "end": 915
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 629,
-          "end": 657
+          "start": 916,
+          "end": 923
         },
-        "value": "quay.io/libpod/ubuntu:latest"
+        "value": "scratch"
       },
       "as_": null
     },
@@ -291,24 +251,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 658,
-          "end": 662
+          "start": 924,
+          "end": 928
         }
       },
       "options": [
         {
-          "flag_start": 663,
+          "flag_start": 929,
           "name": {
             "span": {
-              "start": 665,
-              "end": 669
+              "start": 931,
+              "end": 935
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 670,
-              "end": 676
+              "start": 936,
+              "end": 942
             },
             "value": "native"
           }
@@ -318,8 +278,8 @@
         {
           "path": {
             "span": {
-              "start": 677,
-              "end": 692
+              "start": 943,
+              "end": 958
             },
             "value": "/libc-types.txt"
           }
@@ -327,8 +287,8 @@
       ],
       "dest": {
         "span": {
-          "start": 693,
-          "end": 694
+          "start": 959,
+          "end": 960
         },
         "value": "/"
       }

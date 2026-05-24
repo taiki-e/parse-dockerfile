@@ -1,10 +1,10 @@
 4799 tests/conformance/testdata/Dockerfile.heredoc-quoting
 1756 tests/conformance/testdata/Dockerfile.margs
 1208 tests/bud/preserve-volumes/Dockerfile
+961 tests/conformance/testdata/header-builtin/Dockerfile
 846 tests/bud/verify-cleanup/Dockerfile
 813 tests/conformance/testdata/Dockerfile.edgecases
 704 tests/bud/env/Dockerfile.env-precedence
-695 tests/conformance/testdata/header-builtin/Dockerfile
 662 tests/conformance/testdata/builtins/Dockerfile
 610 tests/bud/save-stages/Dockerfile.three-build-stages-parent-child-independent
 597 tests/conformance/testdata/transientmount/Dockerfile.env

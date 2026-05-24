@@ -1996,20 +1996,27 @@ const DOUBLE_QUOTE: u8 = 1 << 4;
 const POSSIBLE_ESCAPE: u8 = 1 << 5;
 // [=]
 const EQ: u8 = 1 << 6;
+// 0x00..0x20
+const CONTROL: u8 = 1 << 7;
 
 static TABLE: [u8; 256] = {
     let mut table = [0; 256];
     let mut i = 0;
     loop {
+        let mut v = 0;
+        if i < 0x20 {
+            v |= CONTROL;
+        }
         match i {
-            b' ' | b'\t' => table[i as usize] = WHITESPACE | SPACE,
-            b'\n' | b'\r' => table[i as usize] = WHITESPACE | LINE,
-            b'#' => table[i as usize] = COMMENT,
-            b'"' => table[i as usize] = DOUBLE_QUOTE,
-            b'\\' | b'`' => table[i as usize] = POSSIBLE_ESCAPE,
-            b'=' => table[i as usize] = EQ,
+            b' ' | b'\t' => v |= WHITESPACE | SPACE,
+            b'\n' | b'\r' => v |= WHITESPACE | LINE,
+            b'#' => v |= COMMENT,
+            b'"' => v |= DOUBLE_QUOTE,
+            b'\\' | b'`' => v |= POSSIBLE_ESCAPE,
+            b'=' => v |= EQ,
             _ => {}
         }
+        table[i as usize] = v;
         if i == u8::MAX {
             break;
         }
@@ -2114,13 +2121,13 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                 let mut buf = String::new();
                 loop {
                     let (&b, s_next) = s.split_first().ok_or(array_start)?;
-                    if TABLE[b as usize] & (LINE | DOUBLE_QUOTE | POSSIBLE_ESCAPE) == 0 {
+                    if TABLE[b as usize] & (DOUBLE_QUOTE | POSSIBLE_ESCAPE | CONTROL) == 0 {
                         *s = s_next;
                         continue;
                     }
                     match b {
                         b'"' => break,
-                        b'\n' | b'\r' => return Err(array_start),
+                        _ if b < 0x20 => return Err(array_start),
                         _ => {}
                     }
                     let word_end = start.len() - s.len();
@@ -2299,6 +2306,15 @@ fn test_parse_json_array() {
     }]);
     assert_eq!(s, b"");
 
+    // fail (no ending)
+    let t = r#"["]"#;
+    let mut s = t.as_bytes();
+    assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
+    assert_eq!(s, br#""#);
+    let t = r#"["a]"#;
+    let mut s = t.as_bytes();
+    assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
+    assert_eq!(s, br#""#);
     // fail (single quote)
     let t = r#"['abc']"#;
     let mut s = t.as_bytes();
@@ -2309,6 +2325,11 @@ fn test_parse_json_array() {
     let mut s = t.as_bytes();
     assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
     assert_eq!(s, br#"]"#);
+    // fail (extra char after string)
+    let t = r#"["abc"d]"#;
+    let mut s = t.as_bytes();
+    assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
+    assert_eq!(s, br#"d]"#);
     // fail (extra char after array)
     let t = r#"["abc"] c"#;
     let mut s = t.as_bytes();
@@ -2319,7 +2340,22 @@ fn test_parse_json_array() {
     let mut s = t.as_bytes();
     assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
     assert_eq!(s, b"\"]");
-    // TODO: more from https://github.com/serde-rs/json/blob/3f1c6de4af28b1f6c5100da323f2bffaf7c2083f/tests/test.rs#L1060
+    // fail (invalid escape)
+    let t = "[\"\\uD83C\\uFFFF\"]";
+    let mut s = t.as_bytes();
+    assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
+    assert_eq!(s, b"\"]");
+    // fail (control)
+    let t = "[\"a\nb\"]";
+    let mut s = t.as_bytes();
+    assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
+    assert_eq!(s, b"\nb\"]");
+    // fail (control)
+    let t = "[\"a\x1Fb\"]";
+    let mut s = t.as_bytes();
+    assert_eq!(parse_json_array::<Vec<_>>(&mut s, t, b'\\'), Err(0));
+    assert_eq!(s, b"\x1Fb\"]");
+    // TODO: more from https://github.com/serde-rs/json/blob/3f1c6de4af28b1f6c5100da323f2bffaf7c2083f/tests/test.rs#L1079
 }
 
 /// Skips spaces and tabs, and returns `true` if one or more spaces or tabs ware

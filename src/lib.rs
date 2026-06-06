@@ -125,7 +125,7 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
     let mut p = ParseIter::new(text)?;
     let mut s = p.s;
 
-    let mut instructions = Vec::with_capacity(p.text.len() / 60);
+    let mut instructions = Vec::with_capacity((p.text.len() / 60).min(1024));
     let mut stages = Vec::with_capacity(1);
     let mut named_stages = 0;
     let mut current_stage = None;

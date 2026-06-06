@@ -67,50 +67,6 @@ EMPTY2
 ",
             "unknown instruction 'EMPTY2' at line 3 column 1",
         ),
-        // TODO: shouldn't fail
-        (
-            "FROM a
-RUN <<eo'f'
-echo foo
-eof
-",
-            "expected end of here-document (eo), but reached eof at line 5 column 1",
-        ),
-        // TODO: shouldn't fail
-        (
-            "FROM a
-RUN <<eo\'f
-echo foo
-eo'f
-",
-            "expected end of here-document (eo), but reached eof at line 5 column 1",
-        ),
-        // TODO: shouldn't fail
-        (
-            "FROM a
-RUN <<'e'o\'f
-echo foo
-eo'f
-",
-            "expected end of here-document (e), but reached eof at line 5 column 1",
-        ),
-        // TODO: shouldn't fail
-        (
-            "FROM a
-RUN <<'one two'
-echo bar
-one two
-",
-            "expected end of quoted string ('), but found ' ' at line 2 column 11",
-        ),
-        // TODO: shouldn't fail
-        (
-            "FROM a
-RUN <<$EOF
-$EOF
-",
-            "unknown instruction '$EOF' at line 3 column 1",
-        ),
         (
             "FROM a
 SHELL",
@@ -248,17 +204,14 @@ INVALID",
 // Regression tests for bugs caught by fuzzing.
 #[test]
 fn fuzz() {
-    let tests: &[(&str, Result<usize, &str>)] = &[
-        ("", Err("expected at least one FROM instruction")),
+    let tests: &[(&[u8], Result<usize, &str>)] = &[
+        (&b""[..], Err("expected at least one FROM instruction")),
         (
-            str::from_utf8(&[
-                35, 32, 69, 83, 99, 65, 80, 69, 32, 61, 0, 0, 2, 30, 0, 0, 0, 0, 0, 10, 9, 9, 35,
-            ])
-            .unwrap(),
+            &[35, 32, 69, 83, 99, 65, 80, 69, 32, 61, 0, 0, 2, 30, 0, 0, 0, 0, 0, 10, 9, 9, 35],
             Err("invalid escape '\0\0\u{2}\u{1e}\0\0\0\0\0' at line 1 column 11"),
         ),
         (
-            str::from_utf8(&[
+            &[
                 97, 68, 68, 92, 13, 9, 68, 92, 13, 9, 10, 9, 92, 13, 9, 92, 13, 9, 10, 9, 10, 9, 9,
                 92, 13, 9, 92, 13, 13, 9, 10, 9, 92, 13, 9, 92, 13, 9, 10, 9, 10, 9, 9, 92, 13, 9,
                 92, 13, 9, 92, 13, 9, 92, 13, 9, 92, 13, 9, 10, 9, 10, 9, 9, 9, 92, 13, 9, 92, 13,
@@ -267,12 +220,11 @@ fn fuzz() {
                 10, 9, 9, 92, 13, 9, 92, 13, 9, 92, 13, 9, 92, 13, 9, 92, 13, 9, 10, 9, 10, 9, 9,
                 9, 92, 13, 9, 92, 13, 9, 92, 13, 9, 10, 9, 10, 9, 9, 92, 13, 9, 92, 13, 9, 9, 13,
                 9,
-            ])
-            .unwrap(),
+            ],
             Err("aDD instruction requires at least two arguments at line 1 column 1"),
         ),
         (
-            str::from_utf8(&[
+            &[
                 97, 68, 68, 9, 91, 34, 91, 34, 44, 34, 25, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53,
                 53, 53, 53, 91, 0, 0, 0, 53, 53, 53, 53, 0, 0, 0, 0, 0, 0, 39, 0, 0, 97, 68, 68,
                 44, 9, 91, 34, 44, 34, 25, 0, 0, 0, 0, 0, 0, 101, 101, 101, 101, 101, 101, 0, 0, 0,
@@ -352,17 +304,22 @@ fn fuzz() {
                 97, 68, 68, 9, 91, 34, 44, 34, 105, 25, 0, 0, 0, 101, 101, 101, 101, 101, 9, 92,
                 13, 9, 92, 13, 13, 13, 9, 92, 13, 13, 9, 35, 15, 97, 101, 0, 0, 0, 0, 97, 68, 68,
                 9, 91, 34, 44, 34, 105, 25, 0, 0, 0, 0, 9, 91,
-            ])
-            .unwrap(),
+            ],
             Err("expected FROM at line 1 column 1"),
         ),
+        (&[115, 72, 69, 76, 76, 9], Err("expected JSON array at line 1 column 7")),
         (
-            str::from_utf8(&[115, 72, 69, 76, 76, 9]).unwrap(),
-            Err("expected JSON array at line 1 column 7"),
+            &[
+                65, 68, 68, 32, 70, 65, 79, 77, 32, 45, 92, 9, 68, 68, 32, 60, 60, 70, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 82, 79, 92,
+                9, 10, 34, 32, 51, 35, 92, 9, 10, 9, 32, 32, 35, 85, 92, 53, 10, 32, 35, 92, 48,
+                10, 32, 35, 40, 109, 80, 13, 61, 92, 92, 92, 76, 92, 9, 9, 9, 13, 96,
+            ],
+            Err("expected end of quoted string (\"), but reached eof at line 2 column 2"),
         ),
     ];
     for &(test, expected_len) in tests {
-        let res = parse(test);
+        let res = parse(str::from_utf8(test).unwrap());
         match expected_len {
             Ok(expected_len) => {
                 assert_eq!(res.unwrap().instructions.len(), expected_len);
@@ -382,6 +339,7 @@ fn dump() {
         if p.is_dir() {
             continue;
         }
+        eprintln!("parsing {}", p.display());
         let text = &fs::read_to_string(p).unwrap();
         let dockerfile = parse(text).unwrap();
         for r in parse_dockerfile::parse_iter(text).unwrap() {
@@ -389,7 +347,7 @@ fn dump() {
         }
         let dump = serde_json::to_vec_pretty(&dockerfile).unwrap();
         let mut dump_path = fixtures_dir.join("dump").join(p.file_name().unwrap());
-        dump_path.as_mut_os_string().push(".dump.json"); // TODO: Use .add_extension("dump.json") once stabilized.
+        dump_path.add_extension("dump.json");
         assert_diff(dump_path, dump);
     }
 }

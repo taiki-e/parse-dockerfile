@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Fix bug in heredoc parsing.
+
 - Limit memory usage for large input.
 
 - Documentation improvements.

@@ -153,26 +153,51 @@ COPY <<file.txt /dest
 hello world
 file.txt
 
-# TODO: Tested in failure test in test.rs.
-# RUN <<eo'f'
-# echo foo
-# eof
+COPY <<e'o'f /dest
+hello world
+eof
 
-# TODO: Tested in failure test in test.rs.
-# RUN <<eo\'f
-# echo foo
-# eo'f
+RUN <<eo'f'
+echo foo
+eof
 
-# TODO: Tested in failure test in test.rs.
-# RUN <<'e'o\'f
-# echo foo
-# eo'f
+RUN <<eo\'f
+echo foo
+eo'f
 
-# TODO: Tested in failure test in test.rs.
-# RUN <<'one two'
-# echo bar
-# one two
+RUN <<'e'o\'f
+echo foo
+eo'f
 
-# TODO: Tested in failure test in test.rs.
-# RUN <<$EOF
-# $EOF
+RUN <<'one two'
+echo bar
+one two
+
+RUN <<$EOF
+$EOF
+
+# ------------------------------------------------------------------------------
+ADD << /no-here
+ADD <<'' /no-here
+ADD <<"" /no-here
+ADD <<- /no-here
+ADD <<-'' /no-here
+ADD <<-"" /no-here
+COPY << /no-here
+COPY <<'' /no-here
+COPY <<"" /no-here
+COPY <<- /no-here
+COPY <<-'' /no-here
+COPY <<-"" /no-here
+RUN <<
+RUN << /no-here
+RUN <<''
+RUN <<'' /no-here
+RUN <<""
+RUN <<"" /no-here
+RUN <<-
+RUN <<- /no-here
+RUN <<-''
+RUN <<-'' /no-here
+RUN <<-""
+RUN <<-"" /no-here

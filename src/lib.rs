@@ -1368,36 +1368,63 @@ fn parse_add_or_copy<'a>(
     for src in &mut src {
         let Source::Path(path) = src else { unreachable!() };
         let Some(mut delim) = path.value.as_bytes().strip_prefix(b"<<") else { continue };
+        // NB: Sync with parse_run
+        let strip_tab = if let Some((&b'-', delim_next)) = delim.split_first() {
+            delim = delim_next;
+            true
+        } else {
+            false
+        };
+        let mut esq = false;
+        let mut expand = true;
+        let mut quote = None;
+        let mut delim_new = vec![];
+        while let Some((&b, delim_next)) = delim.split_first() {
+            if esq {
+                esq = false;
+                delim_new.push(b);
+                delim = delim_next;
+                continue;
+            }
+            if matches!(b, b'"' | b'\'') {
+                if let Some(q) = quote {
+                    if b == q {
+                        quote = None;
+                        delim = delim_next;
+                        continue;
+                    }
+                } else {
+                    quote = Some(b);
+                    expand = false;
+                    delim = delim_next;
+                    continue;
+                }
+            } else if b == p.escape_byte {
+                esq = true;
+                delim = delim_next;
+                continue;
+            } else if quote.is_none() && TABLE[b as usize] & WHITESPACE != 0 {
+                unreachable!() // unreachable since collect_space_separated_unescaped_consume_line
+            }
+            delim_new.push(b);
+            delim = delim_next;
+        }
+        let delim = delim_new;
+        if esq {
+            return Err(error::other("unterminated escape", path.span.end));
+        }
+        if let Some(quote) = quote {
+            return Err(error::expected_quote(quote, None, path.span.end));
+        }
         if delim.is_empty() {
             continue;
         }
-        let mut strip_tab = false;
-        let mut quote = None;
-        if let Some((&b'-', delim_next)) = delim.split_first() {
-            strip_tab = true;
-            delim = delim_next;
-        }
-        if let Some((&b, delim_next)) = delim.split_first() {
-            if matches!(b, b'"' | b'\'') {
-                quote = Some(b);
-                delim = delim_next;
-                if delim.last() != Some(&b) {
-                    return Err(error::expected_quote(
-                        b,
-                        delim.last().copied(),
-                        p.text.len() - s.len(),
-                    ));
-                }
-                delim = &delim[..delim.len() - 1];
-            }
-        }
         if strip_tab {
-            let (here_doc, span) = collect_here_doc_strip_tab(s, p.text, p.escape_byte, delim)?;
-            *src = Source::HereDoc(HereDoc { span, expand: quote.is_none(), value: here_doc });
+            let (here_doc, span) = collect_here_doc_strip_tab(s, p.text, p.escape_byte, &delim)?;
+            *src = Source::HereDoc(HereDoc { span, expand, value: here_doc });
         } else {
-            let (here_doc, span) = collect_here_doc_no_strip_tab(s, p.text, p.escape_byte, delim)?;
-            *src =
-                Source::HereDoc(HereDoc { span, expand: quote.is_none(), value: here_doc.into() });
+            let (here_doc, span) = collect_here_doc_no_strip_tab(s, p.text, p.escape_byte, &delim)?;
+            *src = Source::HereDoc(HereDoc { span, expand, value: here_doc.into() });
         }
     }
     Ok((options, src, dest.unwrap()))
@@ -1784,65 +1811,84 @@ fn parse_run<'a>(
     }
 
     // https://docs.docker.com/reference/dockerfile/#here-documents
-    let mut strip_tab = false;
-    let mut quote = None;
-    let mut pos = 2;
     // At least 5, <<E\nE
-    if s.len() >= 5 && s.starts_with(b"<<") && {
-        if s[pos] == b'-' {
-            strip_tab = true;
-            pos += 1;
-        }
-        if matches!(s[pos], b'"' | b'\'') {
-            quote = Some(s[pos]);
-            pos += 1;
-        }
-        // TODO: non-ascii_alphanumeric
-        s[pos].is_ascii_alphanumeric()
-    } {
-        *s = &s[pos..];
-        let delim_start = p.text.len() - s.len();
-        // TODO: non-ascii_alphanumeric
-        while let Some((&b, s_next)) = s.split_first() {
-            if b.is_ascii_alphanumeric() {
-                *s = s_next;
-                continue;
-            }
-            break;
-        }
-        let delim = &p.text.as_bytes()[delim_start..p.text.len() - s.len()];
-        if let Some(quote) = quote {
-            if let Some((&b, s_next)) = s.split_first() {
-                if b != quote {
-                    return Err(error::expected_quote(quote, Some(b), p.text.len() - s.len()));
-                }
-                *s = s_next;
+    if s.len() >= 5 {
+        if let Some(mut s_next) = s.strip_prefix(b"<<") {
+            // NB: Sync with parse_add_or_copy
+            let strip_tab = if let Some((&b'-', s_next_next)) = s_next.split_first() {
+                s_next = s_next_next;
+                true
             } else {
-                return Err(error::expected_quote(quote, None, p.text.len() - s.len()));
+                false
+            };
+            let mut esq = false;
+            let mut expand = true;
+            let mut quote = None;
+            let mut delim = vec![];
+            while let Some((&b, s_next_next)) = s_next.split_first() {
+                if esq {
+                    esq = false;
+                    delim.push(b);
+                    s_next = s_next_next;
+                    continue;
+                }
+                if matches!(b, b'"' | b'\'') {
+                    if let Some(q) = quote {
+                        if b == q {
+                            quote = None;
+                            s_next = s_next_next;
+                            continue;
+                        }
+                    } else {
+                        quote = Some(b);
+                        expand = false;
+                        s_next = s_next_next;
+                        continue;
+                    }
+                } else if b == p.escape_byte {
+                    esq = true;
+                    s_next = s_next_next;
+                    continue;
+                } else if quote.is_none() && TABLE[b as usize] & WHITESPACE != 0 {
+                    break;
+                }
+                delim.push(b);
+                s_next = s_next_next;
+            }
+            if esq {
+                return Err(error::other("unterminated escape", p.text.len() - s_next.len()));
+            }
+            if let Some(quote) = quote {
+                return Err(error::expected_quote(quote, None, p.text.len() - s_next.len()));
+            }
+            if !delim.is_empty() {
+                *s = s_next;
+                // TODO: skip space
+                let arguments_start = p.text.len() - s.len();
+                skip_this_line(s, p.escape_byte);
+                let end = p.text.len() - s.len();
+                let arguments = p.text[arguments_start..end].trim_ascii_end();
+                let here_doc = if strip_tab {
+                    let (here_doc, span) =
+                        collect_here_doc_strip_tab(s, p.text, p.escape_byte, &delim)?;
+                    HereDoc { span, expand, value: here_doc }
+                } else {
+                    let (here_doc, span) =
+                        collect_here_doc_no_strip_tab(s, p.text, p.escape_byte, &delim)?;
+                    HereDoc { span, expand, value: here_doc.into() }
+                };
+                return Ok(Instruction::Run(RunInstruction {
+                    run: instruction,
+                    options,
+                    arguments: Command::Shell(Spanned {
+                        span: arguments_start..arguments_start + arguments.len(),
+                        value: arguments,
+                    }),
+                    // TODO: multiple here-docs
+                    here_docs: vec![here_doc],
+                }));
             }
         }
-        // TODO: skip space
-        let arguments_start = p.text.len() - s.len();
-        skip_this_line(s, p.escape_byte);
-        let end = p.text.len() - s.len();
-        let arguments = p.text[arguments_start..end].trim_ascii_end();
-        let here_doc = if strip_tab {
-            let (here_doc, span) = collect_here_doc_strip_tab(s, p.text, p.escape_byte, delim)?;
-            HereDoc { span, expand: quote.is_none(), value: here_doc }
-        } else {
-            let (here_doc, span) = collect_here_doc_no_strip_tab(s, p.text, p.escape_byte, delim)?;
-            HereDoc { span, expand: quote.is_none(), value: here_doc.into() }
-        };
-        return Ok(Instruction::Run(RunInstruction {
-            run: instruction,
-            options,
-            arguments: Command::Shell(Spanned {
-                span: arguments_start..arguments_start + arguments.len(),
-                value: arguments,
-            }),
-            // TODO: multiple here-docs
-            here_docs: vec![here_doc],
-        }));
     }
 
     let arguments_start = p.text.len() - s.len();

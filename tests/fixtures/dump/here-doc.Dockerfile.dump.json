@@ -1210,6 +1210,756 @@
         },
         "value": "/dest"
       }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 1996,
+          "end": 2000
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "here_doc": {
+            "span": {
+              "start": 2015,
+              "end": 2027
+            },
+            "expand": false,
+            "value": "hello world\n"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2009,
+          "end": 2014
+        },
+        "value": "/dest"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2032,
+          "end": 2035
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2043,
+            "end": 2043
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2044,
+            "end": 2053
+          },
+          "expand": false,
+          "value": "echo foo\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2058,
+          "end": 2061
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2069,
+            "end": 2069
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2070,
+            "end": 2079
+          },
+          "expand": true,
+          "value": "echo foo\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2085,
+          "end": 2088
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2098,
+            "end": 2098
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2099,
+            "end": 2108
+          },
+          "expand": false,
+          "value": "echo foo\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2114,
+          "end": 2117
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2129,
+            "end": 2129
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2130,
+            "end": 2139
+          },
+          "expand": false,
+          "value": "echo bar\n"
+        }
+      ]
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2148,
+          "end": 2151
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2158,
+            "end": 2158
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2159,
+            "end": 2159
+          },
+          "expand": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2246,
+          "end": 2249
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2250,
+              "end": 2252
+            },
+            "value": "<<"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2253,
+          "end": 2261
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2262,
+          "end": 2265
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2266,
+              "end": 2270
+            },
+            "value": "<<''"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2271,
+          "end": 2279
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2280,
+          "end": 2283
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2284,
+              "end": 2288
+            },
+            "value": "<<\"\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2289,
+          "end": 2297
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2298,
+          "end": 2301
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2302,
+              "end": 2305
+            },
+            "value": "<<-"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2306,
+          "end": 2314
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2315,
+          "end": 2318
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2319,
+              "end": 2324
+            },
+            "value": "<<-''"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2325,
+          "end": 2333
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "ADD",
+      "add": {
+        "span": {
+          "start": 2334,
+          "end": 2337
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2338,
+              "end": 2343
+            },
+            "value": "<<-\"\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2344,
+          "end": 2352
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2353,
+          "end": 2357
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2358,
+              "end": 2360
+            },
+            "value": "<<"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2361,
+          "end": 2369
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2370,
+          "end": 2374
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2375,
+              "end": 2379
+            },
+            "value": "<<''"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2380,
+          "end": 2388
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2389,
+          "end": 2393
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2394,
+              "end": 2398
+            },
+            "value": "<<\"\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2399,
+          "end": 2407
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2408,
+          "end": 2412
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2413,
+              "end": 2416
+            },
+            "value": "<<-"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2417,
+          "end": 2425
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2426,
+          "end": 2430
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2431,
+              "end": 2436
+            },
+            "value": "<<-''"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2437,
+          "end": 2445
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2446,
+          "end": 2450
+        }
+      },
+      "options": [],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2451,
+              "end": 2456
+            },
+            "value": "<<-\"\""
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2457,
+          "end": 2465
+        },
+        "value": "/no-here"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2466,
+          "end": 2469
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2470,
+            "end": 2472
+          },
+          "value": "<<"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2473,
+          "end": 2476
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2477,
+            "end": 2488
+          },
+          "value": "<< /no-here"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2489,
+          "end": 2492
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2493,
+            "end": 2497
+          },
+          "value": "<<''"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2498,
+          "end": 2501
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2502,
+            "end": 2515
+          },
+          "value": "<<'' /no-here"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2516,
+          "end": 2519
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2520,
+            "end": 2524
+          },
+          "value": "<<\"\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2525,
+          "end": 2528
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2529,
+            "end": 2542
+          },
+          "value": "<<\"\" /no-here"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2543,
+          "end": 2546
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2547,
+            "end": 2550
+          },
+          "value": "<<-"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2551,
+          "end": 2554
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2555,
+            "end": 2567
+          },
+          "value": "<<- /no-here"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2568,
+          "end": 2571
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2572,
+            "end": 2577
+          },
+          "value": "<<-''"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2578,
+          "end": 2581
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2582,
+            "end": 2596
+          },
+          "value": "<<-'' /no-here"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2597,
+          "end": 2600
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2601,
+            "end": 2606
+          },
+          "value": "<<-\"\""
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2607,
+          "end": 2610
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2611,
+            "end": 2625
+          },
+          "value": "<<-\"\" /no-here"
+        }
+      },
+      "here_docs": []
     }
   ]
 }

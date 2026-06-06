@@ -150,7 +150,7 @@ INVALID",
                 Ok(_) => {}
                 Err(e) => {
                     assert_eq!(e.to_string(), expected_err);
-                    assert!(iter.next().unwrap().is_err()); // Usually it will continue to fail, but there's no guarantee.
+                    assert!(iter.next().unwrap().is_err()); // Currently usually it will continue to fail, but may change in the future.
                     break;
                 }
             }

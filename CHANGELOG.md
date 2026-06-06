@@ -16,6 +16,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 - Limit memory usage for large input.
 
+- Relax the minimum supported Rust version (MSRV) from Rust 1.80 to Rust 1.71.
+
 - Documentation improvements.
 
 ## [0.1.6] - 2026-05-24

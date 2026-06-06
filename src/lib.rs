@@ -1038,7 +1038,7 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                 let value_start = p.text.len() - p.s.len();
                 skip_non_whitespace_no_escape(&mut p.s);
                 let end = p.text.len() - p.s.len();
-                let value = p.text[value_start..end].trim_ascii_end();
+                let value = trim_end(p.text, value_start, end);
                 p.parser_directives.syntax = Some(ParserDirective {
                     start: directive_start,
                     value: Spanned { span: value_start..value_start + value.len(), value },
@@ -1063,7 +1063,7 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                 let value_start = p.text.len() - p.s.len();
                 skip_non_whitespace_no_escape(&mut p.s);
                 let end = p.text.len() - p.s.len();
-                let value = p.text[value_start..end].trim_ascii_end();
+                let value = trim_end(p.text, value_start, end);
                 p.parser_directives.check = Some(ParserDirective {
                     start: directive_start,
                     value: Spanned { span: value_start..value_start + value.len(), value },
@@ -1088,7 +1088,7 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                 let value_start = p.text.len() - p.s.len();
                 skip_non_whitespace_no_escape(&mut p.s);
                 let end = p.text.len() - p.s.len();
-                let value = p.text[value_start..end].trim_ascii_end();
+                let value = trim_end(p.text, value_start, end);
                 match value {
                     "`" => p.escape_byte = b'`',
                     "\\" => {}
@@ -1464,7 +1464,7 @@ fn parse_cmd<'a>(
     let arguments_start = p.text.len() - s.len();
     skip_this_line(s, p.escape_byte);
     let end = p.text.len() - s.len();
-    let arguments = p.text[arguments_start..end].trim_ascii_end();
+    let arguments = trim_end(p.text, arguments_start, end);
     Ok(Instruction::Cmd(CmdInstruction {
         cmd: instruction,
         arguments: Command::Shell(Spanned {
@@ -1545,7 +1545,7 @@ fn parse_entrypoint<'a>(
     let arguments_start = p.text.len() - s.len();
     skip_this_line(s, p.escape_byte);
     let end = p.text.len() - s.len();
-    let arguments = p.text[arguments_start..end].trim_ascii_end();
+    let arguments = trim_end(p.text, arguments_start, end);
     if arguments.is_empty() {
         return Err(error::at_least_one_argument(instruction.span.start));
     }
@@ -1650,7 +1650,7 @@ fn parse_healthcheck<'a>(
                     let arguments_start = p.text.len() - s.len();
                     skip_this_line(s, p.escape_byte);
                     let end = p.text.len() - s.len();
-                    let arguments = p.text[arguments_start..end].trim_ascii_end();
+                    let arguments = trim_end(p.text, arguments_start, end);
                     return Ok(Instruction::Healthcheck(HealthcheckInstruction {
                         healthcheck: instruction,
                         options,
@@ -1867,7 +1867,7 @@ fn parse_run<'a>(
                 let arguments_start = p.text.len() - s.len();
                 skip_this_line(s, p.escape_byte);
                 let end = p.text.len() - s.len();
-                let arguments = p.text[arguments_start..end].trim_ascii_end();
+                let arguments = trim_end(p.text, arguments_start, end);
                 let here_doc = if strip_tab {
                     let (here_doc, span) =
                         collect_here_doc_strip_tab(s, p.text, p.escape_byte, &delim)?;
@@ -1894,7 +1894,7 @@ fn parse_run<'a>(
     let arguments_start = p.text.len() - s.len();
     skip_this_line(s, p.escape_byte);
     let end = p.text.len() - s.len();
-    let arguments = p.text[arguments_start..end].trim_ascii_end();
+    let arguments = trim_end(p.text, arguments_start, end);
     Ok(Instruction::Run(RunInstruction {
         run: instruction,
         options,
@@ -2823,6 +2823,22 @@ fn skip_this_line(s: &mut &[u8], escape_byte: u8) {
         has_space_only &= t;
         *s = s_next;
     }
+}
+
+#[inline]
+#[track_caller]
+fn trim_end(text: &str, start: usize, mut end: usize) -> &str {
+    while start < end {
+        let next_end = end - 1;
+        if let Some(&b) = text.as_bytes().get(next_end) {
+            if TABLE[b as usize] & WHITESPACE != 0 {
+                end = next_end;
+                continue;
+            }
+        }
+        break;
+    }
+    &text[start..end]
 }
 
 #[inline(always)]

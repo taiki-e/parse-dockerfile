@@ -3,7 +3,7 @@ name = "parse-dockerfile"
 version = "0.1.6" #publish:version
 edition = "2021"
 # NB: Sync with msrv badge in README.md
-rust-version = "1.80" # For str::trim_ascii_end
+rust-version = "1.71" # For serde_json
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/taiki-e/parse-dockerfile"
 keywords = ["dockerfile", "parser"]

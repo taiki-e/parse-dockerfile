@@ -185,6 +185,11 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
 ///
 /// Unlike [`parse`] function, the returned iterator doesn't error on
 /// duplicate stage names.
+///
+/// # Errors
+///
+/// When `.next()` on the returned iterator has returned an error, the behavior
+/// of subsequent `.next()` calls is unspecified.
 pub fn parse_iter(text: &str) -> Result<ParseIter<'_>> {
     ParseIter::new(text)
 }

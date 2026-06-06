@@ -136,9 +136,25 @@ ONBUILD",
 ONBUILD ONBUILD",
             "ONBUILD ONBUILD is not allowed at line 2 column 9",
         ),
+        (
+            "FROM a
+INVALID",
+            "unknown instruction 'INVALID' at line 2 column 1",
+        ),
     ];
     for &(test, expected_err) in tests {
         assert_eq!(parse(test).unwrap_err().to_string(), expected_err);
+        let mut iter = parse_iter(test).unwrap();
+        loop {
+            match iter.next().unwrap() {
+                Ok(_) => {}
+                Err(e) => {
+                    assert_eq!(e.to_string(), expected_err);
+                    assert!(iter.next().unwrap().is_err()); // Usually it will continue to fail, but there's no guarantee.
+                    break;
+                }
+            }
+        }
     }
 
     for &inst in ALL_INST {

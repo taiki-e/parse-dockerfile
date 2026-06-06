@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Documentation improvements.
+
 ## [0.1.6] - 2026-05-24
 
 - Fix bug in JSON array parsing.

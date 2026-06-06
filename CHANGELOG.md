@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Limit memory usage for large input.
+
 - Documentation improvements.
 
 ## [0.1.6] - 2026-05-24

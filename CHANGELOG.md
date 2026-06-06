@@ -14,6 +14,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 - Fix bug in heredoc parsing.
 
+- Fix bug in `\r`/`\f`/`\v` handling.
+
 - Limit memory usage for large input.
 
 - Relax the minimum supported Rust version (MSRV) from Rust 1.80 to Rust 1.71.

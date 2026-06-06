@@ -221,7 +221,7 @@ fn fuzz() {
                 9, 92, 13, 9, 92, 13, 9, 92, 13, 9, 10, 9, 10, 9, 9, 92, 13, 9, 92, 13, 9, 9, 13,
                 9,
             ],
-            Err("aDD instruction requires at least two arguments at line 1 column 1"),
+            Err("unknown instruction 'aDD\\' at line 1 column 1"),
         ),
         (
             &[
@@ -315,11 +315,35 @@ fn fuzz() {
                 9, 10, 34, 32, 51, 35, 92, 9, 10, 9, 32, 32, 35, 85, 92, 53, 10, 32, 35, 92, 48,
                 10, 32, 35, 40, 109, 80, 13, 61, 92, 92, 92, 76, 92, 9, 9, 9, 13, 96,
             ],
-            Err("expected end of quoted string (\"), but reached eof at line 2 column 2"),
+            Err(
+                "expected end of here-document (F\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0), but reached eof at line 5 column 18",
+            ),
+        ),
+        (
+            &[
+                10, 65, 100, 100, 10, 11, 0, 0, 0, 0, 0, 0, 0, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+                32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+                32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 77,
+                77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77,
+                77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77,
+                77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 47, 93, 0, 0, 40, 13, 92, 10, 35,
+                47, 13, 9, 40, 0, 40, 13, 9, 40, 13, 35, 2, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 52,
+                52, 50,
+            ],
+            Err("Add instruction requires at least two arguments at line 2 column 1"),
+        ),
+        (
+            &[
+                65, 114, 103, 9, 58, 0, 0, 0, 0, 0, 0, 0, 13, 10, 35, 45, 10, 10, 45, 45, 92, 13,
+                10, 92, 92, 35,
+            ],
+            Err("unknown instruction '--\\\\#' at line 4 column 1"),
         ),
     ];
     for &(test, expected_len) in tests {
-        let res = parse(str::from_utf8(test).unwrap());
+        let text = str::from_utf8(test).unwrap();
+        eprintln!("testing '{}'", text.escape_debug().collect::<String>());
+        let res = parse(text);
         match expected_len {
             Ok(expected_len) => {
                 assert_eq!(res.unwrap().instructions.len(), expected_len);

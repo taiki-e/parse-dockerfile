@@ -139,8 +139,7 @@ impl ErrorKind {
             | Self::UnknownInstruction { instruction_start: pos }
             | Self::DuplicateName { first_start: pos, .. } => {
                 let mut s = &p.text.as_bytes()[pos..];
-                let mut word =
-                    super::collect_non_whitespace_unescaped(&mut s, p.text, p.escape_byte).value;
+                let mut word = super::collect_non_whitespace(&mut s, p.text, p.escape_byte).value;
                 match self {
                     Self::AtLeastOneArgument { .. } => {
                         // TODO: handle in collect_non_whitespace_unescaped
@@ -166,7 +165,7 @@ impl ErrorKind {
             Self::Json { .. } => "invalid JSON".into(),
             Self::InvalidEscape { escape_start } => {
                 let mut s = &p.text.as_bytes()[escape_start..];
-                super::skip_non_whitespace_no_escape(&mut s);
+                super::consume_until_whitespaces_or_line_no_line_continuation(&mut s);
                 let escape = &p.text[escape_start..p.text.len() - s.len()];
                 format!("invalid escape '{escape}'").into()
             }

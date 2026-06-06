@@ -111,7 +111,7 @@ mod track_size;
 mod error;
 
 use alloc::{borrow::Cow, boxed::Box, string::String, vec, vec::Vec};
-use core::{mem, ops::Range, str};
+use core::{ops::Range, str};
 use std::collections::HashMap;
 
 use smallvec::SmallVec;
@@ -150,17 +150,17 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
                 instructions.push(instruction);
             }
         }
-        skip_comments_and_whitespaces(&mut s, p.escape_byte);
+        consume_comments_and_whitespaces(&mut s, p.escape_byte);
     }
     if let Some(current_stage) = current_stage {
         stages.push(current_stage..instructions.len());
     }
 
     if stages.is_empty() {
-        // https://github.com/moby/buildkit/blob/e83d79a51fb49aeb921d8a2348ae14a58701c98c/frontend/dockerfile/dockerfile2llb/convert.go#L263
+        // https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/dockerfile2llb/convert.go#L278
         return Err(error::no_stage().into_error(&p));
     }
-    // TODO: https://github.com/moby/buildkit/blob/e83d79a51fb49aeb921d8a2348ae14a58701c98c/frontend/dockerfile/dockerfile2llb/convert.go#L302
+    // TODO: https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/dockerfile2llb/convert.go#L413
     // > base name (%s) should not be blank
 
     let mut stages_by_name = HashMap::with_capacity(named_stages);
@@ -867,6 +867,32 @@ pub struct UnescapedString<'a> {
     #[allow(missing_docs)]
     pub value: Cow<'a, str>,
 }
+impl UnescapedString<'_> {
+    #[inline]
+    fn trim_end(&mut self) {
+        // trim trailing spaces of the value
+        match &mut self.value {
+            Cow::Borrowed(v) => {
+                while let Some(&b) = v.as_bytes().last() {
+                    if TABLE[b as usize] & (WHITESPACE | POSSIBLE_LINE) == 0 {
+                        break;
+                    }
+                    *v = &v[..v.len() - 1];
+                    self.span.end -= 1;
+                }
+            }
+            Cow::Owned(v) => {
+                while let Some(&b) = v.as_bytes().last() {
+                    if TABLE[b as usize] & (WHITESPACE | POSSIBLE_LINE) == 0 {
+                        break;
+                    }
+                    v.pop();
+                    self.span.end -= 1;
+                }
+            }
+        }
+    }
+}
 
 /// A command.
 ///
@@ -962,7 +988,6 @@ impl<'a> ParseIter<'a> {
                 // https://docs.docker.com/reference/dockerfile/#parser-directives
                 syntax: None,
                 escape: None,
-                // https://github.com/moby/buildkit/pull/4962
                 check: None,
             },
         };
@@ -972,7 +997,7 @@ impl<'a> ParseIter<'a> {
         // https://docs.docker.com/reference/dockerfile/#format
         // > For backward compatibility, leading whitespace before comments (#) and
         // > instructions (such as RUN) are ignored, but discouraged.
-        skip_comments_and_whitespaces(&mut p.s, p.escape_byte);
+        consume_comments_and_whitespaces(&mut p.s, p.escape_byte);
         Ok(p)
     }
 }
@@ -1002,12 +1027,12 @@ impl<'a> Iterator for ParseIter<'a> {
                     }
                 }
             }
-            skip_comments_and_whitespaces(&mut s, p.escape_byte);
+            consume_comments_and_whitespaces(&mut s, p.escape_byte);
             p.s = s;
             return Some(Ok(instruction));
         }
         if !p.has_stage {
-            // https://github.com/moby/buildkit/blob/e83d79a51fb49aeb921d8a2348ae14a58701c98c/frontend/dockerfile/dockerfile2llb/convert.go#L263
+            // https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/dockerfile2llb/convert.go#L278
             return Some(Err(error::no_stage().into_error(p)));
         }
         None
@@ -1019,10 +1044,10 @@ const DEFAULT_ESCAPE_BYTE: u8 = b'\\';
 fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
     while let Some((&b'#', s_next)) = p.s.split_first() {
         p.s = s_next;
-        skip_spaces_no_escape(&mut p.s);
+        consume_whitespaces_no_line_continuation(&mut p.s);
         let directive_start = p.text.len() - p.s.len();
         if token(&mut p.s, b"SYNTAX") {
-            skip_spaces_no_escape(&mut p.s);
+            consume_whitespaces_no_line_continuation(&mut p.s);
             if let Some((&b'=', s_next)) = p.s.split_first() {
                 p.s = s_next;
                 if p.parser_directives.syntax.is_some() {
@@ -1031,23 +1056,23 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                     p.parser_directives.escape = None;
                     p.parser_directives.check = None;
                     p.escape_byte = DEFAULT_ESCAPE_BYTE;
-                    skip_this_line_no_escape(&mut p.s);
+                    consume_current_line_no_line_continuation(&mut p.s);
                     break;
                 }
-                skip_spaces_no_escape(&mut p.s);
+                consume_whitespaces_no_line_continuation(&mut p.s);
                 let value_start = p.text.len() - p.s.len();
-                skip_non_whitespace_no_escape(&mut p.s);
+                consume_until_whitespaces_or_line_no_line_continuation(&mut p.s);
                 let end = p.text.len() - p.s.len();
                 let value = trim_end(p.text, value_start, end);
                 p.parser_directives.syntax = Some(ParserDirective {
                     start: directive_start,
                     value: Spanned { span: value_start..value_start + value.len(), value },
                 });
-                skip_this_line_no_escape(&mut p.s);
+                consume_current_line_no_line_continuation(&mut p.s);
                 continue;
             }
         } else if token(&mut p.s, b"CHECK") {
-            skip_spaces_no_escape(&mut p.s);
+            consume_whitespaces_no_line_continuation(&mut p.s);
             if let Some((&b'=', s_next)) = p.s.split_first() {
                 p.s = s_next;
                 if p.parser_directives.check.is_some() {
@@ -1056,23 +1081,23 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                     p.parser_directives.escape = None;
                     p.parser_directives.check = None;
                     p.escape_byte = DEFAULT_ESCAPE_BYTE;
-                    skip_this_line_no_escape(&mut p.s);
+                    consume_current_line_no_line_continuation(&mut p.s);
                     break;
                 }
-                skip_spaces_no_escape(&mut p.s);
+                consume_whitespaces_no_line_continuation(&mut p.s);
                 let value_start = p.text.len() - p.s.len();
-                skip_non_whitespace_no_escape(&mut p.s);
+                consume_until_whitespaces_or_line_no_line_continuation(&mut p.s);
                 let end = p.text.len() - p.s.len();
                 let value = trim_end(p.text, value_start, end);
                 p.parser_directives.check = Some(ParserDirective {
                     start: directive_start,
                     value: Spanned { span: value_start..value_start + value.len(), value },
                 });
-                skip_this_line_no_escape(&mut p.s);
+                consume_current_line_no_line_continuation(&mut p.s);
                 continue;
             }
         } else if token(&mut p.s, b"ESCAPE") {
-            skip_spaces_no_escape(&mut p.s);
+            consume_whitespaces_no_line_continuation(&mut p.s);
             if let Some((&b'=', s_next)) = p.s.split_first() {
                 p.s = s_next;
                 if p.parser_directives.escape.is_some() {
@@ -1081,12 +1106,12 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                     p.parser_directives.escape = None;
                     p.parser_directives.check = None;
                     p.escape_byte = DEFAULT_ESCAPE_BYTE;
-                    skip_this_line_no_escape(&mut p.s);
+                    consume_current_line_no_line_continuation(&mut p.s);
                     break;
                 }
-                skip_spaces_no_escape(&mut p.s);
+                consume_whitespaces_no_line_continuation(&mut p.s);
                 let value_start = p.text.len() - p.s.len();
-                skip_non_whitespace_no_escape(&mut p.s);
+                consume_until_whitespaces_or_line_no_line_continuation(&mut p.s);
                 let end = p.text.len() - p.s.len();
                 let value = trim_end(p.text, value_start, end);
                 match value {
@@ -1101,11 +1126,11 @@ fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
                         value: p.escape_byte as char,
                     },
                 });
-                skip_this_line_no_escape(&mut p.s);
+                consume_current_line_no_line_continuation(&mut p.s);
                 continue;
             }
         }
-        skip_this_line_no_escape(&mut p.s);
+        consume_current_line_no_line_continuation(&mut p.s);
         break;
     }
     Ok(())
@@ -1125,24 +1150,24 @@ fn parse_instruction<'a>(
         b'A' => {
             if token(s, &b"ARG"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_arg(p, s, Keyword { span: instruction_span });
                 }
             } else if token(s, &b"ADD"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     let add = Keyword { span: instruction_span };
                     let (options, src, dest) = parse_add_or_copy(p, s, &add)?;
                     return Ok(Instruction::Add(AddInstruction { add, options, src, dest }));
                 }
             } else if token_slow(s, &b"ARG"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_arg(p, s, Keyword { span: instruction_span });
                 }
             } else if token_slow(s, &b"ADD"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     let add = Keyword { span: instruction_span };
                     let (options, src, dest) = parse_add_or_copy(p, s, &add)?;
                     return Ok(Instruction::Add(AddInstruction { add, options, src, dest }));
@@ -1152,26 +1177,26 @@ fn parse_instruction<'a>(
         b'C' => {
             if token(s, &b"COPY"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     let copy = Keyword { span: instruction_span };
                     let (options, src, dest) = parse_add_or_copy(p, s, &copy)?;
                     return Ok(Instruction::Copy(CopyInstruction { copy, options, src, dest }));
                 }
             } else if token(s, &b"CMD"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_cmd(p, s, Keyword { span: instruction_span });
                 }
             } else if token_slow(s, &b"COPY"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     let copy = Keyword { span: instruction_span };
                     let (options, src, dest) = parse_add_or_copy(p, s, &copy)?;
                     return Ok(Instruction::Copy(CopyInstruction { copy, options, src, dest }));
                 }
             } else if token_slow(s, &b"CMD"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_cmd(p, s, Keyword { span: instruction_span });
                 }
             }
@@ -1179,73 +1204,78 @@ fn parse_instruction<'a>(
         b'E' => {
             if token(s, &b"ENV"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_env(p, s, Keyword { span: instruction_span });
                 }
             } else if token(s, &b"EXPOSE"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_expose(p, s, Keyword { span: instruction_span });
                 }
             } else if token(s, &b"ENTRYPOINT"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_entrypoint(p, s, Keyword { span: instruction_span });
                 }
             } else if token_slow(s, &b"ENV"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_env(p, s, Keyword { span: instruction_span });
                 }
             } else if token_slow(s, &b"EXPOSE"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_expose(p, s, Keyword { span: instruction_span });
                 }
             } else if token_slow(s, &b"ENTRYPOINT"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_entrypoint(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'F' => {
+            cold_path();
             if token(s, &b"FROM"[1..]) || token_slow(s, &b"FROM"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_from(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'H' => {
+            cold_path();
             if token(s, &b"HEALTHCHECK"[1..]) || token_slow(s, &b"HEALTHCHECK"[1..], p.escape_byte)
             {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_healthcheck(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'L' => {
+            cold_path();
             if token(s, &b"LABEL"[1..]) || token_slow(s, &b"LABEL"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_label(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'M' => {
+            cold_path();
             if token(s, &b"MAINTAINER"[1..]) || token_slow(s, &b"MAINTAINER"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_maintainer(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'O' => {
+            cold_path();
             if token(s, &b"ONBUILD"[1..]) || token_slow(s, &b"ONBUILD"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_onbuild(p, s, Keyword { span: instruction_span });
                 }
             }
@@ -1253,54 +1283,58 @@ fn parse_instruction<'a>(
         b'R' => {
             if token(s, &b"RUN"[1..]) || token_slow(s, &b"RUN"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_run(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'S' => {
+            cold_path();
             if token(s, &b"SHELL"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_shell(p, s, Keyword { span: instruction_span });
                 }
             } else if token(s, &b"STOPSIGNAL"[1..]) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_stopsignal(p, s, Keyword { span: instruction_span });
                 }
             } else if token_slow(s, &b"SHELL"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_shell(p, s, Keyword { span: instruction_span });
                 }
             } else if token_slow(s, &b"STOPSIGNAL"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_stopsignal(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'U' => {
+            cold_path();
             if token(s, &b"USER"[1..]) || token_slow(s, &b"USER"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_user(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'V' => {
+            cold_path();
             if token(s, &b"VOLUME"[1..]) || token_slow(s, &b"VOLUME"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_volume(p, s, Keyword { span: instruction_span });
                 }
             }
         }
         b'W' => {
+            cold_path();
             if token(s, &b"WORKDIR"[1..]) || token_slow(s, &b"WORKDIR"[1..], p.escape_byte) {
                 let instruction_span = instruction_start..p.text.len() - s.len();
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     return parse_workdir(p, s, Keyword { span: instruction_span });
                 }
             }
@@ -1321,7 +1355,8 @@ fn parse_arg<'a>(
         b"ARG",
         p.escape_byte,
     ));
-    let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
+    let mut arguments = collect_until_line_consume_newline(s, p.text, p.escape_byte);
+    arguments.trim_end();
     if arguments.value.is_empty() {
         return Err(error::at_least_one_argument(instruction.span.start));
     }
@@ -1346,11 +1381,11 @@ fn parse_add_or_copy<'a>(
             Option<_>,
         )>(&mut tmp, p.text, p.escape_byte)
         {
-            debug_assert!(is_line_end(tmp.first()));
-            if tmp.is_empty() {
-                *s = &[];
+            if let Some((&b, s_next)) = tmp.split_first() {
+                let consumed = consume_newline(b, s, s_next);
+                debug_assert!(consumed);
             } else {
-                *s = &tmp[1..];
+                *s = &[];
             }
             if src.is_empty() {
                 return Err(error::at_least_two_arguments(instruction.span.start));
@@ -1358,7 +1393,7 @@ fn parse_add_or_copy<'a>(
             return Ok((options, src, dest.unwrap()));
         }
     }
-    let (mut src, dest) = collect_space_separated_unescaped_consume_line::<(
+    let (mut src, dest) = collect_space_separated_consume_line::<(
         SmallVec<[Source<'_>; 1]>,
         Option<_>,
     )>(s, p.text, p.escape_byte);
@@ -1367,65 +1402,16 @@ fn parse_add_or_copy<'a>(
     }
     for src in &mut src {
         let Source::Path(path) = src else { unreachable!() };
-        let Some(mut delim) = path.value.as_bytes().strip_prefix(b"<<") else { continue };
-        // NB: Sync with parse_run
-        let strip_tab = if let Some((&b'-', delim_next)) = delim.split_first() {
-            delim = delim_next;
-            true
-        } else {
-            false
-        };
-        let mut esq = false;
-        let mut expand = true;
-        let mut quote = None;
-        let mut delim_new = vec![];
-        while let Some((&b, delim_next)) = delim.split_first() {
-            if esq {
-                esq = false;
-                delim_new.push(b);
-                delim = delim_next;
-                continue;
-            }
-            if matches!(b, b'"' | b'\'') {
-                if let Some(q) = quote {
-                    if b == q {
-                        quote = None;
-                        delim = delim_next;
-                        continue;
-                    }
-                } else {
-                    quote = Some(b);
-                    expand = false;
-                    delim = delim_next;
-                    continue;
-                }
-            } else if b == p.escape_byte {
-                esq = true;
-                delim = delim_next;
-                continue;
-            } else if quote.is_none() && TABLE[b as usize] & WHITESPACE != 0 {
-                unreachable!() // unreachable since collect_space_separated_unescaped_consume_line
-            }
-            delim_new.push(b);
-            delim = delim_next;
-        }
-        let delim = delim_new;
-        if esq {
-            return Err(error::other("unterminated escape", path.span.end));
-        }
-        if let Some(quote) = quote {
-            return Err(error::expected_quote(quote, None, path.span.end));
-        }
-        if delim.is_empty() {
+        let mut val = path.value.as_bytes();
+        let Some(val_next) = val.strip_prefix(b"<<") else { continue };
+        let Some((delim, strip_tab, expand)) =
+            collect_here_doc_delim(&mut val, val_next, &path.value)?
+        else {
             continue;
-        }
-        if strip_tab {
-            let (here_doc, span) = collect_here_doc_strip_tab(s, p.text, p.escape_byte, &delim)?;
-            *src = Source::HereDoc(HereDoc { span, expand, value: here_doc });
-        } else {
-            let (here_doc, span) = collect_here_doc_no_strip_tab(s, p.text, p.escape_byte, &delim)?;
-            *src = Source::HereDoc(HereDoc { span, expand, value: here_doc.into() });
-        }
+        };
+        debug_assert!(val.is_empty()); // because of collect_space_separated_unescaped_consume_line
+        let (here_doc, span) = collect_here_doc(s, p.text, &delim, strip_tab)?;
+        *src = Source::HereDoc(HereDoc { span, expand, value: here_doc });
     }
     Ok((options, src, dest.unwrap()))
 }
@@ -1447,14 +1433,14 @@ fn parse_cmd<'a>(
         if let Ok((arguments, array_span)) =
             parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
         {
-            debug_assert!(is_line_end(tmp.first()));
-            if tmp.is_empty() {
-                *s = &[];
+            if let Some((&b, s_next)) = tmp.split_first() {
+                let consumed = consume_newline(b, s, s_next);
+                debug_assert!(consumed);
             } else {
-                *s = &tmp[1..];
+                *s = &[];
             }
             // "CMD []" seems to be okay?
-            // https://github.com/moby/buildkit/blob/6d143f5602a61acef286f39ee75f1cb33c367d44/frontend/dockerfile/parser/testfiles/brimstone-docker-consul/Dockerfile#L3
+            // https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/parser/testfiles/brimstone-docker-consul/Dockerfile#L3
             return Ok(Instruction::Cmd(CmdInstruction {
                 cmd: instruction,
                 arguments: Command::Exec(Spanned { span: array_span, value: arguments }),
@@ -1462,7 +1448,7 @@ fn parse_cmd<'a>(
         }
     }
     let arguments_start = p.text.len() - s.len();
-    skip_this_line(s, p.escape_byte);
+    consume_current_line(s, p.escape_byte);
     let end = p.text.len() - s.len();
     let arguments = trim_end(p.text, arguments_start, end);
     Ok(Instruction::Cmd(CmdInstruction {
@@ -1485,7 +1471,8 @@ fn parse_env<'a>(
         b"ENV",
         p.escape_byte,
     ));
-    let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
+    let mut arguments = collect_until_line_consume_newline(s, p.text, p.escape_byte);
+    arguments.trim_end();
     if arguments.value.is_empty() {
         return Err(error::at_least_one_argument(instruction.span.start));
     }
@@ -1504,7 +1491,7 @@ fn parse_expose<'a>(
         p.escape_byte,
     ));
     let arguments: SmallVec<[_; 1]> =
-        collect_space_separated_unescaped_consume_line(s, p.text, p.escape_byte);
+        collect_space_separated_consume_line(s, p.text, p.escape_byte);
     if arguments.is_empty() {
         return Err(error::at_least_one_argument(instruction.span.start));
     }
@@ -1527,11 +1514,11 @@ fn parse_entrypoint<'a>(
         if let Ok((arguments, array_span)) =
             parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
         {
-            debug_assert!(is_line_end(tmp.first()));
-            if tmp.is_empty() {
-                *s = &[];
+            if let Some((&b, s_next)) = tmp.split_first() {
+                let consumed = consume_newline(b, s, s_next);
+                debug_assert!(consumed);
             } else {
-                *s = &tmp[1..];
+                *s = &[];
             }
             if arguments.is_empty() {
                 return Err(error::at_least_one_argument(instruction.span.start));
@@ -1543,7 +1530,7 @@ fn parse_entrypoint<'a>(
         }
     }
     let arguments_start = p.text.len() - s.len();
-    skip_this_line(s, p.escape_byte);
+    consume_current_line(s, p.escape_byte);
     let end = p.text.len() - s.len();
     let arguments = trim_end(p.text, arguments_start, end);
     if arguments.is_empty() {
@@ -1570,22 +1557,22 @@ fn parse_from<'a>(
         p.escape_byte,
     ));
     let options = parse_options(s, p.text, p.escape_byte);
-    // TODO: https://github.com/moby/buildkit/blob/e83d79a51fb49aeb921d8a2348ae14a58701c98c/frontend/dockerfile/dockerfile2llb/convert.go#L302
+    // TODO: https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/dockerfile2llb/convert.go#L413
     // > base name (%s) should not be blank
-    let image = collect_non_whitespace_unescaped(s, p.text, p.escape_byte);
+    let image = collect_non_whitespace(s, p.text, p.escape_byte);
     if image.value.is_empty() {
         return Err(error::at_least_one_argument(instruction.span.start));
     }
     let mut as_ = None;
-    if skip_spaces(s, p.escape_byte) {
+    if consume_whitespaces(s, p.escape_byte) {
         let as_start = p.text.len() - s.len();
         if token(s, b"AS") || token_slow(s, b"AS", p.escape_byte) {
             let as_span = as_start..p.text.len() - s.len();
-            if !skip_spaces(s, p.escape_byte) {
+            if !consume_whitespaces(s, p.escape_byte) {
                 return Err(error::expected("AS", as_start));
             }
-            let name = collect_non_whitespace_unescaped(s, p.text, p.escape_byte);
-            skip_spaces(s, p.escape_byte);
+            let name = collect_non_whitespace(s, p.text, p.escape_byte);
+            consume_whitespaces(s, p.escape_byte);
             if !is_line_end(s.first()) {
                 return Err(error::expected("newline or eof", p.text.len() - s.len()));
             }
@@ -1619,17 +1606,17 @@ fn parse_healthcheck<'a>(
             if token(s, &b"CMD"[1..]) || token_slow(s, &b"CMD"[1..], p.escape_byte) {
                 let cmd_span = cmd_or_none_start..p.text.len() - s.len();
                 let cmd_keyword = Keyword { span: cmd_span };
-                if spaces_or_line_end(s, p.escape_byte) {
+                if consume_whitespaces_or_is_empty_line(s, p.escape_byte) {
                     if is_maybe_json(s) {
                         let mut tmp = *s;
                         if let Ok((arguments, array_span)) =
                             parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
                         {
-                            debug_assert!(is_line_end(tmp.first()));
-                            if tmp.is_empty() {
-                                *s = &[];
+                            if let Some((&b, s_next)) = tmp.split_first() {
+                                let consumed = consume_newline(b, s, s_next);
+                                debug_assert!(consumed);
                             } else {
-                                *s = &tmp[1..];
+                                *s = &[];
                             }
                             if arguments.is_empty() {
                                 return Err(error::at_least_one_argument(instruction.span.start));
@@ -1648,7 +1635,7 @@ fn parse_healthcheck<'a>(
                         }
                     }
                     let arguments_start = p.text.len() - s.len();
-                    skip_this_line(s, p.escape_byte);
+                    consume_current_line(s, p.escape_byte);
                     let end = p.text.len() - s.len();
                     let arguments = trim_end(p.text, arguments_start, end);
                     return Ok(Instruction::Healthcheck(HealthcheckInstruction {
@@ -1669,7 +1656,7 @@ fn parse_healthcheck<'a>(
             *s = s_next;
             if token(s, &b"NONE"[1..]) || token_slow(s, &b"NONE"[1..], p.escape_byte) {
                 let none_span = cmd_or_none_start..p.text.len() - s.len();
-                skip_spaces(s, p.escape_byte);
+                consume_whitespaces(s, p.escape_byte);
                 if !is_line_end(s.first()) {
                     return Err(error::other(
                         "HEALTHCHECK NONE does not accept arguments",
@@ -1701,7 +1688,8 @@ fn parse_label<'a>(
         b"LABEL",
         p.escape_byte,
     ));
-    let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
+    let mut arguments = collect_until_line_consume_newline(s, p.text, p.escape_byte);
+    arguments.trim_end();
     if arguments.value.is_empty() {
         return Err(error::at_least_one_argument(instruction.span.start));
     }
@@ -1719,7 +1707,8 @@ fn parse_maintainer<'a>(
         b"MAINTAINER",
         p.escape_byte,
     ));
-    let name = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
+    let mut name = collect_until_line_consume_newline(s, p.text, p.escape_byte);
+    name.trim_end();
     if name.value.is_empty() {
         return Err(error::exactly_one_argument(instruction.span.start));
     }
@@ -1738,9 +1727,10 @@ fn parse_onbuild<'a>(
         p.escape_byte,
     ));
     // https://docs.docker.com/reference/dockerfile/#onbuild-limitations
-    if mem::replace(&mut p.in_onbuild, true) {
+    if p.in_onbuild {
         return Err(error::other("ONBUILD ONBUILD is not allowed", instruction.span.start));
     }
+    p.in_onbuild = true;
     let Some((&b, s_next)) = s.split_first() else {
         return Err(error::expected("instruction after ONBUILD", instruction.span.start));
     };
@@ -1791,11 +1781,11 @@ fn parse_run<'a>(
         if let Ok((arguments, array_span)) =
             parse_json_array::<SmallVec<[_; 1]>>(&mut tmp, p.text, p.escape_byte)
         {
-            debug_assert!(is_line_end(tmp.first()));
-            if tmp.is_empty() {
-                *s = &[];
+            if let Some((&b, s_next)) = tmp.split_first() {
+                let consumed = consume_newline(b, s, s_next);
+                debug_assert!(consumed);
             } else {
-                *s = &tmp[1..];
+                *s = &[];
             }
             if arguments.is_empty() {
                 return Err(error::at_least_one_argument(instruction.span.start));
@@ -1813,70 +1803,15 @@ fn parse_run<'a>(
     // https://docs.docker.com/reference/dockerfile/#here-documents
     // At least 5, <<E\nE
     if s.len() >= 5 {
-        if let Some(mut s_next) = s.strip_prefix(b"<<") {
-            // NB: Sync with parse_add_or_copy
-            let strip_tab = if let Some((&b'-', s_next_next)) = s_next.split_first() {
-                s_next = s_next_next;
-                true
-            } else {
-                false
-            };
-            let mut esq = false;
-            let mut expand = true;
-            let mut quote = None;
-            let mut delim = vec![];
-            while let Some((&b, s_next_next)) = s_next.split_first() {
-                if esq {
-                    esq = false;
-                    delim.push(b);
-                    s_next = s_next_next;
-                    continue;
-                }
-                if matches!(b, b'"' | b'\'') {
-                    if let Some(q) = quote {
-                        if b == q {
-                            quote = None;
-                            s_next = s_next_next;
-                            continue;
-                        }
-                    } else {
-                        quote = Some(b);
-                        expand = false;
-                        s_next = s_next_next;
-                        continue;
-                    }
-                } else if b == p.escape_byte {
-                    esq = true;
-                    s_next = s_next_next;
-                    continue;
-                } else if quote.is_none() && TABLE[b as usize] & WHITESPACE != 0 {
-                    break;
-                }
-                delim.push(b);
-                s_next = s_next_next;
-            }
-            if esq {
-                return Err(error::other("unterminated escape", p.text.len() - s_next.len()));
-            }
-            if let Some(quote) = quote {
-                return Err(error::expected_quote(quote, None, p.text.len() - s_next.len()));
-            }
-            if !delim.is_empty() {
-                *s = s_next;
+        if let Some(s_next) = s.strip_prefix(b"<<") {
+            if let Some((delim, strip_tab, expand)) = collect_here_doc_delim(s, s_next, p.text)? {
                 // TODO: skip space
                 let arguments_start = p.text.len() - s.len();
-                skip_this_line(s, p.escape_byte);
+                consume_current_line(s, p.escape_byte);
                 let end = p.text.len() - s.len();
                 let arguments = trim_end(p.text, arguments_start, end);
-                let here_doc = if strip_tab {
-                    let (here_doc, span) =
-                        collect_here_doc_strip_tab(s, p.text, p.escape_byte, &delim)?;
-                    HereDoc { span, expand, value: here_doc }
-                } else {
-                    let (here_doc, span) =
-                        collect_here_doc_no_strip_tab(s, p.text, p.escape_byte, &delim)?;
-                    HereDoc { span, expand, value: here_doc.into() }
-                };
+                let (here_doc, span) = collect_here_doc(s, p.text, &delim, strip_tab)?;
+                let here_doc = HereDoc { span, expand, value: here_doc };
                 return Ok(Instruction::Run(RunInstruction {
                     run: instruction,
                     options,
@@ -1892,7 +1827,7 @@ fn parse_run<'a>(
     }
 
     let arguments_start = p.text.len() - s.len();
-    skip_this_line(s, p.escape_byte);
+    consume_current_line(s, p.escape_byte);
     let end = p.text.len() - s.len();
     let arguments = trim_end(p.text, arguments_start, end);
     Ok(Instruction::Run(RunInstruction {
@@ -1920,18 +1855,16 @@ fn parse_shell<'a>(
     if !is_maybe_json(s) {
         return Err(error::expected("JSON array", p.text.len() - s.len()));
     }
-    match parse_json_array::<SmallVec<[_; 4]>>(s, p.text, p.escape_byte) {
-        Ok((arguments, _array_span)) => {
-            if !s.is_empty() {
-                *s = &s[1..];
-            }
-            if arguments.is_empty() {
-                return Err(error::at_least_one_argument(instruction.span.start));
-            }
-            Ok(Instruction::Shell(ShellInstruction { shell: instruction, arguments }))
-        }
-        Err(array_start) => Err(error::json(array_start)),
+    let (arguments, _array_span) =
+        parse_json_array::<SmallVec<[_; 4]>>(s, p.text, p.escape_byte).map_err(error::json)?;
+    if let Some((&b, s_next)) = s.split_first() {
+        let consumed = consume_newline(b, s, s_next);
+        debug_assert!(consumed);
     }
+    if arguments.is_empty() {
+        return Err(error::at_least_one_argument(instruction.span.start));
+    }
+    Ok(Instruction::Shell(ShellInstruction { shell: instruction, arguments }))
 }
 
 #[inline]
@@ -1946,7 +1879,8 @@ fn parse_stopsignal<'a>(
         p.escape_byte,
     ));
     // TODO: space is disallowed?
-    let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
+    let mut arguments = collect_until_line_consume_newline(s, p.text, p.escape_byte);
+    arguments.trim_end();
     if arguments.value.is_empty() {
         return Err(error::exactly_one_argument(instruction.span.start));
     }
@@ -1965,7 +1899,8 @@ fn parse_user<'a>(
         p.escape_byte,
     ));
     // TODO: space is disallowed?
-    let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
+    let mut arguments = collect_until_line_consume_newline(s, p.text, p.escape_byte);
+    arguments.trim_end();
     if arguments.value.is_empty() {
         return Err(error::exactly_one_argument(instruction.span.start));
     }
@@ -1986,11 +1921,11 @@ fn parse_volume<'a>(
     if is_maybe_json(s) {
         let mut tmp = *s;
         if let Ok((arguments, array_span)) = parse_json_array(&mut tmp, p.text, p.escape_byte) {
-            debug_assert!(is_line_end(tmp.first()));
-            if tmp.is_empty() {
-                *s = &[];
+            if let Some((&b, s_next)) = tmp.split_first() {
+                let consumed = consume_newline(b, s, s_next);
+                debug_assert!(consumed);
             } else {
-                *s = &tmp[1..];
+                *s = &[];
             }
             // "VOLUME []" seems to be okay?
             return Ok(Instruction::Volume(VolumeInstruction {
@@ -2000,7 +1935,7 @@ fn parse_volume<'a>(
         }
     }
     let arguments: SmallVec<[_; 1]> =
-        collect_space_separated_unescaped_consume_line(s, p.text, p.escape_byte);
+        collect_space_separated_consume_line(s, p.text, p.escape_byte);
     if arguments.is_empty() {
         // TODO: "VOLUME" too?
         return Err(error::at_least_one_argument(instruction.span.start));
@@ -2023,7 +1958,8 @@ fn parse_workdir<'a>(
         p.escape_byte,
     ));
     // TODO: space is disallowed if not escaped/quoted?
-    let arguments = collect_non_line_unescaped_consume_line(s, p.text, p.escape_byte);
+    let mut arguments = collect_until_line_consume_newline(s, p.text, p.escape_byte);
+    arguments.trim_end();
     if arguments.value.is_empty() {
         return Err(error::exactly_one_argument(instruction.span.start));
     }
@@ -2034,10 +1970,12 @@ fn parse_workdir<'a>(
 // Parsing Helpers
 
 // [\r\n]
-const LINE: u8 = 1 << 0;
+const POSSIBLE_LINE: u8 = 1 << 0;
 // [ \t]
 const SPACE: u8 = 1 << 1;
-// [ \r\n\t]
+// [ \r\t\v\f]
+// \v = \x0B, \f = \x0C
+// https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/parser/parser.go#L120
 const WHITESPACE: u8 = 1 << 2;
 // [#]
 const COMMENT: u8 = 1 << 3;
@@ -2060,7 +1998,9 @@ static TABLE: [u8; 256] = {
         }
         match i {
             b' ' | b'\t' => v |= WHITESPACE | SPACE,
-            b'\n' | b'\r' => v |= WHITESPACE | LINE,
+            b'\x0B' | b'\x0C' => v |= WHITESPACE,
+            b'\r' => v |= WHITESPACE | POSSIBLE_LINE,
+            b'\n' => v |= POSSIBLE_LINE,
             b'#' => v |= COMMENT,
             b'"' => v |= DOUBLE_QUOTE,
             b'\\' | b'`' => v |= POSSIBLE_ESCAPE,
@@ -2074,6 +2014,31 @@ static TABLE: [u8; 256] = {
         i += 1;
     }
     table
+};
+
+// Lookup table for ascii to hex decoding.
+#[rustfmt::skip]
+static HEX_DECODE_TABLE: [u8; 256] = {
+    const __: u8 = u8::MAX;
+    [
+        //  _1  _2  _3  _4  _5  _6  _7  _8  _9  _A  _B  _C  _D  _E  _F
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 0_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 1_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 2_
+         0,  1,  2,  3,  4,  5,  6,  7,  8,  9, __, __, __, __, __, __, // 3_
+        __, 10, 11, 12, 13, 14, 15, __, __, __, __, __, __, __, __, __, // 4_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 5_
+        __, 10, 11, 12, 13, 14, 15, __, __, __, __, __, __, __, __, __, // 6_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 7_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 8_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 9_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // A_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // B_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // C_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // D_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // E_
+        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // F_
+    ]
 };
 
 const UTF8_BOM: &[u8] = &[0xEF, 0xBB, 0xBF];
@@ -2117,6 +2082,17 @@ impl<'a, const N: usize> Store<UnescapedString<'a>>
     }
 }
 
+// Equivalent to core::hint::cold_path, but compatible with pre-1.95 rustc.
+#[inline(always)]
+#[cold]
+fn cold_path() {}
+
+// Note: must be called after consume_whitespaces
+#[inline]
+fn is_line_end(b: Option<&u8>) -> bool {
+    matches!(b, Some(b'\n') | None)
+}
+
 #[inline]
 fn parse_options<'a, S: Store<Flag<'a>>>(s: &mut &[u8], start: &'a str, escape_byte: u8) -> S {
     let mut options = S::new();
@@ -2129,39 +2105,43 @@ fn parse_options<'a, S: Store<Flag<'a>>>(s: &mut &[u8], start: &'a str, escape_b
                 s_next = s_next_next;
                 break;
             }
-            if skip_line_escape(&mut s_next, b, s_next_next, escape_byte) {
-                skip_line_escape_followup(&mut s_next, escape_byte);
+            if consume_line_continuation(&mut s_next, b, s_next_next, escape_byte) {
                 continue;
             }
             break 'outer;
         }
         let flag_start = start.len() - s.len();
         *s = s_next;
-        let name = collect_until_unescaped::<{ WHITESPACE | EQ }>(s, start, escape_byte);
+        let name = collect_until::<{ WHITESPACE | POSSIBLE_LINE | EQ }>(s, start, escape_byte);
         let Some((&b'=', s_next)) = s.split_first() else {
             options.push(Flag { flag_start, name, value: None });
-            skip_spaces(s, escape_byte);
+            consume_whitespaces(s, escape_byte);
             continue;
         };
         *s = s_next;
-        let value = collect_non_whitespace_unescaped(s, start, escape_byte);
+        let value = collect_non_whitespace(s, start, escape_byte);
         options.push(Flag { flag_start, name, value: Some(value) });
-        skip_spaces(s, escape_byte);
+        consume_whitespaces(s, escape_byte);
     }
     options
 }
 
+#[inline]
+fn is_maybe_json(s: &[u8]) -> bool {
+    // ADD/COPY: checking [[ to handle escape of [ https://docs.docker.com/reference/dockerfile/#add
+    // Others: TODO: checking [[ to handle [[ -e .. ], but not enough to check [ -e .. ]
+    s.first() == Some(&b'[') && s.get(1) != Some(&b'[')
+}
 fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
     s: &mut &[u8],
     start: &'a str,
     escape_byte: u8,
 ) -> Result<(S, Span), usize> {
-    debug_assert_eq!(s.first(), Some(&b'['));
-    debug_assert_ne!(s.get(1), Some(&b'['));
+    debug_assert!(is_maybe_json(s));
     let mut res = S::new();
     let array_start = start.len() - s.len();
     *s = &s[1..];
-    skip_spaces(s, escape_byte);
+    consume_whitespaces(s, escape_byte);
     let (&b, s_next) = s.split_first().ok_or(array_start)?;
     match b {
         b'"' => {
@@ -2182,8 +2162,7 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                         _ => {}
                     }
                     let word_end = start.len() - s.len();
-                    if skip_line_escape(s, b, s_next, escape_byte) {
-                        skip_line_escape_followup(s, escape_byte);
+                    if consume_line_continuation(s, b, s_next, escape_byte) {
                         // dockerfile escape
                         buf.push_str(&start[word_start..word_end]);
                         word_start = start.len() - s.len();
@@ -2194,7 +2173,9 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                         let word_end = start.len() - s.len();
                         buf.push_str(&start[word_start..word_end]);
                         *s = s_next;
-                        handle_continuation_line(s, escape_byte);
+                        if let Some((&b, s_next)) = s.split_first() {
+                            consume_line_continuation(s, b, s_next, escape_byte);
+                        }
                         let (&b, s_next) = s.split_first().ok_or(array_start)?;
                         *s = s_next;
                         let new = match b {
@@ -2214,7 +2195,7 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                     *s = s_next;
                 }
                 let word_end = start.len() - s.len();
-                let value = if buf.is_empty() {
+                let value = if full_word_start == word_start {
                     // no escape
                     Cow::Borrowed(&start[word_start..word_end])
                 } else {
@@ -2223,12 +2204,12 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
                 };
                 res.push(UnescapedString { span: full_word_start..word_end, value });
                 *s = &s[1..]; // drop "
-                skip_spaces(s, escape_byte);
+                consume_whitespaces(s, escape_byte);
                 let (&b, s_next) = s.split_first().ok_or(array_start)?;
                 match b {
                     b',' => {
                         *s = s_next;
-                        skip_spaces(s, escape_byte);
+                        consume_whitespaces(s, escape_byte);
                         let (&b, s_next) = s.split_first().ok_or(array_start)?;
                         if b == b'"' {
                             *s = s_next;
@@ -2248,19 +2229,11 @@ fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(
         _ => return Err(array_start),
     }
     let array_end = start.len() - s.len();
-    skip_spaces(s, escape_byte);
+    consume_whitespaces(s, escape_byte);
     if !is_line_end(s.first()) {
         return Err(array_start);
     }
     Ok((res, array_start..array_end))
-}
-#[inline]
-fn handle_continuation_line(s: &mut &[u8], escape_byte: u8) {
-    if let Some((&b, s_next)) = s.split_first() {
-        if skip_line_escape(s, b, s_next, escape_byte) {
-            skip_line_escape_followup(s, escape_byte);
-        }
-    }
 }
 // Adapted from https://github.com/serde-rs/json/blob/3f1c6de4af28b1f6c5100da323f2bffaf7c2083f/src/read.rs
 #[cold]
@@ -2276,7 +2249,9 @@ fn parse_json_hex_escape(
 
         let mut n = 0;
         for _ in 0..4 {
-            handle_continuation_line(s, escape_byte);
+            if let Some((&b, s_next)) = s.split_first() {
+                consume_line_continuation(s, b, s_next, escape_byte);
+            }
             let (&b, s_next) = s.split_first().ok_or(array_start)?;
             *s = s_next;
             match decode_hex_val(b) {
@@ -2302,19 +2277,21 @@ fn parse_json_hex_escape(
         // utf-8 string the surrogates are required to be paired,
         // whereas deserializing a byte string accepts lone surrogates.
         n1 @ 0xD800..=0xDBFF => {
-            handle_continuation_line(s, escape_byte);
-            if s.first() == Some(&b'\\') {
-                *s = &s[1..];
-            } else {
-                return Err(array_start); // UnexpectedEndOfHexEscape
+            if let Some((&b, s_next)) = s.split_first() {
+                consume_line_continuation(s, b, s_next, escape_byte);
             }
+            let Some((&b'\\', s_next)) = s.split_first() else {
+                return Err(array_start); // UnexpectedEndOfHexEscape
+            };
+            *s = s_next;
 
-            handle_continuation_line(s, escape_byte);
-            if s.first() == Some(&b'u') {
-                *s = &s[1..];
-            } else {
-                return Err(array_start); // UnexpectedEndOfHexEscape
+            if let Some((&b, s_next)) = s.split_first() {
+                consume_line_continuation(s, b, s_next, escape_byte);
             }
+            let Some((&b'u', s_next)) = s.split_first() else {
+                return Err(array_start); // UnexpectedEndOfHexEscape
+            };
+            *s = s_next;
 
             let n2 = decode_hex_escape(s, escape_byte, array_start)?;
 
@@ -2426,233 +2403,157 @@ fn test_parse_json_array() {
     // TODO: more from https://github.com/serde-rs/json/blob/3f1c6de4af28b1f6c5100da323f2bffaf7c2083f/tests/test.rs#L1079
 }
 
-/// Skips spaces and tabs, and returns `true` if one or more spaces or tabs ware
-/// consumed. (not consumes non-spaces/tabs characters.
 #[inline]
-fn skip_spaces_no_escape(s: &mut &[u8]) -> bool {
-    let start = *s;
-    while let Some((&b, s_next)) = s.split_first() {
-        if TABLE[b as usize] & SPACE != 0 {
-            *s = s_next;
-            continue;
-        }
-        break;
-    }
-    start.len() != s.len()
-}
-/// Skips spaces and tabs, and returns `true` if one or more spaces or tabs ware
-/// consumed. (not consumes non-space/tab characters.
-#[inline]
-fn skip_spaces(s: &mut &[u8], escape_byte: u8) -> bool {
-    let mut has_space = false;
-    while let Some((&b, s_next)) = s.split_first() {
-        let t = TABLE[b as usize];
-        if t & (SPACE | POSSIBLE_ESCAPE) != 0 {
-            if t & SPACE != 0 {
-                *s = s_next;
-                has_space = true;
-                continue;
-            }
-            if skip_line_escape(s, b, s_next, escape_byte) {
-                skip_line_escape_followup(s, escape_byte);
-                continue;
-            }
-        }
-        break;
-    }
-    has_space
-}
-/// Consumes spaces and tabs, and returns `true` if one or more spaces or tabs ware
-/// consumed, or reached line end. (not consumes non-space/tab characters.
-#[inline]
-fn spaces_or_line_end(s: &mut &[u8], escape_byte: u8) -> bool {
-    let mut has_space = false;
-    loop {
-        let Some((&b, s_next)) = s.split_first() else { return true };
-        {
-            let t = TABLE[b as usize];
-            if t & (WHITESPACE | POSSIBLE_ESCAPE) != 0 {
-                if t & SPACE != 0 {
-                    *s = s_next;
-                    has_space = true;
-                    continue;
-                }
-                if t & LINE != 0 {
-                    return true;
-                }
-                if skip_line_escape(s, b, s_next, escape_byte) {
-                    skip_line_escape_followup(s, escape_byte);
-                    continue;
+fn collect_here_doc_delim<'a>(
+    s: &mut &'a [u8],
+    mut s_next: &'a [u8],
+    start: &'a str,
+) -> Result<Option<(Cow<'a, [u8]>, bool, bool)>, ErrorKind> {
+    let strip_tab = if let Some((&b'-', s_next_next)) = s_next.split_first() {
+        s_next = s_next_next;
+        true
+    } else {
+        false
+    };
+    let delim_start = start.len() - s_next.len();
+    let mut current_start = delim_start;
+    let mut expand = true;
+    let mut quote = None;
+    let mut buf = vec![];
+    while let Some((&b, s_next_next)) = s_next.split_first() {
+        match b {
+            b'"' | b'\'' => {
+                if let Some(q) = quote {
+                    if b == q {
+                        quote = None;
+                        let end = start.len() - s_next.len();
+                        buf.extend_from_slice(&start.as_bytes()[current_start..end]);
+                        current_start = start.len() - s_next_next.len();
+                    }
+                } else {
+                    quote = Some(b);
+                    expand = false;
+                    let end = start.len() - s_next.len();
+                    buf.extend_from_slice(&start.as_bytes()[current_start..end]);
+                    current_start = start.len() - s_next_next.len();
                 }
             }
-            break;
+            b'\\' => {
+                // here-doc escape is always \ https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/parser/parser.go#L482
+                let end = start.len() - s_next.len();
+                buf.extend_from_slice(&start.as_bytes()[current_start..end]);
+                current_start = start.len() - s_next_next.len();
+                let Some((_, s_next_next)) = s_next_next.split_first() else {
+                    return Err(error::other("unterminated escape", start.len() - s_next.len()));
+                };
+                s_next = s_next_next;
+                continue;
+            }
+            _ if quote.is_none() && TABLE[b as usize] & (WHITESPACE | POSSIBLE_LINE) != 0 => break,
+            _ => {}
         }
+        s_next = s_next_next;
     }
-    has_space
-}
-
-#[inline]
-fn skip_comments_and_whitespaces(s: &mut &[u8], escape_byte: u8) {
-    while let Some((&b, s_next)) = s.split_first() {
-        let t = TABLE[b as usize];
-        if t & (WHITESPACE | COMMENT | POSSIBLE_ESCAPE) != 0 {
-            if t & WHITESPACE != 0 {
-                *s = s_next;
-                continue;
-            }
-            if t & COMMENT != 0 {
-                *s = s_next;
-                skip_this_line_no_escape(s);
-                continue;
-            }
-            if skip_line_escape(s, b, s_next, escape_byte) {
-                skip_line_escape_followup(s, escape_byte);
-                continue;
-            }
-        }
-        break;
+    if let Some(quote) = quote {
+        return Err(error::expected_quote(quote, None, start.len() - s_next.len()));
     }
+    let end = start.len() - s_next.len();
+    let delim = if delim_start == current_start {
+        Cow::Borrowed(&start.as_bytes()[delim_start..end])
+    } else {
+        buf.extend_from_slice(&start.as_bytes()[current_start..end]);
+        Cow::Owned(buf)
+    };
+    if delim.is_empty() {
+        return Ok(None);
+    }
+    *s = s_next;
+    Ok(Some((delim, strip_tab, expand)))
 }
-
 #[inline]
-fn is_line_end(b: Option<&u8>) -> bool {
-    matches!(b, Some(b'\n' | b'\r') | None)
-}
-#[inline]
-fn is_maybe_json(s: &[u8]) -> bool {
-    // ADD/COPY: checking [[ to handle escape of [ https://docs.docker.com/reference/dockerfile/#add
-    // Others: TODO: checking [[ to handle [[ -e .. ], but not enough to check [ -e .. ]
-    s.first() == Some(&b'[') && s.get(1) != Some(&b'[')
-}
-
-#[inline]
-fn collect_here_doc_no_strip_tab<'a>(
+fn collect_here_doc<'a>(
     s: &mut &[u8],
     start: &'a str,
-    _escape_byte: u8,
     delim: &[u8],
-) -> Result<(&'a str, Span), ErrorKind> {
-    let here_doc_start = start.len() - s.len();
-    loop {
-        if s.len() < delim.len() {
-            return Err(error::expected_here_doc_end(delim, start.len() - s.len()));
-        }
-        if s.starts_with(delim) && is_line_end(s.get(delim.len())) {
-            break;
-        }
-        skip_this_line_no_escape(s);
-    }
-    let end = start.len() - s.len();
-    *s = &s[delim.len()..];
-    if !s.is_empty() {
-        *s = &s[1..];
-    }
-    let span = here_doc_start..end;
-    Ok((&start[span.clone()], span))
-}
-#[inline]
-fn collect_here_doc_strip_tab<'a>(
-    s: &mut &[u8],
-    start: &'a str,
-    _escape_byte: u8,
-    delim: &[u8],
+    strip_tab: bool,
 ) -> Result<(Cow<'a, str>, Span), ErrorKind> {
     let here_doc_start = start.len() - s.len();
     let mut current_start = here_doc_start;
-    let mut res = String::new();
+    let mut buf = String::new();
+    let mut end;
     loop {
+        if strip_tab {
+            // trim leading tabs
+            if let Some((&b'\t', mut s_next)) = s.split_first() {
+                let end = start.len() - s.len();
+                buf.push_str(&start[current_start..end]);
+                while let Some((&b'\t', s_next_next)) = s_next.split_first() {
+                    s_next = s_next_next;
+                }
+                *s = s_next;
+                current_start = start.len() - s.len();
+            }
+        }
         if s.len() < delim.len() {
             return Err(error::expected_here_doc_end(delim, start.len() - s.len()));
         }
-        if let Some((&b'\t', s_next)) = s.split_first() {
-            let end = start.len() - s.len();
-            res.push_str(&start[current_start..end]);
-            *s = s_next;
-            while let Some((&b'\t', s_next)) = s.split_first() {
+        if s.starts_with(delim) {
+            let s_next = &s[delim.len()..];
+            end = start.len() - s.len();
+            if let Some((&b, s_next)) = s_next.split_first() {
+                if consume_newline(b, s, s_next) {
+                    break;
+                }
+            } else {
                 *s = s_next;
+                break;
             }
-            current_start = start.len() - s.len();
         }
-        if s.starts_with(delim) && is_line_end(s.get(delim.len())) {
-            break;
-        }
-        skip_this_line_no_escape(s);
-    }
-    let end = start.len() - s.len();
-    *s = &s[delim.len()..];
-    if !s.is_empty() {
-        *s = &s[1..];
+        consume_current_line_no_line_continuation(s);
     }
     let span = here_doc_start..end;
     if here_doc_start == current_start {
         Ok((Cow::Borrowed(&start[span.clone()]), span))
     } else {
-        res.push_str(&start[current_start..end]);
-        Ok((Cow::Owned(res), span))
+        buf.push_str(&start[current_start..end]);
+        Ok((Cow::Owned(buf), span))
     }
 }
+
 // TODO: escaped/quoted space?
 #[inline]
-fn collect_space_separated_unescaped_consume_line<'a, S: Store<UnescapedString<'a>>>(
+fn collect_space_separated_consume_line<'a, S: Store<UnescapedString<'a>>>(
     s: &mut &[u8],
     start: &'a str,
     escape_byte: u8,
 ) -> S {
     let mut res = S::new();
     loop {
-        let val = collect_non_whitespace_unescaped(s, start, escape_byte);
+        let val = collect_non_whitespace(s, start, escape_byte);
         if !val.value.is_empty() {
             res.push(val);
-            if skip_spaces(s, escape_byte) {
+            if consume_whitespaces(s, escape_byte) {
                 continue;
             }
         }
-        debug_assert!(is_line_end(s.first()));
-        if !s.is_empty() {
-            *s = &s[1..];
+        if let Some((&b, s_next)) = s.split_first() {
+            let consumed = consume_newline(b, s, s_next);
+            debug_assert!(consumed);
         }
         break;
     }
     res
 }
 #[inline]
-fn collect_non_whitespace_unescaped<'a>(
+fn collect_non_whitespace<'a>(
     s: &mut &[u8],
     start: &'a str,
     escape_byte: u8,
 ) -> UnescapedString<'a> {
-    collect_until_unescaped::<WHITESPACE>(s, start, escape_byte)
+    collect_until::<{ WHITESPACE | POSSIBLE_LINE }>(s, start, escape_byte)
 }
 #[inline]
-fn collect_non_line_unescaped_consume_line<'a>(
-    s: &mut &[u8],
-    start: &'a str,
-    escape_byte: u8,
-) -> UnescapedString<'a> {
-    let mut val = collect_until_unescaped::<LINE>(s, start, escape_byte);
-    debug_assert!(is_line_end(s.first()));
-    if !s.is_empty() {
-        *s = &s[1..];
-    }
-    // trim trailing spaces
-    match &mut val.value {
-        Cow::Borrowed(v) => {
-            while let Some(b' ' | b'\t') = v.as_bytes().last() {
-                *v = &v[..v.len() - 1];
-                val.span.end -= 1;
-            }
-        }
-        Cow::Owned(v) => {
-            while let Some(b' ' | b'\t') = v.as_bytes().last() {
-                v.pop();
-                val.span.end -= 1;
-            }
-        }
-    }
-    val
-}
-#[inline]
-fn collect_until_unescaped<'a, const UNTIL_MASK: u8>(
+fn collect_until<'a, const UNTIL_MASK: u8>(
     s: &mut &[u8],
     start: &'a str,
     escape_byte: u8,
@@ -2667,8 +2568,7 @@ fn collect_until_unescaped<'a, const UNTIL_MASK: u8>(
                 break;
             }
             let word_end = start.len() - s.len();
-            if skip_line_escape(s, b, s_next, escape_byte) {
-                skip_line_escape_followup(s, escape_byte);
+            if consume_line_continuation(s, b, s_next, escape_byte) {
                 buf.push_str(&start[word_start..word_end]);
                 word_start = start.len() - s.len();
                 continue;
@@ -2677,7 +2577,58 @@ fn collect_until_unescaped<'a, const UNTIL_MASK: u8>(
         *s = s_next;
     }
     let word_end = start.len() - s.len();
-    let value = if buf.is_empty() {
+    let value = if full_word_start == word_start {
+        // no escape
+        Cow::Borrowed(&start[word_start..word_end])
+    } else {
+        buf.push_str(&start[word_start..word_end]);
+        Cow::Owned(buf)
+    };
+    UnescapedString { span: full_word_start..word_end, value }
+}
+#[inline]
+fn collect_until_line_consume_newline<'a>(
+    s: &mut &[u8],
+    start: &'a str,
+    escape_byte: u8,
+) -> UnescapedString<'a> {
+    let full_word_start = start.len() - s.len();
+    let mut word_start = full_word_start;
+    let mut buf = String::new();
+    let word_end;
+    loop {
+        let Some((&b, s_next)) = s.split_first() else {
+            word_end = start.len() - s.len();
+            break;
+        };
+        let t = TABLE[b as usize];
+        if t & (POSSIBLE_LINE | POSSIBLE_ESCAPE) != 0 {
+            match b {
+                b'\n' => {
+                    word_end = start.len() - s.len();
+                    *s = s_next;
+                    break;
+                }
+                b'\r' => {
+                    if s_next.first() == Some(&b'\n') {
+                        word_end = start.len() - s.len();
+                        *s = &s_next[1..];
+                        break;
+                    }
+                }
+                _ => {
+                    let word_end = start.len() - s.len();
+                    if consume_line_continuation(s, b, s_next, escape_byte) {
+                        buf.push_str(&start[word_start..word_end]);
+                        word_start = start.len() - s.len();
+                        continue;
+                    }
+                }
+            }
+        }
+        *s = s_next;
+    }
+    let value = if full_word_start == word_start {
         // no escape
         Cow::Borrowed(&start[word_start..word_end])
     } else {
@@ -2687,68 +2638,75 @@ fn collect_until_unescaped<'a, const UNTIL_MASK: u8>(
     UnescapedString { span: full_word_start..word_end, value }
 }
 
-/// Skips non-whitespace (non-`[ \r\n\t]`) characters, and returns `true`
-/// if one or more non-whitespace characters are present. (not consumes whitespace character).
-#[inline]
-fn skip_non_whitespace_no_escape(s: &mut &[u8]) -> bool {
-    let start = *s;
-    while let Some((&b, s_next)) = s.split_first() {
-        if TABLE[b as usize] & WHITESPACE != 0 {
-            break;
+/// Consumes a newline if present and returns `true` if consumed.
+/// (not consumes non-newline characters)
+#[inline(always)]
+fn consume_newline<'a>(b: u8, s: &mut &'a [u8], s_next: &'a [u8]) -> bool {
+    match b {
+        b'\n' => {
+            *s = s_next;
+            return true;
         }
-        *s = s_next;
+        b'\r' => {
+            if s_next.first() == Some(&b'\n') {
+                *s = &s_next[1..];
+                return true;
+            }
+        }
+        _ => {}
     }
-    start.len() != s.len()
+    false
 }
-// #[inline]
-// fn skip_non_whitespace(s: &mut &[u8], escape_byte: u8) -> bool {
-//     let mut has_non_whitespace = false;
-//     while let Some((&b, s_next)) = s.split_first() {
-//         if TABLE[b as usize] & WHITESPACE != 0 {
-//             break;
-//         }
-//         if is_line_escape(b, s_next, escape_byte) {
-//             skip_line_escape(s, b, s_next, escape_byte);
-//             continue;
-//         }
-//         *s = s_next;
-//         has_non_whitespace = true;
-//         continue;
-//     }
-//     has_non_whitespace
-// }
 
+/// Consumes a line continuation if present and returns `true` if consumed.
 #[inline]
-fn skip_line_escape<'a>(s: &mut &'a [u8], b: u8, s_next: &'a [u8], escape_byte: u8) -> bool {
-    if b == escape_byte {
-        if let Some((&b, mut s_next)) = s_next.split_first() {
-            if b == b'\n' {
-                *s = s_next;
-                return true;
+fn consume_line_continuation<'a>(
+    s: &mut &'a [u8],
+    b: u8,
+    s_next: &'a [u8],
+    escape_byte: u8,
+) -> bool {
+    #[inline]
+    fn followup(s: &mut &[u8], _escape_byte: u8) {
+        while let Some((&b, mut s_next)) = s.split_first() {
+            let t = TABLE[b as usize];
+            if t & (WHITESPACE | POSSIBLE_LINE | COMMENT) == 0 {
+                break;
             }
-            if b == b'\r' {
-                if s_next.first() == Some(&b'\n') {
-                    *s = &s_next[1..];
-                } else {
-                    *s = s_next;
+            if t & WHITESPACE != 0 {
+                // TODO: escape after spaces is handled in consume_whitespaces_no_line_continuation
+                consume_whitespaces_no_line_continuation(&mut s_next);
+                let Some((&b, s_next_next)) = s_next.split_first() else { break };
+                let t = TABLE[b as usize];
+                if t & (COMMENT | POSSIBLE_LINE) == 0 {
+                    break;
                 }
+                s_next = s_next_next;
+            }
+            *s = s_next;
+            // comment or empty continuation line
+            // \r is handled in the above consume_whitespaces_no_line_continuation
+            if b != b'\n' {
+                consume_current_line_no_line_continuation(s);
+            }
+        }
+    }
+
+    if b == escape_byte {
+        cold_path();
+        if let Some((&b, mut s_next)) = s_next.split_first() {
+            if consume_newline(b, s, s_next) {
+                followup(s, escape_byte);
                 return true;
             }
-            // It seems that "\\ \n" is also accepted.
-            // https://github.com/moby/buildkit/blob/6d143f5602a61acef286f39ee75f1cb33c367d44/frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile#L19C23-L19C24
+            // "\\[ \t]\n" is also accepted.
+            // https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/parser/parser.go#L168
             if TABLE[b as usize] & SPACE != 0 {
-                skip_spaces_no_escape(&mut s_next);
+                cold_path();
+                consume_whitespaces_no_line_continuation(&mut s_next);
                 if let Some((&b, s_next)) = s_next.split_first() {
-                    if b == b'\n' {
-                        *s = s_next;
-                        return true;
-                    }
-                    if b == b'\r' {
-                        if s_next.first() == Some(&b'\n') {
-                            *s = &s_next[1..];
-                        } else {
-                            *s = s_next;
-                        }
+                    if consume_newline(b, s, s_next) {
+                        followup(s, escape_byte);
                         return true;
                     }
                 }
@@ -2757,71 +2715,144 @@ fn skip_line_escape<'a>(s: &mut &'a [u8], b: u8, s_next: &'a [u8], escape_byte: 
     }
     false
 }
+
+/// Consumes until whitespace/line character found without line continuation handling,
+/// and returns `true` if one or more non-whitespace characters are present.
+/// (not consumes whitespace/line character)
 #[inline]
-fn skip_line_escape_followup(s: &mut &[u8], _escape_byte: u8) {
-    while let Some((&b, mut s_next)) = s.split_first() {
+fn consume_until_whitespaces_or_line_no_line_continuation(s: &mut &[u8]) -> bool {
+    let start = *s;
+    while let Some((&b, s_next)) = s.split_first() {
+        if TABLE[b as usize] & (WHITESPACE | POSSIBLE_LINE) != 0 {
+            break;
+        }
+        *s = s_next;
+    }
+    start.len() != s.len()
+}
+
+/// Consumes the current line without line continuation handling.
+/// (consumes newline characters of the current line)
+#[inline]
+fn consume_current_line_no_line_continuation(s: &mut &[u8]) {
+    while let Some((&b, s_next)) = s.split_first() {
+        if consume_newline(b, s, s_next) {
+            break;
+        }
+        *s = s_next;
+    }
+}
+/// Consumes the current line.
+/// (consumes newline characters of the current line)
+#[inline]
+fn consume_current_line(s: &mut &[u8], escape_byte: u8) {
+    let mut has_whitespace_only = 0;
+    while let Some((&b, s_next)) = s.split_first() {
         let t = TABLE[b as usize];
-        if t & (WHITESPACE | COMMENT) != 0 {
-            if t & SPACE != 0 {
-                // TODO: escape after spaces is handled in skip_spaces_no_escape
-                skip_spaces_no_escape(&mut s_next);
-                if let Some((&b, s_next)) = s_next.split_first() {
-                    let t = TABLE[b as usize];
-                    if t & (COMMENT | LINE) != 0 {
-                        // comment or empty continuation line
-                        *s = s_next;
-                        if t & COMMENT != 0 {
-                            skip_this_line_no_escape(s);
-                        }
-                        continue;
-                    }
-                }
-            } else {
-                // comment or empty continuation line
+        if t & (POSSIBLE_LINE | COMMENT | POSSIBLE_ESCAPE) != 0 {
+            if consume_newline(b, s, s_next) {
+                break;
+            }
+            if has_whitespace_only != 0 && t & COMMENT != 0 {
                 *s = s_next;
-                if t & COMMENT != 0 {
-                    skip_this_line_no_escape(s);
-                }
+                consume_current_line_no_line_continuation(s);
+                continue;
+            }
+            if consume_line_continuation(s, b, s_next, escape_byte) {
+                has_whitespace_only = WHITESPACE;
+                continue;
+            }
+        }
+        has_whitespace_only &= t;
+        *s = s_next;
+    }
+}
+
+/// Consumes whitespaces without line continuation handling, and returns `true`
+/// if one or more whitespaces ware consumed.
+/// (not consumes non-whitespace characters)
+#[inline]
+fn consume_whitespaces_no_line_continuation(s: &mut &[u8]) -> bool {
+    let start = *s;
+    while let Some((&b, s_next)) = s.split_first() {
+        if TABLE[b as usize] & WHITESPACE != 0 {
+            *s = s_next;
+            continue;
+        }
+        break;
+    }
+    start.len() != s.len()
+}
+/// Consumes whitespaces, and returns `true`
+/// if one or more whitespaces ware consumed.
+/// (not consumes non-whitespace characters)
+#[inline]
+fn consume_whitespaces(s: &mut &[u8], escape_byte: u8) -> bool {
+    let mut has_space = false;
+    while let Some((&b, s_next)) = s.split_first() {
+        let t = TABLE[b as usize];
+        if t & (WHITESPACE | POSSIBLE_ESCAPE) != 0 {
+            if t & WHITESPACE != 0 {
+                *s = s_next;
+                has_space = true;
+                continue;
+            }
+            if consume_line_continuation(s, b, s_next, escape_byte) {
                 continue;
             }
         }
         break;
     }
+    has_space
 }
-
+/// Consumes whitespaces, and returns `true`
+/// if one or more whitespaces ware consumed or reached line end.
+/// (not consumes non-whitespace characters)
 #[inline]
-fn skip_this_line_no_escape(s: &mut &[u8]) {
-    while let Some((&b, s_next)) = s.split_first() {
-        *s = s_next;
-        if TABLE[b as usize] & LINE != 0 {
+fn consume_whitespaces_or_is_empty_line(s: &mut &[u8], escape_byte: u8) -> bool {
+    let mut has_space = false;
+    loop {
+        let Some((&b, s_next)) = s.split_first() else { return true };
+        {
+            let t = TABLE[b as usize];
+            if t & (WHITESPACE | POSSIBLE_ESCAPE | POSSIBLE_LINE) != 0 {
+                if t & WHITESPACE != 0 {
+                    *s = s_next;
+                    has_space = true;
+                    continue;
+                }
+                if b == b'\n' {
+                    return true;
+                }
+                if consume_line_continuation(s, b, s_next, escape_byte) {
+                    continue;
+                }
+            }
             break;
         }
     }
+    has_space
 }
-/// Skips non-line (non-`[\r\n]`) characters. (consumes line character).
+/// Consumes whitespaces, whitespace/empty lines, and comment lines.
 #[inline]
-fn skip_this_line(s: &mut &[u8], escape_byte: u8) {
-    let mut has_space_only = 0;
+fn consume_comments_and_whitespaces(s: &mut &[u8], escape_byte: u8) {
     while let Some((&b, s_next)) = s.split_first() {
         let t = TABLE[b as usize];
-        if t & (LINE | COMMENT | POSSIBLE_ESCAPE) != 0 {
-            if t & LINE != 0 {
+        if t & (WHITESPACE | POSSIBLE_LINE | COMMENT | POSSIBLE_ESCAPE) != 0 {
+            if t & (WHITESPACE | POSSIBLE_LINE) != 0 {
                 *s = s_next;
-                break;
-            }
-            if has_space_only != 0 && t & COMMENT != 0 {
-                *s = s_next;
-                skip_this_line_no_escape(s);
                 continue;
             }
-            if skip_line_escape(s, b, s_next, escape_byte) {
-                skip_line_escape_followup(s, escape_byte);
-                has_space_only = SPACE;
+            if t & COMMENT != 0 {
+                *s = s_next;
+                consume_current_line_no_line_continuation(s);
+                continue;
+            }
+            if consume_line_continuation(s, b, s_next, escape_byte) {
                 continue;
             }
         }
-        has_space_only &= t;
-        *s = s_next;
+        break;
     }
 }
 
@@ -2831,7 +2862,7 @@ fn trim_end(text: &str, start: usize, mut end: usize) -> &str {
     while start < end {
         let next_end = end - 1;
         if let Some(&b) = text.as_bytes().get(next_end) {
-            if TABLE[b as usize] & WHITESPACE != 0 {
+            if TABLE[b as usize] & (WHITESPACE | POSSIBLE_LINE) != 0 {
                 end = next_end;
                 continue;
             }
@@ -2868,8 +2899,7 @@ fn token_slow(s: &mut &[u8], mut token: &'static [u8], escape_byte: u8) -> bool 
             }
             continue;
         }
-        if skip_line_escape(&mut tmp, b, tmp_next, escape_byte) {
-            skip_line_escape_followup(&mut tmp, escape_byte);
+        if consume_line_continuation(&mut tmp, b, tmp_next, escape_byte) {
             continue;
         }
         break;
@@ -2945,28 +2975,3 @@ fn test_starts_with_ignore_ascii_case() {
         b"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     ));
 }
-
-// Lookup table for ascii to hex decoding.
-#[rustfmt::skip]
-static HEX_DECODE_TABLE: [u8; 256] = {
-    const __: u8 = u8::MAX;
-    [
-        //  _1  _2  _3  _4  _5  _6  _7  _8  _9  _A  _B  _C  _D  _E  _F
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 0_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 1_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 2_
-         0,  1,  2,  3,  4,  5,  6,  7,  8,  9, __, __, __, __, __, __, // 3_
-        __, 10, 11, 12, 13, 14, 15, __, __, __, __, __, __, __, __, __, // 4_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 5_
-        __, 10, 11, 12, 13, 14, 15, __, __, __, __, __, __, __, __, __, // 6_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 7_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 8_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // 9_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // A_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // B_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // C_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // D_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // E_
-        __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, // F_
-    ]
-};

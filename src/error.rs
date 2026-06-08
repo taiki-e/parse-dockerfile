@@ -73,8 +73,8 @@ pub(crate) fn invalid_escape(escape_start: usize) -> ErrorKind<'static> {
 }
 #[cold]
 #[inline]
-pub(crate) fn duplicate_name(first_start: usize, second_start: usize) -> ErrorKind<'static> {
-    ErrorKind::DuplicateName { first_start, second_start }
+pub(crate) fn duplicate_name(name: Cow<'_, str>, second_start: usize) -> ErrorKind<'_> {
+    ErrorKind::DuplicateName { name, second_start }
 }
 #[cold]
 #[inline]
@@ -105,7 +105,7 @@ pub(crate) enum ErrorKind<'a> {
     ExactlyOneArgument { instruction_start: usize },
     UnknownInstruction { instruction_start: usize },
     InvalidEscape { escape_start: usize },
-    DuplicateName { first_start: usize, second_start: usize },
+    DuplicateName { name: Cow<'a, str>, second_start: usize },
     NoStage,
     Json { arguments_start: usize },
 }
@@ -117,6 +117,7 @@ impl ErrorKind<'_> {
         let msg = match self {
             Self::Other { msg, .. } => msg.into(),
             Self::Expected { word, .. } => format!("expected {word}").into(),
+            // TODO: Truncate if the delim is large.
             Self::ExpectedHereDocEnd { ref delim, .. } => format!(
                 "expected end of here-document ({}), but reached eof",
                 str::from_utf8(delim).unwrap() // unwrap is okay since parsing APIs only accept &str
@@ -137,8 +138,7 @@ impl ErrorKind<'_> {
             Self::AtLeastOneArgument { instruction_start: pos }
             | Self::AtLeastTwoArguments { instruction_start: pos }
             | Self::ExactlyOneArgument { instruction_start: pos }
-            | Self::UnknownInstruction { instruction_start: pos }
-            | Self::DuplicateName { first_start: pos, .. } => {
+            | Self::UnknownInstruction { instruction_start: pos } => {
                 let mut s = &p.text.as_bytes()[pos..];
                 let mut word = super::collect_non_whitespace(&mut s, p.text, p.escape_byte).value;
                 match self {
@@ -158,10 +158,11 @@ impl ErrorKind<'_> {
                     Self::UnknownInstruction { .. } => {
                         format!("unknown instruction '{word}'").into()
                     }
-                    Self::DuplicateName { .. } => format!("duplicate name '{word}'").into(),
                     _ => unreachable!(),
                 }
             }
+            // TODO: Truncate if the delim is large.
+            Self::DuplicateName { ref name, .. } => format!("duplicate stage name '{name}'").into(),
             Self::NoStage => "expected at least one FROM instruction".into(),
             Self::Json { .. } => "invalid JSON".into(),
             Self::InvalidEscape { escape_start } => {

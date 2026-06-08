@@ -185,15 +185,16 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
         let Instruction::From(from) = &instructions[stage.start] else { unreachable!() };
         if let Some((_as, name)) = &from.as_ {
             if let Some(&first_occurrence) = stages_by_name.get(&name.value) {
-                let Instruction::From(from) = &instructions[stages[first_occurrence].start] else {
+                drop(stages_by_name);
+                let second_start = name.span.start;
+                let Instruction::From(from) = &mut instructions[stages[first_occurrence].start]
+                else {
                     unreachable!()
                 };
-                let first_start = from.as_.as_ref().unwrap().1.span.start;
-                let second_start = name.span.start;
-                drop(stages_by_name);
+                let name = mem::take(&mut from.as_.as_mut().unwrap().1.value);
                 return Err(error(
                     &p,
-                    error::duplicate_name(first_start, second_start),
+                    error::duplicate_name(name, second_start),
                     &mut instructions,
                     &mut stages,
                 ));
@@ -2184,6 +2185,7 @@ fn parse_options<'a, S: Store<Flag<'a>>>(s: &mut &[u8], start: &'a str, escape_b
 fn is_maybe_json(s: &[u8]) -> bool {
     // ADD/COPY: checking [[ to handle escape of [ https://docs.docker.com/reference/dockerfile/#add
     // Others: TODO: checking [[ to handle [[ -e .. ], but not enough to check [ -e .. ]
+    // TODO: full json check without allocation?
     s.first() == Some(&b'[') && s.get(1) != Some(&b'[')
 }
 fn parse_json_array<'a, S: Store<UnescapedString<'a>>>(

@@ -80,7 +80,7 @@ fn test() {
                         } else if rel.ends_with("/unrecognized/Dockerfile") {
                             expected_err = Some("unknown instruction 'BOGUS'");
                         } else if rel.ends_with("/Dockerfilefromarg") {
-                            expected_err = Some("duplicate name 'final'");
+                            expected_err = Some("duplicate stage name 'final'");
                         }
                     }
                     _ => {}

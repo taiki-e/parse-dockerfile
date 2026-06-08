@@ -122,6 +122,19 @@ use self::error::{ErrorKind, InternalResult, Result};
 /// Parses dockerfile from the given `text`.
 #[allow(clippy::missing_panics_doc)]
 pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
+    #[cold]
+    fn error(
+        p: &ParseIter<'_>,
+        e: ErrorKind<'_>,
+        instructions: &mut Vec<Instruction<'_>>,
+        stages: &mut Vec<Range<usize>>,
+    ) -> Error {
+        // reduce memory usage before allocation in into_error
+        *instructions = vec![];
+        *stages = vec![];
+        e.into_error(p)
+    }
+
     let mut p = ParseIter::new(text)?;
     let mut s = p.s;
 
@@ -130,8 +143,8 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
     let mut named_stages = 0;
     let mut current_stage = None;
     while let Some((&b, s_next)) = s.split_first() {
-        let instruction =
-            parse_instruction(&mut p, &mut s, b, s_next).map_err(|e| e.into_error(&p))?;
+        let instruction = parse_instruction(&mut p, &mut s, b, s_next)
+            .map_err(|e| error(&p, e, &mut instructions, &mut stages))?;
         match instruction {
             Instruction::From(from) => {
                 named_stages += from.as_.is_some() as usize;
@@ -144,8 +157,12 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
             arg @ Instruction::Arg(..) => instructions.push(arg),
             instruction => {
                 if current_stage.is_none() {
-                    return Err(error::expected("FROM", instruction.instruction_span().start)
-                        .into_error(&p));
+                    return Err(error(
+                        &p,
+                        error::expected("FROM", instruction.instruction_span().start),
+                        &mut instructions,
+                        &mut stages,
+                    ));
                 }
                 instructions.push(instruction);
             }
@@ -158,23 +175,30 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
 
     if stages.is_empty() {
         // https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/dockerfile2llb/convert.go#L278
-        return Err(error::no_stage().into_error(&p));
+        return Err(error(&p, error::no_stage(), &mut instructions, &mut stages));
     }
     // TODO: https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/dockerfile2llb/convert.go#L413
     // > base name (%s) should not be blank
 
-    let mut stages_by_name = HashMap::with_capacity(named_stages);
+    let mut stages_by_name = HashMap::<Cow<'_, str>, usize>::with_capacity(named_stages);
     for (i, stage) in stages.iter().enumerate() {
         let Instruction::From(from) = &instructions[stage.start] else { unreachable!() };
         if let Some((_as, name)) = &from.as_ {
-            if let Some(first_occurrence) = stages_by_name.insert(name.value.clone(), i) {
+            if let Some(&first_occurrence) = stages_by_name.get(&name.value) {
                 let Instruction::From(from) = &instructions[stages[first_occurrence].start] else {
                     unreachable!()
                 };
                 let first_start = from.as_.as_ref().unwrap().1.span.start;
                 let second_start = name.span.start;
-                return Err(error::duplicate_name(first_start, second_start).into_error(&p));
+                drop(stages_by_name);
+                return Err(error(
+                    &p,
+                    error::duplicate_name(first_start, second_start),
+                    &mut instructions,
+                    &mut stages,
+                ));
             }
+            stages_by_name.insert(name.value.clone(), i);
         }
     }
 

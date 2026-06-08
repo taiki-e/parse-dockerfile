@@ -16,6 +16,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 - Implement `FusedIterator` for the iterator returned by `parse_iter`.
 
+- Reduce memory usage in error case.
+
 ## [0.1.7] - 2026-06-06
 
 - Fix bug in heredoc parsing.

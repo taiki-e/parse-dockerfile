@@ -2683,19 +2683,21 @@ fn consume_line_continuation<'a>(
             if t & (WHITESPACE | POSSIBLE_LINE | COMMENT) == 0 {
                 break;
             }
+            let mut b = b;
             if t & WHITESPACE != 0 {
                 // TODO: escape after spaces is handled in consume_whitespaces_no_line_continuation
                 consume_whitespaces_no_line_continuation(&mut s_next);
-                let Some((&b, s_next_next)) = s_next.split_first() else { break };
-                let t = TABLE[b as usize];
+                let Some((&b_, s_next_next)) = s_next.split_first() else { break };
+                let t = TABLE[b_ as usize];
                 if t & (COMMENT | POSSIBLE_LINE) == 0 {
                     break;
                 }
+                b = b_;
                 s_next = s_next_next;
             }
             *s = s_next;
             // comment or empty continuation line
-            // \r is handled in the above consume_whitespaces_no_line_continuation
+            // b == \r case never happen because handled in the above consume_whitespaces_no_line_continuation
             if b != b'\n' {
                 consume_current_line_no_line_continuation(s);
             }

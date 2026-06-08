@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use alloc::{boxed::Box, format};
+use alloc::{borrow::Cow, boxed::Box, format};
 use core::{fmt, marker::PhantomData, str};
 
 use super::ParseIter;
 
 pub(crate) type Result<T, E = Error> = core::result::Result<T, E>;
+pub(crate) type InternalResult<'a, T> = core::result::Result<T, ErrorKind<'a>>;
 
 /// An error that occurred during parsing the dockerfile.
 // Boxing ErrorInner to keep error type small for performance.
@@ -27,62 +28,62 @@ impl Error {
 
 #[cold]
 #[inline]
-pub(crate) fn other(msg: &'static str, pos: usize) -> ErrorKind {
+pub(crate) fn other(msg: &'static str, pos: usize) -> ErrorKind<'static> {
     ErrorKind::Other { msg, pos }
 }
 #[cold]
 #[inline]
-pub(crate) fn expected(word: &'static str, pos: usize) -> ErrorKind {
+pub(crate) fn expected(word: &'static str, pos: usize) -> ErrorKind<'static> {
     ErrorKind::Expected { word, pos }
 }
 #[cold]
 #[inline]
-pub(crate) fn expected_here_doc_end(delim: &[u8], pos: usize) -> ErrorKind {
-    ErrorKind::ExpectedHereDocEnd { delim: delim.into(), pos }
+pub(crate) fn expected_here_doc_end(delim: Cow<'_, [u8]>, pos: usize) -> ErrorKind<'_> {
+    ErrorKind::ExpectedHereDocEnd { delim, pos }
 }
 #[cold]
 #[inline]
-pub(crate) fn expected_quote(quote: u8, found: Option<u8>, pos: usize) -> ErrorKind {
+pub(crate) fn expected_quote(quote: u8, found: Option<u8>, pos: usize) -> ErrorKind<'static> {
     ErrorKind::ExpectedQuote { quote, found, pos }
 }
 #[cold]
 #[inline]
-pub(crate) fn at_least_one_argument(instruction_start: usize) -> ErrorKind {
+pub(crate) fn at_least_one_argument(instruction_start: usize) -> ErrorKind<'static> {
     ErrorKind::AtLeastOneArgument { instruction_start }
 }
 #[cold]
 #[inline]
-pub(crate) fn at_least_two_arguments(instruction_start: usize) -> ErrorKind {
+pub(crate) fn at_least_two_arguments(instruction_start: usize) -> ErrorKind<'static> {
     ErrorKind::AtLeastTwoArguments { instruction_start }
 }
 #[cold]
 #[inline]
-pub(crate) fn exactly_one_argument(instruction_start: usize) -> ErrorKind {
+pub(crate) fn exactly_one_argument(instruction_start: usize) -> ErrorKind<'static> {
     ErrorKind::ExactlyOneArgument { instruction_start }
 }
 #[cold]
 #[inline]
-pub(crate) fn unknown_instruction(instruction_start: usize) -> ErrorKind {
+pub(crate) fn unknown_instruction(instruction_start: usize) -> ErrorKind<'static> {
     ErrorKind::UnknownInstruction { instruction_start }
 }
 #[cold]
 #[inline]
-pub(crate) fn invalid_escape(escape_start: usize) -> ErrorKind {
+pub(crate) fn invalid_escape(escape_start: usize) -> ErrorKind<'static> {
     ErrorKind::InvalidEscape { escape_start }
 }
 #[cold]
 #[inline]
-pub(crate) fn duplicate_name(first_start: usize, second_start: usize) -> ErrorKind {
+pub(crate) fn duplicate_name(first_start: usize, second_start: usize) -> ErrorKind<'static> {
     ErrorKind::DuplicateName { first_start, second_start }
 }
 #[cold]
 #[inline]
-pub(crate) fn no_stage() -> ErrorKind {
+pub(crate) fn no_stage() -> ErrorKind<'static> {
     ErrorKind::NoStage
 }
 #[cold]
 #[inline]
-pub(crate) fn json(arguments_start: usize) -> ErrorKind {
+pub(crate) fn json(arguments_start: usize) -> ErrorKind<'static> {
     ErrorKind::Json { arguments_start }
 }
 
@@ -94,10 +95,10 @@ struct ErrorInner {
 }
 
 #[cfg_attr(test, derive(Debug))]
-pub(crate) enum ErrorKind {
+pub(crate) enum ErrorKind<'a> {
     Other { msg: &'static str, pos: usize },
     Expected { word: &'static str, pos: usize },
-    ExpectedHereDocEnd { delim: Box<[u8]>, pos: usize },
+    ExpectedHereDocEnd { delim: Cow<'a, [u8]>, pos: usize },
     ExpectedQuote { quote: u8, found: Option<u8>, pos: usize },
     AtLeastOneArgument { instruction_start: usize },
     AtLeastTwoArguments { instruction_start: usize },
@@ -109,7 +110,7 @@ pub(crate) enum ErrorKind {
     Json { arguments_start: usize },
 }
 
-impl ErrorKind {
+impl ErrorKind<'_> {
     #[cold]
     #[inline(never)]
     pub(crate) fn into_error(self, p: &ParseIter<'_>) -> Error {
@@ -118,7 +119,7 @@ impl ErrorKind {
             Self::Expected { word, .. } => format!("expected {word}").into(),
             Self::ExpectedHereDocEnd { ref delim, .. } => format!(
                 "expected end of here-document ({}), but reached eof",
-                str::from_utf8(delim).unwrap()
+                str::from_utf8(delim).unwrap() // unwrap is okay since parsing APIs only accept &str
             )
             .into(),
             Self::ExpectedQuote { quote, found, .. } => {

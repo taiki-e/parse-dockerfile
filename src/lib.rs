@@ -111,13 +111,13 @@ mod track_size;
 mod error;
 
 use alloc::{borrow::Cow, boxed::Box, string::String, vec, vec::Vec};
-use core::{ops::Range, str};
+use core::{mem, ops::Range, str};
 use std::collections::HashMap;
 
 use smallvec::SmallVec;
 
 pub use self::error::Error;
-use self::error::{ErrorKind, Result};
+use self::error::{ErrorKind, InternalResult, Result};
 
 /// Parses dockerfile from the given `text`.
 #[allow(clippy::missing_panics_doc)]
@@ -1006,7 +1006,7 @@ impl<'a> Iterator for ParseIter<'a> {
     #[inline]
     fn next(&mut self) -> Option<Self::Item> {
         #[cold]
-        fn error(p: &mut ParseIter<'_>, e: ErrorKind) -> Error {
+        fn error(p: &mut ParseIter<'_>, e: ErrorKind<'_>) -> Error {
             let e = e.into_error(p);
             // avoid error loop
             p.s = &[];
@@ -1051,7 +1051,7 @@ impl core::iter::FusedIterator for ParseIter<'_> {}
 
 const DEFAULT_ESCAPE_BYTE: u8 = b'\\';
 
-fn parse_parser_directives(p: &mut ParseIter<'_>) -> Result<(), ErrorKind> {
+fn parse_parser_directives(p: &mut ParseIter<'_>) -> InternalResult<'static, ()> {
     while let Some((&b'#', s_next)) = p.s.split_first() {
         p.s = s_next;
         consume_whitespaces_no_line_continuation(&mut p.s);
@@ -1152,7 +1152,7 @@ fn parse_instruction<'a>(
     s: &mut &'a [u8],
     b: u8,
     s_next: &'a [u8],
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'a, Instruction<'a>> {
     let instruction_start = p.text.len() - s.len();
     *s = s_next;
     // NB: `token_slow` must be called after all `token` calls.
@@ -1359,7 +1359,7 @@ fn parse_arg<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"ARG",
@@ -1378,7 +1378,7 @@ fn parse_add_or_copy<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: &Keyword,
-) -> Result<(SmallVec<[Flag<'a>; 1]>, SmallVec<[Source<'a>; 1]>, UnescapedString<'a>), ErrorKind> {
+) -> InternalResult<'a, (SmallVec<[Flag<'a>; 1]>, SmallVec<[Source<'a>; 1]>, UnescapedString<'a>)> {
     debug_assert!(
         token_slow(&mut p.text[instruction.span.clone()].as_bytes(), b"ADD", p.escape_byte,)
             || token_slow(&mut p.text[instruction.span.clone()].as_bytes(), b"COPY", p.escape_byte,)
@@ -1412,16 +1412,36 @@ fn parse_add_or_copy<'a>(
     }
     for src in &mut src {
         let Source::Path(path) = src else { unreachable!() };
-        let mut val = path.value.as_bytes();
-        let Some(val_next) = val.strip_prefix(b"<<") else { continue };
-        let Some((delim, strip_tab, expand)) =
-            collect_here_doc_delim(&mut val, val_next, &path.value)?
-        else {
-            continue;
-        };
-        debug_assert!(val.is_empty()); // because of collect_space_separated_unescaped_consume_line
-        let (here_doc, span) = collect_here_doc(s, p.text, &delim, strip_tab)?;
-        *src = Source::HereDoc(HereDoc { span, expand, value: here_doc });
+        let full = mem::take(&mut path.value);
+        let mut tmp = full.as_bytes();
+        if let Some(tmp_next) = tmp.strip_prefix(b"<<") {
+            if let Some((delim, strip_tab, expand)) =
+                collect_here_doc_delim(&mut tmp, tmp_next, &full)?
+            {
+                let delim_start = 2 + usize::from(strip_tab);
+                // because of collect_space_separated_unescaped_consume_line
+                debug_assert!(
+                    tmp.is_empty()
+                        && (matches!(delim, Cow::Owned(..))
+                            || full.as_bytes()[delim_start..] == *delim)
+                );
+                let delim = match delim {
+                    Cow::Borrowed(_) => match full {
+                        Cow::Borrowed(v) => Cow::Borrowed(&v.as_bytes()[delim_start..]),
+                        Cow::Owned(v) => {
+                            let mut v = v.into_bytes();
+                            drop(v.drain(..delim_start));
+                            Cow::Owned(v)
+                        }
+                    },
+                    Cow::Owned(v) => Cow::Owned(v),
+                };
+                let (here_doc, span) = collect_here_doc(s, p.text, delim, strip_tab)?;
+                *src = Source::HereDoc(HereDoc { span, expand, value: here_doc });
+                continue;
+            }
+        }
+        path.value = full;
     }
     Ok((options, src, dest.unwrap()))
 }
@@ -1432,7 +1452,7 @@ fn parse_cmd<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"CMD",
@@ -1475,7 +1495,7 @@ fn parse_env<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"ENV",
@@ -1494,7 +1514,7 @@ fn parse_expose<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"EXPOSE",
@@ -1513,7 +1533,7 @@ fn parse_entrypoint<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"ENTRYPOINT",
@@ -1560,7 +1580,7 @@ fn parse_from<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"FROM",
@@ -1599,7 +1619,7 @@ fn parse_healthcheck<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"HEALTHCHECK",
@@ -1692,7 +1712,7 @@ fn parse_label<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"LABEL",
@@ -1711,7 +1731,7 @@ fn parse_maintainer<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"MAINTAINER",
@@ -1730,7 +1750,7 @@ fn parse_onbuild<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'a, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"ONBUILD",
@@ -1779,7 +1799,7 @@ fn parse_run<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'a, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"RUN",
@@ -1820,7 +1840,7 @@ fn parse_run<'a>(
                 consume_current_line(s, p.escape_byte);
                 let end = p.text.len() - s.len();
                 let arguments = trim_end(p.text, arguments_start, end);
-                let (here_doc, span) = collect_here_doc(s, p.text, &delim, strip_tab)?;
+                let (here_doc, span) = collect_here_doc(s, p.text, delim, strip_tab)?;
                 let here_doc = HereDoc { span, expand, value: here_doc };
                 return Ok(Instruction::Run(RunInstruction {
                     run: instruction,
@@ -1856,7 +1876,7 @@ fn parse_shell<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"SHELL",
@@ -1882,7 +1902,7 @@ fn parse_stopsignal<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"STOPSIGNAL",
@@ -1902,7 +1922,7 @@ fn parse_user<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"USER",
@@ -1922,7 +1942,7 @@ fn parse_volume<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"VOLUME",
@@ -1961,7 +1981,7 @@ fn parse_workdir<'a>(
     p: &mut ParseIter<'a>,
     s: &mut &'a [u8],
     instruction: Keyword,
-) -> Result<Instruction<'a>, ErrorKind> {
+) -> InternalResult<'static, Instruction<'a>> {
     debug_assert!(token_slow(
         &mut p.text[instruction.span.clone()].as_bytes(),
         b"WORKDIR",
@@ -2418,7 +2438,7 @@ fn collect_here_doc_delim<'a>(
     s: &mut &'a [u8],
     mut s_next: &'a [u8],
     start: &'a str,
-) -> Result<Option<(Cow<'a, [u8]>, bool, bool)>, ErrorKind> {
+) -> InternalResult<'static, Option<(Cow<'a, [u8]>, bool, bool)>> {
     let strip_tab = if let Some((&b'-', s_next_next)) = s_next.split_first() {
         s_next = s_next_next;
         true
@@ -2484,9 +2504,10 @@ fn collect_here_doc_delim<'a>(
 fn collect_here_doc<'a>(
     s: &mut &[u8],
     start: &'a str,
-    delim: &[u8],
+    delim_cow: Cow<'a, [u8]>,
     strip_tab: bool,
-) -> Result<(Cow<'a, str>, Span), ErrorKind> {
+) -> InternalResult<'a, (Cow<'a, str>, Span)> {
+    let delim: &[u8] = &delim_cow;
     let here_doc_start = start.len() - s.len();
     let mut current_start = here_doc_start;
     let mut buf = String::new();
@@ -2505,7 +2526,7 @@ fn collect_here_doc<'a>(
             }
         }
         if s.len() < delim.len() {
-            return Err(error::expected_here_doc_end(delim, start.len() - s.len()));
+            return Err(error::expected_here_doc_end(delim_cow, start.len() - s.len()));
         }
         if s.starts_with(delim) {
             let s_next = &s[delim.len()..];
@@ -2533,7 +2554,7 @@ fn collect_here_doc<'a>(
 // TODO: escaped/quoted space?
 #[inline]
 fn collect_space_separated_consume_line<'a, S: Store<UnescapedString<'a>>>(
-    s: &mut &[u8],
+    s: &mut &'a [u8],
     start: &'a str,
     escape_byte: u8,
 ) -> S {

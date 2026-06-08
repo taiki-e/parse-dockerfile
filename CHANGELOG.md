@@ -12,6 +12,10 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Specify the behavior of the iterator returned by `parse_iter` when `.next()` called after once `Some(Err(..))` returned, to return `None`. Previously, the behavior was unspecified, and the consistency of the results was not guaranteed.
+
+- Implement `FusedIterator` for the iterator returned by `parse_iter`.
+
 ## [0.1.7] - 2026-06-06
 
 - Fix bug in heredoc parsing.

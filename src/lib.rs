@@ -188,8 +188,8 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
 ///
 /// # Errors
 ///
-/// When `.next()` on the returned iterator has returned an error, the behavior
-/// of subsequent `.next()` calls is unspecified.
+/// When `.next()` on the returned iterator has returned an `Some(Err(..))`
+/// once, the subsequent `.next()` calls return `None`.
 pub fn parse_iter(text: &str) -> Result<ParseIter<'_>> {
     ParseIter::new(text)
 }
@@ -1005,12 +1005,21 @@ impl<'a> Iterator for ParseIter<'a> {
     type Item = Result<Instruction<'a>>;
     #[inline]
     fn next(&mut self) -> Option<Self::Item> {
+        #[cold]
+        fn error(p: &mut ParseIter<'_>, e: ErrorKind) -> Error {
+            let e = e.into_error(p);
+            // avoid error loop
+            p.s = &[];
+            p.has_stage = true;
+            e
+        }
+
         let p = self;
         let mut s = p.s;
         if let Some((&b, s_next)) = s.split_first() {
             let instruction = match parse_instruction(p, &mut s, b, s_next) {
                 Ok(i) => i,
-                Err(e) => return Some(Err(e.into_error(p))),
+                Err(e) => return Some(Err(error(p, e))),
             };
             match &instruction {
                 Instruction::From(..) => {
@@ -1019,11 +1028,10 @@ impl<'a> Iterator for ParseIter<'a> {
                 Instruction::Arg(..) => {}
                 instruction => {
                     if !p.has_stage {
-                        return Some(Err(error::expected(
-                            "FROM",
-                            instruction.instruction_span().start,
-                        )
-                        .into_error(p)));
+                        return Some(Err(error(
+                            p,
+                            error::expected("FROM", instruction.instruction_span().start),
+                        )));
                     }
                 }
             }
@@ -1033,11 +1041,13 @@ impl<'a> Iterator for ParseIter<'a> {
         }
         if !p.has_stage {
             // https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/dockerfile2llb/convert.go#L278
-            return Some(Err(error::no_stage().into_error(p)));
+            return Some(Err(error(p, error::no_stage())));
         }
         None
     }
 }
+
+impl core::iter::FusedIterator for ParseIter<'_> {}
 
 const DEFAULT_ESCAPE_BYTE: u8 = b'\\';
 

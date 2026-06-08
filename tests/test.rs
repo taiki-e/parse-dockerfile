@@ -106,7 +106,8 @@ INVALID",
                 Ok(_) => {}
                 Err(e) => {
                     assert_eq!(e.to_string(), expected_err);
-                    assert!(iter.next().unwrap().is_err()); // Currently usually it will continue to fail, but may change in the future.
+                    assert!(iter.next().is_none());
+                    assert!(iter.next().is_none()); // fused
                     break;
                 }
             }

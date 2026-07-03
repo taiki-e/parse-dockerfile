@@ -66,7 +66,7 @@ assert!(stages.next().is_none());
 <!-- omit in toc -->
 ### Optional features
 
-- **`serde`** — Implements [`serde::Serialize`] trait for parse-dockerfile types.
+- **`serde`** - Implements [`serde::Serialize`] trait for parse-dockerfile types.
 
 [`serde::Serialize`]: https://docs.rs/serde/latest/serde/trait.Serialize.html
 
@@ -1077,6 +1077,7 @@ impl core::iter::FusedIterator for ParseIter<'_> {}
 const DEFAULT_ESCAPE_BYTE: u8 = b'\\';
 
 fn parse_parser_directives(p: &mut ParseIter<'_>) -> InternalResult<'static, ()> {
+    // TODO: https://github.com/moby/buildkit/blob/v0.30/frontend/dockerfile/parser/parser.go#L540
     while let Some((&b'#', s_next)) = p.s.split_first() {
         p.s = s_next;
         consume_whitespaces_no_line_continuation(&mut p.s);

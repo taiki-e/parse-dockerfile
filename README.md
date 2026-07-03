@@ -301,7 +301,7 @@ See [documentation](https://docs.rs/parse-dockerfile) for more information on
 <!-- omit in toc -->
 ### Optional features
 
-- **`serde`** — Implements [`serde::Serialize`] trait for parse-dockerfile types.
+- **`serde`** - Implements [`serde::Serialize`] trait for parse-dockerfile types.
 
 [`serde::Serialize`]: https://docs.rs/serde/latest/serde/trait.Serialize.html
 

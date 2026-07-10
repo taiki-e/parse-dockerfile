@@ -9,14 +9,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 458,
-          "end": 461
+          "start": 404,
+          "end": 407
         }
       },
       "arguments": {
         "span": {
-          "start": 462,
-          "end": 517
+          "start": 408,
+          "end": 463
         },
         "value": "WINDOWS_BASE_IMAGE=mcr.microsoft.com/windows/servercore"
       }
@@ -25,14 +25,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 518,
-          "end": 521
+          "start": 464,
+          "end": 467
         }
       },
       "arguments": {
         "span": {
-          "start": 522,
-          "end": 553
+          "start": 468,
+          "end": 499
         },
         "value": "WINDOWS_BASE_IMAGE_TAG=ltsc2022"
       }
@@ -41,14 +41,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 554,
-          "end": 557
+          "start": 500,
+          "end": 503
         }
       },
       "arguments": {
         "span": {
-          "start": 558,
-          "end": 593
+          "start": 504,
+          "end": 539
         },
         "value": "BUSYBOX_VERSION=FRP-5007-g82accfc19"
       }
@@ -57,31 +57,31 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 662,
-          "end": 665
+          "start": 608,
+          "end": 611
         }
       },
       "arguments": {
         "span": {
-          "start": 666,
-          "end": 748
+          "start": 612,
+          "end": 694
         },
-        "value": "BUSYBOX_SHA256SUM=2d6fff0b2de5c034c92990d696c0d85a677b8a75931fa1ec30694fbf1f1df5c9"
+        "value": "BUSYBOX_SHA256SUM=8263abc2aee6b6f3b3c41aa704bee98987bf7b1ea9bce833f75c7bce89ec1602"
       }
     },
     {
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 750,
-          "end": 754
+          "start": 696,
+          "end": 700
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 755,
-          "end": 802
+          "start": 701,
+          "end": 748
         },
         "value": "${WINDOWS_BASE_IMAGE}:${WINDOWS_BASE_IMAGE_TAG}"
       },
@@ -91,16 +91,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 803,
-          "end": 806
+          "start": 749,
+          "end": 752
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 807,
-            "end": 835
+            "start": 753,
+            "end": 781
           },
           "value": "mkdir C:\\tmp && mkdir C:\\bin"
         }
@@ -111,14 +111,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 836,
-          "end": 839
+          "start": 782,
+          "end": 785
         }
       },
       "arguments": {
         "span": {
-          "start": 840,
-          "end": 855
+          "start": 786,
+          "end": 801
         },
         "value": "BUSYBOX_VERSION"
       }
@@ -127,14 +127,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 856,
-          "end": 859
+          "start": 802,
+          "end": 805
         }
       },
       "arguments": {
         "span": {
-          "start": 860,
-          "end": 877
+          "start": 806,
+          "end": 823
         },
         "value": "BUSYBOX_SHA256SUM"
       }
@@ -143,8 +143,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 878,
-          "end": 881
+          "start": 824,
+          "end": 827
         }
       },
       "options": [],
@@ -152,17 +152,17 @@
         {
           "path": {
             "span": {
-              "start": 882,
-              "end": 985
+              "start": 828,
+              "end": 931
             },
-            "value": "https://github.com/moby/busybox/releases/download/${BUSYBOX_VERSION}/busybox-w32-${BUSYBOX_VERSION}.exe"
+            "value": "https://github.com/moby/busybox/releases/download/${BUSYBOX_VERSION}/busybox-w64-${BUSYBOX_VERSION}.exe"
           }
         }
       ],
       "dest": {
         "span": {
-          "start": 986,
-          "end": 1002
+          "start": 932,
+          "end": 948
         },
         "value": "/bin/busybox.exe"
       }
@@ -171,16 +171,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1003,
-          "end": 1006
+          "start": 949,
+          "end": 952
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1007,
-            "end": 1173
+            "start": 953,
+            "end": 1119
           },
           "value": "powershell \\\n    if ((Get-FileHash -Path /bin/busybox.exe -Algorithm SHA256).Hash -ne $Env:BUSYBOX_SHA256SUM) { \\\n        Throw \\\"Checksum validation failed\\\" \\\n    }"
         }
@@ -191,16 +191,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1175,
-          "end": 1178
+          "start": 1121,
+          "end": 1124
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1179,
-            "end": 1207
+            "start": 1125,
+            "end": 1153
           },
           "value": "setx /M PATH \"C:\\bin;%PATH%\""
         }
@@ -211,16 +211,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1208,
-          "end": 1211
+          "start": 1154,
+          "end": 1157
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1212,
-            "end": 1293
+            "start": 1158,
+            "end": 1239
           },
           "value": "powershell busybox.exe --list ^|%{$nul = cmd /c mklink C:\\bin\\$_.exe busybox.exe}"
         }
@@ -231,21 +231,21 @@
       "kind": "CMD",
       "cmd": {
         "span": {
-          "start": 1294,
-          "end": 1297
+          "start": 1240,
+          "end": 1243
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 1298,
-            "end": 1304
+            "start": 1244,
+            "end": 1250
           },
           "value": [
             {
               "span": {
-                "start": 1300,
-                "end": 1302
+                "start": 1246,
+                "end": 1248
               },
               "value": "sh"
             }

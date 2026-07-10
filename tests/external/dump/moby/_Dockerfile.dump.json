@@ -27,7 +27,7 @@
           "start": 34,
           "end": 51
         },
-        "value": "GO_VERSION=1.26.3"
+        "value": "GO_VERSION=1.26.4"
       }
     },
     {
@@ -91,7 +91,7 @@
           "start": 389,
           "end": 414
         },
-        "value": "DOCKERCLI_VERSION=v29.4.0"
+        "value": "DOCKERCLI_VERSION=v29.5.3"
       }
     },
     {
@@ -155,7 +155,7 @@
           "start": 717,
           "end": 738
         },
-        "value": "BUILDX_VERSION=0.34.1"
+        "value": "BUILDX_VERSION=0.35.0"
       }
     },
     {
@@ -171,7 +171,7 @@
           "start": 821,
           "end": 843
         },
-        "value": "COMPOSE_VERSION=v5.1.3"
+        "value": "COMPOSE_VERSION=v5.1.4"
       }
     },
     {
@@ -1117,7 +1117,7 @@
           "start": 5092,
           "end": 5113
         },
-        "value": "DELVE_VERSION=v1.26.1"
+        "value": "DELVE_VERSION=v1.26.3"
       }
     },
     {
@@ -1549,7 +1549,7 @@
           "start": 6444,
           "end": 6469
         },
-        "value": "CONTAINERD_VERSION=v2.2.3"
+        "value": "CONTAINERD_VERSION=v2.2.4"
       }
     },
     {
@@ -2752,7 +2752,7 @@
           "start": 10859,
           "end": 10878
         },
-        "value": "RUNC_VERSION=v1.3.5"
+        "value": "RUNC_VERSION=v1.3.6"
       }
     },
     {
@@ -3565,7 +3565,7 @@
           "start": 13245,
           "end": 13271
         },
-        "value": "ROOTLESSKIT_VERSION=v3.0.0"
+        "value": "ROOTLESSKIT_VERSION=v3.0.1"
       }
     },
     {

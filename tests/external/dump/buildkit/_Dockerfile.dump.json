@@ -27,7 +27,7 @@
           "start": 48,
           "end": 67
         },
-        "value": "RUNC_VERSION=v1.3.5"
+        "value": "RUNC_VERSION=v1.3.6"
       }
     },
     {
@@ -43,7 +43,7 @@
           "start": 72,
           "end": 97
         },
-        "value": "CONTAINERD_VERSION=v2.2.3"
+        "value": "CONTAINERD_VERSION=v2.2.4"
       }
     },
     {
@@ -59,7 +59,7 @@
           "start": 189,
           "end": 221
         },
-        "value": "CONTAINERD_ALT_VERSION_21=v2.1.7"
+        "value": "CONTAINERD_ALT_VERSION_21=v2.1.8"
       }
     },
     {
@@ -75,7 +75,7 @@
           "start": 226,
           "end": 259
         },
-        "value": "CONTAINERD_ALT_VERSION_17=v1.7.31"
+        "value": "CONTAINERD_ALT_VERSION_17=v1.7.32"
       }
     },
     {
@@ -107,7 +107,7 @@
           "start": 292,
           "end": 318
         },
-        "value": "ROOTLESSKIT_VERSION=v3.0.0"
+        "value": "ROOTLESSKIT_VERSION=v3.0.1"
       }
     },
     {
@@ -155,7 +155,7 @@
           "start": 385,
           "end": 407
         },
-        "value": "NERDCTL_VERSION=v2.2.1"
+        "value": "NERDCTL_VERSION=v2.3.1"
       }
     },
     {
@@ -267,7 +267,7 @@
           "start": 618,
           "end": 639
         },
-        "value": "DELVE_VERSION=v1.26.0"
+        "value": "DELVE_VERSION=v1.26.3"
       }
     },
     {
@@ -283,7 +283,7 @@
           "start": 644,
           "end": 663
         },
-        "value": "DOCKER_VERSION=29.4"
+        "value": "DOCKER_VERSION=29.5"
       }
     },
     {
@@ -315,7 +315,7 @@
           "start": 709,
           "end": 730
         },
-        "value": "BUILDX_VERSION=0.31.1"
+        "value": "BUILDX_VERSION=0.34.1"
       }
     },
     {
@@ -2418,7 +2418,7 @@
               "start": 7408,
               "end": 7517
             },
-            "value": "tonistiigi/binfmt:buildkit-v10.2.1-64@sha256:4cf4c0ad4919b18996362536883de02420c1010654d3c2a2b63e9b72600fa3a9"
+            "value": "tonistiigi/binfmt:buildkit-v10.2.3-66@sha256:6014c1e52b8e51a67fbf76f691ffbe20ac0204c31c2f086df3e8ef3ce134b488"
           }
         }
       ],

@@ -117,10 +117,9 @@ impl ErrorKind<'_> {
         let msg = match self {
             Self::Other { msg, .. } => msg.into(),
             Self::Expected { word, .. } => format!("expected {word}").into(),
-            // TODO: Truncate if the delim is large.
             Self::ExpectedHereDocEnd { ref delim, .. } => format!(
                 "expected end of here-document ({}), but reached eof",
-                str::from_utf8(delim).unwrap() // unwrap is okay since parsing APIs only accept &str
+                truncated_str(str::from_utf8(delim).unwrap()) // unwrap is okay since parsing APIs only accept &str
             )
             .into(),
             Self::ExpectedQuote { quote, found, .. } => {
@@ -161,8 +160,9 @@ impl ErrorKind<'_> {
                     _ => unreachable!(),
                 }
             }
-            // TODO: Truncate if the delim is large.
-            Self::DuplicateName { ref name, .. } => format!("duplicate stage name '{name}'").into(),
+            Self::DuplicateName { ref name, .. } => {
+                format!("duplicate stage name '{}'", truncated_str(name)).into()
+            }
             Self::NoStage => "expected at least one FROM instruction".into(),
             Self::Json { .. } => "invalid JSON".into(),
             Self::InvalidEscape { escape_start } => {
@@ -243,3 +243,16 @@ const fn bytecount_naive(needle: u8, mut s: &[u8]) -> usize {
     n
 }
 use self::bytecount_naive as bytecount;
+
+fn truncated_str(s: &str) -> &str {
+    if let Some((i, _)) = s.char_indices().nth(64) { &s[..i] } else { s }
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn truncated_str() {
+        assert_eq!(super::truncated_str("short value"), "short value");
+        assert_eq!(super::truncated_str(&"あ".repeat(65)), &"あ".repeat(64));
+    }
+}

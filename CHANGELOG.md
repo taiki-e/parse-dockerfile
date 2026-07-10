@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.1.8] - 2026-07-10
+
 - Specify the behavior of the iterator returned by `parse_iter` when `.next()` called after once `Some(Err(..))` returned, to return `None`. Previously, the behavior was unspecified, and the consistency of the results was not guaranteed. ([bbb6d15](https://github.com/taiki-e/parse-dockerfile/commit/bbb6d159489deaaafdb410b606e33b7e88453a91))
 
 - Implement `FusedIterator` for the iterator returned by `parse_iter`. ([bbb6d15](https://github.com/taiki-e/parse-dockerfile/commit/bbb6d159489deaaafdb410b606e33b7e88453a91))
@@ -58,7 +60,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 Initial release
 
-[Unreleased]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.7...HEAD
+[Unreleased]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.8...HEAD
+[0.1.8]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.4...v0.1.5

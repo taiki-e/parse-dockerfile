@@ -27,7 +27,7 @@
           "start": 34,
           "end": 49
         },
-        "value": "GO_VERSION=1.23"
+        "value": "GO_VERSION=1.26"
       }
     },
     {
@@ -41,33 +41,49 @@
       "arguments": {
         "span": {
           "start": 54,
-          "end": 70
+          "end": 73
         },
-        "value": "XX_VERSION=1.6.1"
+        "value": "ALPINE_VERSION=3.23"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 74,
+          "end": 77
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 78,
+          "end": 94
+        },
+        "value": "XX_VERSION=1.9.0"
       }
     },
     {
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 72,
-          "end": 76
+          "start": 96,
+          "end": 100
         }
       },
       "options": [
         {
-          "flag_start": 77,
+          "flag_start": 101,
           "name": {
             "span": {
-              "start": 79,
-              "end": 87
+              "start": 103,
+              "end": 111
             },
             "value": "platform"
           },
           "value": {
             "span": {
-              "start": 88,
-              "end": 102
+              "start": 112,
+              "end": 126
             },
             "value": "$BUILDPLATFORM"
           }
@@ -75,22 +91,22 @@
       ],
       "image": {
         "span": {
-          "start": 103,
-          "end": 130
+          "start": 127,
+          "end": 154
         },
         "value": "tonistiigi/xx:${XX_VERSION}"
       },
       "as_": [
         {
           "span": {
-            "start": 131,
-            "end": 133
+            "start": 155,
+            "end": 157
           }
         },
         {
           "span": {
-            "start": 134,
-            "end": 136
+            "start": 158,
+            "end": 160
           },
           "value": "xx"
         }
@@ -100,24 +116,24 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 138,
-          "end": 142
+          "start": 162,
+          "end": 166
         }
       },
       "options": [
         {
-          "flag_start": 143,
+          "flag_start": 167,
           "name": {
             "span": {
-              "start": 145,
-              "end": 153
+              "start": 169,
+              "end": 177
             },
             "value": "platform"
           },
           "value": {
             "span": {
-              "start": 154,
-              "end": 168
+              "start": 178,
+              "end": 192
             },
             "value": "$BUILDPLATFORM"
           }
@@ -125,22 +141,22 @@
       ],
       "image": {
         "span": {
-          "start": 169,
-          "end": 196
+          "start": 193,
+          "end": 237
         },
-        "value": "golang:${GO_VERSION}-alpine"
+        "value": "golang:${GO_VERSION}-alpine${ALPINE_VERSION}"
       },
       "as_": [
         {
           "span": {
-            "start": 197,
-            "end": 199
+            "start": 238,
+            "end": 240
           }
         },
         {
           "span": {
-            "start": 200,
-            "end": 204
+            "start": 241,
+            "end": 245
           },
           "value": "base"
         }
@@ -150,16 +166,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 205,
-          "end": 208
+          "start": 246,
+          "end": 249
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 209,
-            "end": 231
+            "start": 250,
+            "end": 272
           },
           "value": "apk add --no-cache git"
         }
@@ -170,24 +186,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 232,
-          "end": 236
+          "start": 273,
+          "end": 277
         }
       },
       "options": [
         {
-          "flag_start": 237,
+          "flag_start": 278,
           "name": {
             "span": {
-              "start": 239,
-              "end": 243
+              "start": 280,
+              "end": 284
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 244,
-              "end": 246
+              "start": 285,
+              "end": 287
             },
             "value": "xx"
           }
@@ -197,8 +213,8 @@
         {
           "path": {
             "span": {
-              "start": 247,
-              "end": 248
+              "start": 288,
+              "end": 289
             },
             "value": "/"
           }
@@ -206,8 +222,8 @@
       ],
       "dest": {
         "span": {
-          "start": 249,
-          "end": 250
+          "start": 290,
+          "end": 291
         },
         "value": "/"
       }
@@ -216,14 +232,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 251,
-          "end": 258
+          "start": 292,
+          "end": 299
         }
       },
       "arguments": {
         "span": {
-          "start": 259,
-          "end": 263
+          "start": 300,
+          "end": 304
         },
         "value": "/src"
       }
@@ -232,29 +248,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 265,
-          "end": 269
+          "start": 306,
+          "end": 310
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 270,
-          "end": 274
+          "start": 311,
+          "end": 315
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 275,
-            "end": 277
+            "start": 316,
+            "end": 318
           }
         },
         {
           "span": {
-            "start": 278,
-            "end": 283
+            "start": 319,
+            "end": 324
           },
           "value": "build"
         }
@@ -264,14 +280,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 284,
-          "end": 287
+          "start": 325,
+          "end": 328
         }
       },
       "arguments": {
         "span": {
-          "start": 288,
-          "end": 302
+          "start": 329,
+          "end": 343
         },
         "value": "TARGETPLATFORM"
       }
@@ -280,58 +296,58 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 303,
-          "end": 306
+          "start": 344,
+          "end": 347
         }
       },
       "options": [
         {
-          "flag_start": 307,
+          "flag_start": 348,
           "name": {
             "span": {
-              "start": 309,
-              "end": 314
+              "start": 350,
+              "end": 355
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 315,
-              "end": 323
+              "start": 356,
+              "end": 364
             },
             "value": "target=."
           }
         },
         {
-          "flag_start": 324,
+          "flag_start": 365,
           "name": {
             "span": {
-              "start": 326,
-              "end": 331
+              "start": 367,
+              "end": 372
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 332,
-              "end": 361
+              "start": 373,
+              "end": 402
             },
             "value": "target=/go/pkg/mod,type=cache"
           }
         },
         {
-          "flag_start": 368,
+          "flag_start": 409,
           "name": {
             "span": {
-              "start": 370,
-              "end": 375
+              "start": 411,
+              "end": 416
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 376,
-              "end": 406
+              "start": 417,
+              "end": 447
             },
             "value": "target=/root/.cache,type=cache"
           }
@@ -340,8 +356,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 413,
-            "end": 430
+            "start": 454,
+            "end": 471
           },
           "value": "xx-go build ./..."
         }
@@ -352,29 +368,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 432,
-          "end": 436
+          "start": 473,
+          "end": 477
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 437,
-          "end": 441
+          "start": 478,
+          "end": 482
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 442,
-            "end": 444
+            "start": 483,
+            "end": 485
           }
         },
         {
           "span": {
-            "start": 445,
-            "end": 449
+            "start": 486,
+            "end": 490
           },
           "value": "test"
         }
@@ -384,14 +400,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 450,
-          "end": 453
+          "start": 491,
+          "end": 494
         }
       },
       "arguments": {
         "span": {
-          "start": 454,
-          "end": 463
+          "start": 495,
+          "end": 504
         },
         "value": "TESTFLAGS"
       }
@@ -400,58 +416,58 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 464,
-          "end": 467
+          "start": 505,
+          "end": 508
         }
       },
       "options": [
         {
-          "flag_start": 468,
+          "flag_start": 509,
           "name": {
             "span": {
-              "start": 470,
-              "end": 475
+              "start": 511,
+              "end": 516
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 476,
-              "end": 484
+              "start": 517,
+              "end": 525
             },
             "value": "target=."
           }
         },
         {
-          "flag_start": 485,
+          "flag_start": 526,
           "name": {
             "span": {
-              "start": 487,
-              "end": 492
+              "start": 528,
+              "end": 533
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 493,
-              "end": 522
+              "start": 534,
+              "end": 563
             },
             "value": "target=/go/pkg/mod,type=cache"
           }
         },
         {
-          "flag_start": 529,
+          "flag_start": 570,
           "name": {
             "span": {
-              "start": 531,
-              "end": 536
+              "start": 572,
+              "end": 577
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 537,
-              "end": 567
+              "start": 578,
+              "end": 608
             },
             "value": "target=/root/.cache,type=cache"
           }
@@ -460,8 +476,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 574,
-            "end": 670
+            "start": 615,
+            "end": 711
           },
           "value": "CGO_ENABLED=0 xx-go test -v -coverprofile=/tmp/coverage.txt -covermode=atomic ${TESTFLAGS} ./..."
         }
@@ -472,29 +488,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 672,
-          "end": 676
+          "start": 713,
+          "end": 717
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 677,
-          "end": 681
+          "start": 718,
+          "end": 722
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 682,
-            "end": 684
+            "start": 723,
+            "end": 725
           }
         },
         {
           "span": {
-            "start": 685,
-            "end": 696
+            "start": 726,
+            "end": 737
           },
           "value": "test-noroot"
         }
@@ -504,16 +520,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 697,
-          "end": 700
+          "start": 738,
+          "end": 741
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 701,
-            "end": 736
+            "start": 742,
+            "end": 777
           },
           "value": "mkdir /go/pkg && chmod 0777 /go/pkg"
         }
@@ -524,14 +540,14 @@
       "kind": "USER",
       "user": {
         "span": {
-          "start": 737,
-          "end": 741
+          "start": 778,
+          "end": 782
         }
       },
       "arguments": {
         "span": {
-          "start": 742,
-          "end": 751
+          "start": 783,
+          "end": 792
         },
         "value": "1000:1000"
       }
@@ -540,41 +556,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 752,
-          "end": 755
+          "start": 793,
+          "end": 796
         }
       },
       "options": [
         {
-          "flag_start": 756,
+          "flag_start": 797,
           "name": {
             "span": {
-              "start": 758,
-              "end": 763
+              "start": 799,
+              "end": 804
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 764,
-              "end": 772
+              "start": 805,
+              "end": 813
             },
             "value": "target=."
           }
         },
         {
-          "flag_start": 779,
+          "flag_start": 820,
           "name": {
             "span": {
-              "start": 781,
-              "end": 786
+              "start": 822,
+              "end": 827
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 787,
-              "end": 816
+              "start": 828,
+              "end": 857
             },
             "value": "target=/tmp/.cache,type=cache"
           }
@@ -583,8 +599,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 823,
-            "end": 927
+            "start": 864,
+            "end": 968
           },
           "value": "CGO_ENABLED=0 GOCACHE=/tmp/gocache xx-go test -v -coverprofile=/tmp/coverage.txt -covermode=atomic ./..."
         }
@@ -595,29 +611,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 929,
-          "end": 933
+          "start": 970,
+          "end": 974
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 934,
-          "end": 941
+          "start": 975,
+          "end": 982
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 942,
-            "end": 944
+            "start": 983,
+            "end": 985
           }
         },
         {
           "span": {
-            "start": 945,
-            "end": 958
+            "start": 986,
+            "end": 999
           },
           "value": "test-coverage"
         }
@@ -627,24 +643,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 959,
-          "end": 963
+          "start": 1000,
+          "end": 1004
         }
       },
       "options": [
         {
-          "flag_start": 964,
+          "flag_start": 1005,
           "name": {
             "span": {
-              "start": 966,
-              "end": 970
+              "start": 1007,
+              "end": 1011
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 971,
-              "end": 975
+              "start": 1012,
+              "end": 1016
             },
             "value": "test"
           }
@@ -654,8 +670,8 @@
         {
           "path": {
             "span": {
-              "start": 976,
-              "end": 993
+              "start": 1017,
+              "end": 1034
             },
             "value": "/tmp/coverage.txt"
           }
@@ -663,8 +679,8 @@
       ],
       "dest": {
         "span": {
-          "start": 994,
-          "end": 1012
+          "start": 1035,
+          "end": 1053
         },
         "value": "/coverage-root.txt"
       }
@@ -673,29 +689,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1014,
-          "end": 1018
+          "start": 1055,
+          "end": 1059
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1019,
-          "end": 1026
+          "start": 1060,
+          "end": 1067
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 1027,
-            "end": 1029
+            "start": 1068,
+            "end": 1070
           }
         },
         {
           "span": {
-            "start": 1030,
-            "end": 1050
+            "start": 1071,
+            "end": 1091
           },
           "value": "test-noroot-coverage"
         }
@@ -705,24 +721,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1051,
-          "end": 1055
+          "start": 1092,
+          "end": 1096
         }
       },
       "options": [
         {
-          "flag_start": 1056,
+          "flag_start": 1097,
           "name": {
             "span": {
-              "start": 1058,
-              "end": 1062
+              "start": 1099,
+              "end": 1103
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 1063,
-              "end": 1074
+              "start": 1104,
+              "end": 1115
             },
             "value": "test-noroot"
           }
@@ -732,8 +748,8 @@
         {
           "path": {
             "span": {
-              "start": 1075,
-              "end": 1092
+              "start": 1116,
+              "end": 1133
             },
             "value": "/tmp/coverage.txt"
           }
@@ -741,8 +757,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1093,
-          "end": 1113
+          "start": 1134,
+          "end": 1154
         },
         "value": "/coverage-noroot.txt"
       }
@@ -751,15 +767,626 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1115,
-          "end": 1119
+          "start": 1156,
+          "end": 1160
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1120,
-          "end": 1125
+          "start": 1161,
+          "end": 1165
+        },
+        "value": "base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1166,
+            "end": 1168
+          }
+        },
+        {
+          "span": {
+            "start": 1169,
+            "end": 1179
+          },
+          "value": "bench-base"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1180,
+          "end": 1187
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1188,
+          "end": 1192
+        },
+        "value": "/app"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1193,
+          "end": 1196
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1197,
+          "name": {
+            "span": {
+              "start": 1199,
+              "end": 1204
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1205,
+              "end": 1247
+            },
+            "value": "type=bind,source=go.mod,target=/app/go.mod"
+          }
+        },
+        {
+          "flag_start": 1254,
+          "name": {
+            "span": {
+              "start": 1256,
+              "end": 1261
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1262,
+              "end": 1304
+            },
+            "value": "type=bind,source=go.sum,target=/app/go.sum"
+          }
+        },
+        {
+          "flag_start": 1311,
+          "name": {
+            "span": {
+              "start": 1313,
+              "end": 1318
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1319,
+              "end": 1349
+            },
+            "value": "type=cache,target=/root/.cache"
+          }
+        },
+        {
+          "flag_start": 1356,
+          "name": {
+            "span": {
+              "start": 1358,
+              "end": 1363
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1364,
+              "end": 1393
+            },
+            "value": "type=cache,target=/go/pkg/mod"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1399,
+            "end": 1399
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1400,
+            "end": 1494
+          },
+          "expand": true,
+          "value": "  set -ex\n  apk add --no-cache rsync\n  go install tool github.com/jstemmer/go-junit-report/v2\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 1499,
+          "end": 1503
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 1504,
+          "end": 1514
+        },
+        "value": "bench-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 1515,
+            "end": 1517
+          }
+        },
+        {
+          "span": {
+            "start": 1518,
+            "end": 1523
+          },
+          "value": "bench"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 1524,
+          "end": 1531
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1532,
+          "end": 1536
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 1537,
+          "end": 1540
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 1541,
+          "end": 1556
+        },
+        "value": "BENCH_FILE_SIZE"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 1557,
+          "end": 1560
+        }
+      },
+      "options": [
+        {
+          "flag_start": 1561,
+          "name": {
+            "span": {
+              "start": 1563,
+              "end": 1568
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1569,
+              "end": 1577
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 1584,
+          "name": {
+            "span": {
+              "start": 1586,
+              "end": 1591
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1592,
+              "end": 1621
+            },
+            "value": "target=/go/pkg/mod,type=cache"
+          }
+        },
+        {
+          "flag_start": 1628,
+          "name": {
+            "span": {
+              "start": 1630,
+              "end": 1635
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 1636,
+              "end": 1666
+            },
+            "value": "target=/root/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 1672,
+            "end": 1672
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 1673,
+            "end": 2063
+          },
+          "expand": true,
+          "value": "  set -ex\n  set -o pipefail\n  mkdir -p /tmp/bench-results\n  CGO_ENABLED=0 xx-go test -benchmem -bench=. -run=^$ . 2>&1 | tee /tmp/fsutil.log\n  go-junit-report -in /tmp/fsutil.log -out /tmp/bench-results/fsutil.junit.xml\n  cd bench\n  CGO_ENABLED=0 xx-go test -benchmem -bench=. -run=^$ . 2>&1 | tee /tmp/bench.log\n  go-junit-report -in /tmp/bench.log -out /tmp/bench-results/bench.junit.xml\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2068,
+          "end": 2072
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2073,
+          "end": 2083
+        },
+        "value": "bench-base"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2084,
+            "end": 2086
+          }
+        },
+        {
+          "span": {
+            "start": 2087,
+            "end": 2099
+          },
+          "value": "bench-noroot"
+        }
+      ]
+    },
+    {
+      "kind": "WORKDIR",
+      "workdir": {
+        "span": {
+          "start": 2100,
+          "end": 2107
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2108,
+          "end": 2112
+        },
+        "value": "/src"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2113,
+          "end": 2116
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2117,
+            "end": 2155
+          },
+          "value": "mkdir -p /go/pkg && chmod 0777 /go/pkg"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "USER",
+      "user": {
+        "span": {
+          "start": 2156,
+          "end": 2160
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2161,
+          "end": 2170
+        },
+        "value": "1000:1000"
+      }
+    },
+    {
+      "kind": "ARG",
+      "arg": {
+        "span": {
+          "start": 2171,
+          "end": 2174
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 2175,
+          "end": 2190
+        },
+        "value": "BENCH_FILE_SIZE"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 2191,
+          "end": 2194
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2195,
+          "name": {
+            "span": {
+              "start": 2197,
+              "end": 2202
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 2203,
+              "end": 2211
+            },
+            "value": "target=."
+          }
+        },
+        {
+          "flag_start": 2218,
+          "name": {
+            "span": {
+              "start": 2220,
+              "end": 2225
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 2226,
+              "end": 2255
+            },
+            "value": "target=/tmp/.cache,type=cache"
+          }
+        }
+      ],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 2261,
+            "end": 2261
+          },
+          "value": ""
+        }
+      },
+      "here_docs": [
+        {
+          "span": {
+            "start": 2262,
+            "end": 2694
+          },
+          "expand": true,
+          "value": "  set -ex\n  set -o pipefail\n  mkdir -p /tmp/bench-results\n  CGO_ENABLED=0 GOCACHE=/tmp/gocache xx-go test -bench=. -benchmem -run=^$ . 2>&1 | tee /tmp/fsutil.log\n  go-junit-report -in /tmp/fsutil.log -out /tmp/bench-results/fsutil.junit.xml\n  cd bench\n  CGO_ENABLED=0 GOCACHE=/tmp/gocache xx-go test -bench=. -benchmem -run=^$ . 2>&1 | tee /tmp/bench.log\n  go-junit-report -in /tmp/bench.log -out /tmp/bench-results/bench.junit.xml\n"
+        }
+      ]
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2699,
+          "end": 2703
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2704,
+          "end": 2711
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2712,
+            "end": 2714
+          }
+        },
+        {
+          "span": {
+            "start": 2715,
+            "end": 2733
+          },
+          "value": "bench-root-results"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2734,
+          "end": 2738
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2739,
+          "name": {
+            "span": {
+              "start": 2741,
+              "end": 2745
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2746,
+              "end": 2751
+            },
+            "value": "bench"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2752,
+              "end": 2770
+            },
+            "value": "/tmp/bench-results"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2771,
+          "end": 2782
+        },
+        "value": "/bench-root"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2784,
+          "end": 2788
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2789,
+          "end": 2796
+        },
+        "value": "scratch"
+      },
+      "as_": [
+        {
+          "span": {
+            "start": 2797,
+            "end": 2799
+          }
+        },
+        {
+          "span": {
+            "start": 2800,
+            "end": 2820
+          },
+          "value": "bench-noroot-results"
+        }
+      ]
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 2821,
+          "end": 2825
+        }
+      },
+      "options": [
+        {
+          "flag_start": 2826,
+          "name": {
+            "span": {
+              "start": 2828,
+              "end": 2832
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 2833,
+              "end": 2845
+            },
+            "value": "bench-noroot"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 2846,
+              "end": 2864
+            },
+            "value": "/tmp/bench-results"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 2865,
+          "end": 2878
+        },
+        "value": "/bench-noroot"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 2880,
+          "end": 2884
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 2885,
+          "end": 2890
         },
         "value": "build"
       },

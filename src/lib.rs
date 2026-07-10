@@ -1859,6 +1859,7 @@ fn parse_run<'a>(
     // https://docs.docker.com/reference/dockerfile/#here-documents
     // At least 5, <<E\nE
     if s.len() >= 5 {
+        // TODO: here-doc is not always start from first.
         if let Some(s_next) = s.strip_prefix(b"<<") {
             if let Some((delim, strip_tab, expand)) = collect_here_doc_delim(s, s_next, p.text)? {
                 // TODO: skip space

@@ -27,7 +27,7 @@
           "start": 34,
           "end": 51
         },
-        "value": "GO_VERSION=1.26.4"
+        "value": "GO_VERSION=1.26.5"
       }
     },
     {
@@ -218,38 +218,38 @@
       "arguments": {
         "span": {
           "start": 693,
-          "end": 721
+          "end": 706
         },
-        "value": "/go/src/github.com/moby/moby"
+        "value": "/usr/src/moby"
       }
     },
     {
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 723,
-          "end": 727
+          "start": 708,
+          "end": 712
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 728,
-          "end": 732
+          "start": 713,
+          "end": 717
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 733,
-            "end": 735
+            "start": 718,
+            "end": 720
           }
         },
         {
           "span": {
-            "start": 736,
-            "end": 739
+            "start": 721,
+            "end": 724
           },
           "value": "src"
         }
@@ -259,14 +259,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 740,
-          "end": 747
+          "start": 725,
+          "end": 732
         }
       },
       "arguments": {
         "span": {
-          "start": 748,
-          "end": 752
+          "start": 733,
+          "end": 737
         },
         "value": "/out"
       }
@@ -275,8 +275,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 753,
-          "end": 757
+          "start": 738,
+          "end": 742
         }
       },
       "options": [],
@@ -284,8 +284,8 @@
         {
           "path": {
             "span": {
-              "start": 758,
-              "end": 759
+              "start": 743,
+              "end": 744
             },
             "value": "."
           }
@@ -293,8 +293,8 @@
       ],
       "dest": {
         "span": {
-          "start": 760,
-          "end": 761
+          "start": 745,
+          "end": 746
         },
         "value": "."
       }
@@ -303,16 +303,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 762,
-          "end": 765
+          "start": 747,
+          "end": 750
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 771,
-            "end": 771
+            "start": 756,
+            "end": 756
           },
           "value": ""
         }
@@ -320,8 +320,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 772,
-            "end": 921
+            "start": 757,
+            "end": 906
           },
           "expand": true,
           "value": "  set -ex\n  git config --global user.email \"moby@example.com\"\n  git config --global user.name \"moby\"\n  git init .\n  git add .\n  git commit -m 'init'\n"
@@ -332,29 +332,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 926,
-          "end": 930
+          "start": 911,
+          "end": 915
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 931,
-          "end": 935
+          "start": 916,
+          "end": 920
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 936,
-            "end": 938
+            "start": 921,
+            "end": 923
           }
         },
         {
           "span": {
-            "start": 939,
-            "end": 944
+            "start": 924,
+            "end": 929
           },
           "value": "tools"
         }
@@ -364,41 +364,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 945,
-          "end": 948
+          "start": 930,
+          "end": 933
         }
       },
       "options": [
         {
-          "flag_start": 949,
+          "flag_start": 934,
           "name": {
             "span": {
-              "start": 951,
-              "end": 956
+              "start": 936,
+              "end": 941
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 957,
-              "end": 989
+              "start": 942,
+              "end": 974
             },
             "value": "from=src,source=/out,target=.,rw"
           }
         },
         {
-          "flag_start": 996,
+          "flag_start": 981,
           "name": {
             "span": {
-              "start": 998,
-              "end": 1003
+              "start": 983,
+              "end": 988
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1004,
-              "end": 1043
+              "start": 989,
+              "end": 1028
             },
             "value": "type=cache,target=/root/.cache/go-build"
           }
@@ -407,8 +407,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 1049,
-            "end": 1049
+            "start": 1034,
+            "end": 1034
           },
           "value": ""
         }
@@ -416,8 +416,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 1050,
-            "end": 1201
+            "start": 1035,
+            "end": 1186
           },
           "expand": true,
           "value": "  set -ex\n  # install all tools defined in go.mod\n  go install -v tool\n  go build -v \\\n    -o /usr/bin/pluginrpc-gen \\\n    ./pkg/plugins/pluginrpc-gen\n"
@@ -428,29 +428,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1206,
-          "end": 1210
+          "start": 1191,
+          "end": 1195
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1211,
-          "end": 1216
+          "start": 1196,
+          "end": 1201
         },
         "value": "tools"
       },
       "as_": [
         {
           "span": {
-            "start": 1217,
-            "end": 1219
+            "start": 1202,
+            "end": 1204
           }
         },
         {
           "span": {
-            "start": 1220,
-            "end": 1229
+            "start": 1205,
+            "end": 1214
           },
           "value": "generated"
         }
@@ -460,14 +460,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1230,
-          "end": 1233
+          "start": 1215,
+          "end": 1218
         }
       },
       "arguments": {
         "span": {
-          "start": 1234,
-          "end": 1249
+          "start": 1219,
+          "end": 1234
         },
         "value": "GO111MODULE=off"
       }
@@ -476,24 +476,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1250,
-          "end": 1253
+          "start": 1235,
+          "end": 1238
         }
       },
       "options": [
         {
-          "flag_start": 1254,
+          "flag_start": 1239,
           "name": {
             "span": {
-              "start": 1256,
-              "end": 1261
+              "start": 1241,
+              "end": 1246
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1262,
-              "end": 1294
+              "start": 1247,
+              "end": 1279
             },
             "value": "from=src,source=/out,target=.,rw"
           }
@@ -502,8 +502,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 1300,
-            "end": 1300
+            "start": 1285,
+            "end": 1285
           },
           "value": ""
         }
@@ -511,8 +511,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 1301,
-            "end": 1480
+            "start": 1286,
+            "end": 1465
           },
           "expand": true,
           "value": "  set -ex\n  go generate -v ./...\n  mkdir /out\n  git ls-files -m --others -- ':!vendor' 'profiles/seccomp/default.json' '**/*.pb.go' | tar -cf - --files-from - | tar -C /out -xf -\n"
@@ -523,29 +523,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1485,
-          "end": 1489
+          "start": 1470,
+          "end": 1474
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1490,
-          "end": 1497
+          "start": 1475,
+          "end": 1482
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 1498,
-            "end": 1500
+            "start": 1483,
+            "end": 1485
           }
         },
         {
           "span": {
-            "start": 1501,
-            "end": 1507
+            "start": 1486,
+            "end": 1492
           },
           "value": "update"
         }
@@ -555,24 +555,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1508,
-          "end": 1512
+          "start": 1493,
+          "end": 1497
         }
       },
       "options": [
         {
-          "flag_start": 1513,
+          "flag_start": 1498,
           "name": {
             "span": {
-              "start": 1515,
-              "end": 1519
+              "start": 1500,
+              "end": 1504
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 1520,
-              "end": 1529
+              "start": 1505,
+              "end": 1514
             },
             "value": "generated"
           }
@@ -582,8 +582,8 @@
         {
           "path": {
             "span": {
-              "start": 1530,
-              "end": 1534
+              "start": 1515,
+              "end": 1519
             },
             "value": "/out"
           }
@@ -591,8 +591,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1535,
-          "end": 1536
+          "start": 1520,
+          "end": 1521
         },
         "value": "/"
       }
@@ -601,29 +601,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 1538,
-          "end": 1542
+          "start": 1523,
+          "end": 1527
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 1543,
-          "end": 1547
+          "start": 1528,
+          "end": 1532
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 1548,
-            "end": 1550
+            "start": 1533,
+            "end": 1535
           }
         },
         {
           "span": {
-            "start": 1551,
-            "end": 1559
+            "start": 1536,
+            "end": 1544
           },
           "value": "validate"
         }
@@ -633,41 +633,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1560,
-          "end": 1563
+          "start": 1545,
+          "end": 1548
         }
       },
       "options": [
         {
-          "flag_start": 1564,
+          "flag_start": 1549,
           "name": {
             "span": {
-              "start": 1566,
-              "end": 1571
+              "start": 1551,
+              "end": 1556
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1572,
-              "end": 1604
+              "start": 1557,
+              "end": 1589
             },
             "value": "from=src,source=/out,target=.,rw"
           }
         },
         {
-          "flag_start": 1611,
+          "flag_start": 1596,
           "name": {
             "span": {
-              "start": 1613,
-              "end": 1618
+              "start": 1598,
+              "end": 1603
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 1619,
-              "end": 1679
+              "start": 1604,
+              "end": 1664
             },
             "value": "type=bind,from=generated,source=/out,target=/generated-files"
           }
@@ -676,8 +676,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 1685,
-            "end": 1685
+            "start": 1670,
+            "end": 1670
           },
           "value": ""
         }
@@ -685,8 +685,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 1686,
-            "end": 2039
+            "start": 1671,
+            "end": 2024
           },
           "expand": true,
           "value": "  set -e\n  git add -A\n  if [ \"$(ls -A /generated-files)\" ]; then\n    cp -rf /generated-files/* .\n  fi\n  diff=$(git status --porcelain -- ':!vendor' 'profiles/seccomp/default.json' '**/*.pb.go')\n  if [ -n \"$diff\" ]; then\n    echo >&2 'ERROR: The result of \"go generate\" differs. Please update with \"make generate-files\"'\n    echo \"$diff\"\n    exit 1\n  fi\n"

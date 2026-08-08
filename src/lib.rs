@@ -236,7 +236,6 @@ pub struct Dockerfile<'a> {
 impl<'a> Dockerfile<'a> {
     /// Returns an iterator over global args.
     #[allow(clippy::missing_panics_doc)] // self.stages is not empty
-    #[must_use]
     pub fn global_args<'b>(&'b self) -> impl ExactSizeIterator<Item = &'b ArgInstruction<'a>> {
         self.instructions[..self.stages.first().unwrap().start].iter().map(|arg| {
             let Instruction::Arg(arg) = arg else { unreachable!() };
@@ -252,7 +251,6 @@ impl<'a> Dockerfile<'a> {
         Some(Stage { from, instructions: &self.instructions[stage.start + 1..stage.end] })
     }
     /// Returns an iterator over stages.
-    #[must_use]
     pub fn stages<'b>(&'b self) -> impl ExactSizeIterator<Item = Stage<'a, 'b>> {
         self.stages.iter().map(move |stage| {
             let Instruction::From(from) = &self.instructions[stage.start] else { unreachable!() };

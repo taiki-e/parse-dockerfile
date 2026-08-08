@@ -18,7 +18,7 @@
           "start": 378,
           "end": 395
         },
-        "value": "GO_VERSION=1.26.4"
+        "value": "GO_VERSION=1.26.5"
       }
     },
     {
@@ -278,17 +278,17 @@
       "arguments": {
         "span": {
           "start": 1892,
-          "end": 1907
+          "end": 1905
         },
-        "value": "/usr/src/docker"
+        "value": "/usr/src/moby"
       }
     },
     {
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1908,
-          "end": 1912
+          "start": 1906,
+          "end": 1910
         }
       },
       "options": [],
@@ -296,8 +296,8 @@
         {
           "path": {
             "span": {
-              "start": 1913,
-              "end": 1914
+              "start": 1911,
+              "end": 1912
             },
             "value": "."
           }
@@ -305,10 +305,10 @@
       ],
       "dest": {
         "span": {
-          "start": 1915,
-          "end": 1930
+          "start": 1913,
+          "end": 1926
         },
-        "value": "/usr/src/docker"
+        "value": "/usr/src/moby"
       }
     }
   ]

@@ -27,7 +27,7 @@
           "start": 34,
           "end": 51
         },
-        "value": "GO_VERSION=1.26.4"
+        "value": "GO_VERSION=1.26.5"
       }
     },
     {
@@ -91,7 +91,7 @@
           "start": 389,
           "end": 414
         },
-        "value": "DOCKERCLI_VERSION=v29.5.3"
+        "value": "DOCKERCLI_VERSION=v29.6.0"
       }
     },
     {
@@ -171,7 +171,7 @@
           "start": 821,
           "end": 843
         },
-        "value": "COMPOSE_VERSION=v5.1.4"
+        "value": "COMPOSE_VERSION=v5.3.1"
       }
     },
     {
@@ -1549,7 +1549,7 @@
           "start": 6444,
           "end": 6469
         },
-        "value": "CONTAINERD_VERSION=v2.2.4"
+        "value": "CONTAINERD_VERSION=v2.3.3"
       }
     },
     {
@@ -2752,7 +2752,7 @@
           "start": 10859,
           "end": 10878
         },
-        "value": "RUNC_VERSION=v1.3.6"
+        "value": "RUNC_VERSION=v1.4.3"
       }
     },
     {
@@ -2895,9 +2895,9 @@
         "shell": {
           "span": {
             "start": 11226,
-            "end": 11385
+            "end": 11414
           },
-          "value": "apt-get update && xx-apt-get install -y --no-install-recommends \\\n            gcc \\\n            libc6-dev \\\n            libseccomp-dev \\\n            pkg-config"
+          "value": "apt-get update && xx-apt-get install -y --no-install-recommends \\\n            gcc \\\n            libc6-dev \\\n            linux-libc-dev \\\n            libseccomp-dev \\\n            pkg-config"
         }
       },
       "here_docs": []
@@ -2906,14 +2906,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 11386,
-          "end": 11389
+          "start": 11415,
+          "end": 11418
         }
       },
       "arguments": {
         "span": {
-          "start": 11390,
-          "end": 11403
+          "start": 11419,
+          "end": 11432
         },
         "value": "DOCKER_STATIC"
       }
@@ -2922,41 +2922,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 11404,
-          "end": 11407
+          "start": 11433,
+          "end": 11436
         }
       },
       "options": [
         {
-          "flag_start": 11408,
+          "flag_start": 11437,
           "name": {
             "span": {
-              "start": 11410,
-              "end": 11415
+              "start": 11439,
+              "end": 11444
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 11416,
-              "end": 11450
+              "start": 11445,
+              "end": 11479
             },
             "value": "from=runc-src,src=/usr/src/runc,rw"
           }
         },
         {
-          "flag_start": 11457,
+          "flag_start": 11486,
           "name": {
             "span": {
-              "start": 11459,
-              "end": 11464
+              "start": 11488,
+              "end": 11493
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 11465,
-              "end": 11534
+              "start": 11494,
+              "end": 11563
             },
             "value": "type=cache,target=/root/.cache/go-build,id=runc-build-$TARGETPLATFORM"
           }
@@ -2965,8 +2965,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 11540,
-            "end": 11540
+            "start": 11569,
+            "end": 11569
           },
           "value": ""
         }
@@ -2974,8 +2974,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 11541,
-            "end": 11788
+            "start": 11570,
+            "end": 11817
           },
           "expand": true,
           "value": "  set -e\n  xx-go --wrap\n\n  target=runc\n  verify_flags=\n  if [ \"$DOCKER_STATIC\" = \"1\" ]; then\n    target=static\n    verify_flags=--static\n  fi\n\n  set -x\n  CGO_ENABLED=1 make \"$target\"\n  xx-verify $verify_flags runc\n  mkdir /build\n  mv runc /build/\n"
@@ -2986,29 +2986,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 11793,
-          "end": 11797
+          "start": 11822,
+          "end": 11826
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 11798,
-          "end": 11808
+          "start": 11827,
+          "end": 11837
         },
         "value": "runc-build"
       },
       "as_": [
         {
           "span": {
-            "start": 11809,
-            "end": 11811
+            "start": 11838,
+            "end": 11840
           }
         },
         {
           "span": {
-            "start": 11812,
-            "end": 11822
+            "start": 11841,
+            "end": 11851
           },
           "value": "runc-linux"
         }
@@ -3018,29 +3018,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 11823,
-          "end": 11827
+          "start": 11852,
+          "end": 11856
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 11828,
-          "end": 11840
+          "start": 11857,
+          "end": 11869
         },
         "value": "binary-dummy"
       },
       "as_": [
         {
           "span": {
-            "start": 11841,
-            "end": 11843
+            "start": 11870,
+            "end": 11872
           }
         },
         {
           "span": {
-            "start": 11844,
-            "end": 11856
+            "start": 11873,
+            "end": 11885
           },
           "value": "runc-windows"
         }
@@ -3050,29 +3050,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 11857,
-          "end": 11861
+          "start": 11886,
+          "end": 11890
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 11862,
-          "end": 11878
+          "start": 11891,
+          "end": 11907
         },
         "value": "runc-${TARGETOS}"
       },
       "as_": [
         {
           "span": {
-            "start": 11879,
-            "end": 11881
+            "start": 11908,
+            "end": 11910
           }
         },
         {
           "span": {
-            "start": 11882,
-            "end": 11886
+            "start": 11911,
+            "end": 11915
           },
           "value": "runc"
         }
@@ -3082,29 +3082,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 11895,
-          "end": 11899
+          "start": 11924,
+          "end": 11928
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 11900,
-          "end": 11904
+          "start": 11929,
+          "end": 11933
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 11905,
-            "end": 11907
+            "start": 11934,
+            "end": 11936
           }
         },
         {
           "span": {
-            "start": 11908,
-            "end": 11916
+            "start": 11937,
+            "end": 11945
           },
           "value": "tini-src"
         }
@@ -3114,14 +3114,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 11917,
-          "end": 11924
+          "start": 11946,
+          "end": 11953
         }
       },
       "arguments": {
         "span": {
-          "start": 11925,
-          "end": 11938
+          "start": 11954,
+          "end": 11967
         },
         "value": "/usr/src/tini"
       }
@@ -3130,14 +3130,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 12081,
-          "end": 12084
+          "start": 12110,
+          "end": 12113
         }
       },
       "arguments": {
         "span": {
-          "start": 12085,
-          "end": 12105
+          "start": 12114,
+          "end": 12134
         },
         "value": "TINI_VERSION=v0.19.0"
       }
@@ -3146,8 +3146,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 12106,
-          "end": 12109
+          "start": 12135,
+          "end": 12138
         }
       },
       "options": [],
@@ -3155,8 +3155,8 @@
         {
           "path": {
             "span": {
-              "start": 12110,
-              "end": 12180
+              "start": 12139,
+              "end": 12209
             },
             "value": "https://github.com/krallin/tini.git?ref=${TINI_VERSION}&keep-git-dir=1"
           }
@@ -3164,8 +3164,8 @@
       ],
       "dest": {
         "span": {
-          "start": 12181,
-          "end": 12182
+          "start": 12210,
+          "end": 12211
         },
         "value": "."
       }
@@ -3174,29 +3174,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 12184,
-          "end": 12188
+          "start": 12213,
+          "end": 12217
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 12189,
-          "end": 12193
+          "start": 12218,
+          "end": 12222
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 12194,
-            "end": 12196
+            "start": 12223,
+            "end": 12225
           }
         },
         {
           "span": {
-            "start": 12197,
-            "end": 12207
+            "start": 12226,
+            "end": 12236
           },
           "value": "tini-build"
         }
@@ -3206,14 +3206,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 12208,
-          "end": 12215
+          "start": 12237,
+          "end": 12244
         }
       },
       "arguments": {
         "span": {
-          "start": 12216,
-          "end": 12247
+          "start": 12245,
+          "end": 12276
         },
         "value": "/go/src/github.com/krallin/tini"
       }
@@ -3222,41 +3222,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 12248,
-          "end": 12251
+          "start": 12277,
+          "end": 12280
         }
       },
       "options": [
         {
-          "flag_start": 12252,
+          "flag_start": 12281,
           "name": {
             "span": {
-              "start": 12254,
-              "end": 12259
+              "start": 12283,
+              "end": 12288
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 12260,
-              "end": 12325
+              "start": 12289,
+              "end": 12354
             },
             "value": "type=cache,sharing=locked,id=moby-tini-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 12332,
+          "flag_start": 12361,
           "name": {
             "span": {
-              "start": 12334,
-              "end": 12339
+              "start": 12363,
+              "end": 12368
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 12340,
-              "end": 12409
+              "start": 12369,
+              "end": 12438
             },
             "value": "type=cache,sharing=locked,id=moby-tini-aptcache,target=/var/cache/apt"
           }
@@ -3265,8 +3265,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 12420,
-            "end": 12486
+            "start": 12449,
+            "end": 12515
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends cmake"
         }
@@ -3277,14 +3277,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 12487,
-          "end": 12490
+          "start": 12516,
+          "end": 12519
         }
       },
       "arguments": {
         "span": {
-          "start": 12491,
-          "end": 12505
+          "start": 12520,
+          "end": 12534
         },
         "value": "TARGETPLATFORM"
       }
@@ -3293,41 +3293,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 12506,
-          "end": 12509
+          "start": 12535,
+          "end": 12538
         }
       },
       "options": [
         {
-          "flag_start": 12510,
+          "flag_start": 12539,
           "name": {
             "span": {
-              "start": 12512,
-              "end": 12517
+              "start": 12541,
+              "end": 12546
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 12518,
-              "end": 12583
+              "start": 12547,
+              "end": 12612
             },
             "value": "type=cache,sharing=locked,id=moby-tini-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 12590,
+          "flag_start": 12619,
           "name": {
             "span": {
-              "start": 12592,
-              "end": 12597
+              "start": 12621,
+              "end": 12626
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 12598,
-              "end": 12667
+              "start": 12627,
+              "end": 12696
             },
             "value": "type=cache,sharing=locked,id=moby-tini-aptcache,target=/var/cache/apt"
           }
@@ -3336,10 +3336,10 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 12678,
-            "end": 12790
+            "start": 12707,
+            "end": 12848
           },
-          "value": "xx-apt-get install -y --no-install-recommends \\\n            gcc \\\n            libc6-dev \\\n            pkg-config"
+          "value": "xx-apt-get install -y --no-install-recommends \\\n            gcc \\\n            libc6-dev \\\n            linux-libc-dev \\\n            pkg-config"
         }
       },
       "here_docs": []
@@ -3348,41 +3348,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 12791,
-          "end": 12794
+          "start": 12849,
+          "end": 12852
         }
       },
       "options": [
         {
-          "flag_start": 12795,
+          "flag_start": 12853,
           "name": {
             "span": {
-              "start": 12797,
-              "end": 12802
+              "start": 12855,
+              "end": 12860
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 12803,
-              "end": 12837
+              "start": 12861,
+              "end": 12895
             },
             "value": "from=tini-src,src=/usr/src/tini,rw"
           }
         },
         {
-          "flag_start": 12844,
+          "flag_start": 12902,
           "name": {
             "span": {
-              "start": 12846,
-              "end": 12851
+              "start": 12904,
+              "end": 12909
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 12852,
-              "end": 12921
+              "start": 12910,
+              "end": 12979
             },
             "value": "type=cache,target=/root/.cache/go-build,id=tini-build-$TARGETPLATFORM"
           }
@@ -3391,8 +3391,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 12927,
-            "end": 12927
+            "start": 12985,
+            "end": 12985
           },
           "value": ""
         }
@@ -3400,8 +3400,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 12928,
-            "end": 13069
+            "start": 12986,
+            "end": 13127
           },
           "expand": true,
           "value": "  set -ex\n  CC=$(xx-info)-gcc cmake .\n  make tini-static\n  xx-verify --static tini-static\n  mkdir /build\n  mv tini-static /build/docker-init\n"
@@ -3412,29 +3412,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 13074,
-          "end": 13078
+          "start": 13132,
+          "end": 13136
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 13079,
-          "end": 13089
+          "start": 13137,
+          "end": 13147
         },
         "value": "tini-build"
       },
       "as_": [
         {
           "span": {
-            "start": 13090,
-            "end": 13092
+            "start": 13148,
+            "end": 13150
           }
         },
         {
           "span": {
-            "start": 13093,
-            "end": 13103
+            "start": 13151,
+            "end": 13161
           },
           "value": "tini-linux"
         }
@@ -3444,29 +3444,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 13104,
-          "end": 13108
+          "start": 13162,
+          "end": 13166
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 13109,
-          "end": 13121
+          "start": 13167,
+          "end": 13179
         },
         "value": "binary-dummy"
       },
       "as_": [
         {
           "span": {
-            "start": 13122,
-            "end": 13124
+            "start": 13180,
+            "end": 13182
           }
         },
         {
           "span": {
-            "start": 13125,
-            "end": 13137
+            "start": 13183,
+            "end": 13195
           },
           "value": "tini-windows"
         }
@@ -3476,29 +3476,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 13138,
-          "end": 13142
+          "start": 13196,
+          "end": 13200
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 13143,
-          "end": 13159
+          "start": 13201,
+          "end": 13217
         },
         "value": "tini-${TARGETOS}"
       },
       "as_": [
         {
           "span": {
-            "start": 13160,
-            "end": 13162
+            "start": 13218,
+            "end": 13220
           }
         },
         {
           "span": {
-            "start": 13163,
-            "end": 13167
+            "start": 13221,
+            "end": 13225
           },
           "value": "tini"
         }
@@ -3508,29 +3508,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 13183,
-          "end": 13187
+          "start": 13241,
+          "end": 13245
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 13188,
-          "end": 13192
+          "start": 13246,
+          "end": 13250
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 13193,
-            "end": 13195
+            "start": 13251,
+            "end": 13253
           }
         },
         {
           "span": {
-            "start": 13196,
-            "end": 13211
+            "start": 13254,
+            "end": 13269
           },
           "value": "rootlesskit-src"
         }
@@ -3540,14 +3540,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 13212,
-          "end": 13219
+          "start": 13270,
+          "end": 13277
         }
       },
       "arguments": {
         "span": {
-          "start": 13220,
-          "end": 13240
+          "start": 13278,
+          "end": 13298
         },
         "value": "/usr/src/rootlesskit"
       }
@@ -3556,24 +3556,24 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 13241,
-          "end": 13244
+          "start": 13299,
+          "end": 13302
         }
       },
       "arguments": {
         "span": {
-          "start": 13245,
-          "end": 13271
+          "start": 13303,
+          "end": 13329
         },
-        "value": "ROOTLESSKIT_VERSION=v3.0.1"
+        "value": "ROOTLESSKIT_VERSION=v3.0.2"
       }
     },
     {
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 13272,
-          "end": 13275
+          "start": 13330,
+          "end": 13333
         }
       },
       "options": [],
@@ -3581,8 +3581,8 @@
         {
           "path": {
             "span": {
-              "start": 13276,
-              "end": 13372
+              "start": 13334,
+              "end": 13430
             },
             "value": "https://github.com/rootless-containers/rootlesskit.git?ref=${ROOTLESSKIT_VERSION}&keep-git-dir=1"
           }
@@ -3590,8 +3590,8 @@
       ],
       "dest": {
         "span": {
-          "start": 13373,
-          "end": 13374
+          "start": 13431,
+          "end": 13432
         },
         "value": "."
       }
@@ -3600,29 +3600,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 13376,
-          "end": 13380
+          "start": 13434,
+          "end": 13438
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 13381,
-          "end": 13385
+          "start": 13439,
+          "end": 13443
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 13386,
-            "end": 13388
+            "start": 13444,
+            "end": 13446
           }
         },
         {
           "span": {
-            "start": 13389,
-            "end": 13406
+            "start": 13447,
+            "end": 13464
           },
           "value": "rootlesskit-build"
         }
@@ -3632,14 +3632,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 13407,
-          "end": 13414
+          "start": 13465,
+          "end": 13472
         }
       },
       "arguments": {
         "span": {
-          "start": 13415,
-          "end": 13465
+          "start": 13473,
+          "end": 13523
         },
         "value": "/go/src/github.com/rootless-containers/rootlesskit"
       }
@@ -3648,14 +3648,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 13466,
-          "end": 13469
+          "start": 13524,
+          "end": 13527
         }
       },
       "arguments": {
         "span": {
-          "start": 13470,
-          "end": 13484
+          "start": 13528,
+          "end": 13542
         },
         "value": "TARGETPLATFORM"
       }
@@ -3664,41 +3664,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 13485,
-          "end": 13488
+          "start": 13543,
+          "end": 13546
         }
       },
       "options": [
         {
-          "flag_start": 13489,
+          "flag_start": 13547,
           "name": {
             "span": {
-              "start": 13491,
-              "end": 13496
+              "start": 13549,
+              "end": 13554
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 13497,
-              "end": 13569
+              "start": 13555,
+              "end": 13627
             },
             "value": "type=cache,sharing=locked,id=moby-rootlesskit-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 13576,
+          "flag_start": 13634,
           "name": {
             "span": {
-              "start": 13578,
-              "end": 13583
+              "start": 13636,
+              "end": 13641
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 13584,
-              "end": 13660
+              "start": 13642,
+              "end": 13718
             },
             "value": "type=cache,sharing=locked,id=moby-rootlesskit-aptcache,target=/var/cache/apt"
           }
@@ -3707,10 +3707,10 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 13671,
-            "end": 13801
+            "start": 13729,
+            "end": 13888
           },
-          "value": "apt-get update && xx-apt-get install -y --no-install-recommends \\\n            gcc \\\n            libc6-dev \\\n            pkg-config"
+          "value": "apt-get update && xx-apt-get install -y --no-install-recommends \\\n            gcc \\\n            libc6-dev \\\n            linux-libc-dev \\\n            pkg-config"
         }
       },
       "here_docs": []
@@ -3719,14 +3719,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 13802,
-          "end": 13805
+          "start": 13889,
+          "end": 13892
         }
       },
       "arguments": {
         "span": {
-          "start": 13806,
-          "end": 13819
+          "start": 13893,
+          "end": 13906
         },
         "value": "DOCKER_STATIC"
       }
@@ -3735,58 +3735,58 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 13820,
-          "end": 13823
+          "start": 13907,
+          "end": 13910
         }
       },
       "options": [
         {
-          "flag_start": 13824,
+          "flag_start": 13911,
           "name": {
             "span": {
-              "start": 13826,
-              "end": 13831
+              "start": 13913,
+              "end": 13918
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 13832,
-              "end": 13880
+              "start": 13919,
+              "end": 13967
             },
             "value": "from=rootlesskit-src,src=/usr/src/rootlesskit,rw"
           }
         },
         {
-          "flag_start": 13887,
+          "flag_start": 13974,
           "name": {
             "span": {
-              "start": 13889,
-              "end": 13894
+              "start": 13976,
+              "end": 13981
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 13895,
-              "end": 13924
+              "start": 13982,
+              "end": 14011
             },
             "value": "type=cache,target=/go/pkg/mod"
           }
         },
         {
-          "flag_start": 13931,
+          "flag_start": 14018,
           "name": {
             "span": {
-              "start": 13933,
-              "end": 13938
+              "start": 14020,
+              "end": 14025
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 13939,
-              "end": 14015
+              "start": 14026,
+              "end": 14102
             },
             "value": "type=cache,target=/root/.cache/go-build,id=rootlesskit-build-$TARGETPLATFORM"
           }
@@ -3795,8 +3795,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 14021,
-            "end": 14021
+            "start": 14108,
+            "end": 14108
           },
           "value": ""
         }
@@ -3804,8 +3804,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 14022,
-            "end": 14387
+            "start": 14109,
+            "end": 14474
           },
           "expand": true,
           "value": "  set -e\n\n  if [ \"$DOCKER_STATIC\" = \"1\" ]; then\n      set -x\n      export CGO_ENABLED=0\n      xx-go build -o /build/rootlesskit ./cmd/rootlesskit\n      xx-verify --static /build/rootlesskit\n  else\n      set -x\n      export CGO_ENABLED=1\n      xx-go build -o /build/rootlesskit -ldflags='-linkmode=external' ./cmd/rootlesskit\n      xx-verify /build/rootlesskit\n  fi\n"
@@ -3816,17 +3816,17 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 14391,
-          "end": 14395
+          "start": 14478,
+          "end": 14482
         }
       },
       "options": [
         {
-          "flag_start": 14396,
+          "flag_start": 14483,
           "name": {
             "span": {
-              "start": 14398,
-              "end": 14402
+              "start": 14485,
+              "end": 14489
             },
             "value": "link"
           },
@@ -3837,8 +3837,8 @@
         {
           "path": {
             "span": {
-              "start": 14403,
-              "end": 14432
+              "start": 14490,
+              "end": 14519
             },
             "value": "./contrib/dockerd-rootless.sh"
           }
@@ -3846,8 +3846,8 @@
       ],
       "dest": {
         "span": {
-          "start": 14433,
-          "end": 14440
+          "start": 14520,
+          "end": 14527
         },
         "value": "/build/"
       }
@@ -3856,17 +3856,17 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 14441,
-          "end": 14445
+          "start": 14528,
+          "end": 14532
         }
       },
       "options": [
         {
-          "flag_start": 14446,
+          "flag_start": 14533,
           "name": {
             "span": {
-              "start": 14448,
-              "end": 14452
+              "start": 14535,
+              "end": 14539
             },
             "value": "link"
           },
@@ -3877,8 +3877,8 @@
         {
           "path": {
             "span": {
-              "start": 14453,
-              "end": 14492
+              "start": 14540,
+              "end": 14579
             },
             "value": "./contrib/dockerd-rootless-setuptool.sh"
           }
@@ -3886,8 +3886,8 @@
       ],
       "dest": {
         "span": {
-          "start": 14493,
-          "end": 14500
+          "start": 14580,
+          "end": 14587
         },
         "value": "/build/"
       }
@@ -3896,29 +3896,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 14502,
-          "end": 14506
+          "start": 14589,
+          "end": 14593
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 14507,
-          "end": 14524
+          "start": 14594,
+          "end": 14611
         },
         "value": "rootlesskit-build"
       },
       "as_": [
         {
           "span": {
-            "start": 14525,
-            "end": 14527
+            "start": 14612,
+            "end": 14614
           }
         },
         {
           "span": {
-            "start": 14528,
-            "end": 14545
+            "start": 14615,
+            "end": 14632
           },
           "value": "rootlesskit-linux"
         }
@@ -3928,29 +3928,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 14546,
-          "end": 14550
+          "start": 14633,
+          "end": 14637
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 14551,
-          "end": 14563
+          "start": 14638,
+          "end": 14650
         },
         "value": "binary-dummy"
       },
       "as_": [
         {
           "span": {
-            "start": 14564,
-            "end": 14566
+            "start": 14651,
+            "end": 14653
           }
         },
         {
           "span": {
-            "start": 14567,
-            "end": 14586
+            "start": 14654,
+            "end": 14673
           },
           "value": "rootlesskit-windows"
         }
@@ -3960,29 +3960,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 14587,
-          "end": 14591
+          "start": 14674,
+          "end": 14678
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 14592,
-          "end": 14615
+          "start": 14679,
+          "end": 14702
         },
         "value": "rootlesskit-${TARGETOS}"
       },
       "as_": [
         {
           "span": {
-            "start": 14616,
-            "end": 14618
+            "start": 14703,
+            "end": 14705
           }
         },
         {
           "span": {
-            "start": 14619,
-            "end": 14630
+            "start": 14706,
+            "end": 14717
           },
           "value": "rootlesskit"
         }
@@ -3992,29 +3992,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 14632,
-          "end": 14636
+          "start": 14719,
+          "end": 14723
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 14637,
-          "end": 14641
+          "start": 14724,
+          "end": 14728
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 14642,
-            "end": 14644
+            "start": 14729,
+            "end": 14731
           }
         },
         {
           "span": {
-            "start": 14645,
-            "end": 14649
+            "start": 14732,
+            "end": 14736
           },
           "value": "crun"
         }
@@ -4024,14 +4024,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 14721,
-          "end": 14724
+          "start": 14808,
+          "end": 14811
         }
       },
       "arguments": {
         "span": {
-          "start": 14725,
-          "end": 14742
+          "start": 14812,
+          "end": 14829
         },
         "value": "CRUN_VERSION=1.21"
       }
@@ -4040,41 +4040,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 14743,
-          "end": 14746
+          "start": 14830,
+          "end": 14833
         }
       },
       "options": [
         {
-          "flag_start": 14747,
+          "flag_start": 14834,
           "name": {
             "span": {
-              "start": 14749,
-              "end": 14754
+              "start": 14836,
+              "end": 14841
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 14755,
-              "end": 14820
+              "start": 14842,
+              "end": 14907
             },
             "value": "type=cache,sharing=locked,id=moby-crun-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 14827,
+          "flag_start": 14914,
           "name": {
             "span": {
-              "start": 14829,
-              "end": 14834
+              "start": 14916,
+              "end": 14921
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 14835,
-              "end": 14904
+              "start": 14922,
+              "end": 14991
             },
             "value": "type=cache,sharing=locked,id=moby-crun-aptcache,target=/var/cache/apt"
           }
@@ -4083,8 +4083,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 14915,
-            "end": 15252
+            "start": 15002,
+            "end": 15339
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends \\\n            autoconf \\\n            automake \\\n            build-essential \\\n            libcap-dev \\\n            libprotobuf-c-dev \\\n            libseccomp-dev \\\n            libsystemd-dev \\\n            libtool \\\n            libyajl-dev \\\n            python3 \\\n            ;"
         }
@@ -4095,14 +4095,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 15253,
-          "end": 15260
+          "start": 15340,
+          "end": 15347
         }
       },
       "arguments": {
         "span": {
-          "start": 15261,
-          "end": 15276
+          "start": 15348,
+          "end": 15363
         },
         "value": "/tmp/crun-build"
       }
@@ -4111,8 +4111,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 15277,
-          "end": 15280
+          "start": 15364,
+          "end": 15367
         }
       },
       "options": [],
@@ -4120,8 +4120,8 @@
         {
           "path": {
             "span": {
-              "start": 15281,
-              "end": 15354
+              "start": 15368,
+              "end": 15441
             },
             "value": "https://github.com/containers/crun.git?ref=${CRUN_VERSION}&keep-git-dir=1"
           }
@@ -4129,8 +4129,8 @@
       ],
       "dest": {
         "span": {
-          "start": 15355,
-          "end": 15356
+          "start": 15442,
+          "end": 15443
         },
         "value": "."
       }
@@ -4139,16 +4139,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 15357,
-          "end": 15360
+          "start": 15444,
+          "end": 15447
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 15361,
-            "end": 15435
+            "start": 15448,
+            "end": 15522
           },
           "value": "./autogen.sh && \\\n    ./configure --bindir=/build && \\\n    make -j install"
         }
@@ -4159,29 +4159,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 15456,
-          "end": 15460
+          "start": 15543,
+          "end": 15547
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 15461,
-          "end": 15465
+          "start": 15548,
+          "end": 15552
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 15466,
-            "end": 15468
+            "start": 15553,
+            "end": 15555
           }
         },
         {
           "span": {
-            "start": 15469,
-            "end": 15486
+            "start": 15556,
+            "end": 15573
           },
           "value": "containerutil-src"
         }
@@ -4191,14 +4191,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 15487,
-          "end": 15494
+          "start": 15574,
+          "end": 15581
         }
       },
       "arguments": {
         "span": {
-          "start": 15495,
-          "end": 15517
+          "start": 15582,
+          "end": 15604
         },
         "value": "/usr/src/containerutil"
       }
@@ -4207,14 +4207,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 15518,
-          "end": 15521
+          "start": 15605,
+          "end": 15608
         }
       },
       "arguments": {
         "span": {
-          "start": 15522,
-          "end": 15587
+          "start": 15609,
+          "end": 15674
         },
         "value": "CONTAINERUTILITY_VERSION=aa1ba87e99b68e0113bd27ec26c60b88f9d4ccd9"
       }
@@ -4223,8 +4223,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 15588,
-          "end": 15591
+          "start": 15675,
+          "end": 15678
         }
       },
       "options": [],
@@ -4232,8 +4232,8 @@
         {
           "path": {
             "span": {
-              "start": 15592,
-              "end": 15705
+              "start": 15679,
+              "end": 15792
             },
             "value": "https://github.com/docker-archive/windows-container-utility.git?commit=${CONTAINERUTILITY_VERSION}&keep-git-dir=1"
           }
@@ -4241,8 +4241,8 @@
       ],
       "dest": {
         "span": {
-          "start": 15706,
-          "end": 15707
+          "start": 15793,
+          "end": 15794
         },
         "value": "."
       }
@@ -4251,29 +4251,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 15709,
-          "end": 15713
+          "start": 15796,
+          "end": 15800
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 15714,
-          "end": 15718
+          "start": 15801,
+          "end": 15805
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 15719,
-            "end": 15721
+            "start": 15806,
+            "end": 15808
           }
         },
         {
           "span": {
-            "start": 15722,
-            "end": 15741
+            "start": 15809,
+            "end": 15828
           },
           "value": "containerutil-build"
         }
@@ -4283,14 +4283,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 15742,
-          "end": 15749
+          "start": 15829,
+          "end": 15836
         }
       },
       "arguments": {
         "span": {
-          "start": 15750,
-          "end": 15772
+          "start": 15837,
+          "end": 15859
         },
         "value": "/usr/src/containerutil"
       }
@@ -4299,14 +4299,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 15773,
-          "end": 15776
+          "start": 15860,
+          "end": 15863
         }
       },
       "arguments": {
         "span": {
-          "start": 15777,
-          "end": 15791
+          "start": 15864,
+          "end": 15878
         },
         "value": "TARGETPLATFORM"
       }
@@ -4315,16 +4315,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 15792,
-          "end": 15795
+          "start": 15879,
+          "end": 15882
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 15796,
-            "end": 15910
+            "start": 15883,
+            "end": 15997
           },
           "value": "xx-apt-get install -y --no-install-recommends \\\n        gcc \\\n        g++ \\\n        libc6-dev \\\n        pkg-config"
         }
@@ -4335,41 +4335,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 15911,
-          "end": 15914
+          "start": 15998,
+          "end": 16001
         }
       },
       "options": [
         {
-          "flag_start": 15915,
+          "flag_start": 16002,
           "name": {
             "span": {
-              "start": 15917,
-              "end": 15922
+              "start": 16004,
+              "end": 16009
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 15923,
-              "end": 15975
+              "start": 16010,
+              "end": 16062
             },
             "value": "from=containerutil-src,src=/usr/src/containerutil,rw"
           }
         },
         {
-          "flag_start": 15982,
+          "flag_start": 16069,
           "name": {
             "span": {
-              "start": 15984,
-              "end": 15989
+              "start": 16071,
+              "end": 16076
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 15990,
-              "end": 16068
+              "start": 16077,
+              "end": 16155
             },
             "value": "type=cache,target=/root/.cache/go-build,id=containerutil-build-$TARGETPLATFORM"
           }
@@ -4378,8 +4378,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 16074,
-            "end": 16074
+            "start": 16161,
+            "end": 16161
           },
           "value": ""
         }
@@ -4387,8 +4387,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 16075,
-            "end": 16224
+            "start": 16162,
+            "end": 16311
           },
           "expand": true,
           "value": "  set -ex\n  CC=\"$(xx-info)-gcc\" CXX=\"$(xx-info)-g++\" make\n  xx-verify --static containerutility.exe\n  mkdir /build\n  mv containerutility.exe /build/\n"
@@ -4399,29 +4399,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 16229,
-          "end": 16233
+          "start": 16316,
+          "end": 16320
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 16234,
-          "end": 16246
+          "start": 16321,
+          "end": 16333
         },
         "value": "binary-dummy"
       },
       "as_": [
         {
           "span": {
-            "start": 16247,
-            "end": 16249
+            "start": 16334,
+            "end": 16336
           }
         },
         {
           "span": {
-            "start": 16250,
-            "end": 16269
+            "start": 16337,
+            "end": 16356
           },
           "value": "containerutil-linux"
         }
@@ -4431,29 +4431,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 16270,
-          "end": 16274
+          "start": 16357,
+          "end": 16361
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 16275,
-          "end": 16294
+          "start": 16362,
+          "end": 16381
         },
         "value": "containerutil-build"
       },
       "as_": [
         {
           "span": {
-            "start": 16295,
-            "end": 16297
+            "start": 16382,
+            "end": 16384
           }
         },
         {
           "span": {
-            "start": 16298,
-            "end": 16325
+            "start": 16385,
+            "end": 16412
           },
           "value": "containerutil-windows-amd64"
         }
@@ -4463,29 +4463,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 16326,
-          "end": 16330
+          "start": 16413,
+          "end": 16417
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 16331,
-          "end": 16366
+          "start": 16418,
+          "end": 16453
         },
         "value": "containerutil-windows-${TARGETARCH}"
       },
       "as_": [
         {
           "span": {
-            "start": 16367,
-            "end": 16369
+            "start": 16454,
+            "end": 16456
           }
         },
         {
           "span": {
-            "start": 16370,
-            "end": 16391
+            "start": 16457,
+            "end": 16478
           },
           "value": "containerutil-windows"
         }
@@ -4495,29 +4495,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 16392,
-          "end": 16396
+          "start": 16479,
+          "end": 16483
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 16397,
-          "end": 16422
+          "start": 16484,
+          "end": 16509
         },
         "value": "containerutil-${TARGETOS}"
       },
       "as_": [
         {
           "span": {
-            "start": 16423,
-            "end": 16425
+            "start": 16510,
+            "end": 16512
           }
         },
         {
           "span": {
-            "start": 16426,
-            "end": 16439
+            "start": 16513,
+            "end": 16526
           },
           "value": "containerutil"
         }
@@ -4527,29 +4527,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 16440,
-          "end": 16444
+          "start": 16527,
+          "end": 16531
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 16445,
-          "end": 16480
+          "start": 16532,
+          "end": 16567
         },
         "value": "docker/buildx-bin:${BUILDX_VERSION}"
       },
       "as_": [
         {
           "span": {
-            "start": 16481,
-            "end": 16483
+            "start": 16568,
+            "end": 16570
           }
         },
         {
           "span": {
-            "start": 16484,
-            "end": 16490
+            "start": 16571,
+            "end": 16577
           },
           "value": "buildx"
         }
@@ -4559,29 +4559,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 16491,
-          "end": 16495
+          "start": 16578,
+          "end": 16582
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 16496,
-          "end": 16533
+          "start": 16583,
+          "end": 16620
         },
         "value": "docker/compose-bin:${COMPOSE_VERSION}"
       },
       "as_": [
         {
           "span": {
-            "start": 16534,
-            "end": 16536
+            "start": 16621,
+            "end": 16623
           }
         },
         {
           "span": {
-            "start": 16537,
-            "end": 16544
+            "start": 16624,
+            "end": 16631
           },
           "value": "compose"
         }
@@ -4591,29 +4591,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 16546,
-          "end": 16550
+          "start": 16633,
+          "end": 16637
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 16551,
-          "end": 16555
+          "start": 16638,
+          "end": 16642
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 16556,
-            "end": 16558
+            "start": 16643,
+            "end": 16645
           }
         },
         {
           "span": {
-            "start": 16559,
-            "end": 16576
+            "start": 16646,
+            "end": 16663
           },
           "value": "dev-systemd-false"
         }
@@ -4623,35 +4623,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 16577,
-          "end": 16581
+          "start": 16664,
+          "end": 16668
         }
       },
       "options": [
         {
-          "flag_start": 16582,
+          "flag_start": 16669,
           "name": {
             "span": {
-              "start": 16584,
-              "end": 16588
+              "start": 16671,
+              "end": 16675
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 16589,
+          "flag_start": 16676,
           "name": {
             "span": {
-              "start": 16591,
-              "end": 16595
+              "start": 16678,
+              "end": 16682
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 16596,
-              "end": 16609
+              "start": 16683,
+              "end": 16696
             },
             "value": "frozen-images"
           }
@@ -4661,8 +4661,8 @@
         {
           "path": {
             "span": {
-              "start": 16610,
-              "end": 16617
+              "start": 16697,
+              "end": 16704
             },
             "value": "/build/"
           }
@@ -4670,8 +4670,8 @@
       ],
       "dest": {
         "span": {
-          "start": 16618,
-          "end": 16639
+          "start": 16705,
+          "end": 16726
         },
         "value": "/docker-frozen-images"
       }
@@ -4680,35 +4680,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 16640,
-          "end": 16644
+          "start": 16727,
+          "end": 16731
         }
       },
       "options": [
         {
-          "flag_start": 16645,
+          "flag_start": 16732,
           "name": {
             "span": {
-              "start": 16647,
-              "end": 16651
+              "start": 16734,
+              "end": 16738
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 16652,
+          "flag_start": 16739,
           "name": {
             "span": {
-              "start": 16654,
-              "end": 16658
+              "start": 16741,
+              "end": 16745
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 16659,
-              "end": 16664
+              "start": 16746,
+              "end": 16751
             },
             "value": "delve"
           }
@@ -4718,8 +4718,8 @@
         {
           "path": {
             "span": {
-              "start": 16673,
-              "end": 16680
+              "start": 16760,
+              "end": 16767
             },
             "value": "/build/"
           }
@@ -4727,8 +4727,8 @@
       ],
       "dest": {
         "span": {
-          "start": 16681,
-          "end": 16696
+          "start": 16768,
+          "end": 16783
         },
         "value": "/usr/local/bin/"
       }
@@ -4737,35 +4737,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 16697,
-          "end": 16701
+          "start": 16784,
+          "end": 16788
         }
       },
       "options": [
         {
-          "flag_start": 16702,
+          "flag_start": 16789,
           "name": {
             "span": {
-              "start": 16704,
-              "end": 16708
+              "start": 16791,
+              "end": 16795
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 16709,
+          "flag_start": 16796,
           "name": {
             "span": {
-              "start": 16711,
-              "end": 16715
+              "start": 16798,
+              "end": 16802
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 16716,
-              "end": 16724
+              "start": 16803,
+              "end": 16811
             },
             "value": "gowinres"
           }
@@ -4775,8 +4775,8 @@
         {
           "path": {
             "span": {
-              "start": 16730,
-              "end": 16737
+              "start": 16817,
+              "end": 16824
             },
             "value": "/build/"
           }
@@ -4784,8 +4784,8 @@
       ],
       "dest": {
         "span": {
-          "start": 16738,
-          "end": 16753
+          "start": 16825,
+          "end": 16840
         },
         "value": "/usr/local/bin/"
       }
@@ -4794,35 +4794,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 16754,
-          "end": 16758
+          "start": 16841,
+          "end": 16845
         }
       },
       "options": [
         {
-          "flag_start": 16759,
+          "flag_start": 16846,
           "name": {
             "span": {
-              "start": 16761,
-              "end": 16765
+              "start": 16848,
+              "end": 16852
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 16766,
+          "flag_start": 16853,
           "name": {
             "span": {
-              "start": 16768,
-              "end": 16772
+              "start": 16855,
+              "end": 16859
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 16773,
-              "end": 16777
+              "start": 16860,
+              "end": 16864
             },
             "value": "tini"
           }
@@ -4832,8 +4832,8 @@
         {
           "path": {
             "span": {
-              "start": 16787,
-              "end": 16794
+              "start": 16874,
+              "end": 16881
             },
             "value": "/build/"
           }
@@ -4841,8 +4841,8 @@
       ],
       "dest": {
         "span": {
-          "start": 16795,
-          "end": 16810
+          "start": 16882,
+          "end": 16897
         },
         "value": "/usr/local/bin/"
       }
@@ -4851,35 +4851,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 16811,
-          "end": 16815
+          "start": 16898,
+          "end": 16902
         }
       },
       "options": [
         {
-          "flag_start": 16816,
+          "flag_start": 16903,
           "name": {
             "span": {
-              "start": 16818,
-              "end": 16822
+              "start": 16905,
+              "end": 16909
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 16823,
+          "flag_start": 16910,
           "name": {
             "span": {
-              "start": 16825,
-              "end": 16829
+              "start": 16912,
+              "end": 16916
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 16830,
-              "end": 16838
+              "start": 16917,
+              "end": 16925
             },
             "value": "registry"
           }
@@ -4889,8 +4889,8 @@
         {
           "path": {
             "span": {
-              "start": 16844,
-              "end": 16851
+              "start": 16931,
+              "end": 16938
             },
             "value": "/build/"
           }
@@ -4898,8 +4898,8 @@
       ],
       "dest": {
         "span": {
-          "start": 16852,
-          "end": 16867
+          "start": 16939,
+          "end": 16954
         },
         "value": "/usr/local/bin/"
       }
@@ -4908,35 +4908,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17207,
-          "end": 17211
+          "start": 17294,
+          "end": 17298
         }
       },
       "options": [
         {
-          "flag_start": 17212,
+          "flag_start": 17299,
           "name": {
             "span": {
-              "start": 17214,
-              "end": 17218
+              "start": 17301,
+              "end": 17305
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17219,
+          "flag_start": 17306,
           "name": {
             "span": {
-              "start": 17221,
-              "end": 17225
+              "start": 17308,
+              "end": 17312
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17226,
-              "end": 17235
+              "start": 17313,
+              "end": 17322
             },
             "value": "gotestsum"
           }
@@ -4946,8 +4946,8 @@
         {
           "path": {
             "span": {
-              "start": 17240,
-              "end": 17247
+              "start": 17327,
+              "end": 17334
             },
             "value": "/build/"
           }
@@ -4955,8 +4955,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17248,
-          "end": 17263
+          "start": 17335,
+          "end": 17350
         },
         "value": "/usr/local/bin/"
       }
@@ -4965,35 +4965,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17264,
-          "end": 17268
+          "start": 17351,
+          "end": 17355
         }
       },
       "options": [
         {
-          "flag_start": 17269,
+          "flag_start": 17356,
           "name": {
             "span": {
-              "start": 17271,
-              "end": 17275
+              "start": 17358,
+              "end": 17362
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17276,
+          "flag_start": 17363,
           "name": {
             "span": {
-              "start": 17278,
-              "end": 17282
+              "start": 17365,
+              "end": 17369
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17283,
-              "end": 17296
+              "start": 17370,
+              "end": 17383
             },
             "value": "golangci_lint"
           }
@@ -5003,8 +5003,8 @@
         {
           "path": {
             "span": {
-              "start": 17297,
-              "end": 17304
+              "start": 17384,
+              "end": 17391
             },
             "value": "/build/"
           }
@@ -5012,8 +5012,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17305,
-          "end": 17320
+          "start": 17392,
+          "end": 17407
         },
         "value": "/usr/local/bin/"
       }
@@ -5022,35 +5022,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17321,
-          "end": 17325
+          "start": 17408,
+          "end": 17412
         }
       },
       "options": [
         {
-          "flag_start": 17326,
+          "flag_start": 17413,
           "name": {
             "span": {
-              "start": 17328,
-              "end": 17332
+              "start": 17415,
+              "end": 17419
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17333,
+          "flag_start": 17420,
           "name": {
             "span": {
-              "start": 17335,
-              "end": 17339
+              "start": 17422,
+              "end": 17426
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17340,
-              "end": 17345
+              "start": 17427,
+              "end": 17432
             },
             "value": "shfmt"
           }
@@ -5060,8 +5060,8 @@
         {
           "path": {
             "span": {
-              "start": 17354,
-              "end": 17361
+              "start": 17441,
+              "end": 17448
             },
             "value": "/build/"
           }
@@ -5069,8 +5069,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17362,
-          "end": 17377
+          "start": 17449,
+          "end": 17464
         },
         "value": "/usr/local/bin/"
       }
@@ -5079,35 +5079,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17378,
-          "end": 17382
+          "start": 17465,
+          "end": 17469
         }
       },
       "options": [
         {
-          "flag_start": 17383,
+          "flag_start": 17470,
           "name": {
             "span": {
-              "start": 17385,
-              "end": 17389
+              "start": 17472,
+              "end": 17476
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17390,
+          "flag_start": 17477,
           "name": {
             "span": {
-              "start": 17392,
-              "end": 17396
+              "start": 17479,
+              "end": 17483
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17397,
-              "end": 17401
+              "start": 17484,
+              "end": 17488
             },
             "value": "runc"
           }
@@ -5117,8 +5117,8 @@
         {
           "path": {
             "span": {
-              "start": 17411,
-              "end": 17418
+              "start": 17498,
+              "end": 17505
             },
             "value": "/build/"
           }
@@ -5126,8 +5126,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17419,
-          "end": 17434
+          "start": 17506,
+          "end": 17521
         },
         "value": "/usr/local/bin/"
       }
@@ -5136,35 +5136,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17435,
-          "end": 17439
+          "start": 17522,
+          "end": 17526
         }
       },
       "options": [
         {
-          "flag_start": 17440,
+          "flag_start": 17527,
           "name": {
             "span": {
-              "start": 17442,
-              "end": 17446
+              "start": 17529,
+              "end": 17533
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17447,
+          "flag_start": 17534,
           "name": {
             "span": {
-              "start": 17449,
-              "end": 17453
+              "start": 17536,
+              "end": 17540
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17454,
-              "end": 17464
+              "start": 17541,
+              "end": 17551
             },
             "value": "containerd"
           }
@@ -5174,8 +5174,8 @@
         {
           "path": {
             "span": {
-              "start": 17468,
-              "end": 17475
+              "start": 17555,
+              "end": 17562
             },
             "value": "/build/"
           }
@@ -5183,8 +5183,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17476,
-          "end": 17491
+          "start": 17563,
+          "end": 17578
         },
         "value": "/usr/local/bin/"
       }
@@ -5193,35 +5193,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17492,
-          "end": 17496
+          "start": 17579,
+          "end": 17583
         }
       },
       "options": [
         {
-          "flag_start": 17497,
+          "flag_start": 17584,
           "name": {
             "span": {
-              "start": 17499,
-              "end": 17503
+              "start": 17586,
+              "end": 17590
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17504,
+          "flag_start": 17591,
           "name": {
             "span": {
-              "start": 17506,
-              "end": 17510
+              "start": 17593,
+              "end": 17597
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17511,
-              "end": 17522
+              "start": 17598,
+              "end": 17609
             },
             "value": "rootlesskit"
           }
@@ -5231,8 +5231,8 @@
         {
           "path": {
             "span": {
-              "start": 17525,
-              "end": 17532
+              "start": 17612,
+              "end": 17619
             },
             "value": "/build/"
           }
@@ -5240,8 +5240,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17533,
-          "end": 17548
+          "start": 17620,
+          "end": 17635
         },
         "value": "/usr/local/bin/"
       }
@@ -5250,35 +5250,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17549,
-          "end": 17553
+          "start": 17636,
+          "end": 17640
         }
       },
       "options": [
         {
-          "flag_start": 17554,
+          "flag_start": 17641,
           "name": {
             "span": {
-              "start": 17556,
-              "end": 17560
+              "start": 17643,
+              "end": 17647
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17561,
+          "flag_start": 17648,
           "name": {
             "span": {
-              "start": 17563,
-              "end": 17567
+              "start": 17650,
+              "end": 17654
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17568,
-              "end": 17581
+              "start": 17655,
+              "end": 17668
             },
             "value": "containerutil"
           }
@@ -5288,8 +5288,8 @@
         {
           "path": {
             "span": {
-              "start": 17582,
-              "end": 17589
+              "start": 17669,
+              "end": 17676
             },
             "value": "/build/"
           }
@@ -5297,8 +5297,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17590,
-          "end": 17605
+          "start": 17677,
+          "end": 17692
         },
         "value": "/usr/local/bin/"
       }
@@ -5307,35 +5307,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17606,
-          "end": 17610
+          "start": 17693,
+          "end": 17697
         }
       },
       "options": [
         {
-          "flag_start": 17611,
+          "flag_start": 17698,
           "name": {
             "span": {
-              "start": 17613,
-              "end": 17617
+              "start": 17700,
+              "end": 17704
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17618,
+          "flag_start": 17705,
           "name": {
             "span": {
-              "start": 17620,
-              "end": 17624
+              "start": 17707,
+              "end": 17711
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17625,
-              "end": 17629
+              "start": 17712,
+              "end": 17716
             },
             "value": "crun"
           }
@@ -5345,8 +5345,8 @@
         {
           "path": {
             "span": {
-              "start": 17639,
-              "end": 17646
+              "start": 17726,
+              "end": 17733
             },
             "value": "/build/"
           }
@@ -5354,8 +5354,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17647,
-          "end": 17662
+          "start": 17734,
+          "end": 17749
         },
         "value": "/usr/local/bin/"
       }
@@ -5364,17 +5364,17 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17663,
-          "end": 17667
+          "start": 17750,
+          "end": 17754
         }
       },
       "options": [
         {
-          "flag_start": 17668,
+          "flag_start": 17755,
           "name": {
             "span": {
-              "start": 17670,
-              "end": 17674
+              "start": 17757,
+              "end": 17761
             },
             "value": "link"
           },
@@ -5385,8 +5385,8 @@
         {
           "path": {
             "span": {
-              "start": 17675,
-              "end": 17702
+              "start": 17762,
+              "end": 17789
             },
             "value": "hack/dockerfile/etc/docker/"
           }
@@ -5394,8 +5394,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17704,
-          "end": 17716
+          "start": 17791,
+          "end": 17803
         },
         "value": "/etc/docker/"
       }
@@ -5404,35 +5404,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17717,
-          "end": 17721
+          "start": 17804,
+          "end": 17808
         }
       },
       "options": [
         {
-          "flag_start": 17722,
+          "flag_start": 17809,
           "name": {
             "span": {
-              "start": 17724,
-              "end": 17728
+              "start": 17811,
+              "end": 17815
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17729,
+          "flag_start": 17816,
           "name": {
             "span": {
-              "start": 17731,
-              "end": 17735
+              "start": 17818,
+              "end": 17822
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17736,
-              "end": 17742
+              "start": 17823,
+              "end": 17829
             },
             "value": "buildx"
           }
@@ -5442,8 +5442,8 @@
         {
           "path": {
             "span": {
-              "start": 17750,
-              "end": 17757
+              "start": 17837,
+              "end": 17844
             },
             "value": "/buildx"
           }
@@ -5451,8 +5451,8 @@
       ],
       "dest": {
         "span": {
-          "start": 17758,
-          "end": 17809
+          "start": 17845,
+          "end": 17896
         },
         "value": "/usr/local/libexec/docker/cli-plugins/docker-buildx"
       }
@@ -5461,35 +5461,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 17810,
-          "end": 17814
+          "start": 17897,
+          "end": 17901
         }
       },
       "options": [
         {
-          "flag_start": 17815,
+          "flag_start": 17902,
           "name": {
             "span": {
-              "start": 17817,
-              "end": 17821
+              "start": 17904,
+              "end": 17908
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 17822,
+          "flag_start": 17909,
           "name": {
             "span": {
-              "start": 17824,
-              "end": 17828
+              "start": 17911,
+              "end": 17915
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 17829,
-              "end": 17836
+              "start": 17916,
+              "end": 17923
             },
             "value": "compose"
           }
@@ -5499,8 +5499,8 @@
         {
           "path": {
             "span": {
-              "start": 17843,
-              "end": 17858
+              "start": 17930,
+              "end": 17945
             },
             "value": "/docker-compose"
           }
@@ -5508,42 +5508,10 @@
       ],
       "dest": {
         "span": {
-          "start": 17859,
-          "end": 17905
+          "start": 17946,
+          "end": 17992
         },
         "value": "/usr/libexec/docker/cli-plugins/docker-compose"
-      }
-    },
-    {
-      "kind": "ENV",
-      "env": {
-        "span": {
-          "start": 17907,
-          "end": 17910
-        }
-      },
-      "arguments": {
-        "span": {
-          "start": 17911,
-          "end": 17936
-        },
-        "value": "PATH=/usr/local/cli:$PATH"
-      }
-    },
-    {
-      "kind": "ENV",
-      "env": {
-        "span": {
-          "start": 17937,
-          "end": 17940
-        }
-      },
-      "arguments": {
-        "span": {
-          "start": 17941,
-          "end": 17993
-        },
-        "value": "TEST_CLIENT_BINARY=/usr/local/cli-integration/docker"
       }
     },
     {
@@ -5557,7 +5525,39 @@
       "arguments": {
         "span": {
           "start": 17998,
-          "end": 18055
+          "end": 18023
+        },
+        "value": "PATH=/usr/local/cli:$PATH"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 18024,
+          "end": 18027
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 18028,
+          "end": 18080
+        },
+        "value": "TEST_CLIENT_BINARY=/usr/local/cli-integration/docker"
+      }
+    },
+    {
+      "kind": "ENV",
+      "env": {
+        "span": {
+          "start": 18081,
+          "end": 18084
+        }
+      },
+      "arguments": {
+        "span": {
+          "start": 18085,
+          "end": 18142
         },
         "value": "CONTAINERD_ADDRESS=/run/docker/containerd/containerd.sock"
       }
@@ -5566,14 +5566,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 18056,
-          "end": 18059
+          "start": 18143,
+          "end": 18146
         }
       },
       "arguments": {
         "span": {
-          "start": 18060,
-          "end": 18085
+          "start": 18147,
+          "end": 18172
         },
         "value": "CONTAINERD_NAMESPACE=moby"
       }
@@ -5582,32 +5582,32 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 18086,
-          "end": 18093
+          "start": 18173,
+          "end": 18180
         }
       },
       "arguments": {
         "span": {
-          "start": 18094,
-          "end": 18126
+          "start": 18181,
+          "end": 18194
         },
-        "value": "/go/src/github.com/docker/docker"
+        "value": "/usr/src/moby"
       }
     },
     {
       "kind": "VOLUME",
       "volume": {
         "span": {
-          "start": 18127,
-          "end": 18133
+          "start": 18195,
+          "end": 18201
         }
       },
       "arguments": {
         "string": [
           {
             "span": {
-              "start": 18134,
-              "end": 18149
+              "start": 18202,
+              "end": 18217
             },
             "value": "/var/lib/docker"
           }
@@ -5618,16 +5618,16 @@
       "kind": "VOLUME",
       "volume": {
         "span": {
-          "start": 18150,
-          "end": 18156
+          "start": 18218,
+          "end": 18224
         }
       },
       "arguments": {
         "string": [
           {
             "span": {
-              "start": 18157,
-              "end": 18199
+              "start": 18225,
+              "end": 18267
             },
             "value": "/home/unprivilegeduser/.local/share/docker"
           }
@@ -5638,21 +5638,21 @@
       "kind": "ENTRYPOINT",
       "entrypoint": {
         "span": {
-          "start": 18280,
-          "end": 18290
+          "start": 18348,
+          "end": 18358
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 18291,
-            "end": 18304
+            "start": 18359,
+            "end": 18372
           },
           "value": [
             {
               "span": {
-                "start": 18293,
-                "end": 18302
+                "start": 18361,
+                "end": 18370
               },
               "value": "hack/dind"
             }
@@ -5664,29 +5664,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 18306,
-          "end": 18310
+          "start": 18374,
+          "end": 18378
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 18311,
-          "end": 18328
+          "start": 18379,
+          "end": 18396
         },
         "value": "dev-systemd-false"
       },
       "as_": [
         {
           "span": {
-            "start": 18329,
-            "end": 18331
+            "start": 18397,
+            "end": 18399
           }
         },
         {
           "span": {
-            "start": 18332,
-            "end": 18348
+            "start": 18400,
+            "end": 18416
           },
           "value": "dev-systemd-true"
         }
@@ -5696,41 +5696,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 18349,
-          "end": 18352
+          "start": 18417,
+          "end": 18420
         }
       },
       "options": [
         {
-          "flag_start": 18353,
+          "flag_start": 18421,
           "name": {
             "span": {
-              "start": 18355,
-              "end": 18360
+              "start": 18423,
+              "end": 18428
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 18361,
-              "end": 18425
+              "start": 18429,
+              "end": 18493
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 18432,
+          "flag_start": 18500,
           "name": {
             "span": {
-              "start": 18434,
-              "end": 18439
+              "start": 18502,
+              "end": 18507
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 18440,
-              "end": 18508
+              "start": 18508,
+              "end": 18576
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptcache,target=/var/cache/apt"
           }
@@ -5739,8 +5739,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 18519,
-            "end": 18679
+            "start": 18587,
+            "end": 18747
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends \\\n            dbus \\\n            dbus-user-session \\\n            systemd \\\n            systemd-sysv"
         }
@@ -5751,21 +5751,21 @@
       "kind": "ENTRYPOINT",
       "entrypoint": {
         "span": {
-          "start": 18680,
-          "end": 18690
+          "start": 18748,
+          "end": 18758
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 18691,
-            "end": 18712
+            "start": 18759,
+            "end": 18780
           },
           "value": [
             {
               "span": {
-                "start": 18693,
-                "end": 18710
+                "start": 18761,
+                "end": 18778
               },
               "value": "hack/dind-systemd"
             }
@@ -5777,29 +5777,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 18714,
-          "end": 18718
+          "start": 18782,
+          "end": 18786
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 18719,
-          "end": 18741
+          "start": 18787,
+          "end": 18809
         },
         "value": "dev-systemd-${SYSTEMD}"
       },
       "as_": [
         {
           "span": {
-            "start": 18742,
-            "end": 18744
+            "start": 18810,
+            "end": 18812
           }
         },
         {
           "span": {
-            "start": 18745,
-            "end": 18764
+            "start": 18813,
+            "end": 18832
           },
           "value": "dev-firewalld-false"
         }
@@ -5809,29 +5809,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 18766,
-          "end": 18770
+          "start": 18834,
+          "end": 18838
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 18771,
-          "end": 18787
+          "start": 18839,
+          "end": 18855
         },
         "value": "dev-systemd-true"
       },
       "as_": [
         {
           "span": {
-            "start": 18788,
-            "end": 18790
+            "start": 18856,
+            "end": 18858
           }
         },
         {
           "span": {
-            "start": 18791,
-            "end": 18809
+            "start": 18859,
+            "end": 18877
           },
           "value": "dev-firewalld-true"
         }
@@ -5841,41 +5841,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 18810,
-          "end": 18813
+          "start": 18878,
+          "end": 18881
         }
       },
       "options": [
         {
-          "flag_start": 18814,
+          "flag_start": 18882,
           "name": {
             "span": {
-              "start": 18816,
-              "end": 18821
+              "start": 18884,
+              "end": 18889
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 18822,
-              "end": 18886
+              "start": 18890,
+              "end": 18954
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 18893,
+          "flag_start": 18961,
           "name": {
             "span": {
-              "start": 18895,
-              "end": 18900
+              "start": 18963,
+              "end": 18968
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 18901,
-              "end": 18969
+              "start": 18969,
+              "end": 19037
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptcache,target=/var/cache/apt"
           }
@@ -5884,8 +5884,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 18980,
-            "end": 19064
+            "start": 19048,
+            "end": 19132
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends \\\n            firewalld"
         }
@@ -5896,29 +5896,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 19066,
-          "end": 19070
+          "start": 19134,
+          "end": 19138
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 19071,
-          "end": 19097
+          "start": 19139,
+          "end": 19165
         },
         "value": "dev-firewalld-${FIREWALLD}"
       },
       "as_": [
         {
           "span": {
-            "start": 19098,
-            "end": 19100
+            "start": 19166,
+            "end": 19168
           }
         },
         {
           "span": {
-            "start": 19101,
-            "end": 19109
+            "start": 19169,
+            "end": 19177
           },
           "value": "dev-base"
         }
@@ -5928,16 +5928,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 19110,
-          "end": 19113
+          "start": 19178,
+          "end": 19181
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 19114,
-            "end": 19132
+            "start": 19182,
+            "end": 19200
           },
           "value": "groupadd -r docker"
         }
@@ -5948,16 +5948,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 19133,
-          "end": 19136
+          "start": 19201,
+          "end": 19204
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 19137,
-            "end": 19301
+            "start": 19205,
+            "end": 19369
           },
           "value": "useradd --create-home --gid docker unprivilegeduser \\\n && mkdir -p /home/unprivilegeduser/.local/share/docker \\\n && chown -R unprivilegeduser /home/unprivilegeduser"
         }
@@ -5968,18 +5968,18 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 19330,
-          "end": 19333
+          "start": 19398,
+          "end": 19401
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 19334,
-            "end": 19392
+            "start": 19402,
+            "end": 19441
           },
-          "value": "ln -sfv /go/src/github.com/docker/docker/.bashrc ~/.bashrc"
+          "value": "ln -sfv /usr/src/moby/.bashrc ~/.bashrc"
         }
       },
       "here_docs": []
@@ -5988,16 +5988,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 19420,
-          "end": 19423
+          "start": 19469,
+          "end": 19472
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 19424,
-            "end": 19500
+            "start": 19473,
+            "end": 19549
           },
           "value": "echo \"source /usr/share/bash-completion/bash_completion\" >> /etc/bash.bashrc"
         }
@@ -6008,16 +6008,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 19501,
-          "end": 19504
+          "start": 19550,
+          "end": 19553
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 19505,
-            "end": 19513
+            "start": 19554,
+            "end": 19562
           },
           "value": "ldconfig"
         }
@@ -6028,18 +6028,18 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 19696,
-          "end": 19699
+          "start": 19745,
+          "end": 19748
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 19700,
-            "end": 19777
+            "start": 19749,
+            "end": 19803
           },
-          "value": "git config --global --add safe.directory $GOPATH/src/github.com/docker/docker"
+          "value": "git config --global --add safe.directory /usr/src/moby"
         }
       },
       "here_docs": []
@@ -6048,41 +6048,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 19977,
-          "end": 19980
+          "start": 20003,
+          "end": 20006
         }
       },
       "options": [
         {
-          "flag_start": 19981,
+          "flag_start": 20007,
           "name": {
             "span": {
-              "start": 19983,
-              "end": 19988
+              "start": 20009,
+              "end": 20014
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 19989,
-              "end": 20053
+              "start": 20015,
+              "end": 20079
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 20060,
+          "flag_start": 20086,
           "name": {
             "span": {
-              "start": 20062,
-              "end": 20067
+              "start": 20088,
+              "end": 20093
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 20068,
-              "end": 20136
+              "start": 20094,
+              "end": 20162
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptcache,target=/var/cache/apt"
           }
@@ -6091,8 +6091,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 20147,
-            "end": 20932
+            "start": 20173,
+            "end": 20958
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends \\\n            apparmor \\\n            bash-completion \\\n            bzip2 \\\n            fuse-overlayfs \\\n            inetutils-ping \\\n            iproute2 \\\n            iptables \\\n            nftables \\\n            jq \\\n            libcap2-bin \\\n            libnet1 \\\n            libnftables-dev \\\n            libnl-3-200 \\\n            libprotobuf-c1 \\\n            libyajl2 \\\n            nano \\\n            net-tools \\\n            netcat-openbsd \\\n            patch \\\n            pigz \\\n            sudo \\\n            systemd-journal-remote \\\n            thin-provisioning-tools \\\n            uidmap \\\n            vim \\\n            vim-common \\\n            xfsprogs \\\n            xz-utils \\\n            zip \\\n            zstd"
         }
@@ -6103,41 +6103,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 20933,
-          "end": 20936
+          "start": 20959,
+          "end": 20962
         }
       },
       "options": [
         {
-          "flag_start": 20937,
+          "flag_start": 20963,
           "name": {
             "span": {
-              "start": 20939,
-              "end": 20944
+              "start": 20965,
+              "end": 20970
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 20945,
-              "end": 21009
+              "start": 20971,
+              "end": 21035
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 21016,
+          "flag_start": 21042,
           "name": {
             "span": {
-              "start": 21018,
-              "end": 21023
+              "start": 21044,
+              "end": 21049
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 21024,
-              "end": 21092
+              "start": 21050,
+              "end": 21118
             },
             "value": "type=cache,sharing=locked,id=moby-dev-aptcache,target=/var/cache/apt"
           }
@@ -6146,8 +6146,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 21103,
-            "end": 21287
+            "start": 21129,
+            "end": 21313
           },
           "value": "apt-get update && apt-get install --no-install-recommends -y \\\n            gcc \\\n            pkg-config \\\n            libseccomp-dev \\\n            libsystemd-dev \\\n            yamllint"
         }
@@ -6158,35 +6158,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 21288,
-          "end": 21292
+          "start": 21314,
+          "end": 21318
         }
       },
       "options": [
         {
-          "flag_start": 21293,
+          "flag_start": 21319,
           "name": {
             "span": {
-              "start": 21295,
-              "end": 21299
+              "start": 21321,
+              "end": 21325
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 21300,
+          "flag_start": 21326,
           "name": {
             "span": {
-              "start": 21302,
-              "end": 21306
+              "start": 21328,
+              "end": 21332
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 21307,
-              "end": 21316
+              "start": 21333,
+              "end": 21342
             },
             "value": "dockercli"
           }
@@ -6196,8 +6196,8 @@
         {
           "path": {
             "span": {
-              "start": 21329,
-              "end": 21336
+              "start": 21355,
+              "end": 21362
             },
             "value": "/build/"
           }
@@ -6205,8 +6205,8 @@
       ],
       "dest": {
         "span": {
-          "start": 21337,
-          "end": 21351
+          "start": 21363,
+          "end": 21377
         },
         "value": "/usr/local/cli"
       }
@@ -6215,35 +6215,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 21352,
-          "end": 21356
+          "start": 21378,
+          "end": 21382
         }
       },
       "options": [
         {
-          "flag_start": 21357,
+          "flag_start": 21383,
           "name": {
             "span": {
-              "start": 21359,
-              "end": 21363
+              "start": 21385,
+              "end": 21389
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 21364,
+          "flag_start": 21390,
           "name": {
             "span": {
-              "start": 21366,
-              "end": 21370
+              "start": 21392,
+              "end": 21396
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 21371,
-              "end": 21380
+              "start": 21397,
+              "end": 21406
             },
             "value": "dockercli"
           }
@@ -6253,8 +6253,8 @@
         {
           "path": {
             "span": {
-              "start": 21393,
-              "end": 21409
+              "start": 21419,
+              "end": 21435
             },
             "value": "/completion.bash"
           }
@@ -6262,8 +6262,8 @@
       ],
       "dest": {
         "span": {
-          "start": 21410,
-          "end": 21439
+          "start": 21436,
+          "end": 21465
         },
         "value": "/etc/bash_completion.d/docker"
       }
@@ -6272,35 +6272,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 21440,
-          "end": 21444
+          "start": 21466,
+          "end": 21470
         }
       },
       "options": [
         {
-          "flag_start": 21445,
+          "flag_start": 21471,
           "name": {
             "span": {
-              "start": 21447,
-              "end": 21451
+              "start": 21473,
+              "end": 21477
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 21452,
+          "flag_start": 21478,
           "name": {
             "span": {
-              "start": 21454,
-              "end": 21458
+              "start": 21480,
+              "end": 21484
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 21459,
-              "end": 21480
+              "start": 21485,
+              "end": 21506
             },
             "value": "dockercli-integration"
           }
@@ -6310,8 +6310,8 @@
         {
           "path": {
             "span": {
-              "start": 21481,
-              "end": 21488
+              "start": 21507,
+              "end": 21514
             },
             "value": "/build/"
           }
@@ -6319,8 +6319,8 @@
       ],
       "dest": {
         "span": {
-          "start": 21489,
-          "end": 21515
+          "start": 21515,
+          "end": 21541
         },
         "value": "/usr/local/cli-integration"
       }
@@ -6329,29 +6329,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 21517,
-          "end": 21521
+          "start": 21543,
+          "end": 21547
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 21522,
-          "end": 21526
+          "start": 21548,
+          "end": 21552
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 21527,
-            "end": 21529
+            "start": 21553,
+            "end": 21555
           }
         },
         {
           "span": {
-            "start": 21530,
-            "end": 21535
+            "start": 21556,
+            "end": 21561
           },
           "value": "build"
         }
@@ -6361,24 +6361,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 21536,
-          "end": 21540
+          "start": 21562,
+          "end": 21566
         }
       },
       "options": [
         {
-          "flag_start": 21541,
+          "flag_start": 21567,
           "name": {
             "span": {
-              "start": 21543,
-              "end": 21547
+              "start": 21569,
+              "end": 21573
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 21548,
-              "end": 21556
+              "start": 21574,
+              "end": 21582
             },
             "value": "gowinres"
           }
@@ -6388,8 +6388,8 @@
         {
           "path": {
             "span": {
-              "start": 21557,
-              "end": 21564
+              "start": 21583,
+              "end": 21590
             },
             "value": "/build/"
           }
@@ -6397,8 +6397,8 @@
       ],
       "dest": {
         "span": {
-          "start": 21565,
-          "end": 21580
+          "start": 21591,
+          "end": 21606
         },
         "value": "/usr/local/bin/"
       }
@@ -6407,30 +6407,30 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 21581,
-          "end": 21588
+          "start": 21607,
+          "end": 21614
         }
       },
       "arguments": {
         "span": {
-          "start": 21589,
-          "end": 21621
+          "start": 21615,
+          "end": 21628
         },
-        "value": "/go/src/github.com/docker/docker"
+        "value": "/usr/src/moby"
       }
     },
     {
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 21622,
-          "end": 21625
+          "start": 21629,
+          "end": 21632
         }
       },
       "arguments": {
         "span": {
-          "start": 21626,
-          "end": 21639
+          "start": 21633,
+          "end": 21646
         },
         "value": "CGO_ENABLED=1"
       }
@@ -6439,41 +6439,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 21640,
-          "end": 21643
+          "start": 21647,
+          "end": 21650
         }
       },
       "options": [
         {
-          "flag_start": 21644,
+          "flag_start": 21651,
           "name": {
             "span": {
-              "start": 21646,
-              "end": 21651
+              "start": 21653,
+              "end": 21658
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 21652,
-              "end": 21718
+              "start": 21659,
+              "end": 21725
             },
             "value": "type=cache,sharing=locked,id=moby-build-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 21725,
+          "flag_start": 21732,
           "name": {
             "span": {
-              "start": 21727,
-              "end": 21732
+              "start": 21734,
+              "end": 21739
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 21733,
-              "end": 21803
+              "start": 21740,
+              "end": 21810
             },
             "value": "type=cache,sharing=locked,id=moby-build-aptcache,target=/var/cache/apt"
           }
@@ -6482,8 +6482,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 21814,
-            "end": 21954
+            "start": 21821,
+            "end": 21961
           },
           "value": "apt-get update && apt-get install --no-install-recommends -y \\\n            clang \\\n            lld \\\n            llvm \\\n            icoutils"
         }
@@ -6494,14 +6494,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 21955,
-          "end": 21958
+          "start": 21962,
+          "end": 21965
         }
       },
       "arguments": {
         "span": {
-          "start": 21959,
-          "end": 21973
+          "start": 21966,
+          "end": 21980
         },
         "value": "TARGETPLATFORM"
       }
@@ -6510,41 +6510,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 21974,
-          "end": 21977
+          "start": 21981,
+          "end": 21984
         }
       },
       "options": [
         {
-          "flag_start": 21978,
+          "flag_start": 21985,
           "name": {
             "span": {
-              "start": 21980,
-              "end": 21985
+              "start": 21987,
+              "end": 21992
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 21986,
-              "end": 22052
+              "start": 21993,
+              "end": 22059
             },
             "value": "type=cache,sharing=locked,id=moby-build-aptlib,target=/var/lib/apt"
           }
         },
         {
-          "flag_start": 22059,
+          "flag_start": 22066,
           "name": {
             "span": {
-              "start": 22061,
-              "end": 22066
+              "start": 22068,
+              "end": 22073
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 22067,
-              "end": 22137
+              "start": 22074,
+              "end": 22144
             },
             "value": "type=cache,sharing=locked,id=moby-build-aptcache,target=/var/cache/apt"
           }
@@ -6553,10 +6553,10 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 22148,
-            "end": 22348
+            "start": 22155,
+            "end": 22384
           },
-          "value": "xx-apt-get install --no-install-recommends -y \\\n            gcc \\\n            libc6-dev \\\n            libnftables-dev \\\n            libseccomp-dev \\\n            libsystemd-dev \\\n            pkg-config"
+          "value": "xx-apt-get install --no-install-recommends -y \\\n            gcc \\\n            libc6-dev \\\n            linux-libc-dev \\\n            libnftables-dev \\\n            libseccomp-dev \\\n            libsystemd-dev \\\n            pkg-config"
         }
       },
       "here_docs": []
@@ -6565,14 +6565,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22349,
-          "end": 22352
+          "start": 22385,
+          "end": 22388
         }
       },
       "arguments": {
         "span": {
-          "start": 22353,
-          "end": 22369
+          "start": 22389,
+          "end": 22405
         },
         "value": "DOCKER_BUILDTAGS"
       }
@@ -6581,14 +6581,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22370,
-          "end": 22373
+          "start": 22406,
+          "end": 22409
         }
       },
       "arguments": {
         "span": {
-          "start": 22374,
-          "end": 22386
+          "start": 22410,
+          "end": 22422
         },
         "value": "DOCKER_DEBUG"
       }
@@ -6597,14 +6597,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22387,
-          "end": 22390
+          "start": 22423,
+          "end": 22426
         }
       },
       "arguments": {
         "span": {
-          "start": 22391,
-          "end": 22412
+          "start": 22427,
+          "end": 22448
         },
         "value": "DOCKER_GITCOMMIT=HEAD"
       }
@@ -6613,14 +6613,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22413,
-          "end": 22416
+          "start": 22449,
+          "end": 22452
         }
       },
       "arguments": {
         "span": {
-          "start": 22417,
-          "end": 22431
+          "start": 22453,
+          "end": 22467
         },
         "value": "DOCKER_LDFLAGS"
       }
@@ -6629,14 +6629,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22432,
-          "end": 22435
+          "start": 22468,
+          "end": 22471
         }
       },
       "arguments": {
         "span": {
-          "start": 22436,
-          "end": 22449
+          "start": 22472,
+          "end": 22485
         },
         "value": "DOCKER_STATIC"
       }
@@ -6645,14 +6645,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22450,
-          "end": 22453
+          "start": 22486,
+          "end": 22489
         }
       },
       "arguments": {
         "span": {
-          "start": 22454,
-          "end": 22461
+          "start": 22490,
+          "end": 22497
         },
         "value": "VERSION"
       }
@@ -6661,14 +6661,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22462,
-          "end": 22465
+          "start": 22498,
+          "end": 22501
         }
       },
       "arguments": {
         "span": {
-          "start": 22466,
-          "end": 22474
+          "start": 22502,
+          "end": 22510
         },
         "value": "PLATFORM"
       }
@@ -6677,14 +6677,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22475,
-          "end": 22478
+          "start": 22511,
+          "end": 22514
         }
       },
       "arguments": {
         "span": {
-          "start": 22479,
-          "end": 22486
+          "start": 22515,
+          "end": 22522
         },
         "value": "PRODUCT"
       }
@@ -6693,14 +6693,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22487,
-          "end": 22490
+          "start": 22523,
+          "end": 22526
         }
       },
       "arguments": {
         "span": {
-          "start": 22491,
-          "end": 22514
+          "start": 22527,
+          "end": 22550
         },
         "value": "DEFAULT_PRODUCT_LICENSE"
       }
@@ -6709,14 +6709,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 22515,
-          "end": 22518
+          "start": 22551,
+          "end": 22554
         }
       },
       "arguments": {
         "span": {
-          "start": 22519,
-          "end": 22532
+          "start": 22555,
+          "end": 22568
         },
         "value": "PACKAGER_NAME"
       }
@@ -6725,14 +6725,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 22647,
-          "end": 22650
+          "start": 22683,
+          "end": 22686
         }
       },
       "arguments": {
         "span": {
-          "start": 22651,
-          "end": 22662
+          "start": 22687,
+          "end": 22698
         },
         "value": "PREFIX=/tmp"
       }
@@ -6741,16 +6741,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 22663,
-          "end": 22666
+          "start": 22699,
+          "end": 22702
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 22672,
-            "end": 22672
+            "start": 22708,
+            "end": 22708
           },
           "value": ""
         }
@@ -6758,8 +6758,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 22673,
-            "end": 22875
+            "start": 22709,
+            "end": 22911
           },
           "expand": true,
           "value": "  set -ex\n  # in bullseye arm64 target does not link with lld so configure it to use ld instead\n  if [ \"$(xx-info arch)\" = \"arm64\" ]; then\n    XX_CC_PREFER_LINKER=ld xx-clang --setup-target-triple\n  fi\n"
@@ -6770,28 +6770,11 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 22879,
-          "end": 22882
+          "start": 22915,
+          "end": 22918
         }
       },
       "options": [
-        {
-          "flag_start": 22883,
-          "name": {
-            "span": {
-              "start": 22885,
-              "end": 22890
-            },
-            "value": "mount"
-          },
-          "value": {
-            "span": {
-              "start": 22891,
-              "end": 22912
-            },
-            "value": "type=bind,target=.,rw"
-          }
-        },
         {
           "flag_start": 22919,
           "name": {
@@ -6804,7 +6787,24 @@
           "value": {
             "span": {
               "start": 22927,
-              "end": 22996
+              "end": 22948
+            },
+            "value": "type=bind,target=.,rw"
+          }
+        },
+        {
+          "flag_start": 22955,
+          "name": {
+            "span": {
+              "start": 22957,
+              "end": 22962
+            },
+            "value": "mount"
+          },
+          "value": {
+            "span": {
+              "start": 22963,
+              "end": 23032
             },
             "value": "type=cache,target=/root/.cache/go-build,id=moby-build-$TARGETPLATFORM"
           }
@@ -6813,8 +6813,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 23002,
-            "end": 23002
+            "start": 23038,
+            "end": 23038
           },
           "value": ""
         }
@@ -6822,8 +6822,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 23003,
-            "end": 23570
+            "start": 23039,
+            "end": 23606
           },
           "expand": true,
           "value": "  set -e\n\n  target=dynbinary\n  verify_flags=\n  exe_suffix=\n  if [ \"$DOCKER_STATIC\" = \"1\" ]; then\n      target=binary\n      verify_flags=--static\n  fi\n  if [ \"$(xx-info os)\" = \"windows\" ]; then\n      exe_suffix=.exe\n  fi\n\n  set -x\n  xx-go --wrap\n  PKG_CONFIG=$(xx-go env PKG_CONFIG) ./hack/make.sh \"$target\"\n  xx-verify $verify_flags \"/tmp/bundles/${target}-daemon/dockerd${exe_suffix}\"\n  if [ \"$(xx-info os)\" = \"linux\" ]; then\n      xx-verify $verify_flags \"/tmp/bundles/${target}-daemon/docker-proxy\"\n  fi\n  mkdir /build\n  mv /tmp/bundles/${target}-daemon/* /build/\n"
@@ -6834,29 +6834,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 23700,
-          "end": 23704
+          "start": 23736,
+          "end": 23740
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 23705,
-          "end": 23712
+          "start": 23741,
+          "end": 23748
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 23713,
-            "end": 23715
+            "start": 23749,
+            "end": 23751
           }
         },
         {
           "span": {
-            "start": 23716,
-            "end": 23722
+            "start": 23752,
+            "end": 23758
           },
           "value": "binary"
         }
@@ -6866,24 +6866,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 23723,
-          "end": 23727
+          "start": 23759,
+          "end": 23763
         }
       },
       "options": [
         {
-          "flag_start": 23728,
+          "flag_start": 23764,
           "name": {
             "span": {
-              "start": 23730,
-              "end": 23734
+              "start": 23766,
+              "end": 23770
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 23735,
-              "end": 23740
+              "start": 23771,
+              "end": 23776
             },
             "value": "build"
           }
@@ -6893,8 +6893,8 @@
         {
           "path": {
             "span": {
-              "start": 23741,
-              "end": 23748
+              "start": 23777,
+              "end": 23784
             },
             "value": "/build/"
           }
@@ -6902,8 +6902,8 @@
       ],
       "dest": {
         "span": {
-          "start": 23749,
-          "end": 23750
+          "start": 23785,
+          "end": 23786
         },
         "value": "/"
       }
@@ -6912,29 +6912,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 23788,
-          "end": 23792
+          "start": 23824,
+          "end": 23828
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 23793,
-          "end": 23800
+          "start": 23829,
+          "end": 23836
         },
         "value": "scratch"
       },
       "as_": [
         {
           "span": {
-            "start": 23801,
-            "end": 23803
+            "start": 23837,
+            "end": 23839
           }
         },
         {
           "span": {
-            "start": 23804,
-            "end": 23807
+            "start": 23840,
+            "end": 23843
           },
           "value": "all"
         }
@@ -6944,35 +6944,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 23808,
-          "end": 23812
+          "start": 23844,
+          "end": 23848
         }
       },
       "options": [
         {
-          "flag_start": 23813,
+          "flag_start": 23849,
           "name": {
             "span": {
-              "start": 23815,
-              "end": 23819
+              "start": 23851,
+              "end": 23855
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 23820,
+          "flag_start": 23856,
           "name": {
             "span": {
-              "start": 23822,
-              "end": 23826
+              "start": 23858,
+              "end": 23862
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 23827,
-              "end": 23831
+              "start": 23863,
+              "end": 23867
             },
             "value": "tini"
           }
@@ -6982,8 +6982,8 @@
         {
           "path": {
             "span": {
-              "start": 23841,
-              "end": 23848
+              "start": 23877,
+              "end": 23884
             },
             "value": "/build/"
           }
@@ -6991,8 +6991,8 @@
       ],
       "dest": {
         "span": {
-          "start": 23849,
-          "end": 23850
+          "start": 23885,
+          "end": 23886
         },
         "value": "/"
       }
@@ -7001,35 +7001,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 23851,
-          "end": 23855
+          "start": 23887,
+          "end": 23891
         }
       },
       "options": [
         {
-          "flag_start": 23856,
+          "flag_start": 23892,
           "name": {
             "span": {
-              "start": 23858,
-              "end": 23862
+              "start": 23894,
+              "end": 23898
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 23863,
+          "flag_start": 23899,
           "name": {
             "span": {
-              "start": 23865,
-              "end": 23869
+              "start": 23901,
+              "end": 23905
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 23870,
-              "end": 23874
+              "start": 23906,
+              "end": 23910
             },
             "value": "runc"
           }
@@ -7039,8 +7039,8 @@
         {
           "path": {
             "span": {
-              "start": 23884,
-              "end": 23891
+              "start": 23920,
+              "end": 23927
             },
             "value": "/build/"
           }
@@ -7048,8 +7048,8 @@
       ],
       "dest": {
         "span": {
-          "start": 23892,
-          "end": 23893
+          "start": 23928,
+          "end": 23929
         },
         "value": "/"
       }
@@ -7058,35 +7058,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 23894,
-          "end": 23898
+          "start": 23930,
+          "end": 23934
         }
       },
       "options": [
         {
-          "flag_start": 23899,
+          "flag_start": 23935,
           "name": {
             "span": {
-              "start": 23901,
-              "end": 23905
+              "start": 23937,
+              "end": 23941
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 23906,
+          "flag_start": 23942,
           "name": {
             "span": {
-              "start": 23908,
-              "end": 23912
+              "start": 23944,
+              "end": 23948
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 23913,
-              "end": 23923
+              "start": 23949,
+              "end": 23959
             },
             "value": "containerd"
           }
@@ -7096,8 +7096,8 @@
         {
           "path": {
             "span": {
-              "start": 23927,
-              "end": 23934
+              "start": 23963,
+              "end": 23970
             },
             "value": "/build/"
           }
@@ -7105,8 +7105,8 @@
       ],
       "dest": {
         "span": {
-          "start": 23935,
-          "end": 23936
+          "start": 23971,
+          "end": 23972
         },
         "value": "/"
       }
@@ -7115,35 +7115,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 23937,
-          "end": 23941
+          "start": 23973,
+          "end": 23977
         }
       },
       "options": [
         {
-          "flag_start": 23942,
+          "flag_start": 23978,
           "name": {
             "span": {
-              "start": 23944,
-              "end": 23948
+              "start": 23980,
+              "end": 23984
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 23949,
+          "flag_start": 23985,
           "name": {
             "span": {
-              "start": 23951,
-              "end": 23955
+              "start": 23987,
+              "end": 23991
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 23956,
-              "end": 23967
+              "start": 23992,
+              "end": 24003
             },
             "value": "rootlesskit"
           }
@@ -7153,8 +7153,8 @@
         {
           "path": {
             "span": {
-              "start": 23970,
-              "end": 23977
+              "start": 24006,
+              "end": 24013
             },
             "value": "/build/"
           }
@@ -7162,8 +7162,8 @@
       ],
       "dest": {
         "span": {
-          "start": 23978,
-          "end": 23979
+          "start": 24014,
+          "end": 24015
         },
         "value": "/"
       }
@@ -7172,35 +7172,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 23980,
-          "end": 23984
+          "start": 24016,
+          "end": 24020
         }
       },
       "options": [
         {
-          "flag_start": 23985,
+          "flag_start": 24021,
           "name": {
             "span": {
-              "start": 23987,
-              "end": 23991
+              "start": 24023,
+              "end": 24027
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 23992,
+          "flag_start": 24028,
           "name": {
             "span": {
-              "start": 23994,
-              "end": 23998
+              "start": 24030,
+              "end": 24034
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 23999,
-              "end": 24012
+              "start": 24035,
+              "end": 24048
             },
             "value": "containerutil"
           }
@@ -7210,8 +7210,8 @@
         {
           "path": {
             "span": {
-              "start": 24013,
-              "end": 24020
+              "start": 24049,
+              "end": 24056
             },
             "value": "/build/"
           }
@@ -7219,8 +7219,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24021,
-          "end": 24022
+          "start": 24057,
+          "end": 24058
         },
         "value": "/"
       }
@@ -7229,35 +7229,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24023,
-          "end": 24027
+          "start": 24059,
+          "end": 24063
         }
       },
       "options": [
         {
-          "flag_start": 24028,
+          "flag_start": 24064,
           "name": {
             "span": {
-              "start": 24030,
-              "end": 24034
+              "start": 24066,
+              "end": 24070
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 24035,
+          "flag_start": 24071,
           "name": {
             "span": {
-              "start": 24037,
-              "end": 24041
+              "start": 24073,
+              "end": 24077
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 24042,
-              "end": 24047
+              "start": 24078,
+              "end": 24083
             },
             "value": "build"
           }
@@ -7267,8 +7267,8 @@
         {
           "path": {
             "span": {
-              "start": 24056,
-              "end": 24062
+              "start": 24092,
+              "end": 24098
             },
             "value": "/build"
           }
@@ -7276,8 +7276,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24064,
-          "end": 24065
+          "start": 24100,
+          "end": 24101
         },
         "value": "/"
       }
@@ -7286,29 +7286,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 24130,
-          "end": 24134
+          "start": 24166,
+          "end": 24170
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 24135,
-          "end": 24139
+          "start": 24171,
+          "end": 24175
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 24140,
-            "end": 24142
+            "start": 24176,
+            "end": 24178
           }
         },
         {
           "span": {
-            "start": 24143,
-            "end": 24152
+            "start": 24179,
+            "end": 24188
           },
           "value": "smoketest"
         }
@@ -7318,14 +7318,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 24153,
-          "end": 24160
+          "start": 24189,
+          "end": 24196
         }
       },
       "arguments": {
         "span": {
-          "start": 24161,
-          "end": 24175
+          "start": 24197,
+          "end": 24211
         },
         "value": "/usr/local/bin"
       }
@@ -7334,24 +7334,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24176,
-          "end": 24180
+          "start": 24212,
+          "end": 24216
         }
       },
       "options": [
         {
-          "flag_start": 24181,
+          "flag_start": 24217,
           "name": {
             "span": {
-              "start": 24183,
-              "end": 24187
+              "start": 24219,
+              "end": 24223
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 24188,
-              "end": 24193
+              "start": 24224,
+              "end": 24229
             },
             "value": "build"
           }
@@ -7361,8 +7361,8 @@
         {
           "path": {
             "span": {
-              "start": 24194,
-              "end": 24200
+              "start": 24230,
+              "end": 24236
             },
             "value": "/build"
           }
@@ -7370,8 +7370,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24201,
-          "end": 24202
+          "start": 24237,
+          "end": 24238
         },
         "value": "."
       }
@@ -7380,16 +7380,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 24203,
-          "end": 24206
+          "start": 24239,
+          "end": 24242
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 24212,
-            "end": 24212
+            "start": 24248,
+            "end": 24248
           },
           "value": ""
         }
@@ -7397,8 +7397,8 @@
       "here_docs": [
         {
           "span": {
-            "start": 24213,
-            "end": 24303
+            "start": 24249,
+            "end": 24339
           },
           "expand": true,
           "value": "  set -ex\n  file dockerd\n  dockerd --version\n  file docker-proxy\n  docker-proxy --version\n"
@@ -7409,29 +7409,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 24374,
-          "end": 24378
+          "start": 24410,
+          "end": 24414
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 24379,
-          "end": 24387
+          "start": 24415,
+          "end": 24423
         },
         "value": "dev-base"
       },
       "as_": [
         {
           "span": {
-            "start": 24388,
-            "end": 24390
+            "start": 24424,
+            "end": 24426
           }
         },
         {
           "span": {
-            "start": 24391,
-            "end": 24403
+            "start": 24427,
+            "end": 24439
           },
           "value": "devcontainer"
         }
@@ -7441,17 +7441,17 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24404,
-          "end": 24408
+          "start": 24440,
+          "end": 24444
         }
       },
       "options": [
         {
-          "flag_start": 24409,
+          "flag_start": 24445,
           "name": {
             "span": {
-              "start": 24411,
-              "end": 24415
+              "start": 24447,
+              "end": 24451
             },
             "value": "link"
           },
@@ -7462,8 +7462,8 @@
         {
           "path": {
             "span": {
-              "start": 24416,
-              "end": 24417
+              "start": 24452,
+              "end": 24453
             },
             "value": "."
           }
@@ -7471,8 +7471,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24418,
-          "end": 24419
+          "start": 24454,
+          "end": 24455
         },
         "value": "."
       }
@@ -7481,35 +7481,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24420,
-          "end": 24424
+          "start": 24456,
+          "end": 24460
         }
       },
       "options": [
         {
-          "flag_start": 24425,
+          "flag_start": 24461,
           "name": {
             "span": {
-              "start": 24427,
-              "end": 24431
+              "start": 24463,
+              "end": 24467
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 24432,
+          "flag_start": 24468,
           "name": {
             "span": {
-              "start": 24434,
-              "end": 24438
+              "start": 24470,
+              "end": 24474
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 24439,
-              "end": 24444
+              "start": 24475,
+              "end": 24480
             },
             "value": "gopls"
           }
@@ -7519,8 +7519,8 @@
         {
           "path": {
             "span": {
-              "start": 24453,
-              "end": 24460
+              "start": 24489,
+              "end": 24496
             },
             "value": "/build/"
           }
@@ -7528,8 +7528,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24461,
-          "end": 24476
+          "start": 24497,
+          "end": 24512
         },
         "value": "/usr/local/bin/"
       }
@@ -7538,29 +7538,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 24656,
-          "end": 24660
+          "start": 24692,
+          "end": 24696
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 24661,
-          "end": 24672
+          "start": 24697,
+          "end": 24708
         },
         "value": "docker:dind"
       },
       "as_": [
         {
           "span": {
-            "start": 24673,
-            "end": 24675
+            "start": 24709,
+            "end": 24711
           }
         },
         {
           "span": {
-            "start": 24676,
-            "end": 24680
+            "start": 24712,
+            "end": 24716
           },
           "value": "dind"
         }
@@ -7570,35 +7570,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24681,
-          "end": 24685
+          "start": 24717,
+          "end": 24721
         }
       },
       "options": [
         {
-          "flag_start": 24686,
+          "flag_start": 24722,
           "name": {
             "span": {
-              "start": 24688,
-              "end": 24692
+              "start": 24724,
+              "end": 24728
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 24693,
+          "flag_start": 24729,
           "name": {
             "span": {
-              "start": 24695,
-              "end": 24699
+              "start": 24731,
+              "end": 24735
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 24700,
-              "end": 24709
+              "start": 24736,
+              "end": 24745
             },
             "value": "dockercli"
           }
@@ -7608,8 +7608,8 @@
         {
           "path": {
             "span": {
-              "start": 24710,
-              "end": 24723
+              "start": 24746,
+              "end": 24759
             },
             "value": "/build/docker"
           }
@@ -7617,8 +7617,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24724,
-          "end": 24739
+          "start": 24760,
+          "end": 24775
         },
         "value": "/usr/local/bin/"
       }
@@ -7627,35 +7627,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24740,
-          "end": 24744
+          "start": 24776,
+          "end": 24780
         }
       },
       "options": [
         {
-          "flag_start": 24745,
+          "flag_start": 24781,
           "name": {
             "span": {
-              "start": 24747,
-              "end": 24751
+              "start": 24783,
+              "end": 24787
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 24752,
+          "flag_start": 24788,
           "name": {
             "span": {
-              "start": 24754,
-              "end": 24758
+              "start": 24790,
+              "end": 24794
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 24759,
-              "end": 24765
+              "start": 24795,
+              "end": 24801
             },
             "value": "buildx"
           }
@@ -7665,8 +7665,8 @@
         {
           "path": {
             "span": {
-              "start": 24769,
-              "end": 24776
+              "start": 24805,
+              "end": 24812
             },
             "value": "/buildx"
           }
@@ -7674,8 +7674,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24777,
-          "end": 24828
+          "start": 24813,
+          "end": 24864
         },
         "value": "/usr/local/libexec/docker/cli-plugins/docker-buildx"
       }
@@ -7684,35 +7684,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24829,
-          "end": 24833
+          "start": 24865,
+          "end": 24869
         }
       },
       "options": [
         {
-          "flag_start": 24834,
+          "flag_start": 24870,
           "name": {
             "span": {
-              "start": 24836,
-              "end": 24840
+              "start": 24872,
+              "end": 24876
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 24841,
+          "flag_start": 24877,
           "name": {
             "span": {
-              "start": 24843,
-              "end": 24847
+              "start": 24879,
+              "end": 24883
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 24848,
-              "end": 24855
+              "start": 24884,
+              "end": 24891
             },
             "value": "compose"
           }
@@ -7722,8 +7722,8 @@
         {
           "path": {
             "span": {
-              "start": 24858,
-              "end": 24873
+              "start": 24894,
+              "end": 24909
             },
             "value": "/docker-compose"
           }
@@ -7731,8 +7731,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24874,
-          "end": 24926
+          "start": 24910,
+          "end": 24962
         },
         "value": "/usr/local/libexec/docker/cli-plugins/docker-compose"
       }
@@ -7741,35 +7741,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 24927,
-          "end": 24931
+          "start": 24963,
+          "end": 24967
         }
       },
       "options": [
         {
-          "flag_start": 24932,
+          "flag_start": 24968,
           "name": {
             "span": {
-              "start": 24934,
-              "end": 24938
+              "start": 24970,
+              "end": 24974
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 24939,
+          "flag_start": 24975,
           "name": {
             "span": {
-              "start": 24941,
-              "end": 24945
+              "start": 24977,
+              "end": 24981
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 24946,
-              "end": 24949
+              "start": 24982,
+              "end": 24985
             },
             "value": "all"
           }
@@ -7779,8 +7779,8 @@
         {
           "path": {
             "span": {
-              "start": 24956,
-              "end": 24957
+              "start": 24992,
+              "end": 24993
             },
             "value": "/"
           }
@@ -7788,8 +7788,8 @@
       ],
       "dest": {
         "span": {
-          "start": 24958,
-          "end": 24973
+          "start": 24994,
+          "end": 25009
         },
         "value": "/usr/local/bin/"
       }
@@ -7798,29 +7798,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 25027,
-          "end": 25031
+          "start": 25063,
+          "end": 25067
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 25032,
-          "end": 25040
+          "start": 25068,
+          "end": 25076
         },
         "value": "dev-base"
       },
       "as_": [
         {
           "span": {
-            "start": 25041,
-            "end": 25043
+            "start": 25077,
+            "end": 25079
           }
         },
         {
           "span": {
-            "start": 25044,
-            "end": 25047
+            "start": 25080,
+            "end": 25083
           },
           "value": "dev"
         }
@@ -7830,17 +7830,17 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 25048,
-          "end": 25052
+          "start": 25084,
+          "end": 25088
         }
       },
       "options": [
         {
-          "flag_start": 25053,
+          "flag_start": 25089,
           "name": {
             "span": {
-              "start": 25055,
-              "end": 25059
+              "start": 25091,
+              "end": 25095
             },
             "value": "link"
           },
@@ -7851,8 +7851,8 @@
         {
           "path": {
             "span": {
-              "start": 25060,
-              "end": 25061
+              "start": 25096,
+              "end": 25097
             },
             "value": "."
           }
@@ -7860,8 +7860,8 @@
       ],
       "dest": {
         "span": {
-          "start": 25062,
-          "end": 25063
+          "start": 25098,
+          "end": 25099
         },
         "value": "."
       }

@@ -19,7 +19,7 @@
           "start": 5,
           "end": 16
         },
-        "value": "alpine:3.23"
+        "value": "alpine:3.24"
       },
       "as_": null
     },

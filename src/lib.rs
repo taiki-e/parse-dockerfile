@@ -130,8 +130,11 @@ pub fn parse(text: &str) -> Result<Dockerfile<'_>> {
         stages: &mut Vec<Range<usize>>,
     ) -> Error {
         // reduce memory usage before allocation in into_error
-        *instructions = vec![];
-        *stages = vec![];
+        #[allow(clippy::new_instead_of_clear)]
+        {
+            *instructions = vec![];
+            *stages = vec![];
+        }
         e.into_error(p)
     }
 

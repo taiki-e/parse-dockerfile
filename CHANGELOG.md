@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Distribute prebuilt binary for AArch64 FreeBSD (tier 2 since Rust 1.98).
+
 ## [0.1.8] - 2026-07-10
 
 - Specify the behavior of the iterator returned by `parse_iter` when `.next()` called after once `Some(Err(..))` returned, to return `None`. Previously, the behavior was unspecified, and the consistency of the results was not guaranteed. ([bbb6d15](https://github.com/taiki-e/parse-dockerfile/commit/bbb6d159489deaaafdb410b606e33b7e88453a91))

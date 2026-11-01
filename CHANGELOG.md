@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.1.9] - 2026-11-01
+
 - Distribute prebuilt binary for AArch64 FreeBSD (tier 2 since Rust 1.98).
 
 ## [0.1.8] - 2026-07-10
@@ -62,7 +64,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 Initial release
 
-[Unreleased]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.8...HEAD
+[Unreleased]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.9...HEAD
+[0.1.9]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/taiki-e/parse-dockerfile/compare/v0.1.5...v0.1.6

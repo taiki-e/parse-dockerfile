@@ -25,49 +25,49 @@
       "arguments": {
         "span": {
           "start": 34,
-          "end": 57
+          "end": 55
         },
-        "value": "DEBIAN_VERSION=bookworm"
+        "value": "DEBIAN_VERSION=trixie"
       }
     },
     {
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 194,
-          "end": 197
+          "start": 192,
+          "end": 195
         }
       },
       "arguments": {
         "span": {
-          "start": 198,
-          "end": 214
+          "start": 196,
+          "end": 213
         },
-        "value": "XX_VERSION=1.9.0"
+        "value": "XX_VERSION=1.10.0"
       }
     },
     {
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 255,
-          "end": 259
+          "start": 254,
+          "end": 258
         }
       },
       "options": [
         {
-          "flag_start": 260,
+          "flag_start": 259,
           "name": {
             "span": {
-              "start": 262,
-              "end": 270
+              "start": 261,
+              "end": 269
             },
             "value": "platform"
           },
           "value": {
             "span": {
-              "start": 271,
-              "end": 285
+              "start": 270,
+              "end": 284
             },
             "value": "$BUILDPLATFORM"
           }
@@ -75,22 +75,22 @@
       ],
       "image": {
         "span": {
-          "start": 286,
-          "end": 313
+          "start": 285,
+          "end": 312
         },
         "value": "tonistiigi/xx:${XX_VERSION}"
       },
       "as_": [
         {
           "span": {
-            "start": 314,
-            "end": 316
+            "start": 313,
+            "end": 315
           }
         },
         {
           "span": {
-            "start": 317,
-            "end": 319
+            "start": 316,
+            "end": 318
           },
           "value": "xx"
         }
@@ -100,24 +100,24 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 321,
-          "end": 325
+          "start": 320,
+          "end": 324
         }
       },
       "options": [
         {
-          "flag_start": 326,
+          "flag_start": 325,
           "name": {
             "span": {
-              "start": 328,
-              "end": 336
+              "start": 327,
+              "end": 335
             },
             "value": "platform"
           },
           "value": {
             "span": {
-              "start": 337,
-              "end": 351
+              "start": 336,
+              "end": 350
             },
             "value": "$BUILDPLATFORM"
           }
@@ -125,22 +125,22 @@
       ],
       "image": {
         "span": {
-          "start": 352,
-          "end": 381
+          "start": 351,
+          "end": 380
         },
         "value": "debian:${DEBIAN_VERSION}-slim"
       },
       "as_": [
         {
           "span": {
-            "start": 382,
-            "end": 384
+            "start": 381,
+            "end": 383
           }
         },
         {
           "span": {
-            "start": 385,
-            "end": 390
+            "start": 384,
+            "end": 389
           },
           "value": "build"
         }
@@ -150,35 +150,35 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 391,
-          "end": 395
+          "start": 390,
+          "end": 394
         }
       },
       "options": [
         {
-          "flag_start": 396,
+          "flag_start": 395,
           "name": {
             "span": {
-              "start": 398,
-              "end": 402
+              "start": 397,
+              "end": 401
             },
             "value": "link"
           },
           "value": null
         },
         {
-          "flag_start": 403,
+          "flag_start": 402,
           "name": {
             "span": {
-              "start": 405,
-              "end": 409
+              "start": 404,
+              "end": 408
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 410,
-              "end": 412
+              "start": 409,
+              "end": 411
             },
             "value": "xx"
           }
@@ -188,8 +188,8 @@
         {
           "path": {
             "span": {
-              "start": 413,
-              "end": 414
+              "start": 412,
+              "end": 413
             },
             "value": "/"
           }
@@ -197,8 +197,8 @@
       ],
       "dest": {
         "span": {
-          "start": 415,
-          "end": 416
+          "start": 414,
+          "end": 415
         },
         "value": "/"
       }
@@ -207,14 +207,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 417,
-          "end": 420
+          "start": 416,
+          "end": 419
         }
       },
       "arguments": {
         "span": {
-          "start": 421,
-          "end": 435
+          "start": 420,
+          "end": 434
         },
         "value": "TARGETPLATFORM"
       }
@@ -223,16 +223,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 436,
-          "end": 439
+          "start": 435,
+          "end": 438
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 440,
-            "end": 512
+            "start": 439,
+            "end": 511
           },
           "value": "apt-get update && xx-apt-get --no-install-recommends install -y binutils"
         }
@@ -243,14 +243,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 513,
-          "end": 520
+          "start": 512,
+          "end": 519
         }
       },
       "arguments": {
         "span": {
-          "start": 521,
-          "end": 525
+          "start": 520,
+          "end": 524
         },
         "value": "/out"
       }
@@ -259,24 +259,24 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 526,
-          "end": 529
+          "start": 525,
+          "end": 528
         }
       },
       "options": [
         {
-          "flag_start": 530,
+          "flag_start": 529,
           "name": {
             "span": {
-              "start": 532,
-              "end": 537
+              "start": 531,
+              "end": 536
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 538,
-              "end": 568
+              "start": 537,
+              "end": 567
             },
             "value": "type=bind,target=/winresources"
           }
@@ -285,8 +285,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 575,
-            "end": 679
+            "start": 574,
+            "end": 678
           },
           "value": "x86_64-w64-mingw32-windmc -v /winresources/event_messages.mc \\\n    && mv MSG00001.bin event_messages.bin"
         }
@@ -297,15 +297,15 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 681,
-          "end": 685
+          "start": 680,
+          "end": 684
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 686,
-          "end": 693
+          "start": 685,
+          "end": 692
         },
         "value": "scratch"
       },
@@ -315,24 +315,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 694,
-          "end": 698
+          "start": 693,
+          "end": 697
         }
       },
       "options": [
         {
-          "flag_start": 699,
+          "flag_start": 698,
           "name": {
             "span": {
-              "start": 701,
-              "end": 705
+              "start": 700,
+              "end": 704
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 706,
-              "end": 711
+              "start": 705,
+              "end": 710
             },
             "value": "build"
           }
@@ -342,8 +342,8 @@
         {
           "path": {
             "span": {
-              "start": 712,
-              "end": 716
+              "start": 711,
+              "end": 715
             },
             "value": "/out"
           }
@@ -351,8 +351,8 @@
       ],
       "dest": {
         "span": {
-          "start": 717,
-          "end": 718
+          "start": 716,
+          "end": 717
         },
         "value": "/"
       }

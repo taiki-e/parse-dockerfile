@@ -1,0 +1,91 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 0,
+          "end": 4
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 13,
+          "end": 17
+        }
+      },
+      "options": [
+        {
+          "flag_start": 18,
+          "name": {
+            "span": {
+              "start": 20,
+              "end": 25
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 26,
+              "end": 35
+            },
+            "value": "rwxrwxrwx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 36,
+              "end": 49
+            },
+            "value": "copychmod.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 50,
+          "end": 55
+        },
+        "value": "/tmp/"
+      }
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 57,
+          "end": 60
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 61,
+            "end": 68
+          },
+          "value": "/bin/sh"
+        }
+      }
+    }
+  ]
+}

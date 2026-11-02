@@ -1,0 +1,404 @@
+{
+  "parser_directives": {
+    "syntax": null,
+    "escape": null,
+    "check": null
+  },
+  "instructions": [
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 220,
+          "end": 224
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 225,
+          "end": 231
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 232,
+          "end": 236
+        }
+      },
+      "options": [
+        {
+          "flag_start": 237,
+          "name": {
+            "span": {
+              "start": 239,
+              "end": 244
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 245,
+              "end": 248
+            },
+            "value": "644"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 249,
+              "end": 262
+            },
+            "value": "copychmod.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 263,
+          "end": 286
+        },
+        "value": "/fixtures/copychmod.txt"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 287,
+          "end": 291
+        }
+      },
+      "options": [
+        {
+          "flag_start": 292,
+          "name": {
+            "span": {
+              "start": 294,
+              "end": 299
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 300,
+              "end": 303
+            },
+            "value": "755"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 304,
+              "end": 314
+            },
+            "value": "copysym.sh"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 315,
+          "end": 335
+        },
+        "value": "/fixtures/copysym.sh"
+      }
+    },
+    {
+      "kind": "FROM",
+      "from": {
+        "span": {
+          "start": 337,
+          "end": 341
+        }
+      },
+      "options": [],
+      "image": {
+        "span": {
+          "start": 342,
+          "end": 348
+        },
+        "value": "alpine"
+      },
+      "as_": null
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 406,
+          "end": 410
+        }
+      },
+      "options": [
+        {
+          "flag_start": 411,
+          "name": {
+            "span": {
+              "start": 413,
+              "end": 417
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 418,
+              "end": 419
+            },
+            "value": "0"
+          }
+        },
+        {
+          "flag_start": 420,
+          "name": {
+            "span": {
+              "start": 422,
+              "end": 427
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 428,
+              "end": 438
+            },
+            "value": "u+x,go-rwx"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 439,
+              "end": 462
+            },
+            "value": "/fixtures/copychmod.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 463,
+          "end": 472
+        },
+        "value": "/tmp/sym1"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 544,
+          "end": 548
+        }
+      },
+      "options": [
+        {
+          "flag_start": 549,
+          "name": {
+            "span": {
+              "start": 551,
+              "end": 555
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 556,
+              "end": 557
+            },
+            "value": "0"
+          }
+        },
+        {
+          "flag_start": 558,
+          "name": {
+            "span": {
+              "start": 560,
+              "end": 565
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 566,
+              "end": 575
+            },
+            "value": "a+rX,go-w"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 576,
+              "end": 596
+            },
+            "value": "/fixtures/copysym.sh"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 597,
+          "end": 606
+        },
+        "value": "/tmp/sym2"
+      }
+    },
+    {
+      "kind": "COPY",
+      "copy": {
+        "span": {
+          "start": 708,
+          "end": 712
+        }
+      },
+      "options": [
+        {
+          "flag_start": 713,
+          "name": {
+            "span": {
+              "start": 715,
+              "end": 719
+            },
+            "value": "from"
+          },
+          "value": {
+            "span": {
+              "start": 720,
+              "end": 721
+            },
+            "value": "0"
+          }
+        },
+        {
+          "flag_start": 722,
+          "name": {
+            "span": {
+              "start": 724,
+              "end": 729
+            },
+            "value": "chmod"
+          },
+          "value": {
+            "span": {
+              "start": 730,
+              "end": 734
+            },
+            "value": "a+rX"
+          }
+        }
+      ],
+      "src": [
+        {
+          "path": {
+            "span": {
+              "start": 735,
+              "end": 758
+            },
+            "value": "/fixtures/copychmod.txt"
+          }
+        }
+      ],
+      "dest": {
+        "span": {
+          "start": 759,
+          "end": 768
+        },
+        "value": "/tmp/sym3"
+      }
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 770,
+          "end": 773
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 774,
+            "end": 801
+          },
+          "value": "stat -c \"sym1:%a\" /tmp/sym1"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 802,
+          "end": 805
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 806,
+            "end": 833
+          },
+          "value": "stat -c \"sym2:%a\" /tmp/sym2"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "RUN",
+      "run": {
+        "span": {
+          "start": 834,
+          "end": 837
+        }
+      },
+      "options": [],
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 838,
+            "end": 865
+          },
+          "value": "stat -c \"sym3:%a\" /tmp/sym3"
+        }
+      },
+      "here_docs": []
+    },
+    {
+      "kind": "CMD",
+      "cmd": {
+        "span": {
+          "start": 866,
+          "end": 869
+        }
+      },
+      "arguments": {
+        "shell": {
+          "span": {
+            "start": 870,
+            "end": 877
+          },
+          "value": "/bin/sh"
+        }
+      }
+    }
+  ]
+}

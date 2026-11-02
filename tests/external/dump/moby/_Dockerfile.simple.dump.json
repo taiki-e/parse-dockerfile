@@ -18,7 +18,7 @@
           "start": 378,
           "end": 395
         },
-        "value": "GO_VERSION=1.26.5"
+        "value": "GO_VERSION=1.26.9"
       }
     },
     {
@@ -32,23 +32,23 @@
       "arguments": {
         "span": {
           "start": 401,
-          "end": 430
+          "end": 426
         },
-        "value": "BASE_DEBIAN_DISTRO=\"bookworm\""
+        "value": "BASE_DEBIAN_DISTRO=trixie"
       }
     },
     {
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 431,
-          "end": 434
+          "start": 427,
+          "end": 430
         }
       },
       "arguments": {
         "span": {
-          "start": 435,
-          "end": 492
+          "start": 431,
+          "end": 488
         },
         "value": "GOLANG_IMAGE=\"golang:${GO_VERSION}-${BASE_DEBIAN_DISTRO}\""
       }
@@ -57,15 +57,15 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 494,
-          "end": 498
+          "start": 490,
+          "end": 494
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 499,
-          "end": 514
+          "start": 495,
+          "end": 510
         },
         "value": "${GOLANG_IMAGE}"
       },
@@ -75,14 +75,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 515,
-          "end": 518
+          "start": 511,
+          "end": 514
         }
       },
       "arguments": {
         "span": {
-          "start": 519,
-          "end": 536
+          "start": 515,
+          "end": 532
         },
         "value": "GOTOOLCHAIN=local"
       }
@@ -91,16 +91,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 733,
-          "end": 736
+          "start": 729,
+          "end": 732
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 737,
-            "end": 1024
+            "start": 733,
+            "end": 1020
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends \\\n\t\tbuild-essential \\\n\t\tcurl \\\n\t\tcmake \\\n\t\tgit \\\n\t\tlibseccomp-dev \\\n\t\tca-certificates \\\n\t\te2fsprogs \\\n\t\tiptables \\\n\t\tpkg-config \\\n\t\tpigz \\\n\t\tprocps \\\n\t\txfsprogs \\\n\t\txz-utils \\\n\t\t\\\n\t\tvim-common \\\n\t&& rm -rf /var/lib/apt/lists/*"
         }
@@ -111,41 +111,41 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 1229,
-          "end": 1232
+          "start": 1225,
+          "end": 1228
         }
       },
       "options": [
         {
-          "flag_start": 1233,
+          "flag_start": 1229,
           "name": {
             "span": {
-              "start": 1235,
-              "end": 1240
+              "start": 1231,
+              "end": 1236
             },
             "value": "chmod"
           },
           "value": {
             "span": {
-              "start": 1241,
-              "end": 1245
+              "start": 1237,
+              "end": 1241
             },
             "value": "0644"
           }
         },
         {
-          "flag_start": 1246,
+          "flag_start": 1242,
           "name": {
             "span": {
-              "start": 1248,
-              "end": 1256
+              "start": 1244,
+              "end": 1252
             },
             "value": "checksum"
           },
           "value": {
             "span": {
-              "start": 1257,
-              "end": 1328
+              "start": 1253,
+              "end": 1324
             },
             "value": "sha256:1500c1f56fa9e26b9b8f42452a553675796ade0807cdce11975eb98170b3a570"
           }
@@ -155,8 +155,8 @@
         {
           "path": {
             "span": {
-              "start": 1332,
-              "end": 1376
+              "start": 1328,
+              "end": 1372
             },
             "value": "https://download.docker.com/linux/debian/gpg"
           }
@@ -164,8 +164,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1377,
-          "end": 1405
+          "start": 1373,
+          "end": 1401
         },
         "value": "/etc/apt/keyrings/docker.asc"
       }
@@ -174,14 +174,14 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 1406,
-          "end": 1409
+          "start": 1402,
+          "end": 1405
         }
       },
       "arguments": {
         "span": {
-          "start": 1410,
-          "end": 1428
+          "start": 1406,
+          "end": 1424
         },
         "value": "BASE_DEBIAN_DISTRO"
       }
@@ -190,8 +190,8 @@
       "kind": "ADD",
       "add": {
         "span": {
-          "start": 1429,
-          "end": 1432
+          "start": 1425,
+          "end": 1428
         }
       },
       "options": [],
@@ -199,8 +199,8 @@
         {
           "here_doc": {
             "span": {
-              "start": 1479,
-              "end": 1626
+              "start": 1475,
+              "end": 1622
             },
             "expand": true,
             "value": "Types: deb\nURIs: https://download.docker.com/linux/debian\nSuites: ${BASE_DEBIAN_DISTRO}\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.asc\n"
@@ -209,8 +209,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1440,
-          "end": 1478
+          "start": 1436,
+          "end": 1474
         },
         "value": "/etc/apt/sources.list.d/docker.sources"
       }
@@ -219,16 +219,16 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 1630,
-          "end": 1633
+          "start": 1626,
+          "end": 1629
         }
       },
       "options": [],
       "arguments": {
         "shell": {
           "span": {
-            "start": 1634,
-            "end": 1833
+            "start": 1630,
+            "end": 1829
           },
           "value": "apt-get update && apt-get install -y --no-install-recommends \\\n\t\tcontainerd.io \\\n\t\ttini \\\n\t\tdocker-ce-cli \\\n\t&& rm -rf /var/lib/apt/lists/* \\\n\t&& ln -s /usr/bin/tini-static /usr/local/bin/docker-init"
         }
@@ -239,14 +239,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1835,
-          "end": 1838
+          "start": 1831,
+          "end": 1834
         }
       },
       "arguments": {
         "span": {
-          "start": 1839,
-          "end": 1864
+          "start": 1835,
+          "end": 1860
         },
         "value": "PATH=/usr/local/cli:$PATH"
       }
@@ -255,14 +255,14 @@
       "kind": "ENV",
       "env": {
         "span": {
-          "start": 1866,
-          "end": 1869
+          "start": 1862,
+          "end": 1865
         }
       },
       "arguments": {
         "span": {
-          "start": 1870,
-          "end": 1883
+          "start": 1866,
+          "end": 1879
         },
         "value": "AUTO_GOPATH 1"
       }
@@ -271,14 +271,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 1884,
-          "end": 1891
+          "start": 1880,
+          "end": 1887
         }
       },
       "arguments": {
         "span": {
-          "start": 1892,
-          "end": 1905
+          "start": 1888,
+          "end": 1901
         },
         "value": "/usr/src/moby"
       }
@@ -287,8 +287,8 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 1906,
-          "end": 1910
+          "start": 1902,
+          "end": 1906
         }
       },
       "options": [],
@@ -296,8 +296,8 @@
         {
           "path": {
             "span": {
-              "start": 1911,
-              "end": 1912
+              "start": 1907,
+              "end": 1908
             },
             "value": "."
           }
@@ -305,8 +305,8 @@
       ],
       "dest": {
         "span": {
-          "start": 1913,
-          "end": 1926
+          "start": 1909,
+          "end": 1922
         },
         "value": "/usr/src/moby"
       }

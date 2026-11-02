@@ -1,10 +1,10 @@
-20311 Dockerfile
+20192 Dockerfile
 5219 hack/dockerfiles/archutil.Dockerfile
 5118 hack/dockerfiles/lint.Dockerfile
 3424 hack/dockerfiles/generated-files.Dockerfile
 3388 frontend/dockerfile/parser/testfiles/docker/Dockerfile
 3370 frontend/dockerfile/parser/testfiles/cpuguy83-nagios/Dockerfile
-3071 frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile
+3195 frontend/dockerfile/cmd/dockerfile-frontend/Dockerfile
 2935 vendor/github.com/containerd/fuse-overlayfs-snapshotter/v2/Dockerfile
 2891 vendor/github.com/tonistiigi/fsutil/Dockerfile
 1583 frontend/dockerfile/parser/testfiles/brimstone-docker-consul/Dockerfile
@@ -38,10 +38,10 @@
 230 frontend/dockerfile/parser/testfiles/trailing-backslash/Dockerfile
 211 frontend/dockerfile/parser/testfiles/escapes/Dockerfile
 198 frontend/dockerfile/parser/testfiles/weechat/Dockerfile
+180 vendor/github.com/pelletier/go-toml/v2/Dockerfile
 179 frontend/dockerfile/parser/testfiles/escape-nonewline/Dockerfile
 168 frontend/dockerfile/parser/testfiles/znc/Dockerfile
 157 frontend/dockerfile/parser/testfiles/mumble/Dockerfile
-113 vendor/github.com/pelletier/go-toml/v2/Dockerfile
 107 frontend/dockerfile/parser/testfiles/multiple-volumes/Dockerfile
 69 frontend/dockerfile/parser/testfiles/escape/Dockerfile
 60 frontend/dockerfile/parser/testfiles/escape-with-syntax/Dockerfile

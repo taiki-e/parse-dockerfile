@@ -27,7 +27,7 @@
           "start": 34,
           "end": 51
         },
-        "value": "GO_VERSION=1.26.5"
+        "value": "GO_VERSION=1.26.9"
       }
     },
     {
@@ -75,9 +75,9 @@
         "shell": {
           "span": {
             "start": 98,
-            "end": 135
+            "end": 144
           },
-          "value": "apk add --no-cache bash make yamllint"
+          "value": "apk add --no-cache bash libfyaml make yamllint"
         }
       },
       "here_docs": []
@@ -86,21 +86,21 @@
       "kind": "CMD",
       "cmd": {
         "span": {
-          "start": 136,
-          "end": 139
+          "start": 145,
+          "end": 148
         }
       },
       "arguments": {
         "exec": {
           "span": {
-            "start": 140,
-            "end": 153
+            "start": 149,
+            "end": 162
           },
           "value": [
             {
               "span": {
-                "start": 142,
-                "end": 151
+                "start": 151,
+                "end": 160
               },
               "value": "/bin/bash"
             }
@@ -112,29 +112,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 168,
-          "end": 172
+          "start": 177,
+          "end": 181
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 173,
-          "end": 177
+          "start": 182,
+          "end": 186
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 178,
-            "end": 180
+            "start": 187,
+            "end": 189
           }
         },
         {
           "span": {
-            "start": 181,
-            "end": 188
+            "start": 190,
+            "end": 197
           },
           "value": "swagger"
         }
@@ -144,14 +144,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 189,
-          "end": 196
+          "start": 198,
+          "end": 205
         }
       },
       "arguments": {
         "span": {
-          "start": 197,
-          "end": 237
+          "start": 206,
+          "end": 246
         },
         "value": "/go/src/github.com/go-swagger/go-swagger"
       }
@@ -160,30 +160,30 @@
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 425,
-          "end": 428
+          "start": 434,
+          "end": 437
         }
       },
       "arguments": {
         "span": {
-          "start": 429,
-          "end": 455
+          "start": 438,
+          "end": 464
         },
-        "value": "GO_SWAGGER_VERSION=v0.33.1"
+        "value": "GO_SWAGGER_VERSION=v0.36.6"
       }
     },
     {
       "kind": "ARG",
       "arg": {
         "span": {
-          "start": 456,
-          "end": 459
+          "start": 465,
+          "end": 468
         }
       },
       "arguments": {
         "span": {
-          "start": 460,
-          "end": 474
+          "start": 469,
+          "end": 483
         },
         "value": "TARGETPLATFORM"
       }
@@ -192,41 +192,41 @@
       "kind": "RUN",
       "run": {
         "span": {
-          "start": 475,
-          "end": 478
+          "start": 484,
+          "end": 487
         }
       },
       "options": [
         {
-          "flag_start": 479,
+          "flag_start": 488,
           "name": {
             "span": {
-              "start": 481,
-              "end": 486
+              "start": 490,
+              "end": 495
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 487,
-              "end": 559
+              "start": 496,
+              "end": 568
             },
             "value": "type=cache,target=/root/.cache/go-build,id=swagger-build-$TARGETPLATFORM"
           }
         },
         {
-          "flag_start": 566,
+          "flag_start": 575,
           "name": {
             "span": {
-              "start": 568,
-              "end": 573
+              "start": 577,
+              "end": 582
             },
             "value": "mount"
           },
           "value": {
             "span": {
-              "start": 574,
-              "end": 603
+              "start": 583,
+              "end": 612
             },
             "value": "type=cache,target=/go/pkg/mod"
           }
@@ -235,8 +235,8 @@
       "arguments": {
         "shell": {
           "span": {
-            "start": 610,
-            "end": 736
+            "start": 619,
+            "end": 745
           },
           "value": "CGO_ENABLED=0 go install \"github.com/go-swagger/go-swagger/cmd/swagger@${GO_SWAGGER_VERSION}\" && \\\n    /go/bin/swagger version"
         }
@@ -247,29 +247,29 @@
       "kind": "FROM",
       "from": {
         "span": {
-          "start": 794,
-          "end": 798
+          "start": 803,
+          "end": 807
         }
       },
       "options": [],
       "image": {
         "span": {
-          "start": 799,
-          "end": 803
+          "start": 808,
+          "end": 812
         },
         "value": "base"
       },
       "as_": [
         {
           "span": {
-            "start": 804,
-            "end": 806
+            "start": 813,
+            "end": 815
           }
         },
         {
           "span": {
-            "start": 807,
-            "end": 810
+            "start": 816,
+            "end": 819
           },
           "value": "dev"
         }
@@ -279,24 +279,24 @@
       "kind": "COPY",
       "copy": {
         "span": {
-          "start": 811,
-          "end": 815
+          "start": 820,
+          "end": 824
         }
       },
       "options": [
         {
-          "flag_start": 816,
+          "flag_start": 825,
           "name": {
             "span": {
-              "start": 818,
-              "end": 822
+              "start": 827,
+              "end": 831
             },
             "value": "from"
           },
           "value": {
             "span": {
-              "start": 823,
-              "end": 830
+              "start": 832,
+              "end": 839
             },
             "value": "swagger"
           }
@@ -306,8 +306,8 @@
         {
           "path": {
             "span": {
-              "start": 831,
-              "end": 846
+              "start": 840,
+              "end": 855
             },
             "value": "/go/bin/swagger"
           }
@@ -315,8 +315,8 @@
       ],
       "dest": {
         "span": {
-          "start": 847,
-          "end": 869
+          "start": 856,
+          "end": 878
         },
         "value": "/usr/local/bin/swagger"
       }
@@ -325,14 +325,14 @@
       "kind": "WORKDIR",
       "workdir": {
         "span": {
-          "start": 870,
-          "end": 877
+          "start": 879,
+          "end": 886
         }
       },
       "arguments": {
         "span": {
-          "start": 878,
-          "end": 910
+          "start": 887,
+          "end": 919
         },
         "value": "/go/src/github.com/moby/moby/api"
       }

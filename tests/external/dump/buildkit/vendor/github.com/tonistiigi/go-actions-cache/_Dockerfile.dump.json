@@ -27,7 +27,7 @@
           "start": 34,
           "end": 49
         },
-        "value": "GO_VERSION=1.24"
+        "value": "GO_VERSION=1.26"
       }
     },
     {
@@ -43,7 +43,7 @@
           "start": 54,
           "end": 70
         },
-        "value": "XX_VERSION=1.6.1"
+        "value": "XX_VERSION=1.9.0"
       }
     },
     {
